@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container, Row } from "react-bootstrap";
 import styles from "./Inicio.module.css";
 
@@ -8,7 +9,11 @@ const Info = () => {
         <Row>
           <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div className="d-flex justify-content-center">
-              {/* <img src="./images/content/que-es.png" alt="..." /> */}
+              <Image
+                src="/images/content/que-es.png"
+                width={471}
+                height={581}
+              />
             </div>
           </div>
           <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -45,11 +50,16 @@ const Info = () => {
           </div>
           <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div className="d-flex justify-content-center">
-              {/* <img src="./images/content/como-funciona.png" alt="..." /> */}
+              <Image
+                src="/images/content/como-funciona.png"
+                width={471}
+                height={581}
+              />
             </div>
           </div>
         </Row>
       </section>
+      <div className="py-5" />
     </Container>
   );
 };
