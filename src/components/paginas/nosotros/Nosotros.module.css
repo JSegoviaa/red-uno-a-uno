@@ -1,0 +1,58 @@
+.section {
+  margin-top: 100px;
+}
+
+.title {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 65px;
+  color: #e65a1f;
+}
+
+.content {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: rgba(29, 29, 36, 0.75);
+}
+
+.title {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 65px;
+  color: #e65a1f;
+}
+
+.section2 {
+  margin-top: 150px;
+}
+
+.nosotrosCard {
+  background: #f6f8fa;
+  border-radius: 9px;
+  padding: 41px;
+}
+
+.nosotrosCardTitle {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 32px;
+  color: #000000;
+}
+.nosotrosCardContent {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  color: rgba(29, 29, 36, 0.75);
+}
