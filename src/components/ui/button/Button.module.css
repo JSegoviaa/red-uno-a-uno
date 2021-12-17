@@ -1,0 +1,23 @@
+.primary {
+  background-color: #e44122;
+  color: #fff;
+}
+
+.secondary {
+  background-color: #fff;
+  border: 1px #e44122 solid;
+  border-radius: 20px;
+  color: #e44122;
+}
+
+.Green {
+  background-color: #fff;
+  border: 1px #13a407 solid;
+  border-radius: 20px;
+  color: #13a407;
+}
+
+.add {
+  background-color: #13a407;
+  color: #fff;
+}
