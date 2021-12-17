@@ -1,0 +1,48 @@
+.footerContent {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 29px;
+  color: #cacaca;
+}
+
+.footerStyle {
+  background-color: #2d1260;
+}
+
+.footerLink {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.3s;
+  display: flex;
+}
+.footerLink:hover {
+  color: #e65a1f;
+  display: flex;
+  transform: translateX(10px);
+  transition: 0.3s;
+}
+
+.footerPhone {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 29px;
+  color: #cacaca;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.footerPhone:hover {
+  color: #e65a1f;
+  transition: 0.2s;
+}
+
+.mbExtend {
+  margin-bottom: 100px;
+}
