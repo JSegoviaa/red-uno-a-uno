@@ -1,6 +1,20 @@
 .primary {
-  background-color: #e44122;
-  color: #fff;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 21px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(90deg, #e43d22 0%, #e65a1f 100%);
+  border: none;
+  border-radius: 40px;
+  padding: 14px 18px 14px 18px;
+  text-decoration: none;
+}
+.primary:hover {
+  color: white;
 }
 
 .secondary {

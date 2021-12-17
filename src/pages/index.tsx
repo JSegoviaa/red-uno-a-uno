@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import Info from "../components/paginas/inicio/Info";
 import SEO from "../components/seo/SEO";
 
 const Home: NextPage = () => {
@@ -8,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <>
       <SEO titulo="Inicio" url={asPath} />
-      <div>Página de inicio</div>
+      <Info />
     </>
   );
 };
