@@ -12,7 +12,7 @@ const Titulo = ({ titulo }: Props) => {
         <div className="row d-flex justify-content-center">
           <div className="col-12">
             <div className={styles.title}>{titulo}</div>
-            <div className={styles.line}></div>
+            <div className={styles.line} />
           </div>
         </div>
       </Container>
