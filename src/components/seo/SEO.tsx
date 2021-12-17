@@ -29,11 +29,7 @@ const SEO = ({ titulo, descripcion = desc, url, img = logo }: Props) => {
       <meta property="og:image" content={img} />
       <meta property="og:url" content={`https://red1a1.com${url}`} />
       <meta property="og:site_name" content={`Red 1 a 1 | ${titulo}`} />
-      <link
-        rel="shortcut icon"
-        href="https://firebasestorage.googleapis.com/v0/b/witideal-b1f99.appspot.com/o/assets%2Ficons%2Fthumb%40favicon.png?alt=media&token=2fcfd977-22f0-4c69-be96-90fe23127afc"
-        type="image/x-icon"
-      />
+      <link rel="shortcut icon" href="/red.png" type="image/x-icon" />
     </Head>
   );
 };
