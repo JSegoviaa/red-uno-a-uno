@@ -19,3 +19,12 @@
   line-height: 30px;
   color: rgba(29, 29, 36, 0.75);
 }
+
+.subtitle {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  color: #e65a1f;
+}
