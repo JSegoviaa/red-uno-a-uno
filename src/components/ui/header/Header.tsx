@@ -1,9 +1,16 @@
+import { useState } from "react";
 import Link from "next/link";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import AuthModal from "../authmodal/AuthModal";
 import Button from "../button/Button";
 import styles from "./Header.module.css";
 
 const Header = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <Navbar className={styles.navStyle} bg="light" expand="lg">
       <Container>
@@ -24,9 +31,9 @@ const Header = () => {
                 Regístrate
               </div>
             </Link>
-            <Link href="/contacto">
-              <Button titulo="Inicia sesión" />
-            </Link>
+
+            <Button titulo="Inicia sesión" onClick={handleShow} />
+
             <Link href="/perfil">
               <div className={`${styles.navPerfil} pointer mx-2`}>
                 <img
@@ -39,6 +46,7 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
       </Container>
+      <AuthModal show={show} handleClose={handleClose} />
     </Navbar>
   );
 };
