@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Button from "../../../ui/button/Button";
 import styles from "./Perfil.module.css";
 
@@ -26,15 +26,25 @@ const Perfil = () => {
       </div>
       <hr />
       <div className="py-5">
-        <div className="d-flex justify-content-around">
-          <Button titulo="Mis paquetes" btn="Secondary" onClick={misPaquetes} />
-          <Button titulo="Historial de inmuebles" btn="Secondary" />
-          <Button
-            titulo="Mis propiedades"
-            btn="Secondary"
-            onClick={misPropiedades}
-          />
-        </div>
+        <Row className="d-flex justify-content-center text-center">
+          <Col className="py-3">
+            <Button
+              titulo="Mis paquetes"
+              btn="Secondary"
+              onClick={misPaquetes}
+            />
+          </Col>
+          <Col className="py-3">
+            <Button titulo="Historial de inmuebles" btn="Secondary" />
+          </Col>
+          <Col className="py-3">
+            <Button
+              titulo="Mis propiedades"
+              btn="Secondary"
+              onClick={misPropiedades}
+            />
+          </Col>
+        </Row>
       </div>
     </Container>
   );
