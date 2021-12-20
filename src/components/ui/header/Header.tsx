@@ -1,33 +1,31 @@
 import Link from "next/link";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import styles from "./Header.module.css";
 
 const Header = () => {
   return (
-    <>
-      <Link href="/" scroll>
-        Inicio
-      </Link>
-      <br />
-      <br />
-      <Link href="/contacto" scroll>
-        Contacto
-      </Link>
-      <br />
-      <br />
-      <Link href="/nosotros" scroll>
-        Nosotros
-      </Link>
-      <br />
-      <br />
-      <Link href="/paquetes" scroll>
-        Paquetes
-      </Link>
-      <br />
-      <br />
-      <Link href="/perfil" scroll>
-        Mi perfil
-      </Link>
-    </>
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand>Navbar scroll</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Nav className="me-auto my-2 my-lg-0" navbarScroll>
+            <Nav.Link>
+              <Link href="/nosotros">Nosotros</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link href="/contacto">Contacato</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link href="/paquetes">Paquetes</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link href="/perfil">Mi perfil</Link>
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
