@@ -9,12 +9,12 @@ const Header = () => {
         <Navbar.Brand>Navbar scroll</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav className="me-auto my-2 my-lg-0" navbarScroll>
+          <Nav className="ms-auto my-2 my-lg-0" navbarScroll>
             <Nav.Link>
               <Link href="/nosotros">Nosotros</Link>
             </Nav.Link>
             <Nav.Link>
-              <Link href="/contacto">Contacato</Link>
+              <Link href="/contacto">Contacto</Link>
             </Nav.Link>
             <Nav.Link>
               <Link href="/paquetes">Paquetes</Link>
