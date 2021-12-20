@@ -19,9 +19,68 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
             <Modal.Title>Registrarse</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="text-center">
-              <h3 className={styles.loginTitle}>Registro</h3>
-              <div className={styles.line} />
+            <div className="row d-flex justify-content-center">
+              <div className="text-center">
+                <h3 className={styles.loginTitle}>Registro</h3>
+                <div className={styles.line} />
+              </div>
+
+              <div className="col-10">
+                <label className={styles.modalLabels}>Nombre</label>
+                <br />
+                <input
+                  className={`${styles.modalInputs} mb-4`}
+                  type="mail"
+                  name="nombre"
+                  required
+                />
+              </div>
+              <div className="col-10">
+                <label className={styles.modalLabels}>Apellidos</label>
+                <br />
+                <input
+                  className={`${styles.modalInputs} mb-4`}
+                  type="mail"
+                  name="apellido"
+                  required
+                />
+              </div>
+              <div className="col-10">
+                <label className={styles.modalLabels}>Correo electrónico</label>
+                <br />
+                <input
+                  className={`${styles.modalInputs} mb-4`}
+                  type="mail"
+                  name="correo"
+                  required
+                />
+              </div>
+
+              <div className="col-10">
+                <label className={styles.modalLabels}>Contraseña</label>
+                <br />
+                <input
+                  className={`${styles.modalInputs} mb-4`}
+                  type="password"
+                  name="password"
+                  required
+                />
+              </div>
+              <div className="col-10">
+                <label className={styles.modalLabels}>
+                  Confirme su contraseña
+                </label>
+                <br />
+                <input
+                  className={`${styles.modalInputs} mb-4`}
+                  type="password"
+                  name="password"
+                  required
+                />
+              </div>
+              <div className="col-10 mb-3 text-center">
+                <Button titulo="Registrarse" />
+              </div>
             </div>
           </Modal.Body>
           <Modal.Footer>
@@ -40,7 +99,6 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
             closeButton
             style={{
               border: "none",
-              outline: "none",
             }}
           />
           <Modal.Body>
