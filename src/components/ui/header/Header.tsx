@@ -27,7 +27,7 @@ const Header = () => {
         <Navbar.Collapse>
           <Nav className="ms-auto my-2" navbarScroll>
             <Link href="/">
-              <div className={`${styles.navEnlace} pointer mx-2`}>
+              <div className={`${styles.navEnlace} pointer ms-3`}>
                 Regístrate
               </div>
             </Link>
@@ -35,7 +35,7 @@ const Header = () => {
             <Button titulo="Inicia sesión" onClick={handleShow} />
 
             <Link href="/perfil">
-              <div className={`${styles.navPerfil} pointer mx-2`}>
+              <div className={`${styles.navPerfil} pointer ms-3`}>
                 <img
                   src="/images/icons/perfil.png"
                   alt="Mi perfil"
