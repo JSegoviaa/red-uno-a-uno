@@ -7,7 +7,6 @@ const Index = () => {
   return (
     <>
       <SEO titulo="Propiedades" url={asPath} />
-      <div>Todas las propiedades</div>
     </>
   );
 };
