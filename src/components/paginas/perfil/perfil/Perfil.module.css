@@ -1,0 +1,28 @@
+.nombre {
+  color: #7149bc;
+  font-weight: 700;
+  font-size: 33.49px;
+}
+.paquete {
+  color: #5e5e5e;
+  font-weight: 500;
+  font-size: 28.28px;
+}
+
+.empresa {
+  color: #5e5e5e;
+  font-weight: 400;
+  font-size: 28.28px;
+}
+
+.correo {
+  color: #5e5e5e;
+  font-size: 23.52px;
+  font-weight: 300;
+}
+
+.telefono {
+  color: #5e5e5e;
+  font-size: 23.52px;
+  font-weight: 300;
+}
