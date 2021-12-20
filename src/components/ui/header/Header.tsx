@@ -7,9 +7,13 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   const [show, setShow] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const closeRegister = () => setIsOpen(false);
+  const openRegister = () => setIsOpen(true);
 
   return (
     <Navbar className={styles.navStyle} bg="light" expand="lg">
@@ -26,11 +30,12 @@ const Header = () => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav className="ms-auto my-2" navbarScroll>
-            <Link href="/">
-              <div className={`${styles.navEnlace} pointer ms-3`}>
-                Regístrate
-              </div>
-            </Link>
+            <div
+              onClick={openRegister}
+              className={`${styles.navEnlace} pointer ms-3`}
+            >
+              Regístrate
+            </div>
 
             <Button titulo="Inicia sesión" onClick={handleShow} />
 
@@ -46,7 +51,8 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
       </Container>
-      <AuthModal show={show} handleClose={handleClose} />
+      <AuthModal show={show} handleClose={handleClose} type="Login" />
+      <AuthModal show={isOpen} handleClose={closeRegister} type="Registro" />
     </Navbar>
   );
 };

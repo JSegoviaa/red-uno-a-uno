@@ -1,8 +1,14 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import AuthModal from "../authmodal/AuthModal";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeRegister = () => setIsOpen(false);
+  const openRegister = () => setIsOpen(true);
   return (
     <footer
       className={`text-center text-lg-start text-muted ${styles.footerStyle}`}
@@ -43,7 +49,12 @@ const Footer = () => {
                 <p className={`${styles.footerLink} pointer`}>Contáctanos</p>
               </Link>
 
-              <p className={`${styles.footerLink} pointer`}>Registro</p>
+              <p
+                onClick={openRegister}
+                className={`${styles.footerLink} pointer`}
+              >
+                Registro
+              </p>
             </div>
 
             <div className="col-sm-12 col-md-6 p-4 col-xl-2">
@@ -98,6 +109,7 @@ const Footer = () => {
         </Link>
         . Todos los derechos reservados.
       </div>
+      <AuthModal show={isOpen} handleClose={closeRegister} type="Registro" />
     </footer>
   );
 };
