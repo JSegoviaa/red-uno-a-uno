@@ -1,0 +1,43 @@
+.navStyle {
+  background: #ffffff;
+  box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.25);
+}
+
+.navEnlace {
+  text-decoration: none;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 21px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000 !important;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  margin: 15px;
+  text-decoration: none;
+}
+.navPerfil {
+  text-decoration: none;
+  border: 4px solid #7149bc;
+  border-radius: 50%;
+  width: 50px;
+  background-color: #a4a8bb;
+}
+
+.sesionBtn {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 21px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(90deg, #e43d22 0%, #e65a1f 100%);
+  border: none;
+  border-radius: 40px;
+  padding: 14px 18px 14px 18px;
+  text-decoration: none;
+}
