@@ -1,5 +1,5 @@
 import { Container, Row } from "react-bootstrap";
-import PropertiesCard from "../../../ui/propertiescard/PropertiesCard";
+import FavPropertiesCard from "../../../ui/propertiescard/FavPropertiesCard";
 
 const propiedades = [
   {
@@ -93,7 +93,7 @@ const MiListaFavoritos = () => {
     <Container>
       <Row>
         {propiedades.map((propiedad) => (
-          <PropertiesCard
+          <FavPropertiesCard
             key={propiedad.id}
             id={propiedad.id}
             titulo={propiedad.titulo}
