@@ -88,9 +88,6 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
               </div>
             </div>
           </Modal.Body>
-          <Modal.Footer>
-            <div onClick={handleClose}>Cerrar</div>
-          </Modal.Footer>
         </Modal>
       ) : null}
 
