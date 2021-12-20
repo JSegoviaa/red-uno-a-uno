@@ -1,14 +1,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import AuthModal from "../authmodal/AuthModal";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
+  const goToHome = () => router.push("/");
   const closeRegister = () => setIsOpen(false);
   const openRegister = () => setIsOpen(true);
+
   return (
     <footer
       className={`text-center text-lg-start text-muted ${styles.footerStyle}`}
@@ -20,15 +24,12 @@ const Footer = () => {
         <div className="container text-center text-md-start mt-5">
           <div className="row mt-3">
             <div className="col-sm-12 col-md-6 p-4 col-xl-5">
-              <h6 className="text-uppercase fw-bold mb-4">
-                <Link href="/" scroll>
-                  <Image
-                    className="pointer"
-                    src="/images/logos/red1a1-blanco.png"
-                    width={285}
-                    height={65}
-                  />
-                </Link>
+              <h6 className="text-uppercase mb-4">
+                <img
+                  onClick={goToHome}
+                  className="pointer"
+                  src="/images/logos/red1a1-blanco.png"
+                />
               </h6>
               <p className={styles.footerContent}>
                 Red 1a1 es la solución para asesores independientes e
@@ -37,6 +38,7 @@ const Footer = () => {
                 versátil podrás agregar, buscar y compartir propiedades.
               </p>
             </div>
+
             <div className="col-sm-12 col-md-6 p-4 col-xl-2">
               <h5 className="fw-bold text-white mb-4">Secciones</h5>
               <Link href="/nosotros" scroll>
@@ -63,33 +65,33 @@ const Footer = () => {
                 Querétaro, México. C.P. 76230
               </p>
             </div>
+
             <div className="col-sm-12 col-md-6 p-4 col-xl-3">
               <h5 className="fw-bold text-white mb-4">Teléfono</h5>
-              <p className={styles.footerContent}>
+              <div className={styles.footerContent}>
                 <p className={styles.footerPhone}>442 543 9190</p>
-              </p>
-              <>
-                <a
-                  className="me-2"
-                  href="https://www.facebook.com"
-                  target="_blank"
-                >
-                  <Image
-                    src="/images/icons/facebook.png"
-                    alt="Síguenos en facebook"
-                    width={33}
-                    height={33}
-                  />
-                </a>
-                <a href="https://wa.link/8udscw" target="_blank">
-                  <Image
-                    src="/images/icons/whatsapp.png"
-                    alt="Comunícate por whatsapp"
-                    width={33}
-                    height={33}
-                  />
-                </a>
-              </>
+              </div>
+
+              <a
+                className="me-2"
+                href="https://www.facebook.com"
+                target="_blank"
+              >
+                <Image
+                  src="/images/icons/facebook.png"
+                  alt="Síguenos en facebook"
+                  width={33}
+                  height={33}
+                />
+              </a>
+              <a href="https://wa.link/8udscw" target="_blank">
+                <Image
+                  src="/images/icons/whatsapp.png"
+                  alt="Comunícate por whatsapp"
+                  width={33}
+                  height={33}
+                />
+              </a>
             </div>
           </div>
         </div>
