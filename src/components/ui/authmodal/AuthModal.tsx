@@ -31,8 +31,18 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
       ) : null}
 
       {type === "Login" ? (
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton style={{ border: "none" }} />
+        <Modal
+          show={show}
+          onHide={handleClose}
+          contentClassName={styles.modalContent}
+        >
+          <Modal.Header
+            closeButton
+            style={{
+              border: "none",
+              outline: "none",
+            }}
+          />
           <Modal.Body>
             <div className="row d-flex justify-content-center">
               <div className="text-center">
