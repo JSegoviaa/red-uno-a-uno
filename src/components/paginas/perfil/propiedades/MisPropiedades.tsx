@@ -1,6 +1,6 @@
 import { Container, Row } from "react-bootstrap";
+import PropertiesCard from "../../../ui/propertiescard/PropertiesCard";
 import styles from "./MisPropiedades.module.css";
-import MisPropiedadesLista from "./MisPropiedadesLista";
 
 const propiedades = [
   {
@@ -94,7 +94,7 @@ const MiListaPropiedades = () => {
     <Container>
       <Row>
         {propiedades.map((propiedad) => (
-          <MisPropiedadesLista
+          <PropertiesCard
             key={propiedad.id}
             id={propiedad.id}
             titulo={propiedad.titulo}

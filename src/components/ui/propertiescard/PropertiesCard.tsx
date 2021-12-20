@@ -1,5 +1,5 @@
 import { Col } from "react-bootstrap";
-import styles from "./MisPropiedades.module.css";
+import styles from "./PropertiesCard.module.css";
 
 interface Props {
   id: number;
@@ -7,7 +7,7 @@ interface Props {
   titulo: string;
 }
 
-const MisPropiedadesLista = ({ titulo, id, image }: Props) => {
+const PropertiesCard = ({ titulo, id, image }: Props) => {
   return (
     <Col md={3} xs={6} key={id} className="py-3">
       <div className="card">
@@ -18,4 +18,4 @@ const MisPropiedadesLista = ({ titulo, id, image }: Props) => {
   );
 };
 
-export default MisPropiedadesLista;
+export default PropertiesCard;
