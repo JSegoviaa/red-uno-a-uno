@@ -1,27 +1,21 @@
 import Link from "next/link";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import Button from "../button/Button";
 import styles from "./Header.module.css";
 
 const Header = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className={styles.navStyle} bg="light" expand="lg">
       <Container>
-        <Navbar.Brand>Navbar scroll</Navbar.Brand>
+        <div className="my-2">
+          <img src="/images/logos/red1-color.png" alt="..." />
+        </div>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-            <Nav.Link>
-              <Link href="/nosotros">Nosotros</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link href="/contacto">Contacato</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link href="/paquetes">Paquetes</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link href="/perfil">Mi perfil</Link>
-            </Nav.Link>
+          <Nav className="ms-auto my-2" navbarScroll>
+                <Link href="/"><div className={`${styles.navEnlace} pointer mx-2`}>Regístrate</div></Link>
+                <Link href="/contacto"><div className={`${styles.sesionBtn} pointer mx-2`}>Inicia Sesión</div></Link>
+                <Link href="/perfil"><div className={`${styles.navPerfil} pointer mx-2`}><img src="" alt="..." /></div></Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
