@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
+import ContactForm from "../components/paginas/contacto/ContactForm";
 import SEO from "../components/seo/SEO";
+import Titulo from "../components/ui/titulo/Titulo";
 
 const Contacto = () => {
   const { asPath } = useRouter();
@@ -7,7 +9,8 @@ const Contacto = () => {
   return (
     <>
       <SEO titulo="Contáctanos" url={asPath} />
-      <div>Contacto</div>
+      <Titulo titulo="Contacto" />
+      <ContactForm />
     </>
   );
 };
