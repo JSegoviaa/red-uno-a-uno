@@ -1,5 +1,8 @@
 import { useRouter } from "next/router";
+import Detalles from "../../../components/paginas/propiedades/detalles/Detalles";
+import Slider from "../../../components/paginas/propiedades/detalles/Slider";
 import SEO from "../../../components/seo/SEO";
+import Contacto from "../../contacto";
 
 const DetallesPropiedad = () => {
   const { asPath } = useRouter();
@@ -7,7 +10,9 @@ const DetallesPropiedad = () => {
   return (
     <>
       <SEO titulo="Detalles de la propiedad" url={asPath} />
-      <div>Detalles de la propiedad</div>
+      <Slider />
+      <Detalles />
+      <Contacto />
     </>
   );
 };
