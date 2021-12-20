@@ -13,15 +13,25 @@
   padding: 14px 18px 14px 18px;
   text-decoration: none;
 }
-.primary:hover {
-  color: white;
-}
 
 .secondary {
-  background-color: #fff;
-  border: 1px #e44122 solid;
-  border-radius: 20px;
-  color: #e44122;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25.7083px;
+  padding: 8px 40px;
+  color: #e65a1f;
+  border: 2px solid #e65a1f;
+  box-sizing: border-box;
+  border-radius: 57.1295px;
+  transition: 100ms;
+}
+.secondary:hover {
+  outline: 3px solid #7149BC;
+  border: 2px solid white;
+  background-color: #7149BC;
+  color: white;
+  transition: 100ms;
 }
 
 .Green {
