@@ -12,11 +12,16 @@
   line-height: 21px;
   text-align: center;
   text-transform: uppercase;
-  color: #000000 !important;
+  color: #000000;
   background-color: rgba(255, 255, 255, 0);
   border: none;
   margin: 15px;
   text-decoration: none;
+  transition: 80ms;
+}
+.navEnlace:hover {
+  text-shadow: -2px 1px 3px rgba(158,35,227,0.52);
+  transition: 80ms;
 }
 .navPerfil {
   text-decoration: none;
