@@ -1,0 +1,69 @@
+.s1 {
+  padding: 8px;
+}
+.s2 {
+  padding: 8px;
+}
+
+.cardTel {
+  padding: 30px;
+  background: #f6f8fa;
+  box-shadow: 0px 0px 5px 6px rgba(221, 221, 221, 0.1);
+  border-radius: 10px;
+}
+.titulo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  color: #000000;
+}
+.subtitulo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  color: #5e5e5e;
+}
+.imgBack {
+  position: absolute;
+  transform: translate(170px, -19px);
+}
+.imgBack2 {
+  position: absolute;
+  transform: translate(200px, -26px);
+}
+
+@media (max-width: 1399px) {
+  .imgBack {
+    transform: translate(120px, -19px);
+  }
+  .imgBack2 {
+    transform: translate(150px, -26px);
+  }
+}
+
+@media (max-width: 1199px) {
+  .imgBack {
+    transform: translate(60px, -19px);
+  }
+  .imgBack2 {
+    transform: translate(100px, 1px);
+  }
+}
+@media (max-width: 767px) {
+    .imgBack {
+        transform: translate(40vw, -19px);
+      }
+      .imgBack2 {
+        transform: translate(43vw, -26px);
+      }
+  }
+  @media (max-width: 353px) {
+    .imgBack {
+        transform: translate(90px, -19px);
+      }
+      .imgBack2 {
+        transform: translate(100px, -0px);
+      }
+  }
