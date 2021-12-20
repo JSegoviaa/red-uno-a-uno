@@ -14,10 +14,17 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
   return (
     <>
       {type === "Registro" ? (
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Registrarse</Modal.Title>
-          </Modal.Header>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          contentClassName={styles.modalContent}
+        >
+          <Modal.Header
+            closeButton
+            style={{
+              border: "none",
+            }}
+          />
           <Modal.Body>
             <div className="row d-flex justify-content-center">
               <div className="text-center">
