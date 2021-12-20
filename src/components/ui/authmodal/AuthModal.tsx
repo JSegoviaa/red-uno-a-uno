@@ -1,5 +1,6 @@
 import { Modal } from "react-bootstrap";
 import Button from "../button/Button";
+import Modaltitle from "../modaltitle/Modaltitle";
 import styles from "./AuthModal.module.css";
 
 type Autenticacion = "Registro" | "Login";
@@ -27,10 +28,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
           />
           <Modal.Body>
             <div className="row d-flex justify-content-center">
-              <div className="text-center">
-                <h3 className={styles.loginTitle}>Registro</h3>
-                <div className={styles.line} />
-              </div>
+              <Modaltitle titulo="Registrarse" />
 
               <div className="col-10">
                 <label className={styles.modalLabels}>Nombre</label>
@@ -110,10 +108,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
           />
           <Modal.Body>
             <div className="row d-flex justify-content-center">
-              <div className="text-center">
-                <h3 className={styles.loginTitle}>Inicia sesión</h3>
-                <div className={styles.line} />
-              </div>
+              <Modaltitle titulo="Inicia sesión" />
 
               <div className="col-10">
                 <label className={styles.modalLabels}>Correo electrónico</label>
