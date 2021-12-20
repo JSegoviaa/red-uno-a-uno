@@ -1,0 +1,136 @@
+.paquetesCard {
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 7px;
+  padding: 33px 25px 33px 25px;
+  transition: 300ms;
+  height: 550px;
+  position: relative;
+}
+.paquetesCard:hover {
+  box-shadow: 0px 6px 17px 2px 
+    rgba(134,89,219,0.53);
+  transform: translateY(-10px);
+  transition: 200ms;
+}
+
+.paquetesCardTitle {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 76px;
+  color: #000000;
+}
+
+.listItems {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 19px;
+  line-height: 28px;
+  color: #525452;
+}
+.paquetesCardPrecio {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  color: #13a407;
+}
+.paquetesCardPrecio2 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  color: #13a407;
+  text-align: end;
+}
+.tabla {
+  width: 100%;
+}
+.btnContratar {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  color: #ffffff;
+  background: linear-gradient(90deg, #e43d22 0%, #e65a1f 100%);
+  border-radius: 40px;
+  text-decoration: none;
+  padding: 15px 41px 15px 41px;
+  border: none;
+  outline: none;
+}
+.btnContratar:hover {
+  background: rgb(100, 3, 171);
+  background: linear-gradient(
+    90deg,
+    rgba(100, 3, 171, 1) 0%,
+    rgba(204, 67, 255, 1) 100%
+  );
+}
+
+.ajusteBtn {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -25px);
+}
+
+.advice {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 57px;
+  color: #dc2c2c;
+}
+
+@media (max-width: 767px) {
+  .paquetesCard {
+    height: auto;
+  }
+  .ajusteBtn {
+    position: relative;
+    transform: translate(-50%, 0px);
+  }
+}
+
+@media (max-width: 1399px) {
+  .paquetesCardPrecio2 {
+    font-size: 14px;
+  }
+}
+@media (max-width: 1199px) {
+  .listItems {
+    font-size: 19px;
+  }
+  .paquetesCardPrecio2 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 991px) {
+  .paquetesCardPrecio2 {
+    font-size: 19px;
+  }
+  .listItems {
+    font-size: 19px;
+  }
+}
+@media (max-width: 752px) {
+  .section2 {
+    margin-top: 120px;
+  }
+}
+@media (max-width: 420px) {
+  .section2 {
+    margin-top: 140px;
+  }
+}
+@media (max-width: 315px) {
+  .section2 {
+    margin-top: 170px;
+  }
+}
