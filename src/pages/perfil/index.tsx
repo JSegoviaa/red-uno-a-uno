@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import Perfil from "../../components/paginas/perfil/perfil/Perfil";
 import SEO from "../../components/seo/SEO";
