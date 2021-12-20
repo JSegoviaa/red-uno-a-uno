@@ -8,7 +8,7 @@ const Perfil = () => {
 
   const misPaquetes = () => router.push("/perfil/mis-paquetes");
 
-  const misPropiedades = () => router.push("/perfil/mis-paquetes");
+  const misPropiedades = () => router.push("/perfil/mis-propiedades");
 
   return (
     <Container>
