@@ -9,10 +9,16 @@ interface Props {
 
 const PropertiesCard = ({ titulo, id, image }: Props) => {
   return (
-    <Col md={3} xs={6} key={id} className="py-3">
-      <div className="card">
+    <Col xs={6} md={4} lg={4} xl={3} className="py-3">
+      <div className="card" style={{border: "2px solid red"}}> 
         <img src={image} alt={titulo} />
         <div>{titulo}</div>
+        <div className="btn-group" role="group" aria-label="Basic outlined example">
+          <button type="button" className="btn btn-outline-primary">X</button>
+          <button type="button" className="btn btn-outline-primary">X</button>
+          <button type="button" className="btn btn-outline-primary">X</button>
+          <button type="button" className="btn btn-outline-primary">X</button>
+        </div>
       </div>
     </Col>
   );
