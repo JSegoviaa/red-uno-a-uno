@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import styles from "./MisPropiedades.module.css";
 import MisPropiedadesLista from "./MisPropiedadesLista";
 
