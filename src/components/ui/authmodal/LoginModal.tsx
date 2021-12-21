@@ -92,7 +92,6 @@ const LoginModal = ({ show, handleClose }: Props) => {
               <input
                 className="form-check-input"
                 type="checkbox"
-                value=""
                 id="flexCheckDefault"
                 name="rememberme"
               />
