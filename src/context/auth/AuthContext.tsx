@@ -1,4 +1,5 @@
 import { createContext, FC, useCallback, useState } from 'react';
+import { fetchSinToken } from '../../helpers/fetch';
 
 interface ContextProps {
   auth: Auth;
@@ -32,7 +33,13 @@ export const AuthProvider: FC = ({ children }) => {
   const [auth, setAuth] = useState(initialState);
 
   const login = async (correo: string, password: string) => {
-    console.log('Iniciando sesión');
+    const resp = await fetchSinToken(
+      'auth/login',
+      { correo, password },
+      'POST'
+    );
+
+    console.log(resp);
   };
 
   const register = async (nombre: string, correo: string, password: string) => {

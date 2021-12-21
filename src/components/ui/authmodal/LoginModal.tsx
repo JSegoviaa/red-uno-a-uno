@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Form, Modal } from 'react-bootstrap';
+import { AuthContext } from '../../../context/auth/AuthContext';
 import { useForm } from '../../../hooks/useForm';
 import Button from '../button/Button';
 import Modaltitle from '../modaltitle/Modaltitle';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const LoginModal = ({ show, handleClose }: Props) => {
+  const { login } = useContext(AuthContext);
   const { formulario, handleChange, setFormulario } = useForm({
     correo: 'test@test.com',
     password: '123456',
@@ -43,6 +45,7 @@ const LoginModal = ({ show, handleClose }: Props) => {
       : localStorage.removeItem('correo');
 
     console.log(correo, password);
+    login(correo, password);
   };
 
   return (
