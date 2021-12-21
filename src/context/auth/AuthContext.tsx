@@ -1,5 +1,6 @@
 import { createContext, FC, useCallback, useState } from "react";
 import { fetchSinToken } from "../../helpers/fetch";
+import { Auth, Resp } from "../../interfaces/AuthInterface";
 
 interface ContextProps {
   auth: Auth;
@@ -9,21 +10,6 @@ interface ContextProps {
   signInWithGoogle: () => void;
   signInWithFacebook: () => void;
   verificaToken: () => void;
-}
-
-interface Auth {
-  uid: string | null;
-  checking: boolean;
-  logged: boolean;
-  nombre: string | null;
-  apellido: string | null;
-  correo: string | null;
-}
-
-interface Resp {
-  ok: boolean;
-  msg: "string";
-  usuario: Auth;
 }
 
 export const AuthContext = createContext({} as ContextProps);
