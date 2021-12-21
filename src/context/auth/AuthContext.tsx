@@ -3,7 +3,7 @@ import { fetchSinToken } from "../../helpers/fetch";
 
 interface ContextProps {
   auth: Auth;
-  login: (correo: string, password: string) => void;
+  login: (correo: string, password: string) => Promise<Resp>;
   logOut: () => void;
   register: (nombre: string, correo: string, password: string) => void;
   signInWithGoogle: () => void;
@@ -16,7 +16,14 @@ interface Auth {
   checking: boolean;
   logged: boolean;
   nombre: string | null;
+  apellido: string | null;
   correo: string | null;
+}
+
+interface Resp {
+  ok: boolean;
+  msg: "string";
+  usuario: Auth;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -26,6 +33,7 @@ const initialState: Auth = {
   checking: true,
   logged: false,
   nombre: null,
+  apellido: null,
   correo: null,
 };
 
@@ -46,10 +54,11 @@ export const AuthProvider: FC = ({ children }) => {
         checking: false,
         logged: true,
         nombre: usuario.nombre,
+        apellido: usuario.apellido,
         correo: usuario.correo,
       });
     }
-    return resp.ok;
+    return resp;
   };
 
   const register = async (nombre: string, correo: string, password: string) => {

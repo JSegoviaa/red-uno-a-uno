@@ -16,8 +16,8 @@ interface Props {
 const LoginModal = ({ show, handleClose }: Props) => {
   const { login } = useContext(AuthContext);
   const { formulario, handleChange, setFormulario } = useForm({
-    correo: "test@test.com",
-    password: "123456",
+    correo: "",
+    password: "",
     rememberme: false,
   });
 
@@ -46,9 +46,9 @@ const LoginModal = ({ show, handleClose }: Props) => {
       ? localStorage.setItem("correo", correo)
       : localStorage.removeItem("correo");
 
-    const ok = await login(correo, password);
-    if (!ok!) {
-      toast.error("Error al momento de iniciar sesión");
+    const resp = await login(correo, password);
+    if (!resp.ok) {
+      toast.error(resp.msg);
     }
   };
 
