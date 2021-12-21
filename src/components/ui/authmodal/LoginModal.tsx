@@ -1,10 +1,12 @@
-import { useContext, useEffect } from 'react';
-import { Form, Modal } from 'react-bootstrap';
-import { AuthContext } from '../../../context/auth/AuthContext';
-import { useForm } from '../../../hooks/useForm';
-import Button from '../button/Button';
-import Modaltitle from '../modaltitle/Modaltitle';
-import styles from './AuthModal.module.css';
+import { useContext, useEffect } from "react";
+import { Form, Modal } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../../context/auth/AuthContext";
+import { useForm } from "../../../hooks/useForm";
+import Button from "../button/Button";
+import Modaltitle from "../modaltitle/Modaltitle";
+import styles from "./AuthModal.module.css";
 
 interface Props {
   show: boolean;
@@ -14,13 +16,13 @@ interface Props {
 const LoginModal = ({ show, handleClose }: Props) => {
   const { login } = useContext(AuthContext);
   const { formulario, handleChange, setFormulario } = useForm({
-    correo: 'test@test.com',
-    password: '123456',
+    correo: "test@test.com",
+    password: "123456",
     rememberme: false,
   });
 
   useEffect(() => {
-    const correo = localStorage.getItem('correo');
+    const correo = localStorage.getItem("correo");
 
     if (correo) {
       setFormulario({
@@ -41,12 +43,12 @@ const LoginModal = ({ show, handleClose }: Props) => {
     e.preventDefault();
 
     rememberme
-      ? localStorage.setItem('correo', correo)
-      : localStorage.removeItem('correo');
+      ? localStorage.setItem("correo", correo)
+      : localStorage.removeItem("correo");
 
     const ok = await login(correo, password);
     if (!ok!) {
-      alert('Error al momento de iniciar sesión');
+      toast.error("Error al momento de iniciar sesión");
     }
   };
 
@@ -59,9 +61,10 @@ const LoginModal = ({ show, handleClose }: Props) => {
       <Modal.Header
         closeButton
         style={{
-          border: 'none',
+          border: "none",
         }}
       />
+      <ToastContainer />
       <Modal.Body>
         <Form onSubmit={onSubmit}>
           <div className="row d-flex justify-content-center">
