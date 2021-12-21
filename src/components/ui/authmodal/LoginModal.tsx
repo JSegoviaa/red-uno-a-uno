@@ -37,14 +37,17 @@ const LoginModal = ({ show, handleClose }: Props) => {
     setFormulario({ ...formulario, rememberme: !rememberme });
   };
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
 
     rememberme
       ? localStorage.setItem('correo', correo)
       : localStorage.removeItem('correo');
 
-    login(correo, password);
+    const ok = login(correo, password);
+    if (!ok!) {
+      alert('Error al momento de iniciar sesión');
+    }
   };
 
   return (

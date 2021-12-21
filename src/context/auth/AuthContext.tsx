@@ -38,8 +38,19 @@ export const AuthProvider: FC = ({ children }) => {
       { correo, password },
       'POST'
     );
+    if (resp.token) {
+      localStorage.setItem('token', resp.token);
+      const { usuario } = resp;
+      setAuth({
+        uid: usuario.uid,
+        checking: false,
+        logged: true,
+        nombre: usuario.nombre,
+        correo: usuario.correo,
+      });
+    }
 
-    console.log(resp);
+    return resp.token;
   };
 
   const register = async (nombre: string, correo: string, password: string) => {
