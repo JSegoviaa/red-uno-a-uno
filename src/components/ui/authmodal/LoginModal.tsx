@@ -44,7 +44,6 @@ const LoginModal = ({ show, handleClose }: Props) => {
       ? localStorage.setItem('correo', correo)
       : localStorage.removeItem('correo');
 
-    console.log(correo, password);
     login(correo, password);
   };
 
