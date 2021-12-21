@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useRouter } from "next/router";
 import { Col, Container, Row } from "react-bootstrap";
+import { AuthContext } from "../../../../context/auth/AuthContext";
 import Button from "../../../ui/button/Button";
 import styles from "./Perfil.module.css";
 
@@ -9,6 +11,8 @@ const Perfil = () => {
   const misPaquetes = () => router.push("/perfil/mis-paquetes");
 
   const misPropiedades = () => router.push("/perfil/mis-propiedades");
+
+  const { auth } = useContext(AuthContext);
 
   return (
     <Container>

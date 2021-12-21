@@ -1,5 +1,5 @@
 .primary {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
@@ -15,7 +15,7 @@
 }
 
 .secondary {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
   font-size: 25.7083px;
@@ -47,5 +47,20 @@
 }
 
 .disabled {
-  background-color: #5e5e5e;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 21px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ccc;
+  background: linear-gradient(90deg, #dd6654 0%, #eb7b4c 100%);
+  border: none;
+  border-radius: 40px;
+  padding: 14px 18px 14px 18px;
+  text-decoration: none;
+}
+.disabled:hover {
+  cursor: not-allowed;
 }

@@ -1,5 +1,5 @@
-import { createContext, FC, useCallback, useState } from 'react';
-import { fetchSinToken } from '../../helpers/fetch';
+import { createContext, FC, useCallback, useState } from "react";
+import { fetchSinToken } from "../../helpers/fetch";
 
 interface ContextProps {
   auth: Auth;
@@ -34,12 +34,12 @@ export const AuthProvider: FC = ({ children }) => {
 
   const login = async (correo: string, password: string) => {
     const resp = await fetchSinToken(
-      'auth/login',
+      "auth/login",
       { correo, password },
-      'POST'
+      "POST"
     );
     if (resp.token) {
-      localStorage.setItem('token', resp.token);
+      localStorage.setItem("token", resp.token);
       const { usuario } = resp;
       setAuth({
         uid: usuario.uid,
@@ -53,21 +53,21 @@ export const AuthProvider: FC = ({ children }) => {
   };
 
   const register = async (nombre: string, correo: string, password: string) => {
-    console.log('Registrándose');
+    console.log("Registrándose");
   };
 
   const verificaToken = useCallback(() => {}, []);
 
   const logOut = async () => {
-    console.log('Cerrando sesión');
+    console.log("Cerrando sesión");
   };
 
   const signInWithGoogle = async () => {
-    console.log('Iniciando sesión con google');
+    console.log("Iniciando sesión con google");
   };
 
   const signInWithFacebook = async () => {
-    console.log('Iniciando sesión con facebook');
+    console.log("Iniciando sesión con facebook");
   };
 
   return (
