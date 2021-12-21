@@ -1,51 +1,68 @@
-import { createContext, FC, useState } from "react";
+import { createContext, FC, useCallback, useState } from 'react';
 
 interface ContextProps {
-  user: string;
-  loading: boolean;
-  signIn: () => void;
+  auth: Auth;
+  login: (correo: string, password: string) => void;
   logOut: () => void;
-  register: () => void;
+  register: (nombre: string, correo: string, password: string) => void;
   signInWithGoogle: () => void;
   signInWithFacebook: () => void;
+  verificaToken: () => void;
+}
+
+interface Auth {
+  uid: string | null;
+  checking: boolean;
+  logged: boolean;
+  nombre: string | null;
+  correo: string | null;
 }
 
 export const AuthContext = createContext({} as ContextProps);
 
+const initialState: Auth = {
+  uid: null,
+  checking: true,
+  logged: false,
+  nombre: null,
+  correo: null,
+};
+
 export const AuthProvider: FC = ({ children }) => {
-  const [user, setUser] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [auth, setAuth] = useState(initialState);
 
-  const signIn = () => {
-    console.log("Iniciando sesión");
+  const login = async (correo: string, password: string) => {
+    console.log('Iniciando sesión');
   };
 
-  const register = () => {
-    console.log("Registrándose");
+  const register = async (nombre: string, correo: string, password: string) => {
+    console.log('Registrándose');
   };
 
-  const logOut = () => {
-    console.log("Cerrando sesión");
+  const verificaToken = useCallback(() => {}, []);
+
+  const logOut = async () => {
+    console.log('Cerrando sesión');
   };
 
-  const signInWithGoogle = () => {
-    console.log("Iniciando sesión con google");
+  const signInWithGoogle = async () => {
+    console.log('Iniciando sesión con google');
   };
 
-  const signInWithFacebook = () => {
-    console.log("Iniciando sesión con facebook");
+  const signInWithFacebook = async () => {
+    console.log('Iniciando sesión con facebook');
   };
 
   return (
     <AuthContext.Provider
       value={{
-        user,
-        loading,
-        signIn,
+        auth,
+        login,
         logOut,
         register,
         signInWithGoogle,
         signInWithFacebook,
+        verificaToken,
       }}
     >
       {children}
