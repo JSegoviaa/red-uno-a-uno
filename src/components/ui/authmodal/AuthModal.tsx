@@ -1,9 +1,10 @@
-import { Modal } from "react-bootstrap";
-import Button from "../button/Button";
-import Modaltitle from "../modaltitle/Modaltitle";
-import styles from "./AuthModal.module.css";
+import { Modal } from 'react-bootstrap';
+import { useForm } from '../../../hooks/useForm';
+import Button from '../button/Button';
+import Modaltitle from '../modaltitle/Modaltitle';
+import styles from './AuthModal.module.css';
 
-type Autenticacion = "Registro" | "Login";
+type Autenticacion = 'Registro' | 'Login';
 
 interface Props {
   show: boolean;
@@ -12,9 +13,19 @@ interface Props {
 }
 
 const AuthModal = ({ show, handleClose, type }: Props) => {
+  const { formulario, handleChange } = useForm({
+    nombre: 'José Acosta',
+    apellido: '123456',
+    correo: 'test@test.com',
+    password: '123456',
+    password2: '123456',
+    rememberme: true,
+  });
+
+  const { nombre, apellido, correo, password, password2 } = formulario;
   return (
     <>
-      {type === "Registro" ? (
+      {type === 'Registro' ? (
         <Modal
           show={show}
           onHide={handleClose}
@@ -23,7 +34,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
           <Modal.Header
             closeButton
             style={{
-              border: "none",
+              border: 'none',
             }}
           />
           <Modal.Body>
@@ -37,6 +48,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
                   className={`${styles.modalInputs} mb-4`}
                   type="mail"
                   name="nombre"
+                  value={nombre}
                   required
                 />
               </div>
@@ -47,6 +59,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
                   className={`${styles.modalInputs} mb-4`}
                   type="mail"
                   name="apellido"
+                  value={apellido}
                   required
                 />
               </div>
@@ -57,6 +70,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
                   className={`${styles.modalInputs} mb-4`}
                   type="mail"
                   name="correo"
+                  value={correo}
                   required
                 />
               </div>
@@ -68,6 +82,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
                   className={`${styles.modalInputs} mb-4`}
                   type="password"
                   name="password"
+                  value={password}
                   required
                 />
               </div>
@@ -79,7 +94,8 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
                 <input
                   className={`${styles.modalInputs} mb-4`}
                   type="password"
-                  name="password"
+                  name="password2"
+                  value={password2}
                   required
                 />
               </div>
@@ -91,7 +107,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
         </Modal>
       ) : null}
 
-      {type === "Login" ? (
+      {type === 'Login' ? (
         <Modal
           show={show}
           onHide={handleClose}
@@ -100,7 +116,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
           <Modal.Header
             closeButton
             style={{
-              border: "none",
+              border: 'none',
             }}
           />
           <Modal.Body>
@@ -114,6 +130,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
                   className={`${styles.modalInputs} mb-4`}
                   type="mail"
                   name="correo"
+                  value={correo}
                   required
                 />
               </div>
@@ -124,6 +141,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
                   className={`${styles.modalInputs} mb-4`}
                   type="password"
                   name="password"
+                  value={password}
                   required
                 />
               </div>
@@ -162,6 +180,7 @@ const AuthModal = ({ show, handleClose, type }: Props) => {
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
+                    name="rememberme"
                   />
                   <label className="modal-labels">Recordarme</label>
                 </div>
