@@ -36,7 +36,6 @@ const ContactForm = () => {
     }
   };
 
-  console.log(telefono);
   return (
     <section className="my-5">
       <Container>
