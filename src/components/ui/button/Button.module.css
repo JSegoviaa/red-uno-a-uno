@@ -35,10 +35,24 @@
 }
 
 .Green {
-  background-color: #fff;
-  border: 1px #13a407 solid;
-  border-radius: 20px;
-  color: #13a407;
+  border: 1px solid #13A407;
+  box-sizing: border-box;
+  border-radius: 7px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  align-items: center;
+  color: #13A407;
+  background-color: white;
+  padding: 6px 12px;
+  transition: 100ms;
+}
+
+.Green:hover {
+  background-color: #13A407;
+  color: white;
+  transition: 100ms;
 }
 
 .add {

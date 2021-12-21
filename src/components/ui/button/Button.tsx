@@ -22,14 +22,14 @@ const Button = ({ titulo, onClick, btn = "Primary" }: Props) => {
         </div>
       ) : null}
       {btn === "Green" ? (
-        <div className={`${styles.Green} pointer`} onClick={onClick}>
-          {titulo}
-        </div>
+        <button className={`${styles.Green} pointer`} onClick={onClick}>
+          <i className="bi bi-plus-lg"></i> {titulo}
+        </button>
       ) : null}
       {btn === "Add" ? (
-        <div className={`${styles.add} pointer`} onClick={onClick}>
+        <button className={`${styles.add} pointer`} onClick={onClick}>
           {titulo}
-        </div>
+        </button>
       ) : null}
       {btn === "Disabled" ? (
         <button className={styles.disabled}>{titulo}</button>
