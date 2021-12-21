@@ -1,26 +1,46 @@
 import { Container, Form, Row } from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../ui/button/Button";
 import styles from "./contactform.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = () => {
   const { formulario, handleChange } = useForm({
-    nombre: "José Manuel",
-    apellido: "Acosta Segovia",
-    correo: "test@test.com",
-    telefono: "9982626821",
-    mensaje: "Hola, quiero información sobre esta mierda",
+    nombre: "",
+    apellido: "",
+    correo: "",
+    telefono: "",
+    mensaje: "",
   });
 
   const { nombre, apellido, correo, telefono, mensaje } = formulario;
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+
+    if (correo.trim().length <= 1) {
+      toast.error("El correo es obligatorio");
+    }
+    if (nombre.trim().length <= 1) {
+      toast.error("El nombre es obligatorio");
+    }
+    if (apellido.trim().length <= 1) {
+      toast.error("El apellido es obligatorio");
+    }
+    if (telefono.trim().length < 10) {
+      toast.error("El número teléfonico debe de ser de al menos 10 dígitos");
+    }
+    if (mensaje.trim().length <= 30) {
+      toast.error("El mensaje debe contener al menos 30 caracteres");
+    }
   };
 
+  console.log(telefono);
   return (
     <section className="my-5">
       <Container>
+        <ToastContainer autoClose={10000} />
         <Row>
           <div className="col-sm-12 col-md-7 col-lg-8">
             <div className={styles.s1}>
@@ -34,6 +54,7 @@ const ContactForm = () => {
                         value={nombre}
                         name="nombre"
                         onChange={handleChange}
+                        required
                       />
                       <label htmlFor="floatingInput">Nombre</label>
                     </div>
@@ -46,6 +67,7 @@ const ContactForm = () => {
                         onChange={handleChange}
                         value={apellido}
                         name="apellido"
+                        required
                       />
                       <label htmlFor="floatingInput">Apellido</label>
                     </div>
@@ -58,6 +80,7 @@ const ContactForm = () => {
                         value={correo}
                         name="correo"
                         onChange={handleChange}
+                        required
                       />
                       <label htmlFor="floatingInput">Correo</label>
                     </div>
@@ -65,11 +88,12 @@ const ContactForm = () => {
                   <div className="col-sm-12 col-md-6 col-lg-6">
                     <div className="form-floating mb-3">
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         value={telefono}
                         name="telefono"
                         onChange={handleChange}
+                        required
                       />
                       <label htmlFor="floatingInput">Telefono</label>
                     </div>
@@ -79,10 +103,10 @@ const ContactForm = () => {
                       <textarea
                         className="form-control"
                         style={{ height: 150 }}
-                        defaultValue={""}
                         value={mensaje}
                         name="mensaje"
                         onChange={handleChange}
+                        required
                       />
                       <label htmlFor="floatingTextarea2">Mensaje</label>
                     </div>
