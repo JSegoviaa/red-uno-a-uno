@@ -1,4 +1,4 @@
-import { Modal } from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import { useForm } from '../../../hooks/useForm';
 import Button from '../button/Button';
 import Modaltitle from '../modaltitle/Modaltitle';
@@ -13,13 +13,18 @@ const LoginModal = ({ show, handleClose }: Props) => {
   const { formulario, handleChange, setFormulario } = useForm({
     correo: 'test@test.com',
     password: '123456',
-    rememberme: true,
+    rememberme: false,
   });
 
   const { correo, password, rememberme } = formulario;
 
   const toggleCheck = () => {
     setFormulario({ ...formulario, rememberme: !rememberme });
+  };
+
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    console.log(formulario);
   };
 
   return (
@@ -35,78 +40,80 @@ const LoginModal = ({ show, handleClose }: Props) => {
         }}
       />
       <Modal.Body>
-        <div className="row d-flex justify-content-center">
-          <Modaltitle titulo="Inicia sesión" />
+        <Form onSubmit={onSubmit}>
+          <div className="row d-flex justify-content-center">
+            <Modaltitle titulo="Inicia sesión" />
 
-          <div className="col-10">
-            <label className={styles.modalLabels}>Correo electrónico</label>
-            <br />
-            <input
-              className={`${styles.modalInputs} mb-4`}
-              type="mail"
-              name="correo"
-              value={correo}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="col-10">
-            <label className={styles.modalLabels}>Contraseña</label>
-            <br />
-            <input
-              className={`${styles.modalInputs} mb-4`}
-              type="password"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="col-4 my-4">
-            <hr />
-          </div>
-          <div className="col-2 text-center my-4 modal-labels">O</div>
-          <div className="col-4 my-4">
-            <hr />
-          </div>
-
-          <div className="col-10 mb-3 text-center">
-            <button className={styles.modalGoogleBtn}>
-              <img
-                className="me-3"
-                src="/images/icons/google-icon.png"
-                alt="Inicia sesión con google"
-              />
-              Inicia sesión con Google
-            </button>
-          </div>
-          <div className="col-10 mb-3 text-center">
-            <button className={styles.modalFbBtn}>
-              <img
-                className="me-3"
-                src="/images/icons/fb-icon.png"
-                alt="Inicia sesión con facebook"
-              />
-              Inicia sesión con Facebook
-            </button>
-          </div>
-          <div className="col-10 mb-3">
-            <div className="form-check" onClick={() => toggleCheck()}>
+            <div className="col-10">
+              <label className={styles.modalLabels}>Correo electrónico</label>
+              <br />
               <input
-                className="form-check-input"
-                type="checkbox"
-                id="flexCheckDefault"
-                name="rememberme"
-                checked={rememberme}
+                className={`${styles.modalInputs} mb-4`}
+                type="mail"
+                name="correo"
+                value={correo}
+                onChange={handleChange}
+                required
               />
-              <label className="modal-labels">Recordarme</label>
+            </div>
+            <div className="col-10">
+              <label className={styles.modalLabels}>Contraseña</label>
+              <br />
+              <input
+                className={`${styles.modalInputs} mb-4`}
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="col-4 my-4">
+              <hr />
+            </div>
+            <div className="col-2 text-center my-4 modal-labels">O</div>
+            <div className="col-4 my-4">
+              <hr />
+            </div>
+
+            <div className="col-10 mb-3 text-center">
+              <button className={styles.modalGoogleBtn}>
+                <img
+                  className="me-3"
+                  src="/images/icons/google-icon.png"
+                  alt="Inicia sesión con google"
+                />
+                Inicia sesión con Google
+              </button>
+            </div>
+            <div className="col-10 mb-3 text-center">
+              <button className={styles.modalFbBtn}>
+                <img
+                  className="me-3"
+                  src="/images/icons/fb-icon.png"
+                  alt="Inicia sesión con facebook"
+                />
+                Inicia sesión con Facebook
+              </button>
+            </div>
+            <div className="col-10 mb-3">
+              <div className="form-check" onClick={() => toggleCheck()}>
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  name="rememberme"
+                  checked={rememberme}
+                  readOnly
+                />
+                <label className="modal-labels">Recordarme</label>
+              </div>
+            </div>
+
+            <div className="col-10 mb-3 text-center">
+              <Button titulo="Iniciar sesión" />
             </div>
           </div>
-
-          <div className="col-10 mb-3 text-center">
-            <Button titulo="Iniciar sesión" />
-          </div>
-        </div>
+        </Form>
       </Modal.Body>
     </Modal>
   );

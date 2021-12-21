@@ -1,6 +1,6 @@
-import styles from "./Button.module.css";
+import styles from './Button.module.css';
 
-type Btn = "Primary" | "Secondary" | "Green" | "Add";
+type Btn = 'Primary' | 'Secondary' | 'Green' | 'Add';
 
 interface Props {
   titulo: string;
@@ -8,25 +8,25 @@ interface Props {
   btn?: Btn;
 }
 
-const Button = ({ titulo, onClick, btn = "Primary" }: Props) => {
+const Button = ({ titulo, onClick, btn = 'Primary' }: Props) => {
   return (
     <>
-      {btn === "Primary" ? (
-        <div className={`${styles.primary} pointer`} onClick={onClick}>
+      {btn === 'Primary' ? (
+        <button className={`${styles.primary} pointer`} onClick={onClick}>
           {titulo}
-        </div>
+        </button>
       ) : null}
-      {btn === "Secondary" ? (
+      {btn === 'Secondary' ? (
         <div className={`${styles.secondary} pointer`} onClick={onClick}>
           {titulo}
         </div>
       ) : null}
-      {btn === "Green" ? (
+      {btn === 'Green' ? (
         <div className={`${styles.Green} pointer`} onClick={onClick}>
           {titulo}
         </div>
       ) : null}
-      {btn === "Add" ? (
+      {btn === 'Add' ? (
         <div className={`${styles.add} pointer`} onClick={onClick}>
           {titulo}
         </div>
