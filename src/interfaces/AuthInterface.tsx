@@ -8,6 +8,7 @@ export interface Auth {
 }
 
 export interface Resp {
+  token: string;
   ok: boolean;
   msg: "string";
   usuario: Auth;

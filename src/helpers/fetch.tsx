@@ -1,3 +1,5 @@
+import { Resp } from "../interfaces/AuthInterface";
+
 interface Data {
   correo: string;
   password: string;
@@ -9,7 +11,7 @@ export const fetchSinToken = async (
   endpoint: string,
   data: Data,
   method = "GET"
-) => {
+): Promise<Resp> => {
   const url = `${baseURL}/${endpoint}`;
 
   if (method === "GET") {
