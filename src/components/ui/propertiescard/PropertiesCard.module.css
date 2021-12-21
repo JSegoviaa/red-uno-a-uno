@@ -15,6 +15,10 @@
     color: #000000;
 }
 
+.customBtn1:focus, .customBtn2:focus, .customBtn3:focus, .customBtn4:focus{
+    box-shadow: none;
+}
+
 .customBtn1{
     padding-top: 30px;
     border-top: 1px solid #DDDDDD;
