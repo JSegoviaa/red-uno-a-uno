@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../button/Button";
 import Modaltitle from "../modaltitle/Modaltitle";
 import styles from "./AuthModal.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   show: boolean;
@@ -136,7 +136,11 @@ const LoginModal = ({ show, handleClose }: Props) => {
             </div>
 
             <div className="col-10 mb-3 text-center">
-              <Button titulo="Iniciar sesión" />
+              {correo.length > 0 && password.length > 0 ? (
+                <Button titulo="Iniciar sesión" />
+              ) : (
+                <Button titulo="Iniciar sesión" btn="Disabled" />
+              )}
             </div>
           </div>
         </Form>
