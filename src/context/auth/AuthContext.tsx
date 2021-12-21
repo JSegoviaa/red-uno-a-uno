@@ -49,8 +49,7 @@ export const AuthProvider: FC = ({ children }) => {
         correo: usuario.correo,
       });
     }
-
-    return resp.token;
+    return resp.ok;
   };
 
   const register = async (nombre: string, correo: string, password: string) => {

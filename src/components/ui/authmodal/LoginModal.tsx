@@ -44,7 +44,7 @@ const LoginModal = ({ show, handleClose }: Props) => {
       ? localStorage.setItem('correo', correo)
       : localStorage.removeItem('correo');
 
-    const ok = login(correo, password);
+    const ok = await login(correo, password);
     if (!ok!) {
       alert('Error al momento de iniciar sesión');
     }
