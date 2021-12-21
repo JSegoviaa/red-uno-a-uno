@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import AuthModal from '../authmodal/AuthModal';
-import Button from '../button/Button';
-import styles from './Header.module.css';
-import LoginModal from '../authmodal/LoginModal';
+import { useState } from "react";
+import Link from "next/link";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import Button from "../button/Button";
+import styles from "./Header.module.css";
+import LoginModal from "../authmodal/LoginModal";
+import RegisterModal from "../authmodal/AuthModal";
 
 const Header = () => {
   const [show, setShow] = useState(false);
@@ -45,7 +45,7 @@ const Header = () => {
                 <img
                   src="/images/icons/perfil.png"
                   alt="Mi perfil"
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                 />
               </div>
             </Link>
@@ -53,7 +53,7 @@ const Header = () => {
         </Navbar.Collapse>
       </Container>
       <LoginModal show={show} handleClose={handleClose} />
-      <AuthModal show={isOpen} handleClose={closeRegister} type="Registro" />
+      <RegisterModal show={isOpen} handleClose={closeRegister} />
     </Navbar>
   );
 };
