@@ -9,10 +9,32 @@ interface Props {
 
 const FavPropertiesCard = ({ titulo, id, image }: Props) => {
   return (
-    <Col md={3} xs={6} key={id} className="py-3">
-      <div className="card">
+    <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center">
+      <div className={`${styles.customCard} card`}>
         <img src={image} alt={titulo} />
-        <div>{titulo}</div>
+        <div className={`${styles.proContent} my-3`}>{titulo}</div>
+        <div
+          className="btn-group"
+          role="group"
+          aria-label="Basic mixed styles example"
+        >
+          <button type="button" className={`${styles.customBtn1} btn`}>
+            {" "}
+          </button>{" "}
+          {/* <img src="/images/icons/properties-icons/1-gray.png" alt="..." /> */}
+          <button type="button" className={`${styles.customBtn2} btn`}>
+            {" "}
+          </button>{" "}
+          {/* <img src="/images/icons/properties-icons/2-gray.png" alt="..." /> */}
+          <button type="button" className={`${styles.customBtn3} btn`}>
+            {" "}
+          </button>{" "}
+          {/* <img src="/images/icons/properties-icons/3-gray.png" alt="..." /> */}
+          <button type="button" className={`${styles.customBtn4} btn`}>
+            {" "}
+          </button>{" "}
+          {/* <img src="/images/icons/properties-icons/4-gray.png" alt="..." /> */}
+        </div>
       </div>
     </Col>
   );
