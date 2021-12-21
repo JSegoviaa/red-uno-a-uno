@@ -1,42 +1,65 @@
-import { Modal } from 'react-bootstrap';
-import { useForm } from '../../../hooks/useForm';
-import Button from '../button/Button';
-import Modaltitle from '../modaltitle/Modaltitle';
-import styles from './AuthModal.module.css';
-
-type Autenticacion = 'Registro';
+import { Form, Modal } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import { useForm } from "../../../hooks/useForm";
+import Button from "../button/Button";
+import Modaltitle from "../modaltitle/Modaltitle";
+import styles from "./AuthModal.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   show: boolean;
   handleClose: () => void;
-  type: Autenticacion;
 }
 
-const AuthModal = ({ show, handleClose, type = 'Registro' }: Props) => {
+const RegisterModal = ({ show, handleClose }: Props) => {
   const { formulario, handleChange } = useForm({
-    nombre: 'José Acosta',
-    apellido: '123456',
-    correo: 'test@test.com',
-    password: '123456',
-    password2: '123456',
+    nombre: "",
+    apellido: "",
+    correo: "",
+    password: "",
+    password2: "",
   });
 
   const { nombre, apellido, correo, password, password2 } = formulario;
+
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+
+    if (password !== password2) toast.error("Las contraseñas no coinciden");
+
+    if (password.length < 6) {
+      toast.error("La contraseña tiene que ser de al menos 6 caracteres");
+    }
+
+    if (nombre.trim().length <= 2) {
+      toast.error("El nombre debe tener mínimo 3 caracteres");
+    }
+
+    if (correo.trim().length <= 2) {
+      toast.error("El correo debe tener mínimo 3 caracteres");
+    }
+    if (apellido.trim().length <= 2) {
+      toast.error("El apellido debe tener mínimo 3 caracteres");
+    }
+  };
+
   return (
     <>
-      {type === 'Registro' ? (
-        <Modal
-          show={show}
-          onHide={handleClose}
-          contentClassName={styles.modalContent}
-        >
-          <Modal.Header
-            closeButton
-            style={{
-              border: 'none',
-            }}
-          />
-          <Modal.Body>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        contentClassName={styles.modalContent}
+      >
+        <Modal.Header
+          closeButton
+          style={{
+            border: "none",
+          }}
+        />
+        <ToastContainer autoClose={10000} />
+
+        <Modal.Body>
+          <Form onSubmit={onSubmit}>
             <div className="row d-flex justify-content-center">
               <Modaltitle titulo="Registrarse" />
 
@@ -104,14 +127,21 @@ const AuthModal = ({ show, handleClose, type = 'Registro' }: Props) => {
                 />
               </div>
               <div className="col-10 mb-3 text-center">
-                <Button titulo="Registrarse" />
+                {nombre.length > 0 &&
+                apellido.length > 0 &&
+                correo.length > 0 &&
+                password.length > 0 ? (
+                  <Button titulo="Registrarse" />
+                ) : (
+                  <Button titulo="Registrarse" btn="Disabled" />
+                )}
               </div>
             </div>
-          </Modal.Body>
-        </Modal>
-      ) : null}
+          </Form>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
 
-export default AuthModal;
+export default RegisterModal;

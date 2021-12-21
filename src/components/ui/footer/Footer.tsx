@@ -2,8 +2,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import AuthModal from "../authmodal/AuthModal";
 import styles from "./Footer.module.css";
+import RegisterModal from "../authmodal/AuthModal";
 
 const Footer = () => {
   const router = useRouter();
@@ -111,7 +111,7 @@ const Footer = () => {
         </Link>
         . Todos los derechos reservados.
       </div>
-      <AuthModal show={isOpen} handleClose={closeRegister} type="Registro" />
+      <RegisterModal show={isOpen} handleClose={closeRegister} />
     </footer>
   );
 };

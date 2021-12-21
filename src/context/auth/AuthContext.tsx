@@ -1,22 +1,15 @@
 import { createContext, FC, useCallback, useState } from "react";
 import { fetchSinToken } from "../../helpers/fetch";
+import { Auth, Resp } from "../../interfaces/AuthInterface";
 
 interface ContextProps {
   auth: Auth;
-  login: (correo: string, password: string) => void;
+  login: (correo: string, password: string) => Promise<Resp>;
   logOut: () => void;
   register: (nombre: string, correo: string, password: string) => void;
   signInWithGoogle: () => void;
   signInWithFacebook: () => void;
   verificaToken: () => void;
-}
-
-interface Auth {
-  uid: string | null;
-  checking: boolean;
-  logged: boolean;
-  nombre: string | null;
-  correo: string | null;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -26,6 +19,7 @@ const initialState: Auth = {
   checking: true,
   logged: false,
   nombre: null,
+  apellido: null,
   correo: null,
 };
 
@@ -46,10 +40,11 @@ export const AuthProvider: FC = ({ children }) => {
         checking: false,
         logged: true,
         nombre: usuario.nombre,
+        apellido: usuario.apellido,
         correo: usuario.correo,
       });
     }
-    return resp.ok;
+    return resp;
   };
 
   const register = async (nombre: string, correo: string, password: string) => {
