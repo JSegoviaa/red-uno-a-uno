@@ -1,5 +1,5 @@
 .primary {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
@@ -15,7 +15,7 @@
 }
 
 .secondary {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 25.7083px;
@@ -27,9 +27,9 @@
   transition: 100ms;
 }
 .secondary:hover {
-  outline: 3px solid #7149BC;
+  outline: 3px solid #7149bc;
   border: 2px solid white;
-  background-color: #7149BC;
+  background-color: #7149bc;
   color: white;
   transition: 100ms;
 }
@@ -44,4 +44,8 @@
 .add {
   background-color: #13a407;
   color: #fff;
+}
+
+.disabled {
+  background-color: #5e5e5e;
 }

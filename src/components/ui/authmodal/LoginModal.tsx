@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Form, Modal } from 'react-bootstrap';
 import { useForm } from '../../../hooks/useForm';
 import Button from '../button/Button';
@@ -16,6 +17,18 @@ const LoginModal = ({ show, handleClose }: Props) => {
     rememberme: false,
   });
 
+  useEffect(() => {
+    const correo = localStorage.getItem('correo');
+
+    if (correo) {
+      setFormulario({
+        ...formulario,
+        correo,
+        rememberme: true,
+      });
+    }
+  }, []);
+
   const { correo, password, rememberme } = formulario;
 
   const toggleCheck = () => {
@@ -24,7 +37,12 @@ const LoginModal = ({ show, handleClose }: Props) => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    console.log(formulario);
+
+    rememberme
+      ? localStorage.setItem('correo', correo)
+      : localStorage.removeItem('correo');
+
+    console.log(correo, password);
   };
 
   return (
@@ -77,24 +95,24 @@ const LoginModal = ({ show, handleClose }: Props) => {
             </div>
 
             <div className="col-10 mb-3 text-center">
-              <button className={styles.modalGoogleBtn}>
+              <div className={styles.modalGoogleBtn}>
                 <img
                   className="me-3"
                   src="/images/icons/google-icon.png"
                   alt="Inicia sesión con google"
                 />
                 Inicia sesión con Google
-              </button>
+              </div>
             </div>
             <div className="col-10 mb-3 text-center">
-              <button className={styles.modalFbBtn}>
+              <div className={styles.modalFbBtn}>
                 <img
                   className="me-3"
                   src="/images/icons/fb-icon.png"
                   alt="Inicia sesión con facebook"
                 />
                 Inicia sesión con Facebook
-              </button>
+              </div>
             </div>
             <div className="col-10 mb-3">
               <div className="form-check" onClick={() => toggleCheck()}>

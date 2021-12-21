@@ -1,6 +1,6 @@
 import styles from './Button.module.css';
 
-type Btn = 'Primary' | 'Secondary' | 'Green' | 'Add';
+type Btn = 'Primary' | 'Secondary' | 'Green' | 'Add' | 'Disabled';
 
 interface Props {
   titulo: string;
@@ -30,6 +30,9 @@ const Button = ({ titulo, onClick, btn = 'Primary' }: Props) => {
         <div className={`${styles.add} pointer`} onClick={onClick}>
           {titulo}
         </div>
+      ) : null}
+      {btn === 'Disabled' ? (
+        <div className={styles.disabled}>{titulo}</div>
       ) : null}
     </>
   );
