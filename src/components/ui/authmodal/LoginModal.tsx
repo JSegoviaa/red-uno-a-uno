@@ -10,16 +10,17 @@ interface Props {
 }
 
 const LoginModal = ({ show, handleClose }: Props) => {
-  const { formulario, handleChange } = useForm({
-    nombre: 'José Acosta',
-    apellido: '123456',
+  const { formulario, handleChange, setFormulario } = useForm({
     correo: 'test@test.com',
     password: '123456',
-    password2: '123456',
     rememberme: true,
   });
 
   const { correo, password, rememberme } = formulario;
+
+  const toggleCheck = () => {
+    setFormulario({ ...formulario, rememberme: !rememberme });
+  };
 
   return (
     <Modal
@@ -45,6 +46,7 @@ const LoginModal = ({ show, handleClose }: Props) => {
               type="mail"
               name="correo"
               value={correo}
+              onChange={handleChange}
               required
             />
           </div>
@@ -56,6 +58,7 @@ const LoginModal = ({ show, handleClose }: Props) => {
               type="password"
               name="password"
               value={password}
+              onChange={handleChange}
               required
             />
           </div>
@@ -88,12 +91,13 @@ const LoginModal = ({ show, handleClose }: Props) => {
             </button>
           </div>
           <div className="col-10 mb-3">
-            <div className="form-check">
+            <div className="form-check" onClick={() => toggleCheck()}>
               <input
                 className="form-check-input"
                 type="checkbox"
                 id="flexCheckDefault"
                 name="rememberme"
+                checked={rememberme}
               />
               <label className="modal-labels">Recordarme</label>
             </div>

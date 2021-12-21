@@ -19,7 +19,6 @@ const AuthModal = ({ show, handleClose, type = 'Registro' }: Props) => {
     correo: 'test@test.com',
     password: '123456',
     password2: '123456',
-    rememberme: true,
   });
 
   const { nombre, apellido, correo, password, password2 } = formulario;
@@ -49,6 +48,7 @@ const AuthModal = ({ show, handleClose, type = 'Registro' }: Props) => {
                   type="mail"
                   name="nombre"
                   value={nombre}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -60,6 +60,7 @@ const AuthModal = ({ show, handleClose, type = 'Registro' }: Props) => {
                   type="mail"
                   name="apellido"
                   value={apellido}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -71,6 +72,7 @@ const AuthModal = ({ show, handleClose, type = 'Registro' }: Props) => {
                   type="mail"
                   name="correo"
                   value={correo}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -83,6 +85,7 @@ const AuthModal = ({ show, handleClose, type = 'Registro' }: Props) => {
                   type="password"
                   name="password"
                   value={password}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -96,6 +99,7 @@ const AuthModal = ({ show, handleClose, type = 'Registro' }: Props) => {
                   type="password"
                   name="password2"
                   value={password2}
+                  onChange={handleChange}
                   required
                 />
               </div>

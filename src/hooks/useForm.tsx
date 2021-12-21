@@ -9,5 +9,5 @@ export const useForm = <T extends Object>(initialState: T) => {
     setFormulario({ ...formulario, [name]: value });
   };
 
-  return { formulario, handleChange };
+  return { formulario, handleChange, setFormulario };
 };
