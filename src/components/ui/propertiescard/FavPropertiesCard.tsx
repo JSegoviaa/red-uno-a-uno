@@ -5,9 +5,10 @@ interface Props {
   id: number;
   image: string;
   titulo: string;
+  icon: string;
 }
 
-const FavPropertiesCard = ({ titulo, id, image }: Props) => {
+const FavPropertiesCard = ({ titulo, id, image, icon }: Props) => {
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center">
       <div className={`${styles.customCard} card`}>
@@ -18,9 +19,6 @@ const FavPropertiesCard = ({ titulo, id, image }: Props) => {
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <button type="button" className={`${styles.customBtn1} btn`}>
-            {" "}
-          </button>{" "}
           {/* <img src="/images/icons/properties-icons/1-gray.png" alt="..." /> */}
           <button type="button" className={`${styles.customBtn2} btn`}>
             {" "}
