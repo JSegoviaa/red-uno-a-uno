@@ -1,0 +1,87 @@
+.customCard{
+    border-radius: 7px;
+    outline: 1px solid #DDDDDD;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 7px;
+}
+
+.proContent{
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
+    color: #000000;
+}
+
+.customBtn1{
+    padding-top: 30px;
+    border-top: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 0px 0px 0px 7px;
+    background-image: url('/images/icons/properties-icons/1-gray.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 100ms;
+}
+.customBtn2{
+    padding-top: 30px;
+    border-top: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 0px 0px 0px 7px; 
+    background-image: url('/images/icons/properties-icons/2-gray.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 100ms;
+}
+.customBtn3{
+    padding-top: 30px;
+    border-top: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 0px 0px 0px 7px;
+    background-image: url('/images/icons/properties-icons/3-gray.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 100ms;
+}
+.customBtn4{
+    padding-top: 30px;
+    border-top: 1px solid #DDDDDD;
+    border-left: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 0px 0px 7px 0px;
+    background-image: url('/images/icons/properties-icons/4-gray.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 100ms;
+}
+
+
+.customBtn1:hover {
+    background-color: #7149BC;
+    border: 1px solid #7149BC;
+    background-image: url('/images/icons/properties-icons/1-white.png');
+    transition: 100ms;
+}
+.customBtn2:hover {
+    background-color: #7149BC;
+    border: 1px solid #7149BC;
+    background-image: url('/images/icons/properties-icons/2-white.png');
+    transition: 100ms;
+}
+.customBtn3:hover {
+    background-color: #7149BC;
+    border: 1px solid #7149BC;
+    background-image: url('/images/icons/properties-icons/3-white.png');
+    transition: 100ms;
+}
+.customBtn4:hover {
+    background-color: #7149BC;
+    border: 1px solid #7149BC;
+    background-image: url('/images/icons/properties-icons/4-white.png');
+    transition: 100ms;
+}
