@@ -72,11 +72,7 @@ const Footer = () => {
                 <p className={styles.footerPhone}>442 543 9190</p>
               </div>
 
-              <a
-                className="me-2"
-                href="https://www.facebook.com"
-                target="_blank"
-              >
+              <a className="me-2" href="https://www.facebook.com">
                 <Image
                   src="/images/icons/facebook.png"
                   alt="Síguenos en facebook"
@@ -84,7 +80,7 @@ const Footer = () => {
                   height={33}
                 />
               </a>
-              <a href="https://wa.link/8udscw" target="_blank">
+              <a href="https://wa.link/8udscw">
                 <Image
                   src="/images/icons/whatsapp.png"
                   alt="Comunícate por whatsapp"

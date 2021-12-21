@@ -15,7 +15,7 @@ const SEO = ({ titulo, descripcion = desc, url, img = logo }: Props) => {
   return (
     <Head>
       <title>{titulo ? `Red 1 a 1 | ${titulo}` : "Red 1 a 1"}</title>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content={descripcion} />
       <meta name="keywords" content="Red uno a uno, Red 1 a 1" />
