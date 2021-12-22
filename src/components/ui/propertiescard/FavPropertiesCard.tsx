@@ -1,5 +1,5 @@
 import { Col } from "react-bootstrap";
-import styles from "./PropertiesCard.module.css";
+import styles from "./FavsCard.module.css";
 
 interface Props {
   id: number;
@@ -12,6 +12,7 @@ const FavPropertiesCard = ({ titulo, id, image, icon }: Props) => {
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center">
       <div className={`${styles.customCard} card`}>
+        <img className={styles.iconoF} src={icon} alt="..." />
         <img src={image} alt={titulo} />
         <div className={`${styles.proContent} my-3`}>{titulo}</div>
         <div className="btn-group" role="group" aria-label="Basic mixed styles example">
