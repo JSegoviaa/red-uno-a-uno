@@ -14,24 +14,10 @@ const FavPropertiesCard = ({ titulo, id, image, icon }: Props) => {
       <div className={`${styles.customCard} card`}>
         <img src={image} alt={titulo} />
         <div className={`${styles.proContent} my-3`}>{titulo}</div>
-        <div
-          className="btn-group"
-          role="group"
-          aria-label="Basic mixed styles example"
-        >
-          {/* <img src="/images/icons/properties-icons/1-gray.png" alt="..." /> */}
-          <button type="button" className={`${styles.customBtn2} btn`}>
-            {" "}
-          </button>{" "}
-          {/* <img src="/images/icons/properties-icons/2-gray.png" alt="..." /> */}
-          <button type="button" className={`${styles.customBtn3} btn`}>
-            {" "}
-          </button>{" "}
-          {/* <img src="/images/icons/properties-icons/3-gray.png" alt="..." /> */}
-          <button type="button" className={`${styles.customBtn4} btn`}>
-            {" "}
-          </button>{" "}
-          {/* <img src="/images/icons/properties-icons/4-gray.png" alt="..." /> */}
+        <div className="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button type="button" className={`${styles.customBtn2} btn`}></button>
+          <button type="button" className={`${styles.customBtn3} btn`}></button>
+          <button type="button" className={`${styles.customBtn4} btn`}></button>
         </div>
       </div>
     </Col>
