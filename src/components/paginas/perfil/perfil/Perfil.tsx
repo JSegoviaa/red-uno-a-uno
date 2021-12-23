@@ -1,18 +1,18 @@
-import { useContext } from "react";
-import { useRouter } from "next/router";
-import { Col, Container, Row } from "react-bootstrap";
-import { AuthContext } from "../../../../context/auth/AuthContext";
-import Button from "../../../ui/button/Button";
-import styles from "./Perfil.module.css";
+import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import { Col, Container, Row } from 'react-bootstrap';
+import { AuthContext } from '../../../../context/auth/AuthContext';
+import Button from '../../../ui/button/Button';
+import styles from './Perfil.module.css';
 
 const Perfil = () => {
   const router = useRouter();
 
-  const misPaquetes = () => router.push("/perfil/mis-paquetes");
+  const misPaquetes = () => router.push('/perfil/mis-paquetes');
 
-  const misPropiedades = () => router.push("/perfil/mis-propiedades");
+  const misPropiedades = () => router.push('/perfil/mis-propiedades');
 
-  const { auth } = useContext(AuthContext);
+  const { auth, logOut } = useContext(AuthContext);
 
   return (
     <Container>
@@ -29,6 +29,10 @@ const Perfil = () => {
         </div>
       </div>
       <hr />
+      <h3 className="d-flex justify-content-center pointer" onClick={logOut}>
+        Cerrar sesión
+      </h3>
+
       <div className="py-5">
         <Row className="d-flex justify-content-center text-center">
           <Col className="py-3">

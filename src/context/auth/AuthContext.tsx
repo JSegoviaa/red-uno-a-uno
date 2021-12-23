@@ -126,7 +126,15 @@ export const AuthProvider: FC = ({ children }) => {
   }, []);
 
   const logOut = async () => {
-    console.log('Cerrando sesión');
+    localStorage.removeItem('token');
+    setAuth({
+      uid: null,
+      checking: false,
+      logged: false,
+      nombre: null,
+      apellido: null,
+      correo: null,
+    });
   };
 
   const signInWithGoogle = async () => {
