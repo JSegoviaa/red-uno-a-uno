@@ -1,10 +1,13 @@
-import { Form, Modal } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
-import { useForm } from "../../../hooks/useForm";
-import Button from "../button/Button";
-import Modaltitle from "../modaltitle/Modaltitle";
-import styles from "./AuthModal.module.css";
-import "react-toastify/dist/ReactToastify.css";
+import { useContext } from 'react';
+import { Form, Modal } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import { useForm } from '../../../hooks/useForm';
+import Button from '../button/Button';
+import Modaltitle from '../modaltitle/Modaltitle';
+import styles from './AuthModal.module.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../../context/auth/AuthContext';
+import { useRouter } from 'next/router';
 
 interface Props {
   show: boolean;
@@ -12,34 +15,40 @@ interface Props {
 }
 
 const RegisterModal = ({ show, handleClose }: Props) => {
+  const router = useRouter();
+
+  const { register } = useContext(AuthContext);
   const { formulario, handleChange } = useForm({
-    nombre: "",
-    apellido: "",
-    correo: "",
-    password: "",
-    password2: "",
+    nombre: '',
+    apellido: '',
+    correo: '',
+    password: '',
+    password2: '',
+    role: 'Usuario',
   });
 
-  const { nombre, apellido, correo, password, password2 } = formulario;
+  const { nombre, apellido, correo, password, password2, role } = formulario;
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (password !== password2) toast.error("Las contraseñas no coinciden");
+    if (password !== password2) toast.error('Las contraseñas no coinciden');
 
     if (password.length < 6) {
-      toast.error("La contraseña tiene que ser de al menos 6 caracteres");
+      toast.error('La contraseña tiene que ser de al menos 6 caracteres');
     }
 
-    if (nombre.trim().length <= 2) {
-      toast.error("El nombre debe tener mínimo 3 caracteres");
+    const resp = await register(nombre, apellido, correo, password, role);
+
+    if (resp.errors) {
+      resp.errors.map((e) => {
+        return toast.error(e.msg);
+      });
     }
 
-    if (correo.trim().length <= 2) {
-      toast.error("El correo debe tener mínimo 3 caracteres");
-    }
-    if (apellido.trim().length <= 2) {
-      toast.error("El apellido debe tener mínimo 3 caracteres");
+    if (resp.ok) {
+      router.push('/perfil');
+      handleClose();
     }
   };
 
@@ -53,7 +62,7 @@ const RegisterModal = ({ show, handleClose }: Props) => {
         <Modal.Header
           closeButton
           style={{
-            border: "none",
+            border: 'none',
           }}
         />
         <ToastContainer autoClose={10000} />
