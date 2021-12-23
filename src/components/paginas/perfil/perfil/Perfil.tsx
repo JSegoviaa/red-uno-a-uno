@@ -21,10 +21,12 @@ const Perfil = () => {
           <div className="pt-5 pb-3">
             <img src="/images/icons/perfil.png" />
           </div>
-          <div className={styles.nombre}>Juan Pérez Hernández</div>
+          <div className={styles.nombre}>
+            {auth.nombre} {auth.apellido}
+          </div>
           <div className={styles.paquete}>Paquete básico</div>
           <div className={styles.empresa}>Karls and Wallace</div>
-          <div className={styles.correo}>juan.perez.h@karlsandwallace.com</div>
+          <div className={styles.correo}>{auth.correo} </div>
           <div className={styles.telefono}>112 23 34 455</div>
         </div>
       </div>

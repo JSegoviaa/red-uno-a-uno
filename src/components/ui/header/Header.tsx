@@ -1,12 +1,14 @@
-import { useState } from "react";
-import Link from "next/link";
-import { Container, Nav, Navbar } from "react-bootstrap";
-import Button from "../button/Button";
-import styles from "./Header.module.css";
-import LoginModal from "../authmodal/LoginModal";
-import RegisterModal from "../authmodal/AuthModal";
+import { useContext, useState } from 'react';
+import Link from 'next/link';
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import Button from '../button/Button';
+import styles from './Header.module.css';
+import LoginModal from '../authmodal/LoginModal';
+import RegisterModal from '../authmodal/AuthModal';
+import { AuthContext } from '../../../context/auth/AuthContext';
 
 const Header = () => {
+  const { auth } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,26 +32,30 @@ const Header = () => {
         </div>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav className="ms-auto my-2" navbarScroll>
-            <div
-              onClick={openRegister}
-              className={`${styles.navEnlace} pointer ms-3`}
-            >
-              Regístrate
-            </div>
-
-            <Button titulo="Inicia sesión" onClick={handleShow} />
-
-            <Link href="/perfil">
-              <div className={`${styles.navPerfil} pointer ms-3`}>
-                <img
-                  src="/images/icons/perfil.png"
-                  alt="Mi perfil"
-                  style={{ width: "100%" }}
-                />
+          {!auth.logged ? (
+            <Nav className="ms-auto my-2" navbarScroll>
+              <div
+                onClick={openRegister}
+                className={`${styles.navEnlace} pointer ms-3`}
+              >
+                Regístrate
               </div>
-            </Link>
-          </Nav>
+
+              <Button titulo="Inicia sesión" onClick={handleShow} />
+            </Nav>
+          ) : (
+            <Nav className="ms-auto my-2" navbarScroll>
+              <Link href="/perfil">
+                <div className={`${styles.navPerfil} pointer ms-3`}>
+                  <img
+                    src="/images/icons/perfil.png"
+                    alt="Mi perfil"
+                    style={{ width: '100%' }}
+                  />
+                </div>
+              </Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
       <LoginModal show={show} handleClose={handleClose} />
