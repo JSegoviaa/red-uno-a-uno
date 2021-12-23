@@ -1,12 +1,13 @@
-import { useContext, useEffect } from "react";
-import { Form, Modal } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
-import { AuthContext } from "../../../context/auth/AuthContext";
-import { useForm } from "../../../hooks/useForm";
-import Button from "../button/Button";
-import Modaltitle from "../modaltitle/Modaltitle";
-import styles from "./AuthModal.module.css";
-import "react-toastify/dist/ReactToastify.css";
+import { useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { Form, Modal } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../../../context/auth/AuthContext';
+import { useForm } from '../../../hooks/useForm';
+import Button from '../button/Button';
+import Modaltitle from '../modaltitle/Modaltitle';
+import styles from './AuthModal.module.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
   show: boolean;
@@ -14,15 +15,16 @@ interface Props {
 }
 
 const LoginModal = ({ show, handleClose }: Props) => {
+  const router = useRouter();
   const { login } = useContext(AuthContext);
   const { formulario, handleChange, setFormulario } = useForm({
-    correo: "",
-    password: "",
+    correo: '',
+    password: '',
     rememberme: false,
   });
 
   useEffect(() => {
-    const correo = localStorage.getItem("correo");
+    const correo = localStorage.getItem('correo');
 
     if (correo) {
       setFormulario({
@@ -43,12 +45,17 @@ const LoginModal = ({ show, handleClose }: Props) => {
     e.preventDefault();
 
     rememberme
-      ? localStorage.setItem("correo", correo)
-      : localStorage.removeItem("correo");
+      ? localStorage.setItem('correo', correo)
+      : localStorage.removeItem('correo');
 
     const resp = await login(correo, password);
     if (!resp.ok) {
       toast.error(resp.msg);
+    }
+
+    if (resp.ok) {
+      router.push('/perfil');
+      handleClose();
     }
   };
 
@@ -61,7 +68,7 @@ const LoginModal = ({ show, handleClose }: Props) => {
       <Modal.Header
         closeButton
         style={{
-          border: "none",
+          border: 'none',
         }}
       />
       <ToastContainer />
