@@ -1,5 +1,5 @@
 import { createContext, FC, useCallback, useState } from 'react';
-import { fetchSinToken } from '../../helpers/fetch';
+import { fetchConToken, fetchSinToken } from '../../helpers/fetch';
 import { Auth, Resp } from '../../interfaces/AuthInterface';
 
 interface ContextProps {
@@ -81,7 +81,49 @@ export const AuthProvider: FC = ({ children }) => {
     return resp;
   };
 
-  const verificaToken = useCallback(() => {}, []);
+  const verificaToken = useCallback(async () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      setAuth({
+        uid: null,
+        checking: true,
+        logged: false,
+        nombre: null,
+        apellido: null,
+        correo: null,
+      });
+
+      return false;
+    }
+
+    const resp = await fetchConToken('auth/renew');
+
+    if (resp.ok) {
+      localStorage.setItem('token', resp.token);
+      const { usuario } = resp;
+      setAuth({
+        uid: usuario.uid,
+        checking: false,
+        logged: true,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        correo: usuario.correo,
+      });
+      return true;
+    } else {
+      setAuth({
+        uid: null,
+        checking: false,
+        logged: false,
+        nombre: null,
+        apellido: null,
+        correo: null,
+      });
+
+      return false;
+    }
+  }, []);
 
   const logOut = async () => {
     console.log('Cerrando sesión');
