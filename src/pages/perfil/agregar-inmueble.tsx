@@ -1,5 +1,6 @@
-import { useRouter } from "next/router";
-import SEO from "../../components/seo/SEO";
+import { useRouter } from 'next/router';
+import SEO from '../../components/seo/SEO';
+import { usePrivateRoute } from '../../hooks/usePrivateRoute';
 
 const AgregarInmueble = () => {
   const { asPath } = useRouter();
@@ -12,4 +13,4 @@ const AgregarInmueble = () => {
   );
 };
 
-export default AgregarInmueble;
+export default usePrivateRoute(AgregarInmueble);
