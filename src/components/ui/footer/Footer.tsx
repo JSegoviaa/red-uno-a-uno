@@ -1,15 +1,17 @@
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import styles from "./Footer.module.css";
-import RegisterModal from "../authmodal/AuthModal";
+import { useContext, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styles from './Footer.module.css';
+import RegisterModal from '../authmodal/AuthModal';
+import { AuthContext } from '../../../context/auth/AuthContext';
 
 const Footer = () => {
+  const { auth } = useContext(AuthContext);
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
-  const goToHome = () => router.push("/");
+  const goToHome = () => router.push('/');
   const closeRegister = () => setIsOpen(false);
   const openRegister = () => setIsOpen(true);
 
@@ -50,13 +52,14 @@ const Footer = () => {
               <Link href="/contacto" scroll>
                 <p className={`${styles.footerLink} pointer`}>Contáctanos</p>
               </Link>
-
-              <p
-                onClick={openRegister}
-                className={`${styles.footerLink} pointer`}
-              >
-                Registro
-              </p>
+              {!auth.logged ? (
+                <p
+                  onClick={openRegister}
+                  className={`${styles.footerLink} pointer`}
+                >
+                  Registro
+                </p>
+              ) : null}
             </div>
 
             <div className="col-sm-12 col-md-6 p-4 col-xl-2">
@@ -94,13 +97,13 @@ const Footer = () => {
       </section>
       <div
         className="text-center p-4"
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
       >
-        Copyright © {new Date().getFullYear()}:{" "}
+        Copyright © {new Date().getFullYear()}:{' '}
         <Link href="/" scroll>
           <span
             className="text-reset fw-bold pointer"
-            style={{ textDecoration: "none" }}
+            style={{ textDecoration: 'none' }}
           >
             Red 1 a 1
           </span>
