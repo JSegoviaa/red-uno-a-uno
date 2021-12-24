@@ -10,7 +10,6 @@ const Home: NextPage = () => {
   return (
     <>
       <SEO titulo="Inicio" url={asPath} />
-      <Loading />
       <Info />
     </>
   );

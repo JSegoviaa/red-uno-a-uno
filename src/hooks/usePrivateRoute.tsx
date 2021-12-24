@@ -1,14 +1,20 @@
+import { FC, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
 import { AuthContext } from '../context/auth/AuthContext';
+import Loading from '../components/ui/loading/Loading';
 
-export const usePrivateRoute = () => {
-  const RutaPrivada = () => {
+export const usePrivateRoute = (Component: any) => {
+  return function RutaPrivada(props: FC) {
     const { auth } = useContext(AuthContext);
     const router = useRouter();
 
-    if (auth.logged) {
-      router.replace('/');
+    if (!auth.logged) {
+      useEffect(() => {
+        router.replace('/');
+      }, []);
+      return <Loading />;
     }
+
+    return <Component auth={auth} {...props} />;
   };
 };
