@@ -1,18 +1,11 @@
-import { Resp } from '../interfaces/AuthInterface';
-
-interface Data {
-  nombre?: string;
-  apellido?: string;
-  role?: string;
-  correo: string;
-  password: string;
-}
+import { RegisterData, Resp } from '../interfaces/AuthInterface';
+import { Contact, ContactResp } from '../interfaces/ContactInterface';
 
 const baseURL = 'http://localhost:8080/api';
 
 export const fetchSinToken = async (
   endpoint: string,
-  data: Data,
+  data: RegisterData,
   method = 'GET'
 ): Promise<Resp> => {
   const url = `${baseURL}/${endpoint}`;
@@ -33,7 +26,7 @@ export const fetchSinToken = async (
 
 export const fetchConToken = async (
   endpoint: string,
-  data?: Data,
+  data?: RegisterData,
   method = 'GET'
 ) => {
   const url = `${baseURL}/${endpoint}`;
@@ -53,4 +46,19 @@ export const fetchConToken = async (
 
     return await resp.json();
   }
+};
+
+export const fetchContactForm = async (
+  endpoint: string,
+  data: Contact
+): Promise<ContactResp> => {
+  const url = `${baseURL}/${endpoint}`;
+
+  const resp = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  return await resp.json();
 };

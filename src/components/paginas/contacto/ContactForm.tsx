@@ -1,39 +1,58 @@
-import { Container, Form, Row } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
-import { useForm } from "../../../hooks/useForm";
-import Button from "../../ui/button/Button";
-import styles from "./contactform.module.css";
-import "react-toastify/dist/ReactToastify.css";
+import { Container, Form, Row } from 'react-bootstrap';
+import { toast, ToastContainer } from 'react-toastify';
+import { useForm } from '../../../hooks/useForm';
+import Button from '../../ui/button/Button';
+import styles from './contactform.module.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { fetchContactForm } from '../../../helpers/fetch';
 
 const ContactForm = () => {
-  const { formulario, handleChange } = useForm({
-    nombre: "",
-    apellido: "",
-    correo: "",
-    telefono: "",
-    mensaje: "",
+  const { formulario, handleChange, setFormulario } = useForm({
+    nombre: '',
+    apellido: '',
+    correo: '',
+    telefono: '',
+    mensaje: '',
   });
 
   const { nombre, apellido, correo, telefono, mensaje } = formulario;
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
 
     if (correo.trim().length <= 1) {
-      toast.error("El correo es obligatorio");
+      toast.error('El correo es obligatorio');
     }
     if (nombre.trim().length <= 1) {
-      toast.error("El nombre es obligatorio");
+      toast.error('El nombre es obligatorio');
     }
     if (apellido.trim().length <= 1) {
-      toast.error("El apellido es obligatorio");
+      toast.error('El apellido es obligatorio');
     }
-    if (telefono.trim().length < 10) {
-      toast.error("El número teléfonico debe de ser de al menos 10 dígitos");
+
+    const resp = await fetchContactForm('correos/contacto', formulario);
+
+    if (!resp.ok) {
+      toast.error(resp.msg);
     }
-    if (mensaje.trim().length <= 30) {
-      toast.error("El mensaje debe contener al menos 30 caracteres");
+
+    if (resp.errors) {
+      resp.errors.map((e) => {
+        return toast.error(e.msg);
+      });
     }
+
+    if (resp.ok) {
+      toast.success(resp.msg);
+    }
+
+    setFormulario({
+      nombre: '',
+      apellido: '',
+      correo: '',
+      telefono: '',
+      mensaje: '',
+    });
   };
 
   return (

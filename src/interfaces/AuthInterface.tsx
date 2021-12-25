@@ -20,3 +20,11 @@ interface Errors {
   param: string;
   location: string;
 }
+
+export interface RegisterData {
+  nombre?: string;
+  apellido?: string;
+  role?: string;
+  correo: string;
+  password: string;
+}
