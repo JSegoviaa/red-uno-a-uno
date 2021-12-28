@@ -97,7 +97,7 @@ export const AuthProvider: FC = ({ children }) => {
       return false;
     }
 
-    const resp = await fetchConToken('auth/renew');
+    const resp = await fetchConToken('auth/renovarToken');
 
     if (resp.ok) {
       localStorage.setItem('token', resp.token);

@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { AuthContext } from '../../../../context/auth/AuthContext';
 import Button from '../../../ui/button/Button';
 import styles from './Perfil.module.css';
+import { useUserInfo } from '../../../../hooks/useUserInfo';
 
 const Perfil = () => {
   const router = useRouter();
@@ -13,6 +14,8 @@ const Perfil = () => {
   const misPropiedades = () => router.push('/perfil/mis-propiedades');
 
   const { auth, logOut } = useContext(AuthContext);
+
+  const { user } = useUserInfo();
 
   return (
     <Container>
