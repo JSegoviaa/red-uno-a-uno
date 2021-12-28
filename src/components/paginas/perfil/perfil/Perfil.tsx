@@ -13,7 +13,7 @@ const Perfil = () => {
 
   const misPropiedades = () => router.push('/perfil/mis-propiedades');
 
-  const { auth, logOut } = useContext(AuthContext);
+  const { logOut } = useContext(AuthContext);
 
   const { user } = useUserInfo();
 
@@ -25,12 +25,12 @@ const Perfil = () => {
             <img src="/images/icons/perfil.png" />
           </div>
           <div className={styles.nombre}>
-            {auth.nombre} {auth.apellido}
+            {user?.nombre} {user?.apellido}
           </div>
           <div className={styles.paquete}>Paquete básico</div>
-          <div className={styles.empresa}>Karls and Wallace</div>
-          <div className={styles.correo}>{auth.correo} </div>
-          <div className={styles.telefono}>112 23 34 455</div>
+          <div className={styles.empresa}>{user?.nombreInmobiliaria}</div>
+          <div className={styles.correo}>{user?.correo} </div>
+          <div className={styles.telefono}>{user?.telefonoPersonal}</div>
         </div>
       </div>
       <hr />

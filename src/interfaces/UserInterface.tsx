@@ -3,6 +3,13 @@ interface Location {
   lat: number;
 }
 
+interface Inmuebles {
+  _id: string;
+  titulo: string;
+  precio: number;
+  categoria: string;
+}
+
 export interface Usuario {
   nombre: string;
   apellido: string;
@@ -25,5 +32,5 @@ export interface Usuario {
   youtube: string;
   linkedin: string;
   logo: string;
-  inmuebles: any;
+  inmuebles: Inmuebles[];
 }

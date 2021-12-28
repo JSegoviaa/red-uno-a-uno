@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/auth/AuthContext';
+import { Usuario } from '../interfaces/UserInterface';
 
 export const useUserInfo = () => {
   const { auth } = useContext(AuthContext);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<Usuario>();
   const [loading, setLoading] = useState(true);
 
   const getUserInfo = async () => {
