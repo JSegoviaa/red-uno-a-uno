@@ -1,29 +1,29 @@
 import { Col, Container, Form, Row } from 'react-bootstrap';
+import useCategories from '../../../../hooks/useCategories';
 import { useForm } from '../../../../hooks/useForm';
 import Button from '../../../ui/button/Button';
 import Modaltitle from '../../../ui/modaltitle/Modaltitle';
 import Titulo from '../../../ui/titulo/Titulo';
 
 const AnadirInmueble = () => {
+  const { categorias } = useCategories();
+
   return (
     <Container>
       <Titulo titulo="Agrega un inmueble" />
       <br />
       <Form>
-        <Form.Check
-          inline
-          type="radio"
-          name="group1"
-          label="Venta"
-          id="inline-radio-1"
-        />
-        <Form.Check
-          inline
-          type="radio"
-          name="group1"
-          label="Renta"
-          id="inline-radio-2"
-        />
+        {categorias.map((categoria) => (
+          <Form.Check
+            key={categoria._id}
+            inline
+            type="radio"
+            name="group1"
+            label={categoria.nombre}
+            id="inline-radio-1"
+            value={categoria._id}
+          />
+        ))}
 
         <Form.Group className="mb-3">
           <Form.Label>Tíulo del inmueble</Form.Label>

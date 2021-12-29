@@ -59,3 +59,9 @@ export interface Usuario {
   apellido: string;
   correo: string;
 }
+
+export interface CategoriesResponse {
+  ok: boolean;
+  total: number;
+  categorias: Categoria[];
+}
