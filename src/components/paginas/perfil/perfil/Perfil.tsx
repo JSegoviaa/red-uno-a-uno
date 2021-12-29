@@ -12,6 +12,9 @@ const Perfil = () => {
   const misPaquetes = () => router.push('/perfil/mis-paquetes');
 
   const misPropiedades = () => router.push('/perfil/mis-propiedades');
+  const misFavoritos = () => router.push('/perfil/mis-favoritos');
+  const actualizarPerfil = () => router.push('/perfil/actualizar-perfil');
+  const agregarInmueble = () => router.push('/perfil/agregar-inmueble');
 
   const { logOut } = useContext(AuthContext);
 
@@ -55,6 +58,27 @@ const Perfil = () => {
               titulo="Mis propiedades"
               btn="Secondary"
               onClick={misPropiedades}
+            />
+          </Col>
+          <Col className="py-3">
+            <Button
+              titulo="Actualizar perfil"
+              btn="Secondary"
+              onClick={actualizarPerfil}
+            />
+          </Col>
+          <Col className="py-3">
+            <Button
+              titulo="Agregar inmueble"
+              btn="Secondary"
+              onClick={agregarInmueble}
+            />
+          </Col>
+          <Col className="py-3">
+            <Button
+              titulo="Mis favoritos"
+              btn="Secondary"
+              onClick={misFavoritos}
             />
           </Col>
         </Row>

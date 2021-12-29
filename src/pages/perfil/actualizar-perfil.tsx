@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import ActualizarPerfilForm from '../../components/paginas/perfil/perfil/ActualizarPerfil';
 import SEO from '../../components/seo/SEO';
 import { usePrivateRoute } from '../../hooks/usePrivateRoute';
 
@@ -8,7 +9,7 @@ const ActualizarPerfil = () => {
   return (
     <>
       <SEO titulo="Actualiza tu perfil" url={asPath} />
-      <div>Actualizar perfil</div>
+      <ActualizarPerfilForm />
     </>
   );
 };
