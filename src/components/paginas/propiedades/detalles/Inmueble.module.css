@@ -1,0 +1,67 @@
+.inmuebleTitle {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 45px;
+  line-height: 77px;
+  color: #000000;
+}
+
+.inmueblePrecio {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 38px;
+  line-height: 77px;
+  color: #13a407;
+}
+
+.inmuebleTipo {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25.7083px;
+  line-height: 77px;
+  color: #e65a1f;
+  border: 1.42824px solid #e65a1f;
+  box-sizing: border-box;
+  border-radius: 57.1295px;
+  padding: 2px 37px 2px 37px;
+}
+
+.inmuebleTiempo {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 23px;
+  line-height: 77px;
+  text-align: center;
+  color: #5e5e5e;
+}
+
+.inmuebleSubtitle {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 77px;
+  color: #000000;
+}
+
+.inmuebleContent {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 35px;
+  color: #5e5e5e;
+}
+
+.inmuebleSubcontent {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 35px;
+  color: #5e5e5e;
+}
