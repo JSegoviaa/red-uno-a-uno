@@ -24,9 +24,19 @@ const initialState: Auth = {
   uid: null,
   checking: true,
   logged: false,
-  nombre: null,
-  apellido: null,
-  correo: null,
+  nombre: undefined,
+  apellido: undefined,
+  correo: undefined,
+  telefonoOficina: undefined,
+  telefonoPersonal: undefined,
+  direccionFisica: undefined,
+  facebookpage: undefined,
+  instagram: undefined,
+  nombreInmobiliaria: undefined,
+  twitter: undefined,
+  youtube: undefined,
+  perfilEmpresarial: undefined,
+  linkedin: undefined,
 };
 
 export const AuthProvider: FC = ({ children }) => {
@@ -48,6 +58,16 @@ export const AuthProvider: FC = ({ children }) => {
         nombre: usuario.nombre,
         apellido: usuario.apellido,
         correo: usuario.correo,
+        direccionFisica: usuario.direccionFisica,
+        facebookpage: usuario.facebookpage,
+        instagram: usuario.instagram,
+        nombreInmobiliaria: usuario.nombreInmobiliaria,
+        telefonoOficina: usuario.telefonoOficina,
+        telefonoPersonal: usuario.telefonoPersonal,
+        twitter: usuario.twitter,
+        youtube: usuario.youtube,
+        perfilEmpresarial: usuario.perfilEmpresarial,
+        linkedin: usuario.linkedin,
       });
     }
     return resp;
@@ -75,6 +95,16 @@ export const AuthProvider: FC = ({ children }) => {
         nombre: usuario.nombre,
         apellido: usuario.apellido,
         correo: usuario.correo,
+        direccionFisica: usuario.direccionFisica,
+        facebookpage: usuario.facebookpage,
+        instagram: usuario.instagram,
+        nombreInmobiliaria: usuario.nombreInmobiliaria,
+        telefonoOficina: usuario.telefonoOficina,
+        telefonoPersonal: usuario.telefonoPersonal,
+        twitter: usuario.twitter,
+        youtube: usuario.youtube,
+        perfilEmpresarial: usuario.perfilEmpresarial,
+        linkedin: auth.linkedin,
       });
     }
 
@@ -89,9 +119,19 @@ export const AuthProvider: FC = ({ children }) => {
         uid: null,
         checking: true,
         logged: false,
-        nombre: null,
-        apellido: null,
-        correo: null,
+        nombre: undefined,
+        apellido: undefined,
+        correo: undefined,
+        telefonoOficina: undefined,
+        telefonoPersonal: undefined,
+        direccionFisica: undefined,
+        facebookpage: undefined,
+        instagram: undefined,
+        nombreInmobiliaria: undefined,
+        twitter: undefined,
+        youtube: undefined,
+        perfilEmpresarial: undefined,
+        linkedin: undefined,
       });
 
       return false;
@@ -109,6 +149,16 @@ export const AuthProvider: FC = ({ children }) => {
         nombre: usuario.nombre,
         apellido: usuario.apellido,
         correo: usuario.correo,
+        direccionFisica: usuario.direccionFisica,
+        facebookpage: usuario.facebookpage,
+        instagram: usuario.instagram,
+        nombreInmobiliaria: usuario.nombreInmobiliaria,
+        telefonoOficina: usuario.telefonoOficina,
+        telefonoPersonal: usuario.telefonoPersonal,
+        twitter: usuario.twitter,
+        youtube: usuario.youtube,
+        perfilEmpresarial: usuario.perfilEmpresarial,
+        linkedin: usuario.linkedin,
       });
       return true;
     } else {
@@ -116,9 +166,19 @@ export const AuthProvider: FC = ({ children }) => {
         uid: null,
         checking: false,
         logged: false,
-        nombre: null,
-        apellido: null,
-        correo: null,
+        nombre: undefined,
+        apellido: undefined,
+        correo: undefined,
+        telefonoOficina: undefined,
+        telefonoPersonal: undefined,
+        direccionFisica: undefined,
+        facebookpage: undefined,
+        instagram: undefined,
+        nombreInmobiliaria: undefined,
+        twitter: undefined,
+        youtube: undefined,
+        perfilEmpresarial: undefined,
+        linkedin: undefined,
       });
 
       return false;
@@ -131,9 +191,19 @@ export const AuthProvider: FC = ({ children }) => {
       uid: null,
       checking: false,
       logged: false,
-      nombre: null,
-      apellido: null,
-      correo: null,
+      nombre: undefined,
+      apellido: undefined,
+      correo: undefined,
+      telefonoOficina: undefined,
+      telefonoPersonal: undefined,
+      direccionFisica: undefined,
+      facebookpage: undefined,
+      instagram: undefined,
+      nombreInmobiliaria: undefined,
+      twitter: undefined,
+      youtube: undefined,
+      perfilEmpresarial: undefined,
+      linkedin: undefined,
     });
   };
 

@@ -1,10 +1,20 @@
 export interface Auth {
-  uid: string | null;
+  uid: string | undefined | null;
   checking: boolean;
   logged: boolean;
-  nombre: string | null;
-  apellido: string | null;
-  correo: string | null;
+  nombre: string | number | string[] | undefined;
+  apellido: string | number | string[] | undefined;
+  correo: string | number | string[] | undefined;
+  telefonoOficina: string | number | string[] | undefined;
+  telefonoPersonal: string | number | string[] | undefined;
+  nombreInmobiliaria: string | number | string[] | undefined;
+  direccionFisica: string | number | string[] | undefined;
+  facebookpage: string | number | string[] | undefined;
+  instagram: string | number | string[] | undefined;
+  twitter: string | number | string[] | undefined;
+  youtube: string | number | string[] | undefined;
+  perfilEmpresarial: string | number | string[] | undefined;
+  linkedin: string | number | string[] | undefined;
 }
 
 export interface Resp {

@@ -1,23 +1,28 @@
+import { useContext } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
+import { toast, ToastContainer } from 'react-toastify';
+import { AuthContext } from '../../../../context/auth/AuthContext';
+import { actualizarPerfilFetch } from '../../../../helpers/fetch';
 import { useForm } from '../../../../hooks/useForm';
-import { useUserInfo } from '../../../../hooks/useUserInfo';
+import Button from '../../../ui/button/Button';
 import Modaltitle from '../../../ui/modaltitle/Modaltitle';
 import Titulo from '../../../ui/titulo/Titulo';
 
 const ActualizarPerfilForm = () => {
+  const { auth } = useContext(AuthContext);
   const { formulario, handleChange } = useForm({
-    nombre: '',
-    apellido: '',
-    perfilEmpresarial: '',
-    telefonoOficina: '',
-    telefonoPersonal: '',
-    nombreInmobiliaria: '',
-    direccionFisica: '',
-    facebookpage: '',
-    instagra: '',
-    twitter: '',
-    youtube: '',
-    linkedin: '',
+    nombre: auth.nombre,
+    apellido: auth.apellido,
+    perfilEmpresarial: auth.perfilEmpresarial,
+    telefonoOficina: auth.telefonoOficina,
+    telefonoPersonal: auth.telefonoPersonal,
+    nombreInmobiliaria: auth.nombreInmobiliaria,
+    direccionFisica: auth.direccionFisica,
+    facebookpage: auth.facebookpage,
+    instagram: auth.instagram,
+    twitter: auth.twitter,
+    youtube: auth.youtube,
+    linkedin: auth.linkedin,
   });
 
   const {
@@ -29,14 +34,32 @@ const ActualizarPerfilForm = () => {
     nombreInmobiliaria,
     direccionFisica,
     facebookpage,
-    instagra,
+    instagram,
     twitter,
     youtube,
     linkedin,
   } = formulario;
 
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const resp = await actualizarPerfilFetch(
+      'usuarios/' + auth.uid,
+      formulario
+    );
+
+    if (resp.ok) {
+      toast.success(resp.msg);
+    }
+
+    if (!resp.ok) {
+      toast.error(resp.msg);
+    }
+  };
+
   return (
     <Container>
+      <ToastContainer />
       <Titulo titulo="Actualiza tu perfil" />
       <br />
       <br />
@@ -44,7 +67,7 @@ const ActualizarPerfilForm = () => {
         <Modaltitle titulo="Datos personales" />
       </div>
 
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Nombre(s)</Form.Label>
           <Form.Control
@@ -143,8 +166,8 @@ const ActualizarPerfilForm = () => {
           <Form.Label>Instagram</Form.Label>
           <Form.Control
             type="text"
-            value={instagra}
-            name="instagra"
+            value={instagram}
+            name="instagram"
             onChange={handleChange}
           />
         </Form.Group>
@@ -175,6 +198,8 @@ const ActualizarPerfilForm = () => {
             onChange={handleChange}
           />
         </Form.Group>
+
+        <Button titulo="Actualizar perfil" />
       </Form>
     </Container>
   );

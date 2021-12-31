@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
+import { fetchInmueble } from '../../../../helpers/fetch';
 import useCategories from '../../../../hooks/useCategories';
 import { useForm } from '../../../../hooks/useForm';
 import Button from '../../../ui/button/Button';
@@ -8,26 +10,49 @@ import Titulo from '../../../ui/titulo/Titulo';
 const AnadirInmueble = () => {
   const { categorias } = useCategories();
 
+  const { formulario, handleChange } = useForm({
+    _id: '',
+    categoria: '61ca85313384577442588d29',
+    titulo: '',
+  });
+
+  const { titulo, categoria } = formulario;
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    console.log(categoria, 'categoria');
+    fetchInmueble('inmuebles', { titulo, categoria }, 'POST');
+  };
+
   return (
     <Container>
       <Titulo titulo="Agrega un inmueble" />
       <br />
-      <Form>
-        {categorias.map((categoria) => (
-          <Form.Check
-            key={categoria._id}
-            inline
-            type="radio"
-            name="group1"
-            label={categoria.nombre}
-            id="inline-radio-1"
-            value={categoria._id}
-          />
-        ))}
+      <Form onSubmit={handleSubmit}>
+        <Form.Check
+          inline
+          type="radio"
+          name="categoria"
+          label={'Renta'}
+          value={'61ca85313384577442588d29'}
+        />
+        <Form.Check
+          inline
+          type="radio"
+          name="categoria"
+          label={'Venta'}
+          value={'61cb51ee11b684e8c30cb7cb'}
+        />
 
         <Form.Group className="mb-3">
           <Form.Label>Tíulo del inmueble</Form.Label>
-          <Form.Control type="text" />
+          <Form.Control
+            type="text"
+            value={titulo}
+            name="titulo"
+            onChange={handleChange}
+          />
           <Form.Text className="text-muted">
             Ej. Casa en venta en Palmaris, Cancún
           </Form.Text>
