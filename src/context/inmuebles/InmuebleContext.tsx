@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import { createContext, FC, useState } from "react";
-import { fetchInmueble } from "../../helpers/fetch";
+import { toast, ToastContainer } from "react-toastify";
+import { fetchBorrarInmueble, fetchInmueble } from "../../helpers/fetch";
 import {
+  BorrarInmuebleResp,
   CrearInmuebleResp,
   Inmueble,
 } from "../../interfaces/CrearInmuebleInterface";
@@ -10,53 +13,19 @@ interface ContextProps {
     titulo: string,
     categoria: string
   ) => Promise<CrearInmuebleResp>;
-  eliminarInmueble: () => void;
+  eliminarInmueble: (id: string) => Promise<BorrarInmuebleResp>;
+  inmueble: Inmueble;
 }
 
 const initialState: Inmueble = {
-  titulo: null,
-  descripcion: null,
-  otros: null,
-  precio: 0,
-  comisiones: null,
-  categoria: null,
-  AA: null,
-  IID: null,
-  agua: null,
-  amueblado: null,
-  antiguedad: null,
-  baños: null,
-  camas: null,
-  closet: null,
-  cocina: null,
-  comedor: null,
-  discapacitados: null,
-  escuelas: null,
-  estufa: null,
-  gas: null,
-  habitaciones: null,
-  horno: null,
-  internet: null,
-  lavadora: null,
-  luz: null,
-  m2Construidos: null,
-  m2Terreno: null,
-  mantenimiento: null,
-  medioBaños: null,
-  microondas: null,
-  minihorno: null,
-  parking: null,
-  piscinas: null,
-  pisos: null,
-  propertyType: null,
-  refrigerador: null,
+  _id: null,
 };
 
 export const InmuebleContext = createContext({} as ContextProps);
 
 export const InmuebleProvider: FC = ({ children }) => {
   const [inmueble, setInmueble] = useState(initialState);
-
+  const router = useRouter();
   const crearInmueble = async (titulo: string, categoria: string) => {
     const resp = await fetchInmueble(
       "inmuebles",
@@ -66,19 +35,25 @@ export const InmuebleProvider: FC = ({ children }) => {
 
     const { inmueble } = resp;
     if (resp.ok) {
-      setInmueble({
-        titulo: inmueble.titulo,
-        _id: inmueble._id,
-        categoria: inmueble.categoria,
-      });
+      toast.success(resp.msg);
+      setInmueble({ _id: inmueble._id });
     }
     return resp;
   };
 
-  const eliminarInmueble = () => {};
+  const eliminarInmueble = async (id: string) => {
+    const resp = await fetchBorrarInmueble(`inmuebles/${id}`);
+    router.push("/perfil");
+
+    toast.success(resp.msg);
+    return resp;
+  };
 
   return (
-    <InmuebleContext.Provider value={{ crearInmueble, eliminarInmueble }}>
+    <InmuebleContext.Provider
+      value={{ crearInmueble, eliminarInmueble, inmueble }}
+    >
+      <ToastContainer />
       {children}
     </InmuebleContext.Provider>
   );

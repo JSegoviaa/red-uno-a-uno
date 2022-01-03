@@ -1,6 +1,6 @@
+import { useRouter } from "next/router";
 import { FormEvent, useContext, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
 import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { useForm } from "../../../../hooks/useForm";
 import Button from "../../../ui/button/Button";
@@ -8,7 +8,8 @@ import Modaltitle from "../../../ui/modaltitle/Modaltitle";
 import Titulo from "../../../ui/titulo/Titulo";
 
 const AnadirInmueble = () => {
-  const { crearInmueble } = useContext(InmuebleContext);
+  const { crearInmueble, inmueble } = useContext(InmuebleContext);
+  const router = useRouter();
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
     "61ca85313384577442588d29"
   );
@@ -40,13 +41,12 @@ const AnadirInmueble = () => {
     const resp = await crearInmueble(titulo, categoria);
 
     if (resp.ok) {
-      toast.success(resp.msg);
+      router.push("/propiedades/" + inmueble._id);
     }
   };
 
   return (
     <Container>
-      <ToastContainer />
       <Titulo titulo="Agrega un inmueble" />
       <br />
       <Form onSubmit={handleSubmit}>

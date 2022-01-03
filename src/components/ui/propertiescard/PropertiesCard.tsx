@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { Col } from "react-bootstrap";
+import { InmuebleContext } from "../../../context/inmuebles/InmuebleContext";
 import styles from "./PropertiesCard.module.css";
 
 interface Props {
@@ -9,40 +11,36 @@ interface Props {
 }
 
 const PropertiesCard = ({ titulo, id, image }: Props) => {
+  const { eliminarInmueble } = useContext(InmuebleContext);
   const router = useRouter();
 
   const goToProperty = () => router.push("/propiedades/" + id);
+  const editarInmueble = () => router.push("/perfil/editar-inmueble");
 
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center ">
-      {/* <div className={styles.proCard}> */}
-      <div
-        className={`${styles.customCard} card pointer`}
-        onClick={goToProperty}
-      >
-        <img src={image} alt={titulo} />
-        <div className={`${styles.proContent} my-3`}>{titulo}</div>
+      <div className={`${styles.customCard} card pointer`}>
+        <div onClick={goToProperty}>
+          <img src={image} alt={titulo} />
+          <div className={`${styles.proContent} my-3`}>{titulo}</div>
+        </div>
         <div
           className="btn-group"
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <button type="button" className={`${styles.customBtn1} btn`}>
-            {" "}
-          </button>{" "}
-          {/* <img src="/images/icons/properties-icons/1-gray.png" alt="..." /> */}
-          <button type="button" className={`${styles.customBtn2} btn`}>
-            {" "}
-          </button>{" "}
-          {/* <img src="/images/icons/properties-icons/2-gray.png" alt="..." /> */}
-          <button type="button" className={`${styles.customBtn3} btn`}>
-            {" "}
-          </button>{" "}
-          {/* <img src="/images/icons/properties-icons/3-gray.png" alt="..." /> */}
-          <button type="button" className={`${styles.customBtn4} btn`}>
-            {" "}
-          </button>{" "}
-          {/* <img src="/images/icons/properties-icons/4-gray.png" alt="..." /> */}
+          <button type="button" className={`${styles.customBtn1} btn`} />
+          <button type="button" className={`${styles.customBtn2} btn`} />
+          <button
+            onClick={editarInmueble}
+            type="button"
+            className={`${styles.customBtn3} btn`}
+          />
+          <button
+            onClick={() => eliminarInmueble(id)}
+            type="button"
+            className={`${styles.customBtn4} btn`}
+          />
         </div>
       </div>
     </Col>
