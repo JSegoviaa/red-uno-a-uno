@@ -1,13 +1,14 @@
-import { useContext, useState } from 'react';
-import Link from 'next/link';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import Button from '../button/Button';
-import styles from './Header.module.css';
-import LoginModal from '../authmodal/LoginModal';
-import RegisterModal from '../authmodal/AuthModal';
-import { AuthContext } from '../../../context/auth/AuthContext';
-
+import { useContext, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import Button from "../button/Button";
+import styles from "./Header.module.css";
+import LoginModal from "../authmodal/LoginModal";
+import RegisterModal from "../authmodal/AuthModal";
+import { AuthContext } from "../../../context/auth/AuthContext";
 const Header = () => {
+  const router = useRouter();
   const { auth } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,8 @@ const Header = () => {
 
   const closeRegister = () => setIsOpen(false);
   const openRegister = () => setIsOpen(true);
+
+  const chats = () => router.push("/perfil/mis-chats");
 
   return (
     <Navbar className={styles.navStyle} bg="light" expand="lg">
@@ -45,12 +48,19 @@ const Header = () => {
             </Nav>
           ) : (
             <Nav className="ms-auto my-2" navbarScroll>
+              <Link href="/">
+                <div className="pointer mx-2 d-flex align-items-center">
+                  INICIO
+                </div>
+              </Link>
+              <Button titulo="Chat" onClick={chats} />
+
               <Link href="/perfil">
                 <div className={`${styles.navPerfil} pointer ms-3`}>
                   <img
                     src="/images/icons/perfil.png"
                     alt="Mi perfil"
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                   />
                 </div>
               </Link>

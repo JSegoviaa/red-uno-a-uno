@@ -1,5 +1,5 @@
-import { Accordion, Container, Row } from 'react-bootstrap';
-import styles from './Inmueble.module.css';
+import { Accordion, Container, Row } from "react-bootstrap";
+import styles from "./Inmueble.module.css";
 
 const Detalles = () => {
   return (

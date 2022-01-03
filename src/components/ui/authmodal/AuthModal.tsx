@@ -1,13 +1,13 @@
-import { useContext } from 'react';
-import { Form, Modal } from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
-import { useForm } from '../../../hooks/useForm';
-import Button from '../button/Button';
-import Modaltitle from '../modaltitle/Modaltitle';
-import styles from './AuthModal.module.css';
-import 'react-toastify/dist/ReactToastify.css';
-import { AuthContext } from '../../../context/auth/AuthContext';
-import { useRouter } from 'next/router';
+import { useContext } from "react";
+import { Form, Modal } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import { useForm } from "../../../hooks/useForm";
+import Button from "../button/Button";
+import Modaltitle from "../modaltitle/Modaltitle";
+import styles from "./AuthModal.module.css";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../../context/auth/AuthContext";
+import { useRouter } from "next/router";
 
 interface Props {
   show: boolean;
@@ -19,12 +19,12 @@ const RegisterModal = ({ show, handleClose }: Props) => {
 
   const { register } = useContext(AuthContext);
   const { formulario, handleChange } = useForm({
-    nombre: '',
-    apellido: '',
-    correo: '',
-    password: '',
-    password2: '',
-    role: 'Usuario',
+    nombre: "",
+    apellido: "",
+    correo: "",
+    password: "",
+    password2: "",
+    role: "Usuario",
   });
 
   const { nombre, apellido, correo, password, password2, role } = formulario;
@@ -32,23 +32,25 @@ const RegisterModal = ({ show, handleClose }: Props) => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (password !== password2) toast.error('Las contraseñas no coinciden');
+    if (password !== password2) toast.error("Las contraseñas no coinciden");
 
     if (password.length < 6) {
-      toast.error('La contraseña tiene que ser de al menos 6 caracteres');
+      toast.error("La contraseña tiene que ser de al menos 6 caracteres");
     }
 
-    const resp = await register(nombre, apellido, correo, password, role);
+    if (password === password2) {
+      const resp = await register(nombre, apellido, correo, password, role);
 
-    if (resp.errors) {
-      resp.errors.map((e) => {
-        return toast.error(e.msg);
-      });
-    }
+      if (resp.errors) {
+        resp.errors.map((e) => {
+          return toast.error(e.msg);
+        });
+      }
 
-    if (resp.ok) {
-      router.push('/perfil');
-      handleClose();
+      if (resp.ok) {
+        router.push("/perfil");
+        handleClose();
+      }
     }
   };
 
@@ -62,7 +64,7 @@ const RegisterModal = ({ show, handleClose }: Props) => {
         <Modal.Header
           closeButton
           style={{
-            border: 'none',
+            border: "none",
           }}
         />
         <ToastContainer autoClose={10000} />

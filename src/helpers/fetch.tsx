@@ -1,23 +1,23 @@
-import { RegisterData, Resp } from '../interfaces/AuthInterface';
-import { Contact, ContactResp } from '../interfaces/ContactInterface';
-import { ActualizarUsuario, RespActualizar } from '../interfaces/UserInterface';
+import { RegisterData, Resp } from "../interfaces/AuthInterface";
+import { Contact, ContactResp } from "../interfaces/ContactInterface";
+import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
-const baseURL = 'https://prueba-red1a1.herokuapp.com/api';
+const baseURL = "https://prueba-red1a1.herokuapp.com/api";
 
 export const fetchSinToken = async (
   endpoint: string,
   data: RegisterData,
-  method = 'GET'
+  method = "GET"
 ): Promise<Resp> => {
   const url = `${baseURL}/${endpoint}`;
 
-  if (method === 'GET') {
+  if (method === "GET") {
     const resp = await fetch(url);
     return await resp.json();
   } else {
     const resp = await fetch(url, {
       method,
-      headers: { 'Content-type': 'application/json' },
+      headers: { "Content-type": "application/json" },
       body: JSON.stringify(data),
     });
 
@@ -28,20 +28,20 @@ export const fetchSinToken = async (
 export const fetchConToken = async (
   endpoint: string,
   data?: RegisterData,
-  method = 'GET'
+  method = "GET"
 ) => {
   const url = `${baseURL}/${endpoint}`;
-  const token = localStorage.getItem('token') || '';
+  const token = localStorage.getItem("token") || "";
 
-  if (method === 'GET') {
+  if (method === "GET") {
     const resp = await fetch(url, {
-      headers: { 'x-token': token },
+      headers: { "x-token": token },
     });
     return await resp.json();
   } else {
     const resp = await fetch(url, {
       method,
-      headers: { 'Content-type': 'application/json', 'x-token': token },
+      headers: { "Content-type": "application/json", "x-token": token },
       body: JSON.stringify(data),
     });
 
@@ -56,8 +56,8 @@ export const fetchContactForm = async (
   const url = `${baseURL}/${endpoint}`;
 
   const resp = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-type': 'application/json' },
+    method: "POST",
+    headers: { "Content-type": "application/json" },
     body: JSON.stringify(data),
   });
 
@@ -67,20 +67,20 @@ export const fetchContactForm = async (
 export const fetchInmueble = async (
   endpoint: string,
   data?: any,
-  method = 'GET'
+  method = "GET"
 ) => {
   const url = `${baseURL}/${endpoint}`;
-  const token = localStorage.getItem('token') || '';
+  const token = localStorage.getItem("token") || "";
 
-  if (method === 'GET') {
+  if (method === "GET") {
     const resp = await fetch(url, {
-      headers: { 'x-token': token },
+      headers: { "x-token": token },
     });
     return await resp.json();
   } else {
     const resp = await fetch(url, {
       method,
-      headers: { 'Content-type': 'application/json', 'x-token': token },
+      headers: { "Content-type": "application/json", "x-token": token },
       body: JSON.stringify(data),
     });
 
@@ -93,11 +93,11 @@ export const actualizarPerfilFetch = async (
   data: ActualizarUsuario
 ): Promise<RespActualizar> => {
   const url = `${baseURL}/${endpoint}`;
-  const token = localStorage.getItem('token') || '';
+  const token = localStorage.getItem("token") || "";
 
   const resp = await fetch(url, {
-    method: 'PUT',
-    headers: { 'Content-type': 'application/json', 'x-token': token },
+    method: "PUT",
+    headers: { "Content-type": "application/json", "x-token": token },
     body: JSON.stringify(data),
   });
 
