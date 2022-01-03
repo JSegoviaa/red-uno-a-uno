@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { fetchInmueble } from "../../../../helpers/fetch";
 import { useForm } from "../../../../hooks/useForm";
@@ -13,9 +13,14 @@ const AnadirInmueble = () => {
   const { formulario, handleChange } = useForm({
     categoria: categoriaSeleccionada,
     titulo: "",
+    descripcion: "",
+    precio: "",
+    comisiones: "",
+    otros: "",
   });
 
-  const { titulo, categoria } = formulario;
+  const { titulo, categoria, descripcion, precio, comisiones, otros } =
+    formulario;
 
   const categoriaRenta = () => {
     setCategoriaSeleccionada("61ca85313384577442588d29");
@@ -25,14 +30,18 @@ const AnadirInmueble = () => {
     setCategoriaSeleccionada("61cb51ee11b684e8c30cb7cb");
   };
 
-  console.log(categoria);
-
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setCategoriaSeleccionada("");
 
-    fetchInmueble("inmuebles", { titulo, categoria }, "POST");
+    fetchInmueble(
+      "inmuebles",
+      { titulo, categoria, descripcion, precio, comisiones, otros },
+      "POST"
+    );
+
+    console.log("publicado");
   };
 
   return (
@@ -83,9 +92,9 @@ const AnadirInmueble = () => {
           </Col>
           <Col sm={6}>
             <Form.Select>
-              <option> </option>
-              <option value="1">Casa</option>
-              <option value="2">Departamento</option>
+              <option></option>
+              <option value="Casa">Casa</option>
+              <option value="Departamento">Departamento</option>
             </Form.Select>
           </Col>
         </Row>
@@ -489,7 +498,12 @@ const AnadirInmueble = () => {
 
         <Form.Group className="mb-3">
           <Form.Label>Otros (opcional)</Form.Label>
-          <Form.Control type="text" />
+          <Form.Control
+            type="text"
+            value={otros}
+            onChange={handleChange}
+            name="otros"
+          />
         </Form.Group>
         <hr />
         <br />
@@ -499,7 +513,13 @@ const AnadirInmueble = () => {
         </div>
 
         <Form.Group className="mb-3">
-          <Form.Control as="textarea" rows={3} />
+          <Form.Control
+            as="textarea"
+            rows={3}
+            value={descripcion}
+            name="descripcion"
+            onChange={handleChange}
+          />
         </Form.Group>
         <br />
         <hr />
@@ -510,7 +530,12 @@ const AnadirInmueble = () => {
               <Col>Valor</Col>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Control type="text" />
+                  <Form.Control
+                    value={precio}
+                    name="precio"
+                    onChange={handleChange}
+                    type="number"
+                  />
                 </Form.Group>
               </Col>
             </Row>
@@ -520,7 +545,12 @@ const AnadirInmueble = () => {
               <Col>Comisiones</Col>
               <Col>
                 <Form.Group className="mb-3">
-                  <Form.Control type="text" />
+                  <Form.Control
+                    value={comisiones}
+                    name="comisiones"
+                    onChange={handleChange}
+                    type="number"
+                  />
                 </Form.Group>
               </Col>
             </Row>
