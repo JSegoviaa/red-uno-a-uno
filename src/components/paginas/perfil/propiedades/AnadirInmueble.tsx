@@ -1,12 +1,14 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { fetchInmueble } from "../../../../helpers/fetch";
+import { toast, ToastContainer } from "react-toastify";
+import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { useForm } from "../../../../hooks/useForm";
 import Button from "../../../ui/button/Button";
 import Modaltitle from "../../../ui/modaltitle/Modaltitle";
 import Titulo from "../../../ui/titulo/Titulo";
 
 const AnadirInmueble = () => {
+  const { crearInmueble } = useContext(InmuebleContext);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
     "61ca85313384577442588d29"
   );
@@ -30,22 +32,21 @@ const AnadirInmueble = () => {
     setCategoriaSeleccionada("61cb51ee11b684e8c30cb7cb");
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setCategoriaSeleccionada("");
 
-    fetchInmueble(
-      "inmuebles",
-      { titulo, categoria, descripcion, precio, comisiones, otros },
-      "POST"
-    );
+    const resp = await crearInmueble(titulo, categoria);
 
-    console.log("publicado");
+    if (resp.ok) {
+      toast.success(resp.msg);
+    }
   };
 
   return (
     <Container>
+      <ToastContainer />
       <Titulo titulo="Agrega un inmueble" />
       <br />
       <Form onSubmit={handleSubmit}>
@@ -102,14 +103,7 @@ const AnadirInmueble = () => {
 
         <Row>
           <Col>
-            <Row>
-              <Col>ID del inmueble</Col>
-              <Col>
-                <Form.Group className="mb-3">
-                  <Form.Control type="text" />
-                </Form.Group>
-              </Col>
-            </Row>
+            <Row></Row>
           </Col>
           <Col>
             <Row>

@@ -1,5 +1,6 @@
 import { RegisterData, Resp } from "../interfaces/AuthInterface";
 import { Contact, ContactResp } from "../interfaces/ContactInterface";
+import { CrearInmuebleResp } from "../interfaces/CrearInmuebleInterface";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
 const baseURL = "https://prueba-red1a1.herokuapp.com/api";
@@ -68,7 +69,7 @@ export const fetchInmueble = async (
   endpoint: string,
   data?: any,
   method = "GET"
-) => {
+): Promise<CrearInmuebleResp> => {
   const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 

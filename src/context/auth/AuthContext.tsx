@@ -1,6 +1,6 @@
-import { createContext, FC, useCallback, useState } from 'react';
-import { fetchConToken, fetchSinToken } from '../../helpers/fetch';
-import { Auth, Resp } from '../../interfaces/AuthInterface';
+import { createContext, FC, useCallback, useState } from "react";
+import { fetchConToken, fetchSinToken } from "../../helpers/fetch";
+import { Auth, Resp } from "../../interfaces/AuthInterface";
 
 interface ContextProps {
   auth: Auth;
@@ -44,12 +44,12 @@ export const AuthProvider: FC = ({ children }) => {
 
   const login = async (correo: string, password: string) => {
     const resp = await fetchSinToken(
-      'auth/login',
+      "auth/login",
       { correo, password },
-      'POST'
+      "POST"
     );
     if (resp.token) {
-      localStorage.setItem('token', resp.token);
+      localStorage.setItem("token", resp.token);
       const { usuario } = resp;
       setAuth({
         uid: usuario.uid,
@@ -81,12 +81,12 @@ export const AuthProvider: FC = ({ children }) => {
     role: string
   ) => {
     const resp = await fetchSinToken(
-      'usuarios',
+      "usuarios",
       { nombre, apellido, correo, password, role },
-      'POST'
+      "POST"
     );
     if (resp.token) {
-      localStorage.setItem('token', resp.token);
+      localStorage.setItem("token", resp.token);
       const { usuario } = resp;
       setAuth({
         uid: usuario.uid,
@@ -112,7 +112,7 @@ export const AuthProvider: FC = ({ children }) => {
   };
 
   const verificaToken = useCallback(async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (!token) {
       setAuth({
@@ -137,10 +137,10 @@ export const AuthProvider: FC = ({ children }) => {
       return false;
     }
 
-    const resp = await fetchConToken('auth/renovarToken');
+    const resp = await fetchConToken("auth/renovarToken");
 
     if (resp.ok) {
-      localStorage.setItem('token', resp.token);
+      localStorage.setItem("token", resp.token);
       const { usuario } = resp;
       setAuth({
         uid: usuario.uid,
@@ -186,7 +186,7 @@ export const AuthProvider: FC = ({ children }) => {
   }, []);
 
   const logOut = async () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setAuth({
       uid: null,
       checking: false,
@@ -208,11 +208,11 @@ export const AuthProvider: FC = ({ children }) => {
   };
 
   const signInWithGoogle = async () => {
-    console.log('Iniciando sesión con google');
+    console.log("Iniciando sesión con google");
   };
 
   const signInWithFacebook = async () => {
-    console.log('Iniciando sesión con facebook');
+    console.log("Iniciando sesión con facebook");
   };
 
   return (
