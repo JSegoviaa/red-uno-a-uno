@@ -1,5 +1,5 @@
 .inmuebleTitle {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: bold;
   font-size: 45px;
@@ -8,7 +8,7 @@
 }
 
 .inmueblePrecio {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: bold;
   font-size: 38px;
@@ -17,7 +17,7 @@
 }
 
 .inmuebleTipo {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
   font-size: 25.7083px;
@@ -30,7 +30,7 @@
 }
 
 .inmuebleTiempo {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
   font-size: 23px;
@@ -40,7 +40,7 @@
 }
 
 .inmuebleSubtitle {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 500;
   font-size: 30px;
@@ -49,7 +49,7 @@
 }
 
 .inmuebleContent {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 500;
   font-size: 25px;
@@ -58,10 +58,62 @@
 }
 
 .inmuebleSubcontent {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 300;
   font-size: 25px;
   line-height: 35px;
   color: #5e5e5e;
+}
+
+.acordionContent {
+  padding: 0;
+}
+.btnAccordion:not(.collapsed) {
+  box-shadow: none;
+  background: #ffffff;
+  box-shadow: none;
+  color: #e65a1f !important;
+  text-align: center;
+}
+
+.socialMiniCard {
+  background: #ffffff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.12);
+  border-radius: 12px 0px 0px 12px;
+  padding: 10px;
+}
+.perfilCard {
+  background: #ffffff;
+  box-shadow: 0px 0px 18.9729px 7.29728px rgba(0, 0, 0, 0.07);
+  border-radius: 26px;
+  padding-bottom: 15px;
+}
+.perfilCardImg{
+  /* width: 100%; */
+}
+.perfilCardNombre {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 23px;
+  color: #000000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.perfilCardLine {
+  width: 85px;
+  background-color: #e65a1f;
+  height: 5px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.perfilCardCiudad {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  color: #5e5e5e;
+  margin-top: 10px;
 }
