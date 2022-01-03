@@ -6,7 +6,7 @@ const Ubicacion = () => {
   return (
     <section className="mt-5">
       <Container>
-        <Row>
+        {/* <Row>
           <div className="col-6">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13707.497468222784!2d-86.94184331863724!3d20.50322147007999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1639609950616!5m2!1ses-419!2smx"
@@ -33,7 +33,7 @@ const Ubicacion = () => {
           <div className="col-12 text-center my-5">
             <Button titulo="Añadir a favoritos" />
           </div>
-        </Row>
+        </Row> */}
       </Container>
     </section>
   );

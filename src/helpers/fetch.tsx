@@ -2,7 +2,7 @@ import { RegisterData, Resp } from '../interfaces/AuthInterface';
 import { Contact, ContactResp } from '../interfaces/ContactInterface';
 import { ActualizarUsuario, RespActualizar } from '../interfaces/UserInterface';
 
-const baseURL = 'http://localhost:8080/api';
+const baseURL = 'https://prueba-red1a1.herokuapp.com/api';
 
 export const fetchSinToken = async (
   endpoint: string,

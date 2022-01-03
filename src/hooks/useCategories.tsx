@@ -6,7 +6,7 @@ const useCategories = () => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const obtenerCategorias = async () => {
-    const resp = await fetch('http://localhost:8080/api/categorias/');
+    const resp = await fetch('https://prueba-red1a1.herokuapp.com/api/categorias/');
     const data = await resp.json();
 
     setCategorias(data.categorias);

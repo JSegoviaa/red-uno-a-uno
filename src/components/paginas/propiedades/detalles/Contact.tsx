@@ -5,7 +5,7 @@ import styles from './Inmueble.module.css';
 const Contact = () => {
   return (
     <Container>
-      <Row>
+      {/* <Row>
         <Col>
           <div>Datos del contacto</div>
           <div>Juan Pérez</div>
@@ -15,7 +15,7 @@ const Contact = () => {
           <div>Inica una cnoversación con el asesor de este inmueble</div>
           <Button titulo="Chat" />
         </Col>
-      </Row>
+      </Row> */}
     </Container>
   );
 };

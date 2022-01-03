@@ -10,7 +10,7 @@ export const useUserInfo = () => {
   const getUserInfo = async () => {
     setLoading(true);
 
-    const data = await fetch('http://localhost:8080/api/usuarios/' + auth.uid);
+    const data = await fetch('https://prueba-red1a1.herokuapp.com/api/usuarios/' + auth.uid);
     const resp = await data.json();
 
     setLoading(false);

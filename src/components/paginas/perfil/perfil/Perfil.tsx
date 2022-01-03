@@ -15,6 +15,7 @@ const Perfil = () => {
   const misFavoritos = () => router.push('/perfil/mis-favoritos');
   const actualizarPerfil = () => router.push('/perfil/actualizar-perfil');
   const agregarInmueble = () => router.push('/perfil/agregar-inmueble');
+  const miHistorial = () => router.push('/perfil/historial-de-inmueble');
 
   const { logOut } = useContext(AuthContext);
 
@@ -79,6 +80,13 @@ const Perfil = () => {
               titulo="Mis favoritos"
               btn="Secondary"
               onClick={misFavoritos}
+            />
+          </Col>
+          <Col className="py-3">
+            <Button
+              titulo="Historial"
+              btn="Secondary"
+              onClick={miHistorial}
             />
           </Col>
         </Row>

@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
+import Mihistorial from '../../components/paginas/perfil/historial/Mihistorial';
 import SEO from '../../components/seo/SEO';
+import Titulo from '../../components/ui/titulo/Titulo';
 import { usePrivateRoute } from '../../hooks/usePrivateRoute';
 
 const HistorialInmueble = () => {
@@ -8,7 +10,9 @@ const HistorialInmueble = () => {
   return (
     <>
       <SEO titulo="Historial de inmuebles" url={asPath} />
-      <div>Historial de inmuebles</div>
+      <Titulo titulo='Historial de inmuebles'/>
+      <Mihistorial/>
+
     </>
   );
 };
