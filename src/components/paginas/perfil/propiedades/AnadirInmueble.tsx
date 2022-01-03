@@ -1,12 +1,16 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
+import { useRouter } from "next/router";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { fetchInmueble } from "../../../../helpers/fetch";
+import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { useForm } from "../../../../hooks/useForm";
 import Button from "../../../ui/button/Button";
 import Modaltitle from "../../../ui/modaltitle/Modaltitle";
 import Titulo from "../../../ui/titulo/Titulo";
 
 const AnadirInmueble = () => {
+  const [selected, setSelected] = useState(false);
+  const { crearInmueble, inmueble } = useContext(InmuebleContext);
+  const router = useRouter();
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
     "61ca85313384577442588d29"
   );
@@ -30,18 +34,16 @@ const AnadirInmueble = () => {
     setCategoriaSeleccionada("61cb51ee11b684e8c30cb7cb");
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setCategoriaSeleccionada("");
 
-    fetchInmueble(
-      "inmuebles",
-      { titulo, categoria, descripcion, precio, comisiones, otros },
-      "POST"
-    );
+    const resp = await crearInmueble(titulo, categoria);
 
-    console.log("publicado");
+    if (resp.ok) {
+      router.push("/propiedades/" + inmueble._id);
+    }
   };
 
   return (
@@ -102,14 +104,7 @@ const AnadirInmueble = () => {
 
         <Row>
           <Col>
-            <Row>
-              <Col>ID del inmueble</Col>
-              <Col>
-                <Form.Group className="mb-3">
-                  <Form.Control type="text" />
-                </Form.Group>
-              </Col>
-            </Row>
+            <Row></Row>
           </Col>
           <Col>
             <Row>
@@ -335,176 +330,213 @@ const AnadirInmueble = () => {
           type="radio"
           name="group2"
           label="Sí"
-          id="inline-radio-1"
+          onClick={() => {
+            setSelected(true);
+          }}
         />
         <Form.Check
           inline
           type="radio"
           name="group2"
           label="No"
-          id="inline-radio-2"
+          onClick={() => {
+            setSelected(false);
+          }}
         />
 
-        <Row>
-          <Col>
+        {selected ? (
+          <>
             <Row>
-              <Col>Camas</Col>
               <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
+                <Row>
+                  <Col>Camas</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Col>Closet</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-          </Col>
-          <Col>
-            <Row>
-              <Col>Closet</Col>
-              <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
 
-        <Row>
-          <Col>
             <Row>
-              <Col>Sala</Col>
               <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
+                <Row>
+                  <Col>Sala</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Col>Comedor</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-          </Col>
-          <Col>
-            <Row>
-              <Col>Comedor</Col>
-              <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
 
-        <Row>
-          <Col>
             <Row>
-              <Col>Cocina</Col>
               <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
+                <Row>
+                  <Col>Cocina</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Col>AA</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-          </Col>
-          <Col>
-            <Row>
-              <Col>AA</Col>
-              <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
 
-        <Row>
-          <Col>
             <Row>
-              <Col>Refrigerador</Col>
               <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
+                <Row>
+                  <Col>Refrigerador</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Col>Estufa</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-          </Col>
-          <Col>
-            <Row>
-              <Col>Estufa</Col>
-              <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
 
-        <Row>
-          <Col>
             <Row>
-              <Col>Microondas</Col>
               <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
+                <Row>
+                  <Col>Microondas</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Col>Minihorno</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-          </Col>
-          <Col>
             <Row>
-              <Col>Minihorno</Col>
               <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
+                <Row>
+                  <Col>Horno</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
+              </Col>
+              <Col>
+                <Row>
+                  <Col>Lavadora</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-          </Col>
-        </Row>
 
-        <Row>
-          <Col>
             <Row>
-              <Col>Secadora</Col>
               <Col>
-                <Form.Select className="mb-3">
-                  <option> </option>
-                  <option value="1">Sí</option>
-                  <option value="2">No</option>
-                </Form.Select>
+                <Row>
+                  <Col>Secadora</Col>
+                  <Col>
+                    <Form.Select className="mb-3">
+                      <option> </option>
+                      <option value="1">Sí</option>
+                      <option value="2">No</option>
+                    </Form.Select>
+                  </Col>
+                </Row>
               </Col>
+              <Col></Col>
             </Row>
-          </Col>
-          <Col></Col>
-        </Row>
+            <Form.Group className="mb-3">
+              <Form.Label>Otros (opcional)</Form.Label>
+              <Form.Control
+                type="text"
+                value={otros}
+                onChange={handleChange}
+                name="otros"
+              />
+            </Form.Group>
+          </>
+        ) : null}
 
-        <Form.Group className="mb-3">
-          <Form.Label>Otros (opcional)</Form.Label>
-          <Form.Control
-            type="text"
-            value={otros}
-            onChange={handleChange}
-            name="otros"
-          />
-        </Form.Group>
+        <br />
+        <br />
+
         <hr />
         <br />
 
@@ -557,6 +589,7 @@ const AnadirInmueble = () => {
           </Col>
         </Row>
         <Button titulo="Publicar" />
+        <div className="py-3" />
       </Form>
     </Container>
   );
