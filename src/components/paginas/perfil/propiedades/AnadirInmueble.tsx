@@ -1,28 +1,38 @@
-import { useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { fetchInmueble } from '../../../../helpers/fetch';
-import useCategories from '../../../../hooks/useCategories';
-import { useForm } from '../../../../hooks/useForm';
-import Button from '../../../ui/button/Button';
-import Modaltitle from '../../../ui/modaltitle/Modaltitle';
-import Titulo from '../../../ui/titulo/Titulo';
+import { useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { fetchInmueble } from "../../../../helpers/fetch";
+import { useForm } from "../../../../hooks/useForm";
+import Button from "../../../ui/button/Button";
+import Modaltitle from "../../../ui/modaltitle/Modaltitle";
+import Titulo from "../../../ui/titulo/Titulo";
 
 const AnadirInmueble = () => {
-  const { categorias } = useCategories();
-
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
+    "61ca85313384577442588d29"
+  );
   const { formulario, handleChange } = useForm({
-    _id: '',
-    categoria: '61ca85313384577442588d29',
-    titulo: '',
+    categoria: categoriaSeleccionada,
+    titulo: "",
   });
 
   const { titulo, categoria } = formulario;
 
+  const categoriaRenta = () => {
+    setCategoriaSeleccionada("61ca85313384577442588d29");
+  };
+
+  const categoriaVenta = () => {
+    setCategoriaSeleccionada("61cb51ee11b684e8c30cb7cb");
+  };
+
+  console.log(categoria);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    console.log(categoria, 'categoria');
-    fetchInmueble('inmuebles', { titulo, categoria }, 'POST');
+    setCategoriaSeleccionada("");
+
+    fetchInmueble("inmuebles", { titulo, categoria }, "POST");
   };
 
   return (
@@ -34,15 +44,19 @@ const AnadirInmueble = () => {
           inline
           type="radio"
           name="categoria"
-          label={'Renta'}
-          value={'61ca85313384577442588d29'}
+          label={"Renta"}
+          onClick={categoriaRenta}
+          value={categoriaSeleccionada}
+          onChange={handleChange}
         />
         <Form.Check
           inline
           type="radio"
           name="categoria"
-          label={'Venta'}
-          value={'61cb51ee11b684e8c30cb7cb'}
+          label={"Venta"}
+          onClick={categoriaVenta}
+          value={categoriaSeleccionada}
+          onChange={handleChange}
         />
 
         <Form.Group className="mb-3">
