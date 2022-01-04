@@ -1,9 +1,9 @@
+
 .inmuebleTitle {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: bold;
   font-size: 45px;
-  line-height: 77px;
   color: #000000;
 }
 
@@ -12,7 +12,6 @@
   font-style: normal;
   font-weight: bold;
   font-size: 38px;
-  line-height: 77px;
   color: #13a407;
 }
 
@@ -21,7 +20,6 @@
   font-style: normal;
   font-weight: normal;
   font-size: 25.7083px;
-  line-height: 77px;
   color: #e65a1f;
   border: 1.42824px solid #e65a1f;
   box-sizing: border-box;
@@ -29,13 +27,23 @@
   padding: 2px 37px 2px 37px;
 }
 
+.inmuebleTipo2 {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  color: #5e5e5e;
+  border: 1.22347px solid #7149bc;
+  box-sizing: border-box;
+  border-radius: 57.1295px;
+  padding: 4px 17px;
+}
+
 .inmuebleTiempo {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
   font-size: 23px;
-  line-height: 77px;
-  text-align: center;
   color: #5e5e5e;
 }
 
@@ -82,16 +90,22 @@
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.12);
   border-radius: 12px 0px 0px 12px;
   padding: 10px;
+  transform: translate(1.5px, -30px);
+  transition: 100ms;
 }
+
+.socialMiniCard:hover {
+  transform: translate(1.5px, -36px);
+  transition: 100ms;
+}
+
 .perfilCard {
   background: #ffffff;
   box-shadow: 0px 0px 18.9729px 7.29728px rgba(0, 0, 0, 0.07);
   border-radius: 26px;
   padding-bottom: 15px;
 }
-.perfilCardImg{
-  /* width: 100%; */
-}
+
 .perfilCardNombre {
   font-family: "Open Sans";
   font-style: normal;
@@ -116,4 +130,93 @@
   font-size: 20px;
   color: #5e5e5e;
   margin-top: 10px;
+}
+
+.sliderEjemplo {
+  width: 100%;
+  height: 500px;
+  background-color: #5e5e5e;
+  margin-bottom: 50px;
+}
+
+.contenidoContactoDerecha {
+  padding-top: 6vw;
+  padding-bottom: 5vw;
+  padding-left: 15vw;
+}
+.contenidoContactoIzquierda {
+  background-image: url('/images/icons/deatails-icons/dtosContacto.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 448px;
+}
+.miniTutuloC {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2.5vw;
+  color: #000000;
+}
+.nombreC {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2vw;
+  color: #e65a1f;
+}
+.telefonoC {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.7vw;
+  color: #5e5e5e;
+}
+.LeftTitulo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2vw;
+  color: #ffffff;
+  padding-top: 6vw;
+  letter-spacing: -1.5px;
+}
+
+
+@media (max-width: 1550px) {
+  .contenidoContactoDerecha {
+    padding-left: 10vw;
+  }
+}
+@media (max-width: 1250px) {
+  .contenidoContactoDerecha {
+    padding-left: 5vw;
+  }
+}
+@media (max-width: 991px) {
+  .contenidoContactoDerecha {
+    text-align: center;
+  }
+  .miniTutuloC {
+    font-size: 6vw;
+  }
+  .nombreC {
+    font-size: 5vw;
+  }
+  .telefonoC {
+    font-size: 4vw;
+  }
+
+  .LeftTitulo {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4vw;
+    color: #ffffff;
+    padding-top: 4vw;
+    letter-spacing: -1.5px;
+  }
+
+  .contenidoContactoIzquierda {
+    height: 40vw;
+  }
 }
