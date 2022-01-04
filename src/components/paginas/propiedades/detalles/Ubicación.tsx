@@ -1,8 +1,11 @@
-import { Container, Row } from 'react-bootstrap';
-import Button from '../../../ui/button/Button';
-import styles from './Inmueble.module.css';
+import { useContext } from "react";
+import { Container, Row } from "react-bootstrap";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import Button from "../../../ui/button/Button";
+import styles from "./Inmueble.module.css";
 
 const Ubicacion = () => {
+  const { auth } = useContext(AuthContext);
   return (
     <section className="mt-5">
       <Container>
@@ -18,25 +21,41 @@ const Ubicacion = () => {
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <div className={`${styles.inmuebleTitle} mb-4`}>Apple Park</div>
-            <div className='mb-4'>
+            <div className="mb-4">
               <div className="row">
                 <div className="col-sm-12 col-md-6 col-lg-12 col-xl-6 col-xxl-6 mb-4">
-                  <span className={`${styles.inmuebleTipo2} me-4`}> <img src="/images/icons/deatails-icons/ubicacion.png" alt="..." width={25} /> 481 Rosemont Dr​</span>
+                  <span className={`${styles.inmuebleTipo2} me-4`}>
+                    {" "}
+                    <img
+                      src="/images/icons/deatails-icons/ubicacion.png"
+                      alt="..."
+                      width={25}
+                    />{" "}
+                    481 Rosemont Dr
+                  </span>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-12 col-xl-6 col-xxl-6 mb-4">
-                  <span className={styles.inmuebleTipo2}> <img src="/images/icons/deatails-icons/ciudad.png" alt="..." width={25} /> Cupertino, CA.</span>
+                  <span className={styles.inmuebleTipo2}>
+                    {" "}
+                    <img
+                      src="/images/icons/deatails-icons/ciudad.png"
+                      alt="..."
+                      width={25}
+                    />{" "}
+                    Cupertino, CA.
+                  </span>
                 </div>
-              </div>          
+              </div>
             </div>
             <div className={styles.inmuebleContent}>
-              Un desarrollo ubicado en una de las ciudades más seguras y con 
-              mayor crecimiento de inversión en el país, Pachuca, Hidalgo. Con 
-              casas integrales y acompañadas de amenidades que ayudan a fomentar 
+              Un desarrollo ubicado en una de las ciudades más seguras y con
+              mayor crecimiento de inversión en el país, Pachuca, Hidalgo. Con
+              casas integrales y acompañadas de amenidades que ayudan a fomentar
               la integración familiar.
             </div>
           </div>
           <div className="col-12 text-center my-5">
-            <Button titulo="Añadir a favoritos" />
+            {auth.uid ? <Button titulo="Añadir a favoritos" /> : null}
           </div>
         </Row>
       </Container>

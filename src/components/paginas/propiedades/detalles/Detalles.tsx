@@ -1,8 +1,11 @@
-import { Accordion, AccordionButton, Container, Row } from "react-bootstrap";
-import Modaltitle from "../../../ui/modaltitle/Modaltitle";
+import { useContext } from "react";
+import { Accordion } from "react-bootstrap";
+import { AuthContext } from "../../../../context/auth/AuthContext";
 import styles from "./Inmueble.module.css";
 
 const Detalles = () => {
+  const { auth } = useContext(AuthContext);
+
   return (
     <section>
       <div className="container">
@@ -23,7 +26,9 @@ const Detalles = () => {
                 </div>
               </div>
               <div className="col-sm-12 col-md-4 col-lg-4 text-sm-start text-md-start text-lg-end text-start">
-                <div className={`${styles.inmuebleTiempo} mt-3`}>Publicado hace 9 días</div>
+                <div className={`${styles.inmuebleTiempo} mt-3`}>
+                  Publicado hace 9 días
+                </div>
               </div>
             </div>
             <hr />
@@ -235,9 +240,7 @@ const Detalles = () => {
                           />
                         </td>
                         <td>
-                          <div className={styles.inmuebleContent}>
-                            Pisos
-                          </div>
+                          <div className={styles.inmuebleContent}>Pisos</div>
                           <div className={`${styles.inmuebleSubcontent} mb-1`}>
                             ED-5451
                             <br />
@@ -564,48 +567,79 @@ const Detalles = () => {
             {/*-------- detalles adicionales ------------*/}
           </div>
 
-
           {/* tarjeta de contacto */}
-          <div className="col-sm-12 col-md-2 col-lg-2 col-xl-3 text-center d-none d-xl-block">
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <div className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}><img src="/images/icons/deatails-icons/ubicacion.png" alt=""></img></div>
-                    <div className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}><img src="/images/icons/deatails-icons/whats.png" alt=""></img></div>
-                    <div className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}><img src="/images/icons/deatails-icons/face.png" alt=""></img></div>
-                    <div className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}><img src="/images/icons/deatails-icons/insta.png" alt=""></img></div>
-                  </td>
-                  <td>
-                    <div className={styles.perfilCard}>
-                      <div className={styles.perfilCardImg}>
-                        <img src="/images/icons/deatails-icons/default-perfil.png" alt="..." />
+          {auth.uid ? (
+            <div className="col-sm-12 col-md-2 col-lg-2 col-xl-3 text-center d-none d-xl-block">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div
+                        className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}
+                      >
+                        <img
+                          src="/images/icons/deatails-icons/ubicacion.png"
+                          alt=""
+                        ></img>
                       </div>
-                      {/* <Modaltitle titulo="Juan Pérez Hernández"/> */}
-                      <div className={styles.perfilCardNombre}>
-                        Juan Pérez Hernández
+                      <div
+                        className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}
+                      >
+                        <img
+                          src="/images/icons/deatails-icons/whats.png"
+                          alt=""
+                        ></img>
                       </div>
-                      <div className={styles.perfilCardLine}></div>
-                      <div className={styles.perfilCardCiudad}>
-                        Cancún, Quintana Roo.
+                      <div
+                        className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}
+                      >
+                        <img
+                          src="/images/icons/deatails-icons/face.png"
+                          alt=""
+                        ></img>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                      <div
+                        className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}
+                      >
+                        <img
+                          src="/images/icons/deatails-icons/insta.png"
+                          alt=""
+                        ></img>
+                      </div>
+                    </td>
+                    <td>
+                      <div className={styles.perfilCard}>
+                        <div className={styles.perfilCardImg}>
+                          <img
+                            src="/images/icons/deatails-icons/default-perfil.png"
+                            alt="..."
+                          />
+                        </div>
+                        {/* <Modaltitle titulo="Juan Pérez Hernández"/> */}
+                        <div className={styles.perfilCardNombre}>
+                          Juan Pérez Hernández
+                        </div>
+                        <div className={styles.perfilCardLine}></div>
+                        <div className={styles.perfilCardCiudad}>
+                          Cancún, Quintana Roo.
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ) : null}
+
           {/* tarjeta de contacto */}
 
           {/*-------- equipamiento ------------*/}
           <div className="col-12">
-          <Accordion defaultActiveKey="1" flush>
+            <Accordion defaultActiveKey="1" flush>
               <Accordion.Item eventKey="0">
                 <div className="row">
                   <div className="col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2 col-7">
-                    <div className={styles.inmuebleSubtitle}>
-                      Equipamiento
-                    </div>
+                    <div className={styles.inmuebleSubtitle}>Equipamiento</div>
                   </div>
                   <div className="col-sm-6 col-md-7 col-lg-8 col-xl-8 col-xxl-9 col-3">
                     <hr className="mt-4" />
@@ -1012,7 +1046,9 @@ const Detalles = () => {
                                 <div
                                   className={`${styles.inmuebleSubcontent} mb-1`}
                                 >
-                                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero, reprehenderit. Lorem, ipsum.
+                                  Lorem ipsum dolor sit, amet consectetur
+                                  adipisicing elit. Vero, reprehenderit. Lorem,
+                                  ipsum.
                                   <br />
                                   <br />
                                 </div>
