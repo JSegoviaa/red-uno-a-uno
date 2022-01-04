@@ -146,6 +146,12 @@ export const InmuebleProvider: FC = ({ children }) => {
     if (resp.ok) {
       toast.success(resp.msg);
     }
+
+    if (resp.errors) {
+      resp.errors.map((e) => {
+        return toast.error(e.msg);
+      });
+    }
     return resp;
   };
 
