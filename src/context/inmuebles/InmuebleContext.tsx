@@ -1,42 +1,150 @@
+import { createContext, FC } from "react";
 import { useRouter } from "next/router";
-import { createContext, FC, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { fetchBorrarInmueble, fetchInmueble } from "../../helpers/fetch";
 import {
   BorrarInmuebleResp,
   CrearInmuebleResp,
-  Inmueble,
 } from "../../interfaces/CrearInmuebleInterface";
 
 interface ContextProps {
   crearInmueble: (
     titulo: string,
-    categoria: string
+    categoria: string,
+    precio: number,
+    descripcion?: string,
+    AA?: boolean,
+    agua?: boolean,
+    amueblado?: boolean,
+    antiguedad?: string,
+    baños?: number,
+    camas?: boolean,
+    closet?: boolean,
+    cocina?: boolean,
+    comedor?: boolean,
+    comisiones?: number,
+    discapacitados?: boolean,
+    escuelas?: boolean,
+    estufa?: boolean,
+    gas?: boolean,
+    habitaciones?: number,
+    horno?: boolean,
+    internet?: boolean,
+    lavadora?: boolean,
+    luz?: boolean,
+    m2Construidos?: number,
+    m2Terreno?: number,
+    mantenimiento?: boolean,
+    medioBaños?: number,
+    microondas?: boolean,
+    minihorno?: boolean,
+    otros?: string,
+    parking?: number,
+    piscinas?: boolean,
+    pisos?: number,
+    propertyType?: string,
+    refrigerador?: boolean,
+    sala?: boolean,
+    secadora?: boolean,
+    seguridadPrivada?: boolean
   ) => Promise<CrearInmuebleResp>;
   eliminarInmueble: (id: string) => Promise<BorrarInmuebleResp>;
-  inmueble: Inmueble;
 }
-
-const initialState: Inmueble = {
-  _id: null,
-};
 
 export const InmuebleContext = createContext({} as ContextProps);
 
 export const InmuebleProvider: FC = ({ children }) => {
-  const [inmueble, setInmueble] = useState(initialState);
   const router = useRouter();
-  const crearInmueble = async (titulo: string, categoria: string) => {
+
+  const crearInmueble = async (
+    titulo: string,
+    categoria: string,
+    precio: number,
+    descripcion?: string,
+    agua?: boolean,
+    AA?: boolean,
+    amueblado?: boolean,
+    antiguedad?: string,
+    baños?: number,
+    camas?: boolean,
+    closet?: boolean,
+    cocina?: boolean,
+    comedor?: boolean,
+    comisiones?: number,
+    discapacitados?: boolean,
+    escuelas?: boolean,
+    estufa?: boolean,
+    gas?: boolean,
+    habitaciones?: number,
+    horno?: boolean,
+    internet?: boolean,
+    lavadora?: boolean,
+    luz?: boolean,
+    m2Construidos?: number,
+    m2Terreno?: number,
+    mantenimiento?: boolean,
+    medioBaños?: number,
+    microondas?: boolean,
+    minihorno?: boolean,
+    otros?: string,
+    parking?: number,
+    piscinas?: boolean,
+    pisos?: number,
+    propertyType?: string,
+    refrigerador?: boolean,
+    sala?: boolean,
+    secadora?: boolean,
+    seguridadPrivada?: boolean
+  ) => {
     const resp = await fetchInmueble(
       "inmuebles",
-      { titulo, categoria },
+      {
+        titulo,
+        categoria,
+        precio,
+        descripcion,
+        AA,
+        agua,
+        amueblado,
+        antiguedad,
+        baños,
+        camas,
+        closet,
+        cocina,
+        comedor,
+        comisiones,
+        discapacitados,
+        escuelas,
+        estufa,
+        gas,
+        habitaciones,
+        horno,
+        internet,
+        lavadora,
+        luz,
+        m2Construidos,
+        m2Terreno,
+        mantenimiento,
+        medioBaños,
+        microondas,
+        minihorno,
+        otros,
+        parking,
+        piscinas,
+        pisos,
+        propertyType,
+        refrigerador,
+        sala,
+        secadora,
+        seguridadPrivada,
+      },
       "POST"
     );
 
-    const { inmueble } = resp;
+    console.log(resp);
+
     if (resp.ok) {
       toast.success(resp.msg);
-      setInmueble({ _id: inmueble._id });
     }
     return resp;
   };
@@ -50,9 +158,7 @@ export const InmuebleProvider: FC = ({ children }) => {
   };
 
   return (
-    <InmuebleContext.Provider
-      value={{ crearInmueble, eliminarInmueble, inmueble }}
-    >
+    <InmuebleContext.Provider value={{ crearInmueble, eliminarInmueble }}>
       <ToastContainer />
       {children}
     </InmuebleContext.Provider>

@@ -2,28 +2,26 @@
 
 export interface InmueblesResponse {
   ok: boolean;
-  total: number;
-  inmuebles: Inmueble[];
+  msg: string;
+  inmueble: Inmueble;
 }
 
 export interface Inmueble {
-  _id: string;
   titulo: string;
-  descripcion: string;
+  categoria: string;
   precio: number;
-  publicado: boolean;
-  usuario: Usuario;
-  categoria: Categoria;
-  AA?: number;
-  IID?: string;
+  publicado?: boolean;
+  usuario?: Usuario;
+  descripcion?: string;
+  AA?: boolean;
   agua?: boolean;
   amueblado?: boolean;
   antiguedad?: string;
   baños?: number;
-  camas?: number;
-  closet?: number;
-  cocina?: number;
-  comedor?: number;
+  camas?: boolean;
+  closet?: boolean;
+  cocina?: boolean;
+  comedor?: boolean;
   comisiones?: number;
   discapacitados?: boolean;
   escuelas?: boolean;
@@ -45,7 +43,10 @@ export interface Inmueble {
   piscinas?: boolean;
   pisos?: number;
   propertyType?: string;
-  refrigerador?: number;
+  refrigerador?: boolean;
+  sala?: boolean;
+  secadora?: boolean;
+  seguridadPrivada?: boolean;
 }
 
 export interface Categoria {
