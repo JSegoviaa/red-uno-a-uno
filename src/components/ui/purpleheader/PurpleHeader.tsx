@@ -1,26 +1,29 @@
+import Link from 'next/link'
 import styles from './PurpleHeader.module.css'
 
 const PurpleHeader = () => {
     return (
         <div className={styles.purpleNav2}>
             <ul className="nav d-flex justify-content-center">
-                <li className="nav-item mt-1">
-                    <a className={`${styles.purpleLinks} me-5`} href="#">Mis Propiedades</a>
+                <li className="nav-item mt-2">
+                    <Link href="/perfil/mis-propiedades"><div className={`${styles.purpleLinks} mx-3 pointer`}>Mis Propiedades</div></Link>
                 </li>
-                <li className="nav-item mt-1">
-                    <a className={`${styles.purpleLinks} me-5`} href="#">Mis Favoritos</a>
+                <li className="nav-item mt-2">
+                    <Link href="/perfil/mis-favoritos"><div className={`${styles.purpleLinks} mx-3 pointer`}>Mis Favoritos</div></Link>
                 </li>
-                <li className="nav-item mt-1">
-                    <a className={`${styles.purpleLinks} me-5`} href="#">Mi Cuenta</a>
+                <li className="nav-item mt-2">
+                    <Link href="/perfil"><div className={`${styles.purpleLinks} mx-3 pointer`}>Mi Cuenta</div></Link>
                 </li>
-                <li className="nav-item mt-1">
-                    <a className={`${styles.purpleLinks} me-5`} href="#">Historial de Inmuebles</a>
+                <li className="nav-item mt-2">
+                    <Link href="/perfil/historial-de-inmueble"><div className={`${styles.purpleLinks} mx-3 pointer`}>Historial de Inmuebles</div></Link>
                 </li>
                 <li className="nav-item">
-                    <img className='me-5' src="/images/icons/Notificaciones.png" alt="..." />
+                    <input type="text" className={styles.searchInput} placeholder="Busca aquí..." />
+                    <button className={styles.searchBtn}><i className="bi bi-search" /></button>
                 </li>
-                <input type="text" className={styles.searchInput} placeholder="Busca aquí..." />
-                <button className={styles.searchBtn}><i className="bi bi-search" /></button>
+                <li className="nav-item">
+                    <img className={`${styles.notificacion} mx-3 pointer`} src="/images/icons/Notificaciones.png" alt="..." />
+                </li>
             </ul>
         </div>
     )

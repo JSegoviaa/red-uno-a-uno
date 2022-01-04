@@ -46,11 +46,21 @@
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
-  text-align: center;
   text-transform: uppercase;
   color: #ffffff;
 }
 
 .purpleLinks:hover {
   color: #ec7e0a;
+}
+
+
+@media (max-width: 443px) {
+    .searchInput{
+        margin-top: 10px;
+        margin-bottom: 8px;
+    }
+    .notificacion{
+       margin-top: 10px; 
+    }
 }
