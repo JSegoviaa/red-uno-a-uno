@@ -81,11 +81,11 @@ const AnadirInmueble = () => {
   } = formulario;
 
   const categoriaRenta = () => {
-    setCategoriaSeleccionada("61ca85313384577442588d29");
+    setCategoriaSeleccionada(process.env.DB_VENTA || "");
   };
 
   const categoriaVenta = () => {
-    setCategoriaSeleccionada("61cb51ee11b684e8c30cb7cb");
+    setCategoriaSeleccionada(process.env.DB_RENTA || "");
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {

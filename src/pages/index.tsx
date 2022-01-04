@@ -1,7 +1,7 @@
-import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Info from '../components/paginas/inicio/Info';
-import SEO from '../components/seo/SEO';
+import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import Info from "../components/paginas/inicio/Info";
+import SEO from "../components/seo/SEO";
 
 const Home: NextPage = () => {
   const { asPath } = useRouter();
