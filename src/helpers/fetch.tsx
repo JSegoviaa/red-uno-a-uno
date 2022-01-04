@@ -7,7 +7,7 @@ import {
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
 const baseURL = "https://prueba-red1a1.herokuapp.com/api";
-const devURL = "http://localhost:8000/api";
+const devURL = "http://localhost:8080/api";
 
 export const fetchSinToken = async (
   endpoint: string,

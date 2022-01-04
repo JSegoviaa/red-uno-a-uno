@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Categoria } from "../interfaces/InmueblesInterface";
 
-const devURL = "http://localhost:8000/api";
+const devURL = "http://localhost:8080/api";
 const baseURL = "https://prueba-red1a1.herokuapp.com/api";
 
 const useCategories = () => {

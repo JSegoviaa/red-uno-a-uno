@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth/AuthContext";
 import { Usuario } from "../interfaces/UserInterface";
 
-const devURL = "http://localhost:8000/api";
+const devURL = "http://localhost:8080/api";
 const baseURL = "https://prueba-red1a1.herokuapp.com/api";
 
 export const useUserInfo = () => {

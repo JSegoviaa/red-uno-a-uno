@@ -12,29 +12,29 @@ const AnadirInmueble = () => {
     "61ca85313384577442588d29"
   );
   const [propertyType, setTipoPropiedad] = useState("");
-  const [agua, setAgua] = useState<any>("");
-  const [luz, setLuz] = useState<any>("");
-  const [gas, setGas] = useState<any>("");
-  const [internet, setInternet] = useState<any>("");
-  const [seguridadPrivada, setSeguridadPrivada] = useState<any>("");
-  const [escuelas, setEscuelas] = useState<any>("");
-  const [mantenimiento, setMantenimiento] = useState<any>("");
-  const [piscina, setPiscina] = useState<any>("");
-  const [discapacitados, setDiscapacitados] = useState<any>("");
+  const [agua, setAgua] = useState<any>(true);
+  const [luz, setLuz] = useState<any>(true);
+  const [gas, setGas] = useState<any>(true);
+  const [internet, setInternet] = useState<any>(true);
+  const [seguridadPrivada, setSeguridadPrivada] = useState<any>(true);
+  const [escuelas, setEscuelas] = useState<any>(true);
+  const [mantenimiento, setMantenimiento] = useState<any>(true);
+  const [piscina, setPiscina] = useState<any>(true);
+  const [discapacitados, setDiscapacitados] = useState<any>(true);
   const [amueblado, setAmueblado] = useState(false);
-  const [camas, setCamas] = useState<any>("");
-  const [closet, setCloset] = useState<any>("");
-  const [sala, setSala] = useState<any>("");
-  const [comedor, setComedor] = useState<any>("");
-  const [cocina, setCocina] = useState<any>("");
-  const [AA, setAA] = useState<any>("");
-  const [refrigerador, setRefrigerador] = useState<any>("");
-  const [estufa, setEstufa] = useState<any>("");
-  const [microondas, setMicroondas] = useState<any>("");
-  const [minihorno, setMinihorno] = useState<any>("");
-  const [horno, setHorno] = useState<any>("");
-  const [lavadora, setLavadora] = useState<any>("");
-  const [secadora, setSecadora] = useState<any>("");
+  const [camas, setCamas] = useState<any>(true);
+  const [closet, setCloset] = useState<any>(true);
+  const [sala, setSala] = useState<any>(true);
+  const [comedor, setComedor] = useState<any>(true);
+  const [cocina, setCocina] = useState<any>(true);
+  const [AA, setAA] = useState<any>(true);
+  const [refrigerador, setRefrigerador] = useState<any>(true);
+  const [estufa, setEstufa] = useState<any>(true);
+  const [microondas, setMicroondas] = useState<any>(true);
+  const [minihorno, setMinihorno] = useState<any>(true);
+  const [horno, setHorno] = useState<any>(true);
+  const [lavadora, setLavadora] = useState<any>(true);
+  const [secadora, setSecadora] = useState<any>(true);
 
   const { formulario, handleChange } = useForm({
     categoria: categoriaSeleccionada,
@@ -405,7 +405,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setAgua(e.target.value)}
                   className="mb-3"
                 >
-                  <option></option>
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -424,7 +423,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setLuz(e.target.value)}
                   className="mb-3"
                 >
-                  <option />
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -440,7 +438,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setGas(e.target.value)}
                   className="mb-3"
                 >
-                  <option />
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -459,7 +456,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setInternet(e.target.value)}
                   className="mb-3"
                 >
-                  <option />
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -475,7 +471,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setSeguridadPrivada(e.target.value)}
                   className="mb-3"
                 >
-                  <option />
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -494,7 +489,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setEscuelas(e.target.value)}
                   className="mb-3"
                 >
-                  <option />
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -510,7 +504,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setMantenimiento(e.target.value)}
                   className="mb-3"
                 >
-                  <option />
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -529,7 +522,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setPiscina(e.target.value)}
                   className="mb-3"
                 >
-                  <option />
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -545,7 +537,6 @@ const AnadirInmueble = () => {
                   onChange={(e) => setDiscapacitados(e.target.value)}
                   className="mb-3"
                 >
-                  <option />
                   <option>Sí</option>
                   <option>No</option>
                 </Form.Select>
@@ -591,7 +582,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setCamas(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -607,7 +597,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setCloset(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -626,7 +615,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setSala(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -642,7 +630,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setComedor(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -661,7 +648,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setCocina(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -677,7 +663,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setAA(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -696,7 +681,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setRefrigerador(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -712,7 +696,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setEstufa(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -731,7 +714,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setMicroondas(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -747,7 +729,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setMinihorno(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -765,7 +746,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setHorno(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -781,7 +761,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setLavadora(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
@@ -800,7 +779,6 @@ const AnadirInmueble = () => {
                       onChange={(e) => setSecadora(e.target.value)}
                       className="mb-3"
                     >
-                      <option></option>
                       <option>Sí</option>
                       <option>No</option>
                     </Form.Select>
