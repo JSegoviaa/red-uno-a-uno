@@ -4,6 +4,13 @@ export interface CrearInmuebleResp {
   ok: boolean;
   msg: string;
   inmueble: Inmueble;
+  errors: Errors[];
+}
+
+interface Errors {
+  msg: string;
+  param: string;
+  location: string;
 }
 
 export interface Inmueble {

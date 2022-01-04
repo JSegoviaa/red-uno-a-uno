@@ -12,35 +12,35 @@ const AnadirInmueble = () => {
     "61ca85313384577442588d29"
   );
   const [propertyType, setTipoPropiedad] = useState("");
-  const [agua, setAgua] = useState<any>(true);
-  const [luz, setLuz] = useState<any>(true);
-  const [gas, setGas] = useState<any>(true);
-  const [internet, setInternet] = useState<any>(true);
-  const [seguridadPrivada, setSeguridadPrivada] = useState<any>(true);
-  const [escuelas, setEscuelas] = useState<any>(true);
-  const [mantenimiento, setMantenimiento] = useState<any>(true);
-  const [piscina, setPiscina] = useState<any>(true);
-  const [discapacitados, setDiscapacitados] = useState<any>(true);
+  const [agua, setAgua] = useState<any>(false);
+  const [luz, setLuz] = useState<any>(false);
+  const [gas, setGas] = useState<any>(false);
+  const [internet, setInternet] = useState<any>(false);
+  const [seguridadPrivada, setSeguridadPrivada] = useState<any>(false);
+  const [escuelas, setEscuelas] = useState<any>(false);
+  const [mantenimiento, setMantenimiento] = useState<any>(false);
+  const [piscina, setPiscina] = useState<any>(false);
+  const [discapacitados, setDiscapacitados] = useState<any>(false);
   const [amueblado, setAmueblado] = useState(false);
-  const [camas, setCamas] = useState<any>(true);
-  const [closet, setCloset] = useState<any>(true);
-  const [sala, setSala] = useState<any>(true);
-  const [comedor, setComedor] = useState<any>(true);
-  const [cocina, setCocina] = useState<any>(true);
-  const [AA, setAA] = useState<any>(true);
-  const [refrigerador, setRefrigerador] = useState<any>(true);
-  const [estufa, setEstufa] = useState<any>(true);
-  const [microondas, setMicroondas] = useState<any>(true);
-  const [minihorno, setMinihorno] = useState<any>(true);
-  const [horno, setHorno] = useState<any>(true);
-  const [lavadora, setLavadora] = useState<any>(true);
-  const [secadora, setSecadora] = useState<any>(true);
+  const [camas, setCamas] = useState<any>(false);
+  const [closet, setCloset] = useState<any>(false);
+  const [sala, setSala] = useState<any>(false);
+  const [comedor, setComedor] = useState<any>(false);
+  const [cocina, setCocina] = useState<any>(false);
+  const [AA, setAA] = useState<any>(false);
+  const [refrigerador, setRefrigerador] = useState<any>(false);
+  const [estufa, setEstufa] = useState<any>(false);
+  const [microondas, setMicroondas] = useState<any>(false);
+  const [minihorno, setMinihorno] = useState<any>(false);
+  const [horno, setHorno] = useState<any>(false);
+  const [lavadora, setLavadora] = useState<any>(false);
+  const [secadora, setSecadora] = useState<any>(false);
 
   const { formulario, handleChange } = useForm({
     categoria: categoriaSeleccionada,
     titulo: "",
     propertyType,
-    antiguedad: "",
+    antiguedad: undefined,
     m2Construidos: 0,
     m2Terreno: 0,
     habitaciones: 0,
@@ -57,10 +57,10 @@ const AnadirInmueble = () => {
     mantenimiento,
     piscina,
     discapacitados,
-    descripcion: "",
+    descripcion: undefined,
     precio: 0,
     comisiones: 0,
-    otros: "",
+    otros: undefined,
   });
 
   const {
@@ -81,12 +81,13 @@ const AnadirInmueble = () => {
   } = formulario;
 
   const categoriaRenta = () => {
-    setCategoriaSeleccionada(process.env.DB_VENTA || "");
+    setCategoriaSeleccionada("61ca85313384577442588d29");
   };
 
   const categoriaVenta = () => {
-    setCategoriaSeleccionada(process.env.DB_RENTA || "");
+    setCategoriaSeleccionada("61cb51ee11b684e8c30cb7cb");
   };
+  console.log(categoria);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -292,6 +293,7 @@ const AnadirInmueble = () => {
                     name="m2Construidos"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
@@ -307,6 +309,7 @@ const AnadirInmueble = () => {
                     name="m2Terreno"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
@@ -325,6 +328,7 @@ const AnadirInmueble = () => {
                     name="habitaciones"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
@@ -340,6 +344,7 @@ const AnadirInmueble = () => {
                     name="baños"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
@@ -358,6 +363,7 @@ const AnadirInmueble = () => {
                     name="medioBaños"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
@@ -373,6 +379,7 @@ const AnadirInmueble = () => {
                     name="parking"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
@@ -391,6 +398,7 @@ const AnadirInmueble = () => {
                     name="pisos"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
@@ -405,8 +413,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setAgua(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -423,8 +431,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setLuz(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -438,8 +446,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setGas(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -456,8 +464,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setInternet(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -471,8 +479,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setSeguridadPrivada(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -489,8 +497,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setEscuelas(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -504,8 +512,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setMantenimiento(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -522,8 +530,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setPiscina(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -537,8 +545,8 @@ const AnadirInmueble = () => {
                   onChange={(e) => setDiscapacitados(e.target.value)}
                   className="mb-3"
                 >
-                  <option>Sí</option>
                   <option>No</option>
+                  <option>Sí</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -582,8 +590,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setCamas(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -597,8 +605,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setCloset(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -615,8 +623,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setSala(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -630,8 +638,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setComedor(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -648,8 +656,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setCocina(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -663,8 +671,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setAA(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -681,8 +689,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setRefrigerador(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -696,8 +704,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setEstufa(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -714,8 +722,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setMicroondas(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -729,8 +737,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setMinihorno(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -746,8 +754,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setHorno(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -761,8 +769,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setLavadora(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -779,8 +787,8 @@ const AnadirInmueble = () => {
                       onChange={(e) => setSecadora(e.target.value)}
                       className="mb-3"
                     >
-                      <option>Sí</option>
                       <option>No</option>
+                      <option>Sí</option>
                     </Form.Select>
                   </Col>
                 </Row>
@@ -832,6 +840,7 @@ const AnadirInmueble = () => {
                     name="precio"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
@@ -847,13 +856,19 @@ const AnadirInmueble = () => {
                     name="comisiones"
                     onChange={handleChange}
                     type="number"
+                    min={0}
                   />
                 </Form.Group>
               </Col>
             </Row>
           </Col>
         </Row>
-        <Button titulo="Publicar" />
+
+        {precio <= 0 || titulo.length <= 0 ? (
+          <Button titulo="Publicar" btn="Disabled" />
+        ) : (
+          <Button titulo="Publicar" />
+        )}
         <div className="py-3" />
       </Form>
     </Container>

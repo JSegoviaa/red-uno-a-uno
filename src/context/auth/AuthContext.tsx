@@ -1,6 +1,13 @@
+import { useRouter } from "next/router";
 import { createContext, FC, useCallback, useState } from "react";
-import { fetchConToken, fetchSinToken } from "../../helpers/fetch";
+import { toast } from "react-toastify";
+import {
+  actualizarPerfilFetch,
+  fetchConToken,
+  fetchSinToken,
+} from "../../helpers/fetch";
 import { Auth, Resp } from "../../interfaces/AuthInterface";
+import { RespActualizar } from "../../interfaces/UserInterface";
 
 interface ContextProps {
   auth: Auth;
@@ -16,6 +23,7 @@ interface ContextProps {
   signInWithGoogle: () => void;
   signInWithFacebook: () => void;
   verificaToken: () => void;
+  actualizarPerfil: (data: any) => Promise<RespActualizar>;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -41,6 +49,7 @@ const initialState: Auth = {
 
 export const AuthProvider: FC = ({ children }) => {
   const [auth, setAuth] = useState(initialState);
+  const router = useRouter();
 
   const login = async (correo: string, password: string) => {
     const resp = await fetchSinToken(
@@ -207,6 +216,44 @@ export const AuthProvider: FC = ({ children }) => {
     });
   };
 
+  const actualizarPerfil = async (formulario: any) => {
+    const resp = await actualizarPerfilFetch(
+      "usuarios/" + auth.uid,
+      formulario
+    );
+    const { usuario } = resp;
+
+    if (resp.ok) {
+      setAuth({
+        uid: usuario.uid,
+        checking: false,
+        logged: true,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        correo: usuario.correo,
+        direccionFisica: usuario.direccionFisica,
+        facebookpage: usuario.facebookpage,
+        instagram: usuario.instagram,
+        nombreInmobiliaria: usuario.nombreInmobiliaria,
+        telefonoOficina: usuario.telefonoOficina,
+        telefonoPersonal: usuario.telefonoPersonal,
+        twitter: usuario.twitter,
+        youtube: usuario.youtube,
+        perfilEmpresarial: usuario.perfilEmpresarial,
+        linkedin: usuario.linkedin,
+      });
+
+      toast.success(resp.msg);
+      router.push("/perfil");
+    }
+
+    if (!resp.ok) {
+      toast.error(resp.msg);
+    }
+
+    return resp;
+  };
+
   const signInWithGoogle = async () => {
     console.log("Iniciando sesión con google");
   };
@@ -225,6 +272,7 @@ export const AuthProvider: FC = ({ children }) => {
         signInWithGoogle,
         signInWithFacebook,
         verificaToken,
+        actualizarPerfil,
       }}
     >
       {children}

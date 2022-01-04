@@ -1,15 +1,14 @@
-import { useContext } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { toast, ToastContainer } from 'react-toastify';
-import { AuthContext } from '../../../../context/auth/AuthContext';
-import { actualizarPerfilFetch } from '../../../../helpers/fetch';
-import { useForm } from '../../../../hooks/useForm';
-import Button from '../../../ui/button/Button';
-import Modaltitle from '../../../ui/modaltitle/Modaltitle';
-import Titulo from '../../../ui/titulo/Titulo';
+import { FormEvent, useContext } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { useForm } from "../../../../hooks/useForm";
+import Button from "../../../ui/button/Button";
+import Modaltitle from "../../../ui/modaltitle/Modaltitle";
+import Titulo from "../../../ui/titulo/Titulo";
 
 const ActualizarPerfilForm = () => {
-  const { auth } = useContext(AuthContext);
+  const { auth, actualizarPerfil } = useContext(AuthContext);
+
   const { formulario, handleChange } = useForm({
     nombre: auth.nombre,
     apellido: auth.apellido,
@@ -40,26 +39,14 @@ const ActualizarPerfilForm = () => {
     linkedin,
   } = formulario;
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const resp = await actualizarPerfilFetch(
-      'usuarios/' + auth.uid,
-      formulario
-    );
-
-    if (resp.ok) {
-      toast.success(resp.msg);
-    }
-
-    if (!resp.ok) {
-      toast.error(resp.msg);
-    }
+    actualizarPerfil(formulario);
   };
 
   return (
     <Container>
-      <ToastContainer />
       <Titulo titulo="Actualiza tu perfil" />
       <br />
       <br />
