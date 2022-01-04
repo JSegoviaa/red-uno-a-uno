@@ -7,25 +7,23 @@ const Detalles = () => {
     <section>
       <div className="container">
         <div className="row">
-          <div className="col-9">
+          <div className="col-sm-12 col-md-12 col-lg-12 col-xl-9">
             <div className="row d-flex justify-content-between">
               <div className="col-12">
-                <div className={styles.inmuebleTitle}>
+                <div className={`${styles.inmuebleTitle} mb-3`}>
                   Apple Park en Palo Alto, California
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-sm-12 col-md-4 col-lg-4 text-start">
                 <div className={styles.inmueblePrecio}>$987,350.00</div>
               </div>
-              <div className="col-4">
-                <div className="s">
+              <div className="col-sm-12 col-md-3 col-lg-3 text-sm-start text-md-start text-lg-center text-start">
+                <div className="mt-3">
                   <span className={styles.inmuebleTipo}>Venta</span>
                 </div>
               </div>
-              <div className="col-4">
-                <div className={styles.inmuebleTiempo}>
-                  Publicado hace 9 días
-                </div>
+              <div className="col-sm-12 col-md-4 col-lg-4 text-sm-start text-md-start text-lg-end text-start">
+                <div className={`${styles.inmuebleTiempo} mt-3`}>Publicado hace 9 días</div>
               </div>
             </div>
             <hr />
@@ -279,18 +277,20 @@ const Detalles = () => {
                 </div>
               </div>
             </div>
+
+            {/*-------- detalles adicionales ------------*/}
             <Accordion defaultActiveKey="1" flush>
               <Accordion.Item eventKey="0">
                 <div className="row">
-                  <div className="col-4">
+                  <div className="col-sm-7 col-md-6 col-lg-4 col-xl-5 col-xxl-4 col-7">
                     <div className={styles.inmuebleSubtitle}>
                       Detalles adicionales
                     </div>
                   </div>
-                  <div className="col-7">
+                  <div className="col-sm-4 col-md-5 col-lg-7 col-xl-6 col-xxl-7 col-3">
                     <hr className="mt-4" />
                   </div>
-                  <div className="col-1">
+                  <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1 col-1">
                     <Accordion.Button className={styles.btnAccordion} />
                   </div>
                 </div>
@@ -561,19 +561,20 @@ const Detalles = () => {
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
+            {/*-------- detalles adicionales ------------*/}
           </div>
 
 
           {/* tarjeta de contacto */}
-          <div className="col-3 text-center">
+          <div className="col-sm-12 col-md-2 col-lg-2 col-xl-3 text-center d-none d-xl-block">
             <table>
               <tbody>
                 <tr>
                   <td>
-                    <div className={`${styles.socialMiniCard} mb-2`}><img src="/images/icons/deatails-icons/ubicacion.png" alt=""></img></div>
-                    <div className={`${styles.socialMiniCard} mb-2`}><img src="/images/icons/deatails-icons/whats.png" alt=""></img></div>
-                    <div className={`${styles.socialMiniCard} mb-2`}><img src="/images/icons/deatails-icons/face.png" alt=""></img></div>
-                    <div className={`${styles.socialMiniCard} mb-2`}><img src="/images/icons/deatails-icons/insta.png" alt=""></img></div>
+                    <div className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}><img src="/images/icons/deatails-icons/ubicacion.png" alt=""></img></div>
+                    <div className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}><img src="/images/icons/deatails-icons/whats.png" alt=""></img></div>
+                    <div className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}><img src="/images/icons/deatails-icons/face.png" alt=""></img></div>
+                    <div className={`${styles.socialMiniCard} mb-2 pointer d-none d-xxl-block`}><img src="/images/icons/deatails-icons/insta.png" alt=""></img></div>
                   </td>
                   <td>
                     <div className={styles.perfilCard}>
@@ -596,20 +597,20 @@ const Detalles = () => {
           </div>
           {/* tarjeta de contacto */}
 
-
+          {/*-------- equipamiento ------------*/}
           <div className="col-12">
           <Accordion defaultActiveKey="1" flush>
               <Accordion.Item eventKey="0">
                 <div className="row">
-                  <div className="col-2">
+                  <div className="col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-2 col-7">
                     <div className={styles.inmuebleSubtitle}>
                       Equipamiento
                     </div>
                   </div>
-                  <div className="col-9">
+                  <div className="col-sm-6 col-md-7 col-lg-8 col-xl-8 col-xxl-9 col-3">
                     <hr className="mt-4" />
                   </div>
-                  <div className="col-1">
+                  <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1 col-xxl-1 col-1">
                     <Accordion.Button className={styles.btnAccordion} />
                   </div>
                 </div>
@@ -992,7 +993,7 @@ const Detalles = () => {
                         </table>
                       </div>
                     </div>
-                    <div className="col-sm-12 col-9">
+                    <div className="col-sm-12 col-md-6 col-lg-9">
                       <div className="inmueble-contenido">
                         <table>
                           <tbody>
@@ -1026,6 +1027,7 @@ const Detalles = () => {
               </Accordion.Item>
             </Accordion>
           </div>
+          {/*-------- equipamiento ------------*/}
         </div>
       </div>
     </section>
