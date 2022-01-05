@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
+import PaquetesCards from '../../components/paginas/paquetes/Paquetes';
 import SEO from '../../components/seo/SEO';
+import Titulo from '../../components/ui/titulo/Titulo';
 import { usePrivateRoute } from '../../hooks/usePrivateRoute';
 
 const MisPaquetes = () => {
@@ -8,7 +10,8 @@ const MisPaquetes = () => {
   return (
     <>
       <SEO titulo="Mis paquetes" url={asPath} />
-      Mis Paquetes
+      <Titulo titulo='Mis paquetes'/>
+      <PaquetesCards/>
     </>
   );
 };

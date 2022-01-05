@@ -22,6 +22,8 @@ const Header = () => {
   const [show1, setShow1] = useState(false);
   const target = useRef(null);
 
+  const { logOut } = useContext(AuthContext);
+
   const chats = () => router.push("/perfil/mis-chats");
 
   return (
@@ -68,29 +70,35 @@ const Header = () => {
               </div>
               <Overlay target={target.current} show={show1} placement="right">
                 {({ placement, arrowProps, show: _show, popper, ...props }) => (
-                  <div
+                  <div className={styles.menu}
                     {...props}
                     style={{
-                      backgroundColor: 'white',
-                      padding: '2px 10px',
-                      color: 'grey',
-
-                      borderRadius: 3,
                       ...props.style,
                     }}
                   >
-                    Simple tooltip <br />
                     <Link href="/perfil">
-                      <div className="pointer mx-4 d-flex align-items-center">
-                        Mi perfil
+                      <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
+                        Mi Perfil
                       </div>
                     </Link>
                     <Link href="/">
-                      <div className="pointer mx-4 d-flex align-items-center">
-                        INICIO
+                      <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
+                        Mis Usuarios
                       </div>
                     </Link>
-                    
+                    <Link href="/perfil/mis-paquetes">
+                      <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
+                        Mis Paquetes
+                      </div>
+                    </Link>
+                    <Link href="/perfil/historial-de-pagos">
+                      <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
+                        Mis Pagos
+                      </div>
+                    </Link>
+                    <div className={`${styles.menuCerrar} pointer mx-3 my-2`} onClick={logOut}>
+                      Cerrar sesion
+                    </div>
                   </div>
                 )}
               </Overlay>

@@ -12,7 +12,7 @@ const Perfil = () => {
   const misPropiedades = () => router.push("/perfil/mis-propiedades");
   const actualizarPerfil = () => router.push("/perfil/actualizar-perfil");
 
-  const { logOut, auth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
   return (
     <Container>
@@ -31,9 +31,6 @@ const Perfil = () => {
         </div>
       </div>
       <hr />
-      <h3 className="d-flex justify-content-center pointer" onClick={logOut}>
-        Cerrar sesión
-      </h3>
 
       <div className="py-5">
         <Row className="d-flex justify-content-center text-center">
