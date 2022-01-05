@@ -6,11 +6,15 @@ import SEO from "../components/seo/SEO";
 
 const Home: NextPage = () => {
   const { asPath } = useRouter();
-
   return (
     <>
       <SEO titulo="Inicio" url={asPath} />
-      <MapaBuscador />
+      <MapaBuscador
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd22YBCutdzEZePBY2wbS2OawTZ1_H7-s&libraries=places&language=es"
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `100vh` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
       <Info />
     </>
   );
