@@ -52,9 +52,6 @@ const Perfil = () => {
             />
           </Col>
           <Col className="py-3">
-            <Button titulo="Historial de inmuebles" btn="Secondary" />
-          </Col>
-          <Col className="py-3">
             <Button
               titulo="Mis propiedades"
               btn="Secondary"
@@ -66,27 +63,6 @@ const Perfil = () => {
               titulo="Actualizar perfil"
               btn="Secondary"
               onClick={actualizarPerfil}
-            />
-          </Col>
-          <Col className="py-3">
-            <Button
-              titulo="Agregar inmueble"
-              btn="Secondary"
-              onClick={agregarInmueble}
-            />
-          </Col>
-          <Col className="py-3">
-            <Button
-              titulo="Mis favoritos"
-              btn="Secondary"
-              onClick={misFavoritos}
-            />
-          </Col>
-          <Col className="py-3">
-            <Button
-              titulo="Historial"
-              btn="Secondary"
-              onClick={miHistorial}
             />
           </Col>
         </Row>

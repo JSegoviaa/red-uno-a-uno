@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, Overlay } from "react-bootstrap";
 import Button from "../button/Button";
 import styles from "./Header.module.css";
 import LoginModal from "../authmodal/LoginModal";
@@ -18,6 +18,9 @@ const Header = () => {
 
   const closeRegister = () => setIsOpen(false);
   const openRegister = () => setIsOpen(true);
+
+  const [show1, setShow1] = useState(false);
+  const target = useRef(null);
 
   const chats = () => router.push("/perfil/mis-chats");
 
@@ -55,15 +58,43 @@ const Header = () => {
               </Link>
               <Button titulo="mis chats" onClick={chats} />
 
-              <Link href="/perfil">
-                <div className={`${styles.navPerfil} pointer ms-3`}>
-                  <img
-                    src="/images/icons/perfil.png"
-                    alt="Mi perfil"
-                    style={{ width: "100%" }}
-                  />
-                </div>
-              </Link>
+
+              <div className={`${styles.navPerfil} pointer ms-3`} ref={target} onClick={() => setShow1(!show1)}>
+                <img
+                  src="/images/icons/perfil.png"
+                  alt="Mi perfil"
+                  style={{ width: "100%" }}
+                />
+              </div>
+              <Overlay target={target.current} show={show1} placement="right">
+                {({ placement, arrowProps, show: _show, popper, ...props }) => (
+                  <div
+                    {...props}
+                    style={{
+                      backgroundColor: 'white',
+                      padding: '2px 10px',
+                      color: 'grey',
+                      
+                      borderRadius: 3,
+                      ...props.style,
+                    }}
+                  >
+                    Simple tooltip <br />
+                    <Link href="/">
+                      <div className="pointer mx-4 d-flex align-items-center">
+                        INICIO
+                      </div>
+                    </Link>
+                    <Link href="/">
+                      <div className="pointer mx-4 d-flex align-items-center">
+                        INICIO
+                      </div>
+                    </Link>
+                    
+                  </div>
+                )}
+              </Overlay>
+
             </Nav>
           )}
         </Navbar.Collapse>
