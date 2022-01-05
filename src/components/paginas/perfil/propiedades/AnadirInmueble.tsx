@@ -87,7 +87,6 @@ const AnadirInmueble = () => {
   const categoriaVenta = () => {
     setCategoriaSeleccionada("61cb51ee11b684e8c30cb7cb");
   };
-  console.log(categoria);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

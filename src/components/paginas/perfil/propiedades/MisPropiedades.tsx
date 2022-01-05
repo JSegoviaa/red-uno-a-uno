@@ -4,7 +4,6 @@ import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useUserInmuebles } from "../../../../hooks/useUserInfo";
 import Loading from "../../../ui/loading/Loading";
 import PropertiesCard from "../../../ui/propertiescard/PropertiesCard";
-import styles from "./MisPropiedades.module.css";
 
 const MiListaPropiedades = () => {
   const { auth } = useContext(AuthContext);
@@ -12,7 +11,21 @@ const MiListaPropiedades = () => {
 
   return (
     <Container>
-      <Row>{cargando ? <Loading /> : <div>hola</div>}</Row>
+      <Row>
+        {cargando ? (
+          <Loading />
+        ) : (
+          <>
+            {inmuebles?.inmueblesUsuario.map((inmueble) => (
+              <PropertiesCard
+                key={inmueble._id}
+                id={inmueble._id}
+                titulo={inmueble.titulo}
+              />
+            ))}
+          </>
+        )}
+      </Row>
     </Container>
   );
 };
