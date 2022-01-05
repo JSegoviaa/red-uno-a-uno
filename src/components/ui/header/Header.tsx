@@ -74,15 +74,15 @@ const Header = () => {
                       backgroundColor: 'white',
                       padding: '2px 10px',
                       color: 'grey',
-                      
+
                       borderRadius: 3,
                       ...props.style,
                     }}
                   >
                     Simple tooltip <br />
-                    <Link href="/">
+                    <Link href="/perfil">
                       <div className="pointer mx-4 d-flex align-items-center">
-                        INICIO
+                        Mi perfil
                       </div>
                     </Link>
                     <Link href="/">

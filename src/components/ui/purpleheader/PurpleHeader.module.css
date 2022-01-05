@@ -9,19 +9,6 @@
   padding: 18px;
 }
 
-.searchInput {
-  background: #ffffff;
-  border: 3px solid #7149bc;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  width: 39vw;
-  padding-left: 15px;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: normal;
-  font-size: 19px;
-  outline: none;
-}
 .searchBtn {
   background: #e9e9e9;
   border: 3px solid #7149bc;
@@ -54,6 +41,11 @@
   color: #ec7e0a;
 }
 
+@media (max-width: 985px) {
+  .searchBtn{
+    margin-top: 4px;
+  }
+}
 
 @media (max-width: 443px) {
     .searchInput{

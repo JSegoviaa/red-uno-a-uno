@@ -13,32 +13,29 @@ const Buscador = () => {
     !suggest
       ? setCoordenadas({ lat: 19.4326077, lng: -99.133208 })
       : setCoordenadas({
-          lat: suggest.location.lat,
-          lng: suggest.location.lng,
-        });
+        lat: suggest.location.lat,
+        lng: suggest.location.lng,
+      });
   };
 
   console.log(coordenadas, "coordenadas");
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        zIndex: 10,
-        transform: "translate(900px,-50px)",
-      }}
-    >
+
+    <>
       <Geosuggest
         ref={geosuggestEl}
-        queryDelay={730}
+        queryDelay={530}
         country="mx"
-        placeholder="Busca aquí"
+        placeholder="Busca aquí..."
         onSuggestSelect={onSuggestSelect}
         autoComplete="off"
         inputClassName={styles.buscador}
-        suggestsClassName={styles.ss}
+        suggestsClassName={styles.respuesta}
+        suggestItemClassName={styles.item}
       />
-    </div>
+    </>
+
   );
 };
 
