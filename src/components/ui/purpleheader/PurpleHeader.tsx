@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/auth/AuthContext";
+import Buscador from "../buscador/Buscador";
 import styles from "./PurpleHeader.module.css";
 
 const PurpleHeader = () => {
@@ -41,16 +42,17 @@ const PurpleHeader = () => {
           </>
         ) : null}
         <li className="nav-item">
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Busca aquí..."
-          />
+          <Buscador/>
+          {/* <button className={styles.searchBtn}>
+            <i className="bi bi-search" />
+          </button> */}
+        </li>
+        <li>
           <button className={styles.searchBtn}>
             <i className="bi bi-search" />
           </button>
         </li>
-        {auth.uid ? (
+        {/* {auth.uid ? (
           <li className="nav-item">
             <img
               className={`${styles.notificacion} mx-3 pointer`}
@@ -58,7 +60,7 @@ const PurpleHeader = () => {
               alt="..."
             />
           </li>
-        ) : null}
+        ) : null} */}
       </ul>
     </div>
   );
