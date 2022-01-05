@@ -1,0 +1,9 @@
+.buscador {
+  background-color: white;
+}
+.ss {
+  position: absolute;
+  background-color: aqua;
+  transform: translate(40px, 200px);
+  width: 25vw;
+}
