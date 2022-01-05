@@ -1,25 +1,18 @@
-import { useContext } from 'react';
-import { useRouter } from 'next/router';
-import { Col, Container, Row } from 'react-bootstrap';
-import { AuthContext } from '../../../../context/auth/AuthContext';
-import Button from '../../../ui/button/Button';
-import styles from './Perfil.module.css';
-import { useUserInfo } from '../../../../hooks/useUserInfo';
+import { useContext } from "react";
+import { useRouter } from "next/router";
+import { Col, Container, Row } from "react-bootstrap";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import Button from "../../../ui/button/Button";
+import styles from "./Perfil.module.css";
 
 const Perfil = () => {
   const router = useRouter();
 
-  const misPaquetes = () => router.push('/perfil/mis-paquetes');
+  const misPaquetes = () => router.push("/perfil/mis-paquetes");
+  const misPropiedades = () => router.push("/perfil/mis-propiedades");
+  const actualizarPerfil = () => router.push("/perfil/actualizar-perfil");
 
-  const misPropiedades = () => router.push('/perfil/mis-propiedades');
-  const misFavoritos = () => router.push('/perfil/mis-favoritos');
-  const actualizarPerfil = () => router.push('/perfil/actualizar-perfil');
-  const agregarInmueble = () => router.push('/perfil/agregar-inmueble');
-  const miHistorial = () => router.push('/perfil/historial-de-inmueble');
-
-  const { logOut } = useContext(AuthContext);
-
-  const { user } = useUserInfo();
+  const { logOut, auth } = useContext(AuthContext);
 
   return (
     <Container>
@@ -29,12 +22,12 @@ const Perfil = () => {
             <img src="/images/icons/perfil.png" />
           </div>
           <div className={styles.nombre}>
-            {user?.nombre} {user?.apellido}
+            {auth.nombre} {auth.apellido}
           </div>
           <div className={styles.paquete}>Paquete básico</div>
-          <div className={styles.empresa}>{user?.nombreInmobiliaria}</div>
-          <div className={styles.correo}>{user?.correo} </div>
-          <div className={styles.telefono}>{user?.telefonoPersonal}</div>
+          <div className={styles.empresa}>{auth.nombreInmobiliaria}</div>
+          <div className={styles.correo}>{auth.correo} </div>
+          <div className={styles.telefono}>{auth.telefonoPersonal}</div>
         </div>
       </div>
       <hr />

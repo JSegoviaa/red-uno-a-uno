@@ -1,22 +1,18 @@
+import { useContext } from "react";
 import { Container, Row } from "react-bootstrap";
-import { useUserInfo } from "../../../../hooks/useUserInfo";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { useUserInmuebles } from "../../../../hooks/useUserInfo";
+import Loading from "../../../ui/loading/Loading";
 import PropertiesCard from "../../../ui/propertiescard/PropertiesCard";
 import styles from "./MisPropiedades.module.css";
 
 const MiListaPropiedades = () => {
-  const { user } = useUserInfo();
+  const { auth } = useContext(AuthContext);
+  const { cargando, inmuebles } = useUserInmuebles(auth.uid);
+
   return (
     <Container>
-      <Row>
-        {user?.inmuebles.map((propiedad) => (
-          <PropertiesCard
-            key={propiedad._id}
-            id={propiedad._id}
-            titulo={propiedad.titulo}
-            // image={propiedad.image}
-          />
-        ))}
-      </Row>
+      <Row>{cargando ? <Loading /> : <div>hola</div>}</Row>
     </Container>
   );
 };
