@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { InmueblesUsuario } from "../interfaces/CrearInmuebleInterface";
+import { InmuebleUsuario } from "../interfaces/CrearInmuebleInterface";
 import { Usuario } from "../interfaces/UserInterface";
 
 const devURL = "http://localhost:8080/api";
@@ -27,7 +27,7 @@ export const useUserInfo = (uid: string | undefined | null) => {
 };
 
 export const useUserInmuebles = (uid: string | undefined | null) => {
-  const [inmuebles, setInmuebles] = useState<InmueblesUsuario>();
+  const [inmuebles, setInmuebles] = useState<InmuebleUsuario>();
   const [cargando, setCargando] = useState(true);
 
   const obtenerInmueblesDeUsuario = async () => {
