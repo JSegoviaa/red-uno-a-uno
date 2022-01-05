@@ -82,7 +82,7 @@ const Header = () => {
                     Simple tooltip <br />
                     <Link href="/perfil">
                       <div className="pointer mx-4 d-flex align-items-center">
-                        Perfil
+                        Mi perfil
                       </div>
                     </Link>
                     <Link href="/">
