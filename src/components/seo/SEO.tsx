@@ -32,6 +32,11 @@ const SEO = ({ titulo, descripcion = desc, url, img = logo }: Props) => {
       <meta property="og:url" content={`https://red1a1.com${url}`} />
       <meta property="og:site_name" content={`Red 1 a 1 | ${titulo}`} />
       <link rel="shortcut icon" href="/red.png" type="image/x-icon" />
+      <script
+        type="text/javascript"
+        async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd22YBCutdzEZePBY2wbS2OawTZ1_H7-s&libraries=places&language=es"
+      ></script>
     </Head>
   );
 };
