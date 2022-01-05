@@ -49,11 +49,11 @@ const Header = () => {
           ) : (
             <Nav className="ms-auto my-2" navbarScroll>
               <Link href="/">
-                <div className="pointer mx-2 d-flex align-items-center">
+                <div className="pointer mx-4 d-flex align-items-center">
                   INICIO
                 </div>
               </Link>
-              <Button titulo="Chat" onClick={chats} />
+              <Button titulo="mis chats" onClick={chats} />
 
               <Link href="/perfil">
                 <div className={`${styles.navPerfil} pointer ms-3`}>
