@@ -7,6 +7,7 @@ export interface InmueblesResponse {
 }
 
 export interface Inmueble {
+  _id: string;
   titulo: string;
   slug: string;
   categoria: string;

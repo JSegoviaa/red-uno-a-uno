@@ -1,17 +1,36 @@
+import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import ListaPropiedades from "../../components/paginas/propiedades/ListaPropiedades/ListaPropiedades";
 import SEO from "../../components/seo/SEO";
 import Titulo from "../../components/ui/titulo/Titulo";
+import { Inmueble } from "../../interfaces/InmueblesInterface";
 
-const Index = () => {
+interface Resp {
+  data: {
+    ok: boolean;
+    total: number;
+    inmuebles: Inmueble[];
+  };
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const resp = await fetch(
+    "https://prueba-red1a1.herokuapp.com/api/inmuebles/"
+  );
+  const data = await resp.json();
+
+  return { props: { data } };
+};
+
+const Index = ({ data }: Resp) => {
   const { asPath } = useRouter();
 
   return (
     <>
       <SEO titulo="Propiedades" url={asPath} />
-      <Titulo titulo="Resultados de busqueda"/>
+      <Titulo titulo="Resultados de busqueda" />
       <br />
-      <ListaPropiedades/>
+      <ListaPropiedades data={data} />
     </>
   );
 };
