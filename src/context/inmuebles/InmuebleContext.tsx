@@ -12,6 +12,8 @@ interface ContextProps {
     titulo: string,
     categoria: string,
     precio: number,
+    lat: number,
+    lng: number,
     descripcion?: string,
     AA?: boolean,
     agua?: boolean,
@@ -60,6 +62,8 @@ export const InmuebleProvider: FC = ({ children }) => {
     titulo: string,
     categoria: string,
     precio: number,
+    lat: number,
+    lng: number,
     descripcion?: string,
     agua?: boolean,
     AA?: boolean,
@@ -137,6 +141,8 @@ export const InmuebleProvider: FC = ({ children }) => {
         sala,
         secadora,
         seguridadPrivada,
+        lat,
+        lng,
       },
       "POST"
     );
