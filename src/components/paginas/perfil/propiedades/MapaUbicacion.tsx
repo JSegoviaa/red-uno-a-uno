@@ -14,8 +14,6 @@ const MapaUbicacion = () => {
     setUbicacion({ lat: e.latLng!.lat(), lng: e.latLng!.lng() });
   };
 
-  console.log(ubicacion, " ===");
-
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}

@@ -167,6 +167,8 @@ const AnadirInmueble = () => {
       titulo,
       categoria,
       precio,
+      ubicacion.lat,
+      ubicacion.lng,
       descripcion,
       agua,
       AA,
