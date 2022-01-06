@@ -1,13 +1,17 @@
 import { FormEvent, useContext, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
+import { MapContext } from "../../../../context/map/MapContext";
 import { useForm } from "../../../../hooks/useForm";
+import SeleccionarLugar from "../../../ui/buscador/SeleccionarLugar";
 import Button from "../../../ui/button/Button";
 import Modaltitle from "../../../ui/modaltitle/Modaltitle";
 import Titulo from "../../../ui/titulo/Titulo";
+import MapaUbicacion from "./MapaUbicacion";
 
 const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
+  const { ubicacion } = useContext(MapContext);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
     "61ca85313384577442588d29"
   );
@@ -860,6 +864,21 @@ const AnadirInmueble = () => {
                 </Form.Group>
               </Col>
             </Row>
+          </Col>
+        </Row>
+
+        <br />
+        <br />
+        <div className="d-flex justify-content-start">
+          <Modaltitle titulo="Ubicación" />
+        </div>
+
+        <Row>
+          <Col>
+            <SeleccionarLugar />
+          </Col>
+          <Col>
+            <MapaUbicacion />
           </Col>
         </Row>
 
