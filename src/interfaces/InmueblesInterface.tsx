@@ -8,6 +8,7 @@ export interface InmueblesResponse {
 
 export interface Inmueble {
   titulo: string;
+  slug: string;
   categoria: string;
   precio: number;
   publicado?: boolean;

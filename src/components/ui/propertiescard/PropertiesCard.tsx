@@ -8,13 +8,14 @@ interface Props {
   id: string;
   image?: string;
   titulo: string;
+  slug: string;
 }
 
-const PropertiesCard = ({ titulo, id, image }: Props) => {
+const PropertiesCard = ({ titulo, id, image, slug }: Props) => {
   const { eliminarInmueble } = useContext(InmuebleContext);
   const router = useRouter();
 
-  const goToProperty = () => router.push("/propiedades/" + id);
+  const goToProperty = () => router.push("/propiedades/" + slug);
   const editarInmueble = () => router.push("/perfil/editar-inmueble");
 
   return (

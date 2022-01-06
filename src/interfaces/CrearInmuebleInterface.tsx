@@ -44,6 +44,7 @@ export interface InmuebleUsuario {
 export interface InmueblesUsuario {
   _id: string;
   titulo: string;
+  slug: string;
   descripcion: string;
   precio: number;
   publicado: boolean;
