@@ -81,7 +81,7 @@ const Header = () => {
                         Mi Perfil
                       </div>
                     </Link>
-                    <Link href="/">
+                    <Link href="/perfil/mis-usuarios">
                       <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
                         Mis Usuarios
                       </div>
