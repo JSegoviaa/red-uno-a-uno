@@ -1,20 +1,22 @@
-import { useContext, useEffect, useRef } from "react";
-import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
+import { useContext } from "react";
+import { GoogleMap } from "@react-google-maps/api";
 import { MapContext } from "../../../context/map/MapContext";
 
-const MapaBuscador = withScriptjs(
-  withGoogleMap(() => {
-    const { coordenadas } = useContext(MapContext);
-    const mapRef = useRef<GoogleMap>();
+const containerStyle = {
+  width: "100%",
+  height: "87vh",
+};
 
-    return (
-      <GoogleMap
-        defaultZoom={13}
-        defaultCenter={{ lat: coordenadas.lat, lng: coordenadas.lng }}
-        center={coordenadas}
-      />
-    );
-  })
-);
+const MapaUbicacion = () => {
+  const { coordenadas } = useContext(MapContext);
 
-export default MapaBuscador;
+  return (
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={{ lat: coordenadas.lat, lng: coordenadas.lng }}
+      zoom={14}
+    />
+  );
+};
+
+export default MapaUbicacion;

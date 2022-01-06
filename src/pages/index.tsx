@@ -9,12 +9,7 @@ const Home: NextPage = () => {
   return (
     <>
       <SEO titulo="Inicio" url={asPath} />
-      <MapaBuscador
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd22YBCutdzEZePBY2wbS2OawTZ1_H7-s"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `87vh` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
+      <MapaBuscador />
       <Info />
     </>
   );
