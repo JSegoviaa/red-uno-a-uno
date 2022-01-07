@@ -8,14 +8,14 @@ import Contact from "../../components/paginas/propiedades/detalles/Contact";
 import SEO from "../../components/seo/SEO";
 import { AuthContext } from "../../context/auth/AuthContext";
 
-export const getStaticProps: GetStaticProps = async () => {
-  return { props: {} };
-};
+// export const getStaticProps: GetStaticProps = async () => {
+//   return { props: {} };
+// };
 
-export const getStaticPaths = async () => {
-  const paths: string[] = [];
-  return { paths };
-};
+// export const getStaticPaths = async () => {
+//   const paths: string[] = [];
+//   return { paths };
+// };
 
 const Propiedad = () => {
   const { asPath } = useRouter();

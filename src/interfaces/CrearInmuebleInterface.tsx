@@ -85,4 +85,6 @@ export interface InmueblesUsuario {
   sala: boolean;
   secadora: boolean;
   seguridadPrivada: boolean;
+  lat: number;
+  lng: number;
 }
