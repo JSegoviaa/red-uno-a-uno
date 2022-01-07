@@ -6,6 +6,8 @@ interface ContextProps {
   setCoordenadas: Dispatch<SetStateAction<Location>>;
   ubicacion: Location;
   setUbicacion: Dispatch<SetStateAction<Location>>;
+  direccion: string | undefined;
+  setDireccion: any;
 }
 
 export const MapContext = createContext({} as ContextProps);
@@ -21,9 +23,18 @@ export const MapProvider: FC = ({ children }) => {
     lng: -99.133208,
   });
 
+  const [direccion, setDireccion] = useState();
+
   return (
     <MapContext.Provider
-      value={{ coordenadas, setCoordenadas, ubicacion, setUbicacion }}
+      value={{
+        coordenadas,
+        setCoordenadas,
+        ubicacion,
+        setUbicacion,
+        direccion,
+        setDireccion,
+      }}
     >
       {children}
     </MapContext.Provider>

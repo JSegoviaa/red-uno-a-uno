@@ -11,7 +11,7 @@ import MapaUbicacion from "./MapaUbicacion";
 
 const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
-  const { ubicacion } = useContext(MapContext);
+  const { ubicacion, direccion } = useContext(MapContext);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
     "61ca85313384577442588d29"
   );
@@ -167,6 +167,7 @@ const AnadirInmueble = () => {
       titulo,
       categoria,
       precio,
+      direccion,
       ubicacion.lat,
       ubicacion.lng,
       descripcion,
