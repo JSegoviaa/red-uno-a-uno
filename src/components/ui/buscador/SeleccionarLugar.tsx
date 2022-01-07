@@ -6,10 +6,13 @@ import styles from "./Buscador.module.css";
 const SeleccionarLugar = () => {
   const geosuggestEl = useRef<Geosuggest>(null);
 
-  const { setUbicacion, ubicacion } = useContext(MapContext);
+  const { setUbicacion, setDireccion } = useContext(MapContext);
 
   const onSuggestSelect = (suggest: Suggest) => {
-    console.log(suggest);
+    if (!suggest) return;
+
+    setDireccion(suggest.label);
+
     !suggest
       ? setUbicacion({ lat: 19.4326077, lng: -99.133208 })
       : setUbicacion({
@@ -17,8 +20,6 @@ const SeleccionarLugar = () => {
           lng: suggest.location.lng,
         });
   };
-
-  console.log(ubicacion);
 
   return (
     <>

@@ -7,9 +7,12 @@ export interface InmueblesResponse {
 }
 
 export interface Inmueble {
+  _id: string;
   titulo: string;
+  slug: string;
   categoria: string;
   precio: number;
+  direccion: string | undefined;
   publicado?: boolean;
   usuario?: Usuario;
   descripcion?: string;
