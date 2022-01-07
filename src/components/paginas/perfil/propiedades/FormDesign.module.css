@@ -1,0 +1,36 @@
+.subTitulo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  color: #000000;
+}
+
+.MiniSub {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  color: #000000;
+  margin-bottom: 10px;
+}
+.line {
+  width: 95px;
+  height: 5px;
+  background-color: #e65a1f;
+}
+.content {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  color: #5e5e5e;
+}
+.labels{
+    font-family: "Open Sans";
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+color: #5E5E5E;
+margin-top: 5px;
+}

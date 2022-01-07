@@ -27,9 +27,12 @@ const SeleccionarLugar = () => {
         ref={geosuggestEl}
         queryDelay={530}
         country="mx"
-        placeholder="Ubicación"
+        placeholder="Busca tu colonia aquí..."
         onSuggestSelect={onSuggestSelect}
         autoComplete="off"
+        inputClassName={styles.buscador2}
+        suggestsClassName={styles.respuesta2}
+        suggestItemClassName={styles.item2}
       />
     </>
   );
