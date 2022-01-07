@@ -1,3 +1,4 @@
+import { development, production } from "../credentials/credentials";
 import { RegisterData, Resp } from "../interfaces/AuthInterface";
 import { Contact, ContactResp } from "../interfaces/ContactInterface";
 import {
@@ -6,8 +7,8 @@ import {
 } from "../interfaces/CrearInmuebleInterface";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
-const baseURL = "https://prueba-red1a1.herokuapp.com/api";
-const devURL = "http://localhost:8080/api";
+const baseURL = production;
+const devURL = development;
 
 export const fetchSinToken = async (
   endpoint: string,
