@@ -32,3 +32,47 @@ a {
   background: #267dc0;
   color: #fff;
 }
+
+.img-center {
+  margin-top: 3%;
+  box-sizing: border-box;
+  width: 45%;
+}
+
+.titulo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 3.6vh;
+  line-height: 3.5vh;
+  text-align: center;
+  text-transform: uppercase;
+  color: #5a5a5c;
+}
+
+.subtitulo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 3.6vh;
+  text-align: center;
+  color: #5a5a5c;
+}
+
+@media (max-width: 1400px) {
+  .img-center {
+    width: 60%;
+  }
+}
+
+@media (max-width: 900px) {
+  .img-center {
+    width: 70%;
+  }
+}
+
+@media (max-width: 800px) {
+  .img-center {
+    width: 100%;
+  }
+}
