@@ -22,6 +22,8 @@ const Contact = ({ inmuebles }: Props) => {
                 src="/images/icons/deatails-icons/propietario.png"
                 alt=""
               />
+              {inmuebles.inmueble.usuario.nombre}{" "}
+              {inmuebles.inmueble.usuario.apellido} {/*Ajustar esta mierda*/}
             </div>
             <div className={styles.telefonoC}>
               <img
@@ -29,7 +31,11 @@ const Contact = ({ inmuebles }: Props) => {
                 src="/images/icons/deatails-icons/telefono.png"
                 alt=""
               />
-              998 123 4567
+              {inmuebles.inmueble.usuario.telefonoPersonal
+                ? inmuebles.inmueble.usuario.telefonoPersonal
+                : inmuebles.inmueble.usuario.telefonoOficina
+                ? inmuebles.inmueble.usuario.telefonoOficina
+                : "El promotor no ha dado de alta su número telefónico"}
             </div>
           </div>
         </div>
