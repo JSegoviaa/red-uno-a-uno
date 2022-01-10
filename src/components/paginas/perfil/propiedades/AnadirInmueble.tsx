@@ -280,8 +280,8 @@ const AnadirInmueble = () => {
                     </div>
                     <div className="col-4">
                       <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
+                        value={"id"}
+                        name="id"
                         onChange={handleChange}
                         type="text"
                       />
@@ -314,10 +314,10 @@ const AnadirInmueble = () => {
                     </div>
                     <div className="col-4">
                       <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
+                        value={m2Construidos}
+                        name="m2Construidos"
                         onChange={handleChange}
-                        type="text"
+                        type="number"
                       />
                     </div>
                   </div>
@@ -331,10 +331,10 @@ const AnadirInmueble = () => {
                     </div>
                     <div className="col-4">
                       <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
+                        value={m2Terreno}
+                        name="m2Terreno"
                         onChange={handleChange}
-                        type="text"
+                        type="number"
                       />
                     </div>
                   </div>
@@ -348,10 +348,10 @@ const AnadirInmueble = () => {
                     </div>
                     <div className="col-4">
                       <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
+                        value={habitaciones}
+                        name="habitaciones"
                         onChange={handleChange}
-                        type="text"
+                        type="number"
                       />
                     </div>
                   </div>
@@ -365,10 +365,10 @@ const AnadirInmueble = () => {
                     </div>
                     <div className="col-4">
                       <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
+                        value={baños}
+                        name="baños"
                         onChange={handleChange}
-                        type="text"
+                        type="number"
                       />
                     </div>
                   </div>
@@ -382,10 +382,10 @@ const AnadirInmueble = () => {
                     </div>
                     <div className="col-4">
                       <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
+                        value={medioBaños}
+                        name="medioBaños"
                         onChange={handleChange}
-                        type="text"
+                        type="number"
                       />
                     </div>
                   </div>
@@ -399,10 +399,10 @@ const AnadirInmueble = () => {
                     </div>
                     <div className="col-4">
                       <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
+                        value={parking}
+                        name="parking"
                         onChange={handleChange}
-                        type="text"
+                        type="number"
                       />
                     </div>
                   </div>
@@ -416,10 +416,10 @@ const AnadirInmueble = () => {
                     </div>
                     <div className="col-4">
                       <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
+                        value={pisos}
+                        name="pisos"
                         onChange={handleChange}
-                        type="text"
+                        type="number"
                       />
                     </div>
                   </div>
@@ -517,7 +517,7 @@ const AnadirInmueble = () => {
                       </div>
                     </div>
                     <div className="col-4">
-                    <Form.Select
+                      <Form.Select
                         value={escuelas}
                         onChange={(e) => setEscuelas(e.target.value)}>
                         <option>No</option>
@@ -534,7 +534,7 @@ const AnadirInmueble = () => {
                       </div>
                     </div>
                     <div className="col-4">
-                    <Form.Select
+                      <Form.Select
                         value={mantenimiento}
                         onChange={(e) => setMantenimiento(e.target.value)}>
                         <option>No</option>
@@ -551,7 +551,7 @@ const AnadirInmueble = () => {
                       </div>
                     </div>
                     <div className="col-4">
-                    <Form.Select
+                      <Form.Select
                         value={piscina}
                         onChange={(e) => setPiscina(e.target.value)}>
                         <option>No</option>
@@ -568,7 +568,7 @@ const AnadirInmueble = () => {
                       </div>
                     </div>
                     <div className="col-4">
-                    <Form.Select
+                      <Form.Select
                         value={discapacitados}
                         onChange={(e) => setDiscapacitados(e.target.value)}>
                         <option>No</option>
@@ -578,6 +578,355 @@ const AnadirInmueble = () => {
                   </div>
                 </div>
               </div>
+              <hr />
+              <div className={styles.MiniSub}>
+                ¿El inmueble está amueblado?
+              </div>
+              <div className={styles.line}></div>
+              <br />
+              <div className="row">
+                <div className="col-12 mb-3">
+                  <Form.Check
+                    inline
+                    type="radio"
+                    name="group2"
+                    label="Sí"
+                    onClick={() => {
+                      setAmueblado(true);
+                    }}
+                  />
+                  <Form.Check
+                    inline
+                    type="radio"
+                    name="group2"
+                    label="No"
+                    onClick={() => {
+                      setAmueblado(false);
+                    }}
+                  />
+                </div>
+                {amueblado ? (
+                  <>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Camas
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={camas}
+                            onChange={(e) => setCamas(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Closet
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={closet}
+                            onChange={(e) => setCloset(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Sala
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={sala}
+                            onChange={(e) => setSala(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Comedor
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={comedor}
+                            onChange={(e) => setComedor(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Cocina
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={cocina}
+                            onChange={(e) => setCocina(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            AA
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={AA}
+                            onChange={(e) => setAA(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Refrigerador
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={refrigerador}
+                            onChange={(e) => setRefrigerador(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Estufa
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={estufa}
+                            onChange={(e) => setEstufa(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Microondas
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={microondas}
+                            onChange={(e) => setMicroondas(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Mini horno
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={minihorno}
+                            onChange={(e) => setMinihorno(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Horno
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={horno}
+                            onChange={(e) => setHorno(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Lavadora
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={lavadora}
+                            onChange={(e) => setLavadora(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-7">
+                          <div className={styles.labels}>
+                            Secadora
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <Form.Select
+                            value={secadora}
+                            onChange={(e) => setSecadora(e.target.value)}>
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12 mb-3">
+                      <div className="row">
+                        <div className="col-3">
+                          <div className={styles.labels}>
+                            Otros (opcional):
+                          </div>
+                        </div>
+                        <div className="col-9">
+                          <Form.Control
+                            type="text"
+                            value={otros}
+                            onChange={handleChange}
+                            name="otros"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : null}
+
+              </div>
+              <hr />
+              <div className={styles.MiniSub}>
+                Descripción del inmueble
+              </div>
+              <div className={styles.line}></div>
+              <br />
+              <div className="row">
+                <div className="col-12 mb-3">
+                  <Form.Control
+                    as="textarea"
+                    rows={7}
+                    value={descripcion}
+                    name="descripcion"
+                    onChange={handleChange}
+                    placeholder="Escribe una breve descripción del inmueble..."
+                  />
+                </div>
+                <div className="col-12">
+                  <hr />
+                </div>
+                <div className="col-6">
+                  <div className="row d-flex justify-content-start">
+                    <div className="col-3">
+                      <div className={styles.labels2}>
+                        Valor
+                      </div>
+                    </div>
+                    <div className="col-7">
+                      <div className="input-group mb-3">
+                        <span className="input-group-text">$</span>
+                        <input type="number" className="form-control" placeholder="5,000.00" value={precio}
+                          name="precio"
+                          onChange={handleChange}
+                          min={0} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="row d-flex justify-content-end">
+                    <div className="col-5">
+                      <div className={styles.labels2}>
+                        Comisiones
+                      </div>
+                    </div>
+                    <div className="col-5">
+                      <div className="input-group mb-3">
+                        <span className="input-group-text">%</span>
+                        <input type="number" className="form-control" placeholder="5" value={comisiones}
+                          name="comisiones"
+                          onChange={handleChange}
+                          min={0} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.MiniSub}>
+                Ubicación
+              </div>
+              <div className={styles.line}></div>
+              <br />
+              <div className="row">
+                <div className="col-12 mb-3">
+                  <SeleccionarLugar />
+                </div>
+                <div className="col-12 mb-5">
+                  <MapaUbicacion />
+                </div>
+                <br />
+                <div className="col-12 mb-5">
+                  {precio <= 0 || titulo.length <= 0 ? (
+                    <Button titulo="Publicar" btn="Disabled"/>
+                  ) : (
+                    <Button titulo="Publicar" />
+                  )}
+                </div>
+              </div>
             </Form>
           </div>
 
@@ -585,693 +934,9 @@ const AnadirInmueble = () => {
             <h2>imagen</h2>
           </div>
         </div>
-      </div>
-    </section>
-    // <Container>
-
-    //   <Titulo titulo="Agrega un inmueble" />
-    //   <br />
-    //   <Form onSubmit={handleSubmit}>
-    //     <Form.Check
-    //       inline
-    //       type="radio"
-    //       name="categoria"
-    //       label={"Renta"}
-    //       onClick={categoriaRenta}
-    //       value={categoriaSeleccionada}
-    //       onChange={handleChange}
-    //     />
-    //     <Form.Check
-    //       inline
-    //       type="radio"
-    //       name="categoria"
-    //       label={"Venta"}
-    //       onClick={categoriaVenta}
-    //       value={categoriaSeleccionada}
-    //       onChange={handleChange}
-    //     />
-
-    //     <Form.Group className="mb-3">
-    //       <Form.Label>Tíulo del inmueble</Form.Label>
-    //       <Form.Control
-    //         type="text"
-    //         value={titulo}
-    //         name="titulo"
-    //         onChange={handleChange}
-    //       />
-    //       <Form.Text className="text-muted">
-    //         Ej. Casa en venta en Palmaris, Cancún
-    //       </Form.Text>
-    //     </Form.Group>
-    //     <hr />
-    //     <br />
-    //     <div className="d-flex justify-content-start">
-    //       <Modaltitle titulo="Detalles del inmueble" />
-    //     </div>
-
-    // <Row>
-    //   <Col sm={6}>
-    //     <div>Tipo de propiedad</div>
-    //   </Col>
-    //   <Col sm={6}>
-    //     <Form.Select
-    //       value={propertyType}
-    //       onChange={(e) => setTipoPropiedad(e.target.value)}
-    //     >
-    //       <option></option>
-    //       <option>Casa</option>
-    //       <option>Departamento</option>
-    //     </Form.Select>
-    //   </Col>
-    // </Row>
-    //     <br />
-
-    //     <Row>
-    //       <Col>
-    //         <Row></Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Antigüedad</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={antiguedad}
-    //                 name="antiguedad"
-    //                 onChange={handleChange}
-    //                 type="text"
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>M2 de construcción</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={m2Construidos}
-    //                 name="m2Construidos"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>M2 de terreno</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={m2Terreno}
-    //                 name="m2Terreno"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>Habitaciones</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={habitaciones}
-    //                 name="habitaciones"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Baños completos</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={baños}
-    //                 name="baños"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>Medio baños</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={medioBaños}
-    //                 name="medioBaños"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Estacionamientos</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={parking}
-    //                 name="parking"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>Pisos</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={pisos}
-    //                 name="pisos"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Cuenta con agua</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={agua}
-    //               onChange={(e) => setAgua(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>Cuenta con luz</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={luz}
-    //               onChange={(e) => setLuz(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Cuenta con gas</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={gas}
-    //               onChange={(e) => setGas(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>Internet</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={internet}
-    //               onChange={(e) => setInternet(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Seguridad privada</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={seguridadPrivada}
-    //               onChange={(e) => setSeguridadPrivada(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>Escuelas cercanas</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={escuelas}
-    //               onChange={(e) => setEscuelas(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Mantenimiento</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={mantenimiento}
-    //               onChange={(e) => setMantenimiento(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>Piscina</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={piscina}
-    //               onChange={(e) => setPiscina(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Acceso a discapacitados</Col>
-    //           <Col>
-    //             <Form.Select
-    //               value={discapacitados}
-    //               onChange={(e) => setDiscapacitados(e.target.value)}
-    //               className="mb-3"
-    //             >
-    //               <option>No</option>
-    //               <option>Sí</option>
-    //             </Form.Select>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-    //     <hr />
-    //     <br />
-    //     <div className="d-flex justify-content-start">
-    //       <Modaltitle titulo="¿El inmueble está amueblado?" />
-    //     </div>
-
-    //     <Form.Check
-    //       inline
-    //       type="radio"
-    //       name="group2"
-    //       label="Sí"
-    //       onClick={() => {
-    //         setAmueblado(true);
-    //       }}
-    //     />
-
-    //     <Form.Check
-    //       inline
-    //       type="radio"
-    //       name="group2"
-    //       label="No"
-    //       onClick={() => {
-    //         setAmueblado(false);
-    //       }}
-    //     />
-
-    //     {amueblado ? (
-    //       <>
-    //         <Row>
-    //           <Col>
-    //             <Row>
-    //               <Col>Camas</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={camas}
-    //                   onChange={(e) => setCamas(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //           <Col>
-    //             <Row>
-    //               <Col>Closet</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={closet}
-    //                   onChange={(e) => setCloset(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //         </Row>
-
-    //         <Row>
-    //           <Col>
-    //             <Row>
-    //               <Col>Sala</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={sala}
-    //                   onChange={(e) => setSala(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //           <Col>
-    //             <Row>
-    //               <Col>Comedor</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={comedor}
-    //                   onChange={(e) => setComedor(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //         </Row>
-
-    //         <Row>
-    //           <Col>
-    //             <Row>
-    //               <Col>Cocina</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={cocina}
-    //                   onChange={(e) => setCocina(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //           <Col>
-    //             <Row>
-    //               <Col>AA</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={AA}
-    //                   onChange={(e) => setAA(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //         </Row>
-
-    //         <Row>
-    //           <Col>
-    //             <Row>
-    //               <Col>Refrigerador</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={refrigerador}
-    //                   onChange={(e) => setRefrigerador(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //           <Col>
-    //             <Row>
-    //               <Col>Estufa</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={estufa}
-    //                   onChange={(e) => setEstufa(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //         </Row>
-
-    //         <Row>
-    //           <Col>
-    //             <Row>
-    //               <Col>Microondas</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={microondas}
-    //                   onChange={(e) => setMicroondas(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //           <Col>
-    //             <Row>
-    //               <Col>Minihorno</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={minihorno}
-    //                   onChange={(e) => setMinihorno(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //         </Row>
-    //         <Row>
-    //           <Col>
-    //             <Row>
-    //               <Col>Horno</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={horno}
-    //                   onChange={(e) => setHorno(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //           <Col>
-    //             <Row>
-    //               <Col>Lavadora</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={lavadora}
-    //                   onChange={(e) => setLavadora(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //         </Row>
-
-    //         <Row>
-    //           <Col>
-    //             <Row>
-    //               <Col>Secadora</Col>
-    //               <Col>
-    //                 <Form.Select
-    //                   value={secadora}
-    //                   onChange={(e) => setSecadora(e.target.value)}
-    //                   className="mb-3"
-    //                 >
-    //                   <option>No</option>
-    //                   <option>Sí</option>
-    //                 </Form.Select>
-    //               </Col>
-    //             </Row>
-    //           </Col>
-    //           <Col></Col>
-    //         </Row>
-    //         <Form.Group className="mb-3">
-    //           <Form.Label>Otros (opcional)</Form.Label>
-    //           <Form.Control
-    //             type="text"
-    //             value={otros}
-    //             onChange={handleChange}
-    //             name="otros"
-    //           />
-    //         </Form.Group>
-    //       </>
-    //     ) : null}
-
-    //     <br />
-    //     <br />
-
-    //     <hr />
-    //     <br />
-
-    //     <div className="d-flex justify-content-start">
-    //       <Modaltitle titulo="Descripción del inmueble" />
-    //     </div>
-
-    //     <Form.Group className="mb-3">
-    //       <Form.Control
-    //         as="textarea"
-    //         rows={3}
-    //         value={descripcion}
-    //         name="descripcion"
-    //         onChange={handleChange}
-    //       />
-    //     </Form.Group>
-    //     <br />
-    //     <hr />
-
-    //     <Row>
-    //       <Col>
-    //         <Row>
-    //           <Col>Valor</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={precio}
-    //                 name="precio"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //       <Col>
-    //         <Row>
-    //           <Col>Comisiones</Col>
-    //           <Col>
-    //             <Form.Group className="mb-3">
-    //               <Form.Control
-    //                 value={comisiones}
-    //                 name="comisiones"
-    //                 onChange={handleChange}
-    //                 type="number"
-    //                 min={0}
-    //               />
-    //             </Form.Group>
-    //           </Col>
-    //         </Row>
-    //       </Col>
-    //     </Row>
-
-    //     <br />
-    //     <br />
-    //     <div className="d-flex justify-content-start">
-    //       <Modaltitle titulo="Ubicación" />
-    //     </div>
-
-    //     <Row>
-    //       <Col>
-    //         <SeleccionarLugar />
-    //       </Col>
-    //       <Col>
-    //         <MapaUbicacion />
-    //       </Col>
-    //     </Row>
-
-    //     {precio <= 0 || titulo.length <= 0 ? (
-    //       <Button titulo="Publicar" btn="Disabled" />
-    //     ) : (
-    //       <Button titulo="Publicar" />
-    //     )}
-    //     <div className="py-3" />
-    //   </Form>
-    // </Container>
+      </div >
+    </section >
+   
   );
 };
 
