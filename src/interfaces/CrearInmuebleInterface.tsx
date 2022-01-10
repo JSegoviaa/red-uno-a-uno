@@ -49,7 +49,7 @@ export interface InmueblesUsuario {
   precio: number;
   direccion: string | undefined;
   publicado: boolean;
-  usuario: string;
+  usuario: Usuario;
   categoria: string;
   AA: boolean;
   agua: boolean;
@@ -87,4 +87,11 @@ export interface InmueblesUsuario {
   seguridadPrivada: boolean;
   lat: number;
   lng: number;
+}
+
+interface Usuario {
+  _id: string;
+  nombre: string;
+  apellido: string;
+  correo: string;
 }

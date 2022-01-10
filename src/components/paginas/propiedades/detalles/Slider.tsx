@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Inmueble.module.css";
 import "swiper/css";
+import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 
 const imagenes = [
   { id: 1, img: "" },
@@ -12,7 +13,14 @@ const imagenes = [
   { id: 7, img: "" },
 ];
 
-const Slider = () => {
+interface Props {
+  inmuebles: {
+    inmueble: InmueblesUsuario;
+    ok: boolean;
+  };
+}
+
+const Slider = ({ inmuebles }: Props) => {
   return (
     <div className="text-center">
       <Swiper className="mySwiper">

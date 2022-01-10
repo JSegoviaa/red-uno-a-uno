@@ -1,10 +1,18 @@
 import { useContext } from "react";
 import { Container, Row } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import Button from "../../../ui/button/Button";
 import styles from "./Inmueble.module.css";
 
-const Ubicacion = () => {
+interface Props {
+  inmuebles: {
+    inmueble: InmueblesUsuario;
+    ok: boolean;
+  };
+}
+
+const Ubicacion = ({ inmuebles }: Props) => {
   const { auth } = useContext(AuthContext);
   return (
     <section className="mt-5">

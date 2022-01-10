@@ -12,7 +12,6 @@ interface Props {
 }
 
 const Detalles = ({ inmuebles }: Props) => {
-  console.log(inmuebles.inmueble);
   const { auth } = useContext(AuthContext);
 
   return (
@@ -1011,27 +1010,31 @@ const Detalles = ({ inmuebles }: Props) => {
                       <div className="inmueble-contenido">
                         <table>
                           <tbody>
-                            <tr>
-                              <td valign="top">
-                                <img
-                                  className="me-3"
-                                  src="/images/icons/deatails-icons/17.png"
-                                  alt="..."
-                                />
-                              </td>
-                              <td>
-                                <div className={styles.inmuebleContent}>
-                                  Acceso a discapacitados
-                                </div>
-                                <div
-                                  className={`${styles.inmuebleSubcontent} mb-1`}
-                                >
-                                  ED-5451
-                                  <br />
-                                  <br />
-                                </div>
-                              </td>
-                            </tr>
+                            {inmuebles.inmueble.discapacitados ? (
+                              <tr>
+                                <td valign="top">
+                                  <img
+                                    className="me-3"
+                                    src="/images/icons/deatails-icons/17.png"
+                                    alt="..."
+                                  />
+                                </td>
+                                <td>
+                                  <div className={styles.inmuebleContent}>
+                                    Acceso a discapacitados
+                                  </div>
+                                  <div
+                                    className={`${styles.inmuebleSubcontent} mb-1`}
+                                  >
+                                    {inmuebles.inmueble.discapacitados
+                                      ? "Sí"
+                                      : null}
+                                    <br />
+                                    <br />
+                                  </div>
+                                </td>
+                              </tr>
+                            ) : null}
                           </tbody>
                         </table>
                       </div>
@@ -1040,29 +1043,29 @@ const Detalles = ({ inmuebles }: Props) => {
                       <div className="inmueble-contenido">
                         <table>
                           <tbody>
-                            <tr>
-                              <td valign="top">
-                                <img
-                                  className="me-3"
-                                  src="/images/icons/deatails-icons/17.png"
-                                  alt="..."
-                                />
-                              </td>
-                              <td>
-                                <div className={styles.inmuebleContent}>
-                                  Otros
-                                </div>
-                                <div
-                                  className={`${styles.inmuebleSubcontent} mb-1`}
-                                >
-                                  Lorem ipsum dolor sit, amet consectetur
-                                  adipisicing elit. Vero, reprehenderit. Lorem,
-                                  ipsum.
-                                  <br />
-                                  <br />
-                                </div>
-                              </td>
-                            </tr>
+                            {inmuebles.inmueble.otros ? (
+                              <tr>
+                                <td valign="top">
+                                  <img
+                                    className="me-3"
+                                    src="/images/icons/deatails-icons/17.png"
+                                    alt="..."
+                                  />
+                                </td>
+                                <td>
+                                  <div className={styles.inmuebleContent}>
+                                    Otros
+                                  </div>
+                                  <div
+                                    className={`${styles.inmuebleSubcontent} mb-1`}
+                                  >
+                                    inmuebles.inmueble.otros
+                                    <br />
+                                    <br />
+                                  </div>
+                                </td>
+                              </tr>
+                            ) : null}
                           </tbody>
                         </table>
                       </div>
