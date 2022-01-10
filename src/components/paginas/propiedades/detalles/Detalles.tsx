@@ -878,12 +878,12 @@ const Detalles = ({ inmuebles }: Props) => {
                               </td>
                               <td>
                                 <div className={styles.inmuebleContent}>
-                                  Alberca
+                                  Estufa
                                 </div>
                                 <div
                                   className={`${styles.inmuebleSubcontent} mb-1`}
                                 >
-                                  ED-5451
+                                  {inmuebles.inmueble.estufa ? "Sí" : "No"}
                                   <br />
                                   <br />
                                 </div>
@@ -907,12 +907,12 @@ const Detalles = ({ inmuebles }: Props) => {
                               </td>
                               <td>
                                 <div className={styles.inmuebleContent}>
-                                  Acceso a discapacitados
+                                  Microondas
                                 </div>
                                 <div
                                   className={`${styles.inmuebleSubcontent} mb-1`}
                                 >
-                                  ED-5451
+                                  {inmuebles.inmueble.microondas ? "Sí" : "No"}
                                   <br />
                                   <br />
                                 </div>
@@ -936,12 +936,12 @@ const Detalles = ({ inmuebles }: Props) => {
                               </td>
                               <td>
                                 <div className={styles.inmuebleContent}>
-                                  Acceso a discapacitados
+                                  Mini Horno
                                 </div>
                                 <div
                                   className={`${styles.inmuebleSubcontent} mb-1`}
                                 >
-                                  ED-5451
+                                  {inmuebles.inmueble.minihorno ? "Sí" : "No"}
                                   <br />
                                   <br />
                                 </div>
@@ -965,12 +965,12 @@ const Detalles = ({ inmuebles }: Props) => {
                               </td>
                               <td>
                                 <div className={styles.inmuebleContent}>
-                                  Acceso a discapacitados
+                                  Horno
                                 </div>
                                 <div
                                   className={`${styles.inmuebleSubcontent} mb-1`}
                                 >
-                                  ED-5451
+                                  {inmuebles.inmueble.horno ? "Sí" : "No"}
                                   <br />
                                   <br />
                                 </div>
@@ -994,12 +994,12 @@ const Detalles = ({ inmuebles }: Props) => {
                               </td>
                               <td>
                                 <div className={styles.inmuebleContent}>
-                                  Acceso a discapacitados
+                                  Lavadora
                                 </div>
                                 <div
                                   className={`${styles.inmuebleSubcontent} mb-1`}
                                 >
-                                  ED-5451
+                                  {inmuebles.inmueble.lavadora ? "Sí" : "No"}
                                   <br />
                                   <br />
                                 </div>
@@ -1023,12 +1023,12 @@ const Detalles = ({ inmuebles }: Props) => {
                               </td>
                               <td>
                                 <div className={styles.inmuebleContent}>
-                                  Acceso a discapacitados
+                                  Secadora
                                 </div>
                                 <div
                                   className={`${styles.inmuebleSubcontent} mb-1`}
                                 >
-                                  {inmuebles.inmueble.discapacitados
+                                  {inmuebles.inmueble.secadora
                                     ? "Sí"
                                     : "No"}
                                   <br />
