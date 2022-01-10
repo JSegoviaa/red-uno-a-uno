@@ -24,6 +24,7 @@ const MapaUbicacion = () => {
         draggable
         position={{ lat: ubicacion.lat, lng: ubicacion.lng }}
         onDragEnd={onDragEnd}
+        icon="/images/icons/marcador-ubicacion.png"
       />
     </GoogleMap>
   );
