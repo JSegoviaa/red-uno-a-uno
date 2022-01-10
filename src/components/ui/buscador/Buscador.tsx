@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useContext, useRef } from "react";
 import Geosuggest, { Suggest } from "react-geosuggest";
 import { MapContext } from "../../../context/map/MapContext";
@@ -5,6 +6,7 @@ import styles from "./Buscador.module.css";
 
 const Buscador = () => {
   const geosuggestEl = useRef<Geosuggest>(null);
+  const router = useRouter();
 
   const { setCoordenadas, setDirMapa, setZoom } = useContext(MapContext);
 
@@ -15,6 +17,8 @@ const Buscador = () => {
           lat: suggest.location.lat,
           lng: suggest.location.lng,
         });
+
+    router.push("/");
 
     !suggest ? setDirMapa(null) : setDirMapa(suggest.label);
 
