@@ -248,7 +248,9 @@ export const AuthProvider: FC = ({ children }) => {
     }
 
     if (!resp.ok) {
-      toast.error(resp.msg);
+      resp.errors.map((error) => {
+        toast.error(error.msg);
+      });
     }
 
     return resp;

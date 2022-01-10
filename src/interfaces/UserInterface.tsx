@@ -54,6 +54,13 @@ export interface RespActualizar {
   ok: boolean;
   usuario: Usuario;
   msg: string;
+  errors: Errors[];
+}
+
+interface Errors {
+  msg: string;
+  param: string;
+  location: string;
 }
 
 export interface Usuario {
