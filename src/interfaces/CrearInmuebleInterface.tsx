@@ -94,4 +94,6 @@ interface Usuario {
   nombre: string;
   apellido: string;
   correo: string;
+  telefonoOficina: string;
+  telefonoPersonal: string;
 }
