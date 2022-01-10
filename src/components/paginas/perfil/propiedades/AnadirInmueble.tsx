@@ -1,12 +1,11 @@
 import { FormEvent, useContext, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { MapContext } from "../../../../context/map/MapContext";
 import { useForm } from "../../../../hooks/useForm";
-import styles from './FormDesign.module.css'
+import styles from "./FormDesign.module.css";
 import SeleccionarLugar from "../../../ui/buscador/SeleccionarLugar";
 import Button from "../../../ui/button/Button";
-import Modaltitle from "../../../ui/modaltitle/Modaltitle";
 import Titulo from "../../../ui/titulo/Titulo";
 import MapaUbicacion from "./MapaUbicacion";
 
@@ -217,7 +216,8 @@ const AnadirInmueble = () => {
         <div className="row">
           <div className="col-6 px-4">
             <Form onSubmit={handleSubmit}>
-              <Form.Check className="mb-3"
+              <Form.Check
+                className="mb-3"
                 inline
                 type="radio"
                 name="categoria"
@@ -226,7 +226,8 @@ const AnadirInmueble = () => {
                 value={categoriaSeleccionada}
                 onChange={handleChange}
               />
-              <Form.Check className="mb-3"
+              <Form.Check
+                className="mb-3"
                 inline
                 type="radio"
                 name="categoria"
@@ -236,7 +237,9 @@ const AnadirInmueble = () => {
                 onChange={handleChange}
               />
               <Form.Group className="mb-3">
-                <Form.Label className={`${styles.subTitulo}`}>Título del inmueble</Form.Label>
+                <Form.Label className={`${styles.subTitulo}`}>
+                  Título del inmueble
+                </Form.Label>
                 <Form.Control
                   type="text"
                   value={titulo}
@@ -248,16 +251,12 @@ const AnadirInmueble = () => {
                 </Form.Text>
               </Form.Group>
               <hr />
-              <div className={styles.MiniSub}>
-                Detalles del inmueble
-              </div>
+              <div className={styles.MiniSub}>Detalles del inmueble</div>
               <div className={styles.line}></div>
               <br />
               <div className="row mb-3">
                 <div className="col-4">
-                  <div className={styles.content}>
-                    Tipo de propiedad
-                  </div>
+                  <div className={styles.content}>Tipo de propiedad</div>
                 </div>
                 <div className="col-8">
                   <Form.Select
@@ -274,9 +273,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        ID de inmueble
-                      </div>
+                      <div className={styles.labels}>ID de inmueble</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -291,9 +288,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Antigüedad
-                      </div>
+                      <div className={styles.labels}>Antigüedad</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -308,9 +303,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        M² de construcción
-                      </div>
+                      <div className={styles.labels}>M² de construcción</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -325,9 +318,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        M² de terreno
-                      </div>
+                      <div className={styles.labels}>M² de terreno</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -342,9 +333,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Habitaciones
-                      </div>
+                      <div className={styles.labels}>Habitaciones</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -359,9 +348,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Baños completos
-                      </div>
+                      <div className={styles.labels}>Baños completos</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -376,9 +363,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Medios baños
-                      </div>
+                      <div className={styles.labels}>Medios baños</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -393,9 +378,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Estacionamientos
-                      </div>
+                      <div className={styles.labels}>Estacionamientos</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -410,9 +393,7 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Pisos
-                      </div>
+                      <div className={styles.labels}>Pisos</div>
                     </div>
                     <div className="col-4">
                       <Form.Control
@@ -427,14 +408,13 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Cuenta con agua
-                      </div>
+                      <div className={styles.labels}>Cuenta con agua</div>
                     </div>
                     <div className="col-4">
                       <Form.Select
                         value={agua}
-                        onChange={(e) => setAgua(e.target.value)}>
+                        onChange={(e) => setAgua(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -444,14 +424,13 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Cuenta con luz
-                      </div>
+                      <div className={styles.labels}>Cuenta con luz</div>
                     </div>
                     <div className="col-4">
                       <Form.Select
                         value={luz}
-                        onChange={(e) => setLuz(e.target.value)}>
+                        onChange={(e) => setLuz(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -461,14 +440,13 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Cuenta con gas
-                      </div>
+                      <div className={styles.labels}>Cuenta con gas</div>
                     </div>
                     <div className="col-4">
                       <Form.Select
                         value={gas}
-                        onChange={(e) => setGas(e.target.value)}>
+                        onChange={(e) => setGas(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -478,14 +456,13 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Internet
-                      </div>
+                      <div className={styles.labels}>Internet</div>
                     </div>
                     <div className="col-4">
                       <Form.Select
                         value={internet}
-                        onChange={(e) => setInternet(e.target.value)}>
+                        onChange={(e) => setInternet(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -495,14 +472,13 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Seguridad privada
-                      </div>
+                      <div className={styles.labels}>Seguridad privada</div>
                     </div>
                     <div className="col-4">
                       <Form.Select
                         value={seguridadPrivada}
-                        onChange={(e) => setSeguridadPrivada(e.target.value)}>
+                        onChange={(e) => setSeguridadPrivada(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -512,14 +488,13 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Escuelas cercanas
-                      </div>
+                      <div className={styles.labels}>Escuelas cercanas</div>
                     </div>
                     <div className="col-4">
                       <Form.Select
                         value={escuelas}
-                        onChange={(e) => setEscuelas(e.target.value)}>
+                        onChange={(e) => setEscuelas(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -529,14 +504,13 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Mantenimiento
-                      </div>
+                      <div className={styles.labels}>Mantenimiento</div>
                     </div>
                     <div className="col-4">
                       <Form.Select
                         value={mantenimiento}
-                        onChange={(e) => setMantenimiento(e.target.value)}>
+                        onChange={(e) => setMantenimiento(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -546,14 +520,13 @@ const AnadirInmueble = () => {
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-8">
-                      <div className={styles.labels}>
-                        Alberca
-                      </div>
+                      <div className={styles.labels}>Alberca</div>
                     </div>
                     <div className="col-4">
                       <Form.Select
                         value={piscina}
-                        onChange={(e) => setPiscina(e.target.value)}>
+                        onChange={(e) => setPiscina(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -570,7 +543,8 @@ const AnadirInmueble = () => {
                     <div className="col-4">
                       <Form.Select
                         value={discapacitados}
-                        onChange={(e) => setDiscapacitados(e.target.value)}>
+                        onChange={(e) => setDiscapacitados(e.target.value)}
+                      >
                         <option>No</option>
                         <option>Sí</option>
                       </Form.Select>
@@ -579,9 +553,7 @@ const AnadirInmueble = () => {
                 </div>
               </div>
               <hr />
-              <div className={styles.MiniSub}>
-                ¿El inmueble está amueblado?
-              </div>
+              <div className={styles.MiniSub}>¿El inmueble está amueblado?</div>
               <div className={styles.line}></div>
               <br />
               <div className="row">
@@ -610,14 +582,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Camas
-                          </div>
+                          <div className={styles.labels}>Camas</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={camas}
-                            onChange={(e) => setCamas(e.target.value)}>
+                            onChange={(e) => setCamas(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -627,14 +598,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Closet
-                          </div>
+                          <div className={styles.labels}>Closet</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={closet}
-                            onChange={(e) => setCloset(e.target.value)}>
+                            onChange={(e) => setCloset(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -644,14 +614,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Sala
-                          </div>
+                          <div className={styles.labels}>Sala</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={sala}
-                            onChange={(e) => setSala(e.target.value)}>
+                            onChange={(e) => setSala(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -661,14 +630,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Comedor
-                          </div>
+                          <div className={styles.labels}>Comedor</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={comedor}
-                            onChange={(e) => setComedor(e.target.value)}>
+                            onChange={(e) => setComedor(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -678,14 +646,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Cocina
-                          </div>
+                          <div className={styles.labels}>Cocina</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={cocina}
-                            onChange={(e) => setCocina(e.target.value)}>
+                            onChange={(e) => setCocina(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -695,14 +662,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            AA
-                          </div>
+                          <div className={styles.labels}>AA</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={AA}
-                            onChange={(e) => setAA(e.target.value)}>
+                            onChange={(e) => setAA(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -712,14 +678,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Refrigerador
-                          </div>
+                          <div className={styles.labels}>Refrigerador</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={refrigerador}
-                            onChange={(e) => setRefrigerador(e.target.value)}>
+                            onChange={(e) => setRefrigerador(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -729,14 +694,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Estufa
-                          </div>
+                          <div className={styles.labels}>Estufa</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={estufa}
-                            onChange={(e) => setEstufa(e.target.value)}>
+                            onChange={(e) => setEstufa(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -746,14 +710,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Microondas
-                          </div>
+                          <div className={styles.labels}>Microondas</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={microondas}
-                            onChange={(e) => setMicroondas(e.target.value)}>
+                            onChange={(e) => setMicroondas(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -763,14 +726,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Mini horno
-                          </div>
+                          <div className={styles.labels}>Mini horno</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={minihorno}
-                            onChange={(e) => setMinihorno(e.target.value)}>
+                            onChange={(e) => setMinihorno(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -780,14 +742,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Horno
-                          </div>
+                          <div className={styles.labels}>Horno</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={horno}
-                            onChange={(e) => setHorno(e.target.value)}>
+                            onChange={(e) => setHorno(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -797,14 +758,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Lavadora
-                          </div>
+                          <div className={styles.labels}>Lavadora</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={lavadora}
-                            onChange={(e) => setLavadora(e.target.value)}>
+                            onChange={(e) => setLavadora(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -814,14 +774,13 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-7">
-                          <div className={styles.labels}>
-                            Secadora
-                          </div>
+                          <div className={styles.labels}>Secadora</div>
                         </div>
                         <div className="col-4">
                           <Form.Select
                             value={secadora}
-                            onChange={(e) => setSecadora(e.target.value)}>
+                            onChange={(e) => setSecadora(e.target.value)}
+                          >
                             <option>No</option>
                             <option>Sí</option>
                           </Form.Select>
@@ -831,9 +790,7 @@ const AnadirInmueble = () => {
                     <div className="col-12 mb-3">
                       <div className="row">
                         <div className="col-3">
-                          <div className={styles.labels}>
-                            Otros (opcional):
-                          </div>
+                          <div className={styles.labels}>Otros (opcional):</div>
                         </div>
                         <div className="col-9">
                           <Form.Control
@@ -847,12 +804,9 @@ const AnadirInmueble = () => {
                     </div>
                   </>
                 ) : null}
-
               </div>
               <hr />
-              <div className={styles.MiniSub}>
-                Descripción del inmueble
-              </div>
+              <div className={styles.MiniSub}>Descripción del inmueble</div>
               <div className={styles.line}></div>
               <br />
               <div className="row">
@@ -872,17 +826,20 @@ const AnadirInmueble = () => {
                 <div className="col-6">
                   <div className="row d-flex justify-content-start">
                     <div className="col-3">
-                      <div className={styles.labels2}>
-                        Valor
-                      </div>
+                      <div className={styles.labels2}>Valor</div>
                     </div>
                     <div className="col-7">
                       <div className="input-group mb-3">
                         <span className="input-group-text">$</span>
-                        <input type="number" className="form-control" placeholder="5,000.00" value={precio}
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="5,000.00"
+                          value={precio}
                           name="precio"
                           onChange={handleChange}
-                          min={0} />
+                          min={0}
+                        />
                       </div>
                     </div>
                   </div>
@@ -890,25 +847,26 @@ const AnadirInmueble = () => {
                 <div className="col-6">
                   <div className="row d-flex justify-content-end">
                     <div className="col-5">
-                      <div className={styles.labels2}>
-                        Comisiones
-                      </div>
+                      <div className={styles.labels2}>Comisiones</div>
                     </div>
                     <div className="col-5">
                       <div className="input-group mb-3">
                         <span className="input-group-text">%</span>
-                        <input type="number" className="form-control" placeholder="5" value={comisiones}
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="5"
+                          value={comisiones}
                           name="comisiones"
                           onChange={handleChange}
-                          min={0} />
+                          min={0}
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className={styles.MiniSub}>
-                Ubicación
-              </div>
+              <div className={styles.MiniSub}>Ubicación</div>
               <div className={styles.line}></div>
               <br />
               <div className="row">
@@ -921,7 +879,7 @@ const AnadirInmueble = () => {
                 <br />
                 <div className="col-12 mb-5">
                   {precio <= 0 || titulo.length <= 0 ? (
-                    <Button titulo="Publicar" btn="Disabled"/>
+                    <Button titulo="Publicar" btn="Disabled" />
                   ) : (
                     <Button titulo="Publicar" />
                   )}
@@ -934,9 +892,8 @@ const AnadirInmueble = () => {
             <h2>imagen</h2>
           </div>
         </div>
-      </div >
-    </section >
-   
+      </div>
+    </section>
   );
 };
 
