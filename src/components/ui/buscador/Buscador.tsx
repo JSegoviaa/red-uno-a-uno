@@ -6,16 +6,19 @@ import styles from "./Buscador.module.css";
 const Buscador = () => {
   const geosuggestEl = useRef<Geosuggest>(null);
 
-  const { setCoordenadas } = useContext(MapContext);
+  const { setCoordenadas, setDirMapa, setZoom } = useContext(MapContext);
 
   const onSuggestSelect = (suggest: Suggest) => {
-    console.log(suggest);
     !suggest
       ? setCoordenadas({ lat: 19.4326077, lng: -99.133208 })
       : setCoordenadas({
           lat: suggest.location.lat,
           lng: suggest.location.lng,
         });
+
+    !suggest ? setDirMapa(null) : setDirMapa(suggest.label);
+
+    !suggest ? setZoom(5) : setZoom(13);
   };
 
   return (

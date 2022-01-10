@@ -8,6 +8,10 @@ interface ContextProps {
   setUbicacion: Dispatch<SetStateAction<Location>>;
   direccion: string | undefined;
   setDireccion: any;
+  dirMapa: string | undefined;
+  setDirMapa: any;
+  zoom: number;
+  setZoom: any;
 }
 
 export const MapContext = createContext({} as ContextProps);
@@ -25,6 +29,10 @@ export const MapProvider: FC = ({ children }) => {
 
   const [direccion, setDireccion] = useState();
 
+  const [dirMapa, setDirMapa] = useState("Ciudad de México, CDMX, México");
+
+  const [zoom, setZoom] = useState(5);
+
   return (
     <MapContext.Provider
       value={{
@@ -34,6 +42,10 @@ export const MapProvider: FC = ({ children }) => {
         setUbicacion,
         direccion,
         setDireccion,
+        dirMapa,
+        setDirMapa,
+        zoom,
+        setZoom,
       }}
     >
       {children}
