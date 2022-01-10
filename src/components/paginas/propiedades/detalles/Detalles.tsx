@@ -1,9 +1,18 @@
 import { useContext } from "react";
 import { Accordion } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import styles from "./Inmueble.module.css";
 
-const Detalles = () => {
+interface Props {
+  inmuebles: {
+    inmueble: InmueblesUsuario;
+    ok: boolean;
+  };
+}
+
+const Detalles = ({ inmuebles }: Props) => {
+  console.log(inmuebles.inmueble);
   const { auth } = useContext(AuthContext);
 
   return (

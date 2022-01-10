@@ -11,7 +11,6 @@ interface Resp {
 }
 
 const ListaPropiedades = ({ data }: Resp) => {
-  console.log(data, "asdfas");
   return (
     <Container>
       <Row>

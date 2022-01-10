@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import ListaPropiedades from "../../components/paginas/propiedades/ListaPropiedades/ListaPropiedades";
 import SEO from "../../components/seo/SEO";
 import Titulo from "../../components/ui/titulo/Titulo";
+import { production } from "../../credentials/credentials";
 import { Inmueble } from "../../interfaces/InmueblesInterface";
 
 interface Resp {
@@ -14,9 +15,7 @@ interface Resp {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const resp = await fetch(
-    "https://prueba-red1a1.herokuapp.com/api/inmuebles/"
-  );
+  const resp = await fetch(`${production}/inmuebles/`);
   const data = await resp.json();
 
   return { props: { data } };
