@@ -14,4 +14,4 @@ const Index = () => {
   );
 };
 
-export default usePrivateRoute(Index);
+export default Index;

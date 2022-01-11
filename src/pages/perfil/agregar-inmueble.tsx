@@ -14,4 +14,4 @@ const AgregarInmueble = () => {
   );
 };
 
-export default usePrivateRoute(AgregarInmueble);
+export default AgregarInmueble;

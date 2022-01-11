@@ -14,4 +14,4 @@ const ActualizarPerfil = () => {
   );
 };
 
-export default usePrivateRoute(ActualizarPerfil);
+export default ActualizarPerfil;

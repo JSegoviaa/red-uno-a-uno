@@ -4,4 +4,4 @@ const Chat = () => {
   return <div>Chat</div>;
 };
 
-export default usePrivateRoute(Chat);
+export default Chat;

@@ -17,4 +17,4 @@ const HistorialInmueble = () => {
   );
 };
 
-export default usePrivateRoute(HistorialInmueble);
+export default HistorialInmueble;

@@ -18,4 +18,4 @@ const MisPropiedades = () => {
   );
 };
 
-export default usePrivateRoute(MisPropiedades);
+export default MisPropiedades;

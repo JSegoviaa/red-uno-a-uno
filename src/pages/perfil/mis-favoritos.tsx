@@ -18,4 +18,4 @@ const MisFavoritos = () => {
   );
 };
 
-export default usePrivateRoute(MisFavoritos);
+export default MisFavoritos;

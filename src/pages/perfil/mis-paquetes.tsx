@@ -16,4 +16,4 @@ const MisPaquetes = () => {
   );
 };
 
-export default usePrivateRoute(MisPaquetes);
+export default MisPaquetes;
