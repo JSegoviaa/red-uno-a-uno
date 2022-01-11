@@ -8,7 +8,7 @@ const Info = () => {
         <Row>
           <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div className="d-flex justify-content-center">
-              <img src="/images/content/que-es.png" />
+              <img src="/images/content/que-es.png" style={{ width: "100%" }} />
             </div>
           </div>
           <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -45,7 +45,10 @@ const Info = () => {
           </div>
           <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div className="d-flex justify-content-center">
-              <img src="/images/content/como-funciona.png" />
+              <img
+                src="/images/content/como-funciona.png"
+                style={{ width: "100%" }}
+              />
             </div>
           </div>
         </Row>

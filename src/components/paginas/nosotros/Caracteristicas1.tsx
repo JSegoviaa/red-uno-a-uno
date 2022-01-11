@@ -49,7 +49,7 @@ const Caracteristicas1 = () => {
           {cards.map((card) => (
             <div
               key={card.id}
-              className="col-sm-12 col-md-6 col-lg-4 text-center mb-4"
+              className="col-sm-12 col-md-6 col-lg-4 text-center mb-4 "
             >
               <div className={styles.nosotrosCard}>
                 <div className="d-flex justify-content-center">

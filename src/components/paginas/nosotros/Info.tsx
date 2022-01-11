@@ -9,12 +9,15 @@ const Info = () => {
           <div className="row d-flex justify-content-center">
             <div className="col-sm-12 col-md-12 col-lg-10">
               <Row>
-                <Col>
+                <Col md={6}>
                   <div className="d-flex justify-content-center">
-                    <img src="/images/content/nosotros-1.png" />
+                    <img
+                      src="/images/content/nosotros-1.png"
+                      style={{ width: "100%" }}
+                    />
                   </div>
                 </Col>
-                <Col className="my-5">
+                <Col md={6} className="my-5">
                   <div className={`${styles.title} mb-5`}>
                     Acerca de nosotros
                   </div>

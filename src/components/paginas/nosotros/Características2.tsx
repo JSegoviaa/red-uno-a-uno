@@ -20,7 +20,7 @@ const cards = [
   {
     id: 4,
     title: "Servicio de chat con otros asesores / inmobiliarias en tiempo real",
-    image: "/images/icons/agrega.png",
+    image: "/images/icons/chat.png",
   },
   {
     id: 5,

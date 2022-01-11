@@ -154,6 +154,7 @@ export const InmuebleProvider: FC = ({ children }) => {
 
     if (resp.ok) {
       toast.success(resp.msg);
+      router.push("/perfil/mis-propiedades")
     }
 
     if (resp.errors) {

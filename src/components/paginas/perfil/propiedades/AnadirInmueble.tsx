@@ -920,7 +920,7 @@ const AnadirInmueble = () => {
           </div>
         </Form>
       </div>
-    </section >
+    </section>
   );
 };
 
