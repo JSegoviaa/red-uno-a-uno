@@ -1,7 +1,7 @@
-import { usePrivateRoute } from '../../../hooks/usePrivateRoute';
+import { PrivateRoute } from "../../../hooks/usePrivateRoute";
 
 const Chat = () => {
   return <div>Chat</div>;
 };
 
-export default usePrivateRoute(Chat);
+export default PrivateRoute(Chat);

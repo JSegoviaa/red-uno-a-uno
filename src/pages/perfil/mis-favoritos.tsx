@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
-import FiltroFavs from '../../components/paginas/perfil/favoritos/FiltroFavs';
-import MiListaFavoritos from '../../components/paginas/perfil/favoritos/MisFavoritos';
-import SEO from '../../components/seo/SEO';
-import Titulo from '../../components/ui/titulo/Titulo';
-import { usePrivateRoute } from '../../hooks/usePrivateRoute';
+import { useRouter } from "next/router";
+import FiltroFavs from "../../components/paginas/perfil/favoritos/FiltroFavs";
+import MiListaFavoritos from "../../components/paginas/perfil/favoritos/MisFavoritos";
+import SEO from "../../components/seo/SEO";
+import Titulo from "../../components/ui/titulo/Titulo";
+import { PrivateRoute } from "../../hooks/usePrivateRoute";
 
 const MisFavoritos = () => {
   const { asPath } = useRouter();
@@ -18,4 +18,4 @@ const MisFavoritos = () => {
   );
 };
 
-export default usePrivateRoute(MisFavoritos);
+export default PrivateRoute(MisFavoritos);

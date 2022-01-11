@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import AnadirInmueble from '../../components/paginas/perfil/propiedades/AnadirInmueble';
-import SEO from '../../components/seo/SEO';
-import { usePrivateRoute } from '../../hooks/usePrivateRoute';
+import { useRouter } from "next/router";
+import AnadirInmueble from "../../components/paginas/perfil/propiedades/AnadirInmueble";
+import SEO from "../../components/seo/SEO";
+import { PrivateRoute } from "../../hooks/usePrivateRoute";
 
 const AgregarInmueble = () => {
   const { asPath } = useRouter();
@@ -14,4 +14,4 @@ const AgregarInmueble = () => {
   );
 };
 
-export default usePrivateRoute(AgregarInmueble);
+export default PrivateRoute(AgregarInmueble);

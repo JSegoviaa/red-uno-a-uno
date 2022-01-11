@@ -1,7 +1,7 @@
-import { usePrivateRoute } from '../../../hooks/usePrivateRoute';
+import { PrivateRoute } from "../../../hooks/usePrivateRoute";
 
 const Index = () => {
   return <div>Aquí van mis chats</div>;
 };
 
-export default usePrivateRoute(Index);
+export default PrivateRoute(Index);

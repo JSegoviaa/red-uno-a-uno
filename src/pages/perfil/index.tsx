@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
-import Perfil from '../../components/paginas/perfil/perfil/Perfil';
-import SEO from '../../components/seo/SEO';
-import { usePrivateRoute } from '../../hooks/usePrivateRoute';
+import { useRouter } from "next/router";
+import Perfil from "../../components/paginas/perfil/perfil/Perfil";
+import SEO from "../../components/seo/SEO";
+import { PrivateRoute } from "../../hooks/usePrivateRoute";
 
 const Index = () => {
   const { asPath } = useRouter();
@@ -14,4 +14,4 @@ const Index = () => {
   );
 };
 
-export default usePrivateRoute(Index);
+export default PrivateRoute(Index);
