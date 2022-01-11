@@ -37,12 +37,15 @@ interface Props {
 }
 
 const Propiedad = ({ inmuebles }: Props) => {
-  console.log(inmuebles.inmueble);
   const { asPath } = useRouter();
   const { auth } = useContext(AuthContext);
   return (
     <>
-      <SEO titulo={inmuebles.inmueble.titulo} url={asPath} />
+      <SEO
+        titulo={inmuebles.inmueble.titulo}
+        url={asPath}
+        descripcion={inmuebles.inmueble.descripcion}
+      />
       <Slider inmuebles={inmuebles} />
       <Detalles inmuebles={inmuebles} />
       <Ubicacion inmuebles={inmuebles} />
