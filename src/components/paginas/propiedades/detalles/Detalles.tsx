@@ -680,7 +680,12 @@ const Detalles = ({ inmuebles }: Props) => {
                       <div className={styles.perfilCard}>
                         <div className={styles.perfilCardImg}>
                           <img
-                            src="/images/icons/deatails-icons/default-perfil.png"
+                            src="/images/avatares/2.svg"
+                            style={{
+                              width: "100%",
+                              borderTopLeftRadius: 30,
+                              borderTopRightRadius: 30,
+                            }}
                             alt="..."
                           />
                         </div>

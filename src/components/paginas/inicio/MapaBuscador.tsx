@@ -10,6 +10,11 @@ const containerStyle = {
   height: "87vh",
 };
 
+const icon = {
+  url: "/images/icons/marcador.svg",
+  scaledSize: new google.maps.Size(50, 50),
+};
+
 const MapaUbicacion = () => {
   const router = useRouter();
   const { coordenadas, zoom } = useContext(MapContext);
@@ -31,7 +36,8 @@ const MapaUbicacion = () => {
               onClick={() => goToProperty(inmueble.slug)}
               key={inmueble._id}
               position={{ lat: inmueble.lat, lng: inmueble.lng }}
-              icon="/images/icons/marcador-ubicacion.png"
+              icon={icon}
+              // icon={"/images/icons/marcador-ubicacion.png"}
             />
           ))}
         </>

@@ -60,49 +60,75 @@ const Header = () => {
               </Link>
               <Button titulo="mis chats" onClick={chats} />
 
-
-              <div className={`${styles.navPerfil} pointer ms-3`} ref={target} onClick={() => setShow1(!show1)}>
+              <div
+                className={`${styles.navPerfil} pointer ms-3`}
+                ref={target}
+                onClick={() => setShow1(!show1)}
+              >
                 <img
-                  src="/images/icons/perfil.png"
+                  src="/images/avatares/2.svg"
                   alt="Mi perfil"
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", borderRadius: "50%" }}
                 />
               </div>
               <Overlay target={target.current} show={show1} placement="right">
                 {({ placement, arrowProps, show: _show, popper, ...props }) => (
-                  <div className={styles.menu}
+                  <div
+                    className={styles.menu}
                     {...props}
                     style={{
                       ...props.style,
                     }}
                   >
                     <Link href="/perfil">
-                      <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
+                      <div
+                        className={`${styles.menuItem} pointer mx-3 my-2`}
+                        onClick={() => {
+                          setShow1(false);
+                        }}
+                      >
                         Mi Perfil
                       </div>
                     </Link>
                     <Link href="/perfil/mis-usuarios">
-                      <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
+                      <div
+                        className={`${styles.menuItem} pointer mx-3 my-2`}
+                        onClick={() => {
+                          setShow1(false);
+                        }}
+                      >
                         Mis Usuarios
                       </div>
                     </Link>
                     <Link href="/perfil/mis-paquetes">
-                      <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
+                      <div
+                        className={`${styles.menuItem} pointer mx-3 my-2`}
+                        onClick={() => {
+                          setShow1(false);
+                        }}
+                      >
                         Mis Paquetes
                       </div>
                     </Link>
                     <Link href="/perfil/historial-de-pagos">
-                      <div className={`${styles.menuItem} pointer mx-3 my-2`} onClick={()=>{setShow1(false)}}>
+                      <div
+                        className={`${styles.menuItem} pointer mx-3 my-2`}
+                        onClick={() => {
+                          setShow1(false);
+                        }}
+                      >
                         Mis Pagos
                       </div>
                     </Link>
-                    <div className={`${styles.menuCerrar} pointer mx-3 my-2`} onClick={logOut}>
+                    <div
+                      className={`${styles.menuCerrar} pointer mx-3 my-2`}
+                      onClick={logOut}
+                    >
                       Cerrar sesion
                     </div>
                   </div>
                 )}
               </Overlay>
-
             </Nav>
           )}
         </Navbar.Collapse>
