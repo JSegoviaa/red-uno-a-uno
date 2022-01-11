@@ -187,6 +187,8 @@ const ActualizarPerfilForm = () => {
         </Form.Group>
 
         <Button titulo="Actualizar perfil" />
+        <br />
+        <br />
       </Form>
     </Container>
   );
