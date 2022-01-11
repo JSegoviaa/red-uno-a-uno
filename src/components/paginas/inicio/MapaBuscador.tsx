@@ -12,7 +12,7 @@ const containerStyle = {
 
 const icon = {
   url: "/images/icons/marcador.svg",
-  scaledSize: new google.maps.Size(50, 50),
+  // scaledSize: new google.maps.Size(50, 50)
 };
 
 const MapaUbicacion = () => {
