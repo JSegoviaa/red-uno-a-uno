@@ -38,7 +38,7 @@ const Ubicacion = ({ inmuebles }: Props) => {
                   lat: inmuebles.inmueble.lat,
                   lng: inmuebles.inmueble.lng,
                 }}
-                icon="/images/icons/marcador-ubicacion.png"
+                icon={{ url: "/images/icons/marcador.svg" }}
               />
             </GoogleMap>
           </div>
