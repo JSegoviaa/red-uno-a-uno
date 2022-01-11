@@ -28,7 +28,7 @@ const MapaUbicacion = () => {
         <>
           {inmuebles?.map((inmueble) => (
             <Marker
-              onClick={() => goToProperty(inmueble._id)}
+              onClick={() => goToProperty(inmueble.slug)}
               key={inmueble._id}
               position={{ lat: inmueble.lat, lng: inmueble.lng }}
               icon="/images/icons/marcador-ubicacion.png"
