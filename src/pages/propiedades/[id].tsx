@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { params: { id: path.slug.toString() } };
   });
 
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
