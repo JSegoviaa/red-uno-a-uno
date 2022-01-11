@@ -18,8 +18,4 @@ const MisFavoritos = () => {
   );
 };
 
-<<<<<<< HEAD
-export default MisFavoritos;
-=======
 export default PrivateRoute(MisFavoritos);
->>>>>>> 0f2eb67b4acc7a543c19a02552237f21db5f2472

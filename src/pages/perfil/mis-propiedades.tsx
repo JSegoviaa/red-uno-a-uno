@@ -18,8 +18,4 @@ const MisPropiedades = () => {
   );
 };
 
-<<<<<<< HEAD
-export default MisPropiedades;
-=======
 export default PrivateRoute(MisPropiedades);
->>>>>>> 0f2eb67b4acc7a543c19a02552237f21db5f2472

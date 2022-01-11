@@ -16,8 +16,4 @@ const HistorialInmueble = () => {
   );
 };
 
-<<<<<<< HEAD
-export default HistorialInmueble;
-=======
 export default PrivateRoute(HistorialInmueble);
->>>>>>> 0f2eb67b4acc7a543c19a02552237f21db5f2472

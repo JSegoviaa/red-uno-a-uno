@@ -14,8 +14,4 @@ const ActualizarPerfil = () => {
   );
 };
 
-<<<<<<< HEAD
-export default ActualizarPerfil;
-=======
 export default PrivateRoute(ActualizarPerfil);
->>>>>>> 0f2eb67b4acc7a543c19a02552237f21db5f2472
