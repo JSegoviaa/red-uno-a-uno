@@ -1,5 +1,5 @@
-import { GoogleMap, Marker } from "@react-google-maps/api";
 import { useContext } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import { Container, Row } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
@@ -43,7 +43,9 @@ const Ubicacion = ({ inmuebles }: Props) => {
             </GoogleMap>
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-            <div className={`${styles.inmuebleTitle} mb-4`}>Apple Park</div>
+            <div className={`${styles.inmuebleTitleUbicacion} mb-4`}>
+              {inmuebles.inmueble.titulo}
+            </div>
             <div className="mb-4">
               <div className="row">
                 <div className="col-12 mb-4">
