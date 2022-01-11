@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { FormEvent, useContext } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "../../../hooks/useForm";
@@ -29,7 +29,7 @@ const RegisterModal = ({ show, handleClose }: Props) => {
 
   const { nombre, apellido, correo, password, password2, role } = formulario;
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (password !== password2) toast.error("Las contraseñas no coinciden");
