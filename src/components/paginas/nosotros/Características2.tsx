@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Container, Row } from "react-bootstrap";
 import styles from "./Nosotros.module.css";
 
@@ -55,12 +54,7 @@ const Características2 = () => {
             >
               <div className={styles.nosotrosCard2}>
                 <div>
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    width={103}
-                    height={103}
-                  />
+                  <img src={card.image} alt={card.title} />
                 </div>
                 <div className={`${styles.nosotrosCardTitle2} my-4`}>
                   {card.title}

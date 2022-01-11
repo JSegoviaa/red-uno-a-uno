@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Container, Row } from "react-bootstrap";
 import styles from "./Nosotros.module.css";
 
@@ -54,12 +53,7 @@ const Caracteristicas1 = () => {
             >
               <div className={styles.nosotrosCard}>
                 <div className="d-flex justify-content-center">
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    width={63}
-                    height={63}
-                  />
+                  <img src={card.image} alt={card.title} />
                 </div>
                 <div className={`${styles.nosotrosCardTitle} my-4`}>
                   {card.title}
