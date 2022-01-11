@@ -96,4 +96,7 @@ interface Usuario {
   correo: string;
   telefonoOficina: string;
   telefonoPersonal: string;
+  facebookpage: string;
+  instagram: string;
+  twitter: string;
 }

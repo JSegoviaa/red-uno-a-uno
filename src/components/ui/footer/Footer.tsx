@@ -1,17 +1,16 @@
-import { useContext, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import styles from './Footer.module.css';
-import RegisterModal from '../authmodal/AuthModal';
-import { AuthContext } from '../../../context/auth/AuthContext';
+import { useContext, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import styles from "./Footer.module.css";
+import RegisterModal from "../authmodal/AuthModal";
+import { AuthContext } from "../../../context/auth/AuthContext";
 
 const Footer = () => {
   const { auth } = useContext(AuthContext);
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
-  const goToHome = () => router.push('/');
+  const goToHome = () => router.push("/");
   const closeRegister = () => setIsOpen(false);
   const openRegister = () => setIsOpen(true);
 
@@ -76,19 +75,15 @@ const Footer = () => {
               </div>
 
               <a className="me-2" href="https://www.facebook.com">
-                <Image
+                <img
                   src="/images/icons/facebook.png"
                   alt="Síguenos en facebook"
-                  width={33}
-                  height={33}
                 />
               </a>
               <a href="https://wa.link/8udscw">
-                <Image
+                <img
                   src="/images/icons/whatsapp.png"
                   alt="Comunícate por whatsapp"
-                  width={33}
-                  height={33}
                 />
               </a>
             </div>
@@ -97,13 +92,13 @@ const Footer = () => {
       </section>
       <div
         className="text-center p-4"
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
       >
-        Copyright © {new Date().getFullYear()}:{' '}
+        Copyright © {new Date().getFullYear()}:{" "}
         <Link href="/" scroll>
           <span
             className="text-reset fw-bold pointer"
-            style={{ textDecoration: 'none' }}
+            style={{ textDecoration: "none" }}
           >
             Red 1 a 1
           </span>

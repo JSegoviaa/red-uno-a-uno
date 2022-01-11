@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "./Nosotros.module.css";
 
@@ -12,11 +11,7 @@ const Info = () => {
               <Row>
                 <Col>
                   <div className="d-flex justify-content-center">
-                    <Image
-                      src="/images/content/nosotros-1.png"
-                      width={471}
-                      height={581}
-                    />
+                    <img src="/images/content/nosotros-1.png" />
                   </div>
                 </Col>
                 <Col className="my-5">

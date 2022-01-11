@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { MapContext } from "../../../../context/map/MapContext";
 import { useForm } from "../../../../hooks/useForm";
@@ -64,7 +64,7 @@ const AnadirInmueble = () => {
     descripcion: undefined,
     precio: 0,
     comisiones: 0,
-    otros: undefined,
+    otros: "",
   });
 
   const {
@@ -208,6 +208,9 @@ const AnadirInmueble = () => {
     );
   };
 
+  const longitudTitulo = titulo.length;
+  const longitudOtros = otros.length;
+
   return (
     <section>
       <div className="container">
@@ -246,9 +249,21 @@ const AnadirInmueble = () => {
                   name="titulo"
                   onChange={handleChange}
                 />
-                <Form.Text className="text-muted">
-                  Ej. Casa en venta en Palmaris, Cancún
-                </Form.Text>
+                <Row>
+                  <Col>
+                    <Form.Text className="text-muted">
+                      Ej. Casa en venta en Palmaris, Cancún
+                    </Form.Text>
+                  </Col>
+                  <Col className="d-flex justify-content-end">
+                    <span
+                      style={{ color: longitudTitulo > 75 ? "red" : "black" }}
+                    >
+                      {longitudTitulo}
+                    </span>
+                    /75
+                  </Col>
+                </Row>
               </Form.Group>
               <hr />
               <div className={styles.MiniSub}>Detalles del inmueble</div>
@@ -799,6 +814,19 @@ const AnadirInmueble = () => {
                             onChange={handleChange}
                             name="otros"
                           />
+                          <Row>
+                            <Col></Col>
+                            <Col className="d-flex justify-content-end">
+                              <span
+                                style={{
+                                  color: longitudOtros > 100 ? "red" : "black",
+                                }}
+                              >
+                                {longitudOtros}
+                              </span>
+                              /100
+                            </Col>
+                          </Row>
                         </div>
                       </div>
                     </div>

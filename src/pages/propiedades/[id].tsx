@@ -15,7 +15,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const data = await resp.json();
 
   const paths = data.inmuebles.map((path: InmueblesUsuario) => {
-    return { params: { id: path._id.toString() } };
+    return { params: { id: path.slug.toString() } };
   });
 
   return { paths, fallback: false };
@@ -23,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const id = context.params!.id;
-  const resp = await fetch(`${production}/inmuebles/${id}`);
+  const resp = await fetch(`${production}/inmuebles/url/${id}`);
   const data = await resp.json();
 
   return { props: { inmuebles: data } };
@@ -37,12 +37,15 @@ interface Props {
 }
 
 const Propiedad = ({ inmuebles }: Props) => {
-  console.log(inmuebles.inmueble);
   const { asPath } = useRouter();
   const { auth } = useContext(AuthContext);
   return (
     <>
-      <SEO titulo={inmuebles.inmueble.titulo} url={asPath} />
+      <SEO
+        titulo={inmuebles.inmueble.titulo}
+        url={asPath}
+        descripcion={inmuebles.inmueble.descripcion}
+      />
       <Slider inmuebles={inmuebles} />
       <Detalles inmuebles={inmuebles} />
       <Ubicacion inmuebles={inmuebles} />
