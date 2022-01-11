@@ -8,8 +8,7 @@ interface Props {
 }
 
 const desc = "Descripción";
-const logo =
-  "https://firebasestorage.googleapis.com/v0/b/witideal-b1f99.appspot.com/o/assets%2Fthumb%40logo.png?alt=media&token=a099ac10-a2b7-49ce-869d-cffaeeb9b1aa";
+const logo = "https://i.imgur.com/45hp3Ed.png";
 
 const SEO = ({ titulo, descripcion = desc, url, img = logo }: Props) => {
   return (
