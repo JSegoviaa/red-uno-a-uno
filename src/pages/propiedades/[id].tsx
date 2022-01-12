@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { params: { id: path.slug.toString() } };
   });
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const resp = await fetch(`${production}/inmuebles/url/${id}`);
   const data = await resp.json();
 
-  return { props: { inmuebles: data } };
+  return { props: { inmuebles: data }, revalidate: 60 };
 };
 
 interface Props {
