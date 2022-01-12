@@ -35,7 +35,9 @@ const Detalles = ({ inmuebles }: Props) => {
               </div>
               <div className="col-sm-12 col-md-2 col-lg-2 text-sm-start text-md-start text-lg-center text-start">
                 <div className="mt-3">
-                  <span className={styles.inmuebleTipo}>Venta</span>
+                  <span className={styles.inmuebleTipo}>
+                    {inmuebles.inmueble.categoria.nombre}
+                  </span>
                 </div>
               </div>
               <div className="col-sm-12 col-md-4 col-lg-4 text-sm-start text-md-start text-lg-end text-start">
