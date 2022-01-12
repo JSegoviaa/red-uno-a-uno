@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import Detalles from "../../components/paginas/propiedades/detalles/Detalles";
 import Slider from "../../components/paginas/propiedades/detalles/Slider";
 import Ubicacion from "../../components/paginas/propiedades/detalles/Ubicación";
@@ -37,13 +36,12 @@ interface Props {
 }
 
 const Propiedad = ({ inmuebles }: Props) => {
-  const { asPath } = useRouter();
   const { auth } = useContext(AuthContext);
   return (
     <>
       <SEO
         titulo={inmuebles.inmueble.titulo}
-        url={asPath}
+        url={`/${inmuebles.inmueble.slug}`}
         descripcion={inmuebles.inmueble.descripcion}
       />
       <Slider inmuebles={inmuebles} />
