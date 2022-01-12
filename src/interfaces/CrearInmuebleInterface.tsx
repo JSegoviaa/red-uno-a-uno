@@ -89,6 +89,7 @@ export interface InmueblesUsuario {
   seguridadPrivada: boolean;
   lat: number;
   lng: number;
+  tipoPropiedad: TipoPropiedad;
 }
 
 interface Usuario {
@@ -101,4 +102,9 @@ interface Usuario {
   facebookpage: string;
   instagram: string;
   twitter: string;
+}
+
+interface TipoPropiedad {
+  _id: string;
+  nombre: string;
 }

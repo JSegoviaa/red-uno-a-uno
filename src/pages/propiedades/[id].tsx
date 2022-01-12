@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const resp = await fetch(`${production}/inmuebles/url/${id}`);
   const data = await resp.json();
 
-  return { props: { inmuebles: data }, revalidate: 15, notFound: true };
+  return { props: { inmuebles: data }, revalidate: 15, notFound: !data };
 };
 
 interface Props {
