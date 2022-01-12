@@ -8,10 +8,13 @@ import SeleccionarLugar from "../../../ui/buscador/SeleccionarLugar";
 import Button from "../../../ui/button/Button";
 import Titulo from "../../../ui/titulo/Titulo";
 import MapaUbicacion from "./MapaUbicacion";
+import useCategories from "../../../../hooks/useCategories";
+import Loading from "../../../ui/loading/Loading";
 
 const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
+  const { categorias, cargando } = useCategories();
   const [categoria, setCategoria] = useState("61cb51ee11b684e8c30cb7cb");
   const [propertyType, setTipoPropiedad] = useState("");
   const [agua, setAgua] = useState<any>(false);
@@ -258,17 +261,22 @@ const AnadirInmueble = () => {
                       <div className={styles.content}></div>
                     </div>
                     <div className="col-sm-7 col-md-8 col-lg-8">
-                      <Form.Select
-                        value={categoria}
-                        onChange={(e) => setCategoria(e.target.value)}
-                      >
-                        <option value={"61cb51ee11b684e8c30cb7cb"}>
-                          Rentar
-                        </option>
-                        <option value={"61ca85313384577442588d29"}>
-                          Vender
-                        </option>
-                      </Form.Select>
+                      {cargando ? (
+                        <Loading />
+                      ) : (
+                        <Form.Select
+                          value={categoria}
+                          onChange={(e) => setCategoria(e.target.value)}
+                        >
+                          {categorias.map((categoria) => (
+                            <>
+                              <option key={categoria._id} value={categoria._id}>
+                                {categoria.nombre}
+                              </option>
+                            </>
+                          ))}
+                        </Form.Select>
+                      )}
                     </div>
                   </div>
                 </Col>
