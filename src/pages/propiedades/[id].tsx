@@ -21,15 +21,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  try {
-    const id = context.params!.id;
-    const resp = await fetch(`${production}/inmuebles/url/${id}`);
-    const data = await resp.json();
+  const id = context.params!.id;
+  const resp = await fetch(`${production}/inmuebles/url/${id}`);
+  const data = await resp.json();
 
-    return { props: { inmuebles: data }, revalidate: 15, notFound: !data };
-  } catch (error) {
-    return { props: { inmuebles: error }, revalidate: 15, notFound: true };
-  }
+  return { props: { inmuebles: data }, revalidate: 15, notFound: !data };
 };
 
 interface Props {
