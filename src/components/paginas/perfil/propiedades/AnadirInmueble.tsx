@@ -12,9 +12,7 @@ import MapaUbicacion from "./MapaUbicacion";
 const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
-    "61ca85313384577442588d29"
-  );
+  const [categoria, setCategoria] = useState("61cb51ee11b684e8c30cb7cb");
   const [propertyType, setTipoPropiedad] = useState("");
   const [agua, setAgua] = useState<any>(false);
   const [luz, setLuz] = useState<any>(false);
@@ -41,7 +39,6 @@ const AnadirInmueble = () => {
   const [secadora, setSecadora] = useState<any>(false);
 
   const { formulario, handleChange } = useForm({
-    categoria: categoriaSeleccionada,
     titulo: "",
     propertyType,
     antiguedad: undefined,
@@ -68,7 +65,6 @@ const AnadirInmueble = () => {
   });
 
   const {
-    categoria,
     titulo,
     antiguedad,
     m2Construidos,
@@ -83,14 +79,6 @@ const AnadirInmueble = () => {
     comisiones,
     otros,
   } = formulario;
-
-  const categoriaRenta = () => {
-    setCategoriaSeleccionada("61ca85313384577442588d29");
-  };
-
-  const categoriaVenta = () => {
-    setCategoriaSeleccionada("61cb51ee11b684e8c30cb7cb");
-  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -161,8 +149,6 @@ const AnadirInmueble = () => {
     if (secadora === "Sí") setSecadora(true);
     if (secadora === "No") setSecadora(false);
 
-    setCategoriaSeleccionada("");
-
     crearInmueble(
       titulo,
       categoria,
@@ -219,26 +205,6 @@ const AnadirInmueble = () => {
         <Form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-sm-12 col-md-12 col-lg-6 px-4">
-              <Form.Check
-                className="mb-3"
-                inline
-                type="radio"
-                name="categoria"
-                label={"Renta"}
-                onClick={categoriaRenta}
-                value={categoriaSeleccionada}
-                onChange={handleChange}
-              />
-              <Form.Check
-                className="mb-3"
-                inline
-                type="radio"
-                name="categoria"
-                label={"Venta"}
-                onClick={categoriaVenta}
-                value={categoriaSeleccionada}
-                onChange={handleChange}
-              />
               <Form.Group className="mb-3">
                 <Form.Label className={`${styles.subTitulo}`}>
                   Título del inmueble
@@ -265,27 +231,56 @@ const AnadirInmueble = () => {
                   </Col>
                 </Row>
               </Form.Group>
+
+              <br />
+              <br />
+
+              <Row>
+                <Col md={6}>
+                  <div className="row mb-3">
+                    <div className="col-sm-5 col-md-4 col-lg-4">
+                      <div className={styles.content}>Tipo</div>
+                    </div>
+                    <div className="col-sm-7 col-md-8 col-lg-8">
+                      <Form.Select
+                        value={propertyType}
+                        onChange={(e) => setTipoPropiedad(e.target.value)}
+                      >
+                        <option>Casa</option>
+                        <option>Departamento</option>
+                      </Form.Select>
+                    </div>
+                  </div>
+                </Col>
+                <Col md={6}>
+                  <div className="row mb-3">
+                    <div className="col-sm-5 col-md-4 col-lg-4">
+                      <div className={styles.content}></div>
+                    </div>
+                    <div className="col-sm-7 col-md-8 col-lg-8">
+                      <Form.Select
+                        value={categoria}
+                        onChange={(e) => setCategoria(e.target.value)}
+                      >
+                        <option value={"61cb51ee11b684e8c30cb7cb"}>
+                          Rentar
+                        </option>
+                        <option value={"61ca85313384577442588d29"}>
+                          Vender
+                        </option>
+                      </Form.Select>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+
               <hr />
               <div className={styles.MiniSub}>Detalles del inmueble</div>
               <div className={styles.line}></div>
               <br />
-              <div className="row mb-3">
-                <div className="col-sm-5 col-md-4 col-lg-4">
-                  <div className={styles.content}>Tipo de propiedad</div>
-                </div>
-                <div className="col-sm-7 col-md-8 col-lg-8">
-                  <Form.Select
-                    value={propertyType}
-                    onChange={(e) => setTipoPropiedad(e.target.value)}
-                  >
-                    <option></option>
-                    <option>Casa</option>
-                    <option>Departamento</option>
-                  </Form.Select>
-                </div>
-              </div>
+
               <div className="row">
-                <div className="col-6 mb-3">
+                {/* <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
                       <div className={styles.labels}>ID de inmueble</div>
@@ -299,7 +294,7 @@ const AnadirInmueble = () => {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
@@ -326,6 +321,7 @@ const AnadirInmueble = () => {
                         name="m2Construidos"
                         onChange={handleChange}
                         type="number"
+                        min={0}
                       />
                     </div>
                   </div>
@@ -341,6 +337,7 @@ const AnadirInmueble = () => {
                         name="m2Terreno"
                         onChange={handleChange}
                         type="number"
+                        min={0}
                       />
                     </div>
                   </div>
@@ -356,6 +353,7 @@ const AnadirInmueble = () => {
                         name="habitaciones"
                         onChange={handleChange}
                         type="number"
+                        min={0}
                       />
                     </div>
                   </div>
@@ -371,6 +369,7 @@ const AnadirInmueble = () => {
                         name="baños"
                         onChange={handleChange}
                         type="number"
+                        min={0}
                       />
                     </div>
                   </div>
@@ -386,6 +385,7 @@ const AnadirInmueble = () => {
                         name="medioBaños"
                         onChange={handleChange}
                         type="number"
+                        min={0}
                       />
                     </div>
                   </div>
@@ -401,6 +401,7 @@ const AnadirInmueble = () => {
                         name="parking"
                         onChange={handleChange}
                         type="number"
+                        min={0}
                       />
                     </div>
                   </div>
@@ -416,6 +417,7 @@ const AnadirInmueble = () => {
                         name="pisos"
                         onChange={handleChange}
                         type="number"
+                        min={0}
                       />
                     </div>
                   </div>

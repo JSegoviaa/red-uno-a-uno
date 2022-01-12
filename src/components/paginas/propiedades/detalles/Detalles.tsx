@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Accordion } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import { formatPrice } from "../../../../helpers/formatPrice";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import styles from "./Inmueble.module.css";
 
@@ -27,15 +28,14 @@ const Detalles = ({ inmuebles }: Props) => {
               </div>
               <div className="col-sm-12 col-md-5 col-lg-5 text-start">
                 <div className={styles.inmueblePrecio}>
-                  {new Intl.NumberFormat("es-MX", {
-                    style: "currency",
-                    currency: "MXN",
-                  }).format(inmuebles.inmueble.precio)}
+                  {formatPrice(inmuebles.inmueble.precio)}
                 </div>
               </div>
               <div className="col-sm-12 col-md-2 col-lg-2 text-sm-start text-md-start text-lg-center text-start">
                 <div className="mt-3">
-                  <span className={styles.inmuebleTipo}>Venta</span>
+                  <span className={styles.inmuebleTipo}>
+                    {inmuebles.inmueble.categoria.nombre}
+                  </span>
                 </div>
               </div>
               <div className="col-sm-12 col-md-4 col-lg-4 text-sm-start text-md-start text-lg-end text-start">

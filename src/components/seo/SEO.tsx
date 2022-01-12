@@ -34,6 +34,7 @@ const SEO = ({ titulo, descripcion = desc, url, img = logo }: Props) => {
       <script
         type="text/javascript"
         async
+        defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd22YBCutdzEZePBY2wbS2OawTZ1_H7-s&libraries=places&language=es"
       ></script>
     </Head>

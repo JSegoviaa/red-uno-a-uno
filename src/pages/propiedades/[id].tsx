@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import Detalles from "../../components/paginas/propiedades/detalles/Detalles";
 import Slider from "../../components/paginas/propiedades/detalles/Slider";
 import Ubicacion from "../../components/paginas/propiedades/detalles/Ubicación";
@@ -18,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { params: { id: path.slug.toString() } };
   });
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -26,7 +25,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const resp = await fetch(`${production}/inmuebles/url/${id}`);
   const data = await resp.json();
 
-  return { props: { inmuebles: data } };
+  return { props: { inmuebles: data }, revalidate: 15 };
 };
 
 interface Props {
@@ -37,13 +36,12 @@ interface Props {
 }
 
 const Propiedad = ({ inmuebles }: Props) => {
-  const { asPath } = useRouter();
   const { auth } = useContext(AuthContext);
   return (
     <>
       <SEO
         titulo={inmuebles.inmueble.titulo}
-        url={asPath}
+        url={`/${inmuebles.inmueble.slug}`}
         descripcion={inmuebles.inmueble.descripcion}
       />
       <Slider inmuebles={inmuebles} />
