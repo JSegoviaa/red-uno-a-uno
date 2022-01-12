@@ -8,15 +8,21 @@ import SeleccionarLugar from "../../../ui/buscador/SeleccionarLugar";
 import Button from "../../../ui/button/Button";
 import Titulo from "../../../ui/titulo/Titulo";
 import MapaUbicacion from "./MapaUbicacion";
-import useCategories from "../../../../hooks/useCategories";
+import {
+  useCategories,
+  useTipoPropiedad,
+} from "../../../../hooks/useCategories";
 import Loading from "../../../ui/loading/Loading";
 
 const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
   const { categorias, cargando } = useCategories();
+  const { loading, propertyTypes } = useTipoPropiedad();
   const [categoria, setCategoria] = useState("61cb51ee11b684e8c30cb7cb");
-  const [propertyType, setTipoPropiedad] = useState("");
+  const [tipoPropiedad, setTipoPropiedad] = useState(
+    "61df4edbde1013c85c1f991a"
+  );
   const [agua, setAgua] = useState<any>(false);
   const [luz, setLuz] = useState<any>(false);
   const [gas, setGas] = useState<any>(false);
@@ -43,7 +49,6 @@ const AnadirInmueble = () => {
 
   const { formulario, handleChange } = useForm({
     titulo: "",
-    propertyType,
     antiguedad: undefined,
     m2Construidos: 0,
     m2Terreno: 0,
@@ -189,7 +194,7 @@ const AnadirInmueble = () => {
       parking,
       piscina,
       pisos,
-      propertyType,
+      tipoPropiedad,
       refrigerador,
       sala,
       secadora,
@@ -199,6 +204,8 @@ const AnadirInmueble = () => {
 
   const longitudTitulo = titulo.length;
   const longitudOtros = otros.length;
+
+  console.log(tipoPropiedad, "?");
 
   return (
     <section>
@@ -245,20 +252,30 @@ const AnadirInmueble = () => {
                       <div className={styles.content}>Tipo</div>
                     </div>
                     <div className="col-sm-7 col-md-8 col-lg-8">
-                      <Form.Select
-                        value={propertyType}
-                        onChange={(e) => setTipoPropiedad(e.target.value)}
-                      >
-                        <option>Casa</option>
-                        <option>Departamento</option>
-                      </Form.Select>
+                      {loading ? (
+                        <Loading />
+                      ) : (
+                        <Form.Select
+                          value={tipoPropiedad}
+                          onChange={(e) => setTipoPropiedad(e.target.value)}
+                        >
+                          {propertyTypes.map((propertyType) => (
+                            <option
+                              key={propertyType._id}
+                              value={propertyType._id}
+                            >
+                              {propertyType.nombre}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      )}
                     </div>
                   </div>
                 </Col>
                 <Col md={6}>
                   <div className="row mb-3">
                     <div className="col-sm-5 col-md-4 col-lg-4">
-                      <div className={styles.content}></div>
+                      <div className={styles.content} />
                     </div>
                     <div className="col-sm-7 col-md-8 col-lg-8">
                       {cargando ? (
@@ -269,11 +286,9 @@ const AnadirInmueble = () => {
                           onChange={(e) => setCategoria(e.target.value)}
                         >
                           {categorias.map((categoria) => (
-                            <>
-                              <option key={categoria._id} value={categoria._id}>
-                                {categoria.nombre}
-                              </option>
-                            </>
+                            <option key={categoria._id} value={categoria._id}>
+                              {categoria.nombre}
+                            </option>
                           ))}
                         </Form.Select>
                       )}
@@ -288,21 +303,6 @@ const AnadirInmueble = () => {
               <br />
 
               <div className="row">
-                {/* <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>ID de inmueble</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={"id"}
-                        name="id"
-                        onChange={handleChange}
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                </div> */}
                 <div className="col-6 mb-3">
                   <div className="row">
                     <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">

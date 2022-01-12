@@ -45,7 +45,7 @@ interface ContextProps {
     parking?: number,
     piscinas?: boolean,
     pisos?: number,
-    propertyType?: string,
+    tipoPropiedad?: string,
     refrigerador?: boolean,
     sala?: boolean,
     secadora?: boolean,
@@ -96,7 +96,7 @@ export const InmuebleProvider: FC = ({ children }) => {
     parking?: number,
     piscinas?: boolean,
     pisos?: number,
-    propertyType?: string,
+    tipoPropiedad?: string,
     refrigerador?: boolean,
     sala?: boolean,
     secadora?: boolean,
@@ -139,7 +139,7 @@ export const InmuebleProvider: FC = ({ children }) => {
         parking,
         piscinas,
         pisos,
-        propertyType,
+        tipoPropiedad,
         refrigerador,
         sala,
         secadora,
@@ -154,7 +154,7 @@ export const InmuebleProvider: FC = ({ children }) => {
 
     if (resp.ok) {
       toast.success(resp.msg);
-      router.push("/perfil/mis-propiedades")
+      router.push("/perfil/mis-propiedades");
     }
 
     if (resp.errors) {
