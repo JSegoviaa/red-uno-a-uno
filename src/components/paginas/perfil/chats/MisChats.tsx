@@ -1,170 +1,129 @@
-import styles from './MisChats.module.css'
-import { Offcanvas } from 'react-bootstrap'
-interface Props { showCanvas: boolean, handleCloseCanvas: any }
+import { useRouter } from "next/router";
+import { Offcanvas } from "react-bootstrap";
+import styles from "./MisChats.module.css";
 
-const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
+const chats = [
+  {
+    id: 1,
+    img: "/images/avatares/4.svg",
+    nombre: "James Franco",
+    mensaje: "No sé quien es James Franco",
+  },
+  {
+    id: 2,
+    img: "/images/avatares/2.svg",
+    nombre: "Bruce Wayne",
+    mensaje: "Soy Batman",
+  },
+  {
+    id: 3,
+    img: "/images/avatares/3.svg",
+    nombre: "Scarlett Johanson",
+    mensaje: "Estoy muy guapa ¿verdad?",
+  },
+  {
+    id: 4,
+    img: "/images/avatares/1.svg",
+    nombre: "Leo Messi",
+    mensaje: "Cristiano Ronaldo no sabe jugar",
+  },
+  {
+    id: 5,
+    img: "/images/avatares/6.svg",
+    nombre: "Peter Parker",
+    mensaje: "Se me acabó la telaraña",
+  },
+  {
+    id: 6,
+    img: "/images/avatares/1.svg",
+    nombre: "Pedro Picapiedra",
+    mensaje: "Pablo, te invito a comer",
+  },
+  {
+    id: 7,
+    img: "/images/avatares/5.svg",
+    nombre: "James Hatfield",
+    mensaje: "Megadeth es mejor que nosotros",
+  },
+  {
+    id: 8,
+    img: "/images/avatares/3.svg",
+    nombre: "AMLO",
+    mensaje: "Fuerza moral",
+  },
+  {
+    id: 9,
+    img: "/images/avatares/5.svg",
+    nombre: "Don Ramón",
+    mensaje: "No he pagado la renta",
+  },
+  {
+    id: 10,
+    img: "/images/avatares/2.svg",
+    nombre: "Naruto",
+    mensaje: "Soy un ninja",
+  },
+  {
+    id: 11,
+    img: "/images/avatares/6.svg",
+    nombre: "Gokú",
+    mensaje: "Me convertí en super sayayin fase 90",
+  },
+  {
+    id: 11,
+    img: "/images/avatares/6.svg",
+    nombre: "Barack Obama",
+    mensaje: "Soy negro",
+  },
+];
 
-    return (
-        <Offcanvas show={showCanvas} onHide={handleCloseCanvas} placement="end" >
-            <Offcanvas.Header closeButton className={styles.OFhead}>
-                <Offcanvas.Title>Mis chats</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body className={styles.OFbody}>
-                <div className={`${styles.ChatHover} pointer mb-2`}>
-                    <div className={styles.michat}>
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                <div className={styles.backImg}>
-                                    <img src="/images/avatares/2.svg" alt="..." style={{borderRadius:'50%'}}/>
-                                </div>
-                            </div>
-                            <div className="col-10">
-                                <div className={styles.nombre}>
-                                    James Franco
-                                </div>
-                                <div className={styles.mensaje}>
-                                    Ya me llego de la kuuuuusshhhh, quieres?
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.ChatHover} pointer mb-2`}>
-                    <div className={styles.michat}>
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                <div className={styles.backImg}>
-                                    <img src="/images/avatares/4.svg" alt="..." style={{borderRadius:'50%'}}/>
-                                </div>
-                            </div>
-                            <div className="col-10">
-                                <div className={styles.nombre}>
-                                    Seth Rogen
-                                </div>
-                                <div className={styles.mensaje}>
-                                    Ya viste lo que bajó Franco?!?!?!?!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.ChatHover} pointer mb-2`}>
-                    <div className={styles.michat}>
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                <div className={styles.backImg}>
-                                    <img src="/images/avatares/6.svg" alt="..." style={{borderRadius:'50%'}}/>
-                                </div>
-                            </div>
-                            <div className="col-10">
-                                <div className={styles.nombre}>
-                                    Jonah Hill
-                                </div>
-                                <div className={styles.mensaje}>
-                                    Mañana fiesta en mi casa, ya le dije a franco y a seth
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.ChatHover} pointer mb-2`}>
-                    <div className={styles.michat}>
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                <div className={styles.backImg}>
-                                    <img src="/images/avatares/2.svg" alt="..." style={{borderRadius:'50%'}}/>
-                                </div>
-                            </div>
-                            <div className="col-10">
-                                <div className={styles.nombre}>
-                                    Michael Cera
-                                </div>
-                                <div className={styles.mensaje}>
-                                    Vasir o no vasir?
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.ChatHover} pointer mb-2`}>
-                    <div className={styles.michat}>
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                <div className={styles.backImg}>
-                                    <img src="/images/avatares/1.svg" alt="..." style={{borderRadius:'50%'}}/>
-                                </div>
-                            </div>
-                            <div className="col-10">
-                                <div className={styles.nombre}>
-                                    Zendaya Maree
-                                </div>
-                                <div className={styles.mensaje}>
-                                    Por que me odias? :(
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.ChatHover} pointer mb-2`}>
-                    <div className={styles.michat}>
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                <div className={styles.backImg}>
-                                    <img src="/images/avatares/4.svg" alt="..." style={{borderRadius:'50%'}}/>
-                                </div>
-                            </div>
-                            <div className="col-10">
-                                <div className={styles.nombre}>
-                                    Keanu Reeves
-                                </div>
-                                <div className={styles.mensaje}>
-                                    A poco si actuo igual en todas las peliculas? :/
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.ChatHover} pointer mb-2`}>
-                    <div className={styles.michat}>
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                <div className={styles.backImg}>
-                                    <img src="/images/avatares/5.svg" alt="..." style={{borderRadius:'50%'}}/>
-                                </div>
-                            </div>
-                            <div className="col-10">
-                                <div className={styles.nombre}>
-                                    Scarlet Johanson
-                                </div>
-                                <div className={styles.mensaje}>
-                                    Que pasaaa? te veo en la fiesta de Jonah o te da miedo?
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.ChatHover} pointer mb-2`}>
-                    <div className={styles.michat}>
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                <div className={styles.backImg}>
-                                    <img src="/images/avatares/3.svg" alt="..." style={{borderRadius:'50%'}}/>
-                                </div>
-                            </div>
-                            <div className="col-10">
-                                <div className={styles.nombre}>
-                                    Kat Dennings
-                                </div>
-                                <div className={styles.mensaje}>
-                                    Te veo hoy?
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Offcanvas.Body>
-        </Offcanvas>
-    )
+interface Props {
+  showCanvas: boolean;
+  handleCloseCanvas: any;
 }
 
-export default MisChats
+const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
+  const router = useRouter();
+
+  const goToChat = (id: number) => {
+    router.push("/perfil/mis-chats/" + id);
+    handleCloseCanvas();
+  };
+
+  return (
+    <Offcanvas show={showCanvas} onHide={handleCloseCanvas} placement="end">
+      <Offcanvas.Header closeButton className={styles.OFhead}>
+        <Offcanvas.Title>Mis chats</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body className={styles.OFbody}>
+        {chats.map((chat) => (
+          <div
+            key={chat.id}
+            onClick={() => goToChat(chat.id)}
+            className={`${styles.ChatHover} pointer mb-2`}
+          >
+            <div className={styles.michat}>
+              <div className="row">
+                <div className="col-2 text-center">
+                  <div className={styles.backImg}>
+                    <img
+                      src={chat.img}
+                      alt={chat.nombre}
+                      style={{ borderRadius: "50%" }}
+                    />
+                  </div>
+                </div>
+                <div className="col-10">
+                  <div className={styles.nombre}>{chat.nombre}</div>
+                  <div className={styles.mensaje}>{chat.mensaje}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Offcanvas.Body>
+    </Offcanvas>
+  );
+};
+
+export default MisChats;
