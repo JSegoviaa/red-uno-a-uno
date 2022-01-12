@@ -1,0 +1,66 @@
+.header {
+  background-color: #7149bc;
+  padding: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.perfilImg {
+  width: 75px;
+  border-radius: 50%;
+}
+.nombre {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  color: white;
+}
+.conexion {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: white;
+  padding-right: 10px;
+}
+.chatBox {
+  box-shadow: 0px 0px 17px 3px rgba(0, 0, 0, 0.29);
+  padding: 25px 10px;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.sendMensaje {
+  background-color: #7149bc;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 15px;
+}
+.btnEnviar {
+  border: none;
+  background: none;
+}
+
+.mensaje1 {
+  background-color: tomato;
+  padding: 20px;
+  border-radius: 10px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  
+  
+}
+.mensaje2 {
+  background-color: #7149bc;
+  padding: 20px;
+  border-radius: 10px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  
+}
