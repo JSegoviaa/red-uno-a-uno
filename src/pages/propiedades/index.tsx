@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const resp = await fetch(`${production}/inmuebles/`);
   const data = await resp.json();
 
-  return { props: { data }, revalidate: 60 };
+  return { props: { data }, revalidate: 15 };
 };
 
 const Index = ({ data }: Resp) => {
