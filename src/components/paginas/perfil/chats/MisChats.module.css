@@ -1,0 +1,37 @@
+.michat {
+  padding: 10px 20px;
+}
+.ChatHover:hover {
+  background-color: #ececec;
+}
+.OFhead{
+  background-color: slateblue;
+  color: white;
+}
+.OFbody {
+  padding: 0;
+}
+
+
+
+.nombre {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 19px;
+  color: slateblue;
+}
+.mensaje {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #5e5e5e;
+  padding-left: 5px;
+}
+.backImg {
+  width: 55px;
+  height: 55px;
+  background-color: slateblue;
+  border-radius: 50%;
+}

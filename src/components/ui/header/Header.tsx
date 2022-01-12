@@ -7,6 +7,7 @@ import styles from "./Header.module.css";
 import LoginModal from "../authmodal/LoginModal";
 import RegisterModal from "../authmodal/AuthModal";
 import { AuthContext } from "../../../context/auth/AuthContext";
+import MisChats from "../../paginas/perfil/chats/MisChats";
 const Header = () => {
   const router = useRouter();
   const { auth } = useContext(AuthContext);
@@ -24,7 +25,11 @@ const Header = () => {
 
   const { logOut } = useContext(AuthContext);
 
-  const chats = () => router.push("/perfil/mis-chats");
+
+  const [showCanvas, setShowCanvas] = useState(false);
+  const handleCloseCanvas = () => setShowCanvas(false);
+  const handleShowCanvas = () => setShowCanvas(true);
+
 
   return (
     <Navbar className={styles.navStyle} bg="light" expand="lg">
@@ -58,7 +63,7 @@ const Header = () => {
                   INICIO
                 </div>
               </Link>
-              <Button titulo="mis chats" onClick={chats} />
+              <Button titulo="mis chats" onClick={handleShowCanvas} />
 
               <div
                 className={`${styles.navPerfil} pointer ms-3`}
@@ -135,6 +140,9 @@ const Header = () => {
       </Container>
       <LoginModal show={show} handleClose={handleClose} />
       <RegisterModal show={isOpen} handleClose={closeRegister} />
+      <MisChats showCanvas={showCanvas} handleCloseCanvas={handleCloseCanvas}/>
+      
+
     </Navbar>
   );
 };
