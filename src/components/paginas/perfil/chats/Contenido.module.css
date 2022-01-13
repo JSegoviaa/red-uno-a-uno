@@ -3,9 +3,10 @@
   padding: 10px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+  box-sizing: border-box;
 }
 .perfilImg {
-  width: 75px;
+  width: 50px;
   border-radius: 50%;
 }
 .nombre {
