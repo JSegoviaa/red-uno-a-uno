@@ -9,10 +9,10 @@ const ContenidoChat = () => {
                     <div className="col-12">
                         <div className={styles.header}>
                             <div className="row">
-                                <div className="col-1 text-center">
+                                <div className="col-sm-2 col-xl-1 text-center">
                                     <img className={styles.perfilImg} src="/images/avatares/2.svg" alt="..." />
                                 </div>
-                                <div className="col-7">
+                                <div className="col-sm-9 col-xl-7">
                                     <div className={`${styles.nombre} mt-2`}>
                                         James Franco
                                     </div>
@@ -26,62 +26,62 @@ const ContenidoChat = () => {
                     <div className="col-12">
                         <div className={styles.chatBox}>
                             <div className="row d-flex justify-content-center">
-                                <div className="col-10 mb-2">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
                                         Que pedo maldito drogadicto!
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
                                         Adivina que xd
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
                                         Voy a vender la casa de isla, pero no se que precio ponerle, puedes pasarme tu contacto del valuador? para empezar con los tramites, ya sabes tambien te va a tocar tu comision si la vendes
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
                                         Si quieres venir a verla, avisame
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2 text-start">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje2}>
                                         Que pexilindro
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2 text-start">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje2}>
                                         O sea que ya se acabron las fiestas alocadas en la terraza? :(
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
                                         Pues cuando compre la nueva la vamos a inaugurar, tu tranqui, ya les avise a los demas
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2 text-start">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje2}>
                                         Camara pues, deja le aviso al valuador para ir juntos a revisar la casa
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2 text-start">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje2}>
                                         De todos modos te mando su num para que le marques
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2 text-start">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje2}>
                                         555 12487
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
                                         Va, gracias!
                                     </div>
                                 </div>
-                                <div className="col-10 mb-2">
+                                <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
                                         Te debo un porrito jajaja
                                     </div>

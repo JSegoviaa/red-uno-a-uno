@@ -73,3 +73,9 @@
 .hoja{
   border: 2px solid red;
 }
+
+@media (max-width: 500px) {
+  .mensaje1, .mensaje2{
+    max-width: 80%;
+  }
+}
