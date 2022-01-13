@@ -5,6 +5,7 @@ import {
   BorrarInmuebleResp,
   CrearInmuebleResp,
 } from "../interfaces/CrearInmuebleInterface";
+import { FavData, FavResp } from "../interfaces/Favoritos";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
 const baseURL = production;
@@ -123,4 +124,20 @@ export const actualizarPerfilFetch = async (
   });
 
   return await resp.json();
+};
+
+export const agregarFav = async (
+  endpoint: string,
+  data: FavData
+): Promise<FavResp> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await res.json();
 };

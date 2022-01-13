@@ -5,6 +5,8 @@ import { AuthContext } from "../../../../context/auth/AuthContext";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import Button from "../../../ui/button/Button";
 import styles from "./Inmueble.module.css";
+import { agregarFav } from "../../../../helpers/fetch";
+import { toast } from "react-toastify";
 
 interface Props {
   inmuebles: {
@@ -20,6 +22,30 @@ const containerStyle = {
 
 const Ubicacion = ({ inmuebles }: Props) => {
   const { auth } = useContext(AuthContext);
+
+  const agregarFavorito = async (inmuebleId: string) => {
+    const favorito = { usuario: auth.uid, inmueble: inmuebleId };
+
+    const resp = await agregarFav("favoritos", favorito);
+    console.log(resp, " =?");
+
+    if (resp.ok) {
+      toast.success(resp.msg);
+    }
+
+    if (!resp.ok) {
+      if (resp.errors) {
+        resp.errors.map((error) => {
+          toast.error(error.msg);
+        });
+      }
+
+      if (!resp.ok) {
+        toast.error(resp.msg);
+      }
+    }
+  };
+
   return (
     <section className="mt-5">
       <Container>
@@ -67,7 +93,12 @@ const Ubicacion = ({ inmuebles }: Props) => {
             </div>
           </div>
           <div className="col-12 text-center my-5">
-            {auth.uid ? <Button titulo="Añadir a favoritos" /> : null}
+            {auth.uid ? (
+              <Button
+                titulo="Añadir a favoritos"
+                onClick={() => agregarFavorito(inmuebles.inmueble._id)}
+              />
+            ) : null}
           </div>
         </Row>
       </Container>
