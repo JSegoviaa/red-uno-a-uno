@@ -30,7 +30,7 @@ const ContenidoChat = () => {
                                 <div className="col-10 mb-3">
                                     <div className="row d-flex justify-content-start">
                                         <div className={`${styles.mensaje1} col-7 text-start`}>
-                                            que pedo
+                                            que onda
                                         </div>
                                     </div>
                                 </div>
