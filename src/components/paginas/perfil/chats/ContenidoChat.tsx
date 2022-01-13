@@ -26,135 +26,66 @@ const ContenidoChat = () => {
                     <div className="col-12">
                         <div className={styles.chatBox}>
                             <div className="row d-flex justify-content-center">
-                                
-                                <div className="col-10 mb-3">
-                                    <div className="row d-flex justify-content-start">
-                                        <div className={`${styles.mensaje1} col-7 text-start`}>
-                                            que onda
-                                        </div>
+                                <div className="col-10 mb-2">
+                                    <div className={styles.mensaje1}>
+                                        Que pedo maldito drogadicto!
                                     </div>
                                 </div>
-
-                                <div className="col-10 mb-3">
-                                    <div className="row d-flex justify-content-end">
-                                        <div className={`${styles.mensaje2} col-7 text-end`}>
-                                            no pos nomas aqui
-                                        </div>
+                                <div className="col-10 mb-2">
+                                    <div className={styles.mensaje1}>
+                                        Adivina que xd
                                     </div>
                                 </div>
-                                
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-start">
-                                        <div className={`${styles.mensaje1} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2">
+                                    <div className={styles.mensaje1}>
+                                        Voy a vender la casa de isla, pero no se que precio ponerle, puedes pasarme tu contacto del valuador? para empezar con los tramites, ya sabes tambien te va a tocar tu comision si la vendes
                                     </div>
                                 </div>
-
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-end">
-                                        <div className={`${styles.mensaje2} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2">
+                                    <div className={styles.mensaje1}>
+                                        Si quieres venir a verla, avisame
                                     </div>
                                 </div>
-                                
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-start">
-                                        <div className={`${styles.mensaje1} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2 text-start">
+                                    <div className={styles.mensaje2}>
+                                        Que pexilindro
                                     </div>
                                 </div>
-
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-end">
-                                        <div className={`${styles.mensaje2} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2 text-start">
+                                    <div className={styles.mensaje2}>
+                                        O sea que ya se acabron las fiestas alocadas en la terraza? :(
                                     </div>
                                 </div>
-                                
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-start">
-                                        <div className={`${styles.mensaje1} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2">
+                                    <div className={styles.mensaje1}>
+                                        Pues cuando compre la nueva la vamos a inaugurar, tu tranqui, ya les avise a los demas
                                     </div>
                                 </div>
-
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-end">
-                                        <div className={`${styles.mensaje2} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2 text-start">
+                                    <div className={styles.mensaje2}>
+                                        Camara pues, deja le aviso al valuador para ir juntos a revisar la casa
                                     </div>
                                 </div>
-                                
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-start">
-                                        <div className={`${styles.mensaje1} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2 text-start">
+                                    <div className={styles.mensaje2}>
+                                        De todos modos te mando su num para que le marques
                                     </div>
                                 </div>
-
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-end">
-                                        <div className={`${styles.mensaje2} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2 text-start">
+                                    <div className={styles.mensaje2}>
+                                        555 12487
                                     </div>
                                 </div>
-                                
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-start">
-                                        <div className={`${styles.mensaje1} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2">
+                                    <div className={styles.mensaje1}>
+                                        Va, gracias!
                                     </div>
                                 </div>
-
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-end">
-                                        <div className={`${styles.mensaje2} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
+                                <div className="col-10 mb-2">
+                                    <div className={styles.mensaje1}>
+                                        Te debo un porrito jajaja
                                     </div>
                                 </div>
-                                
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-start">
-                                        <div className={`${styles.mensaje1} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-end">
-                                        <div className={`${styles.mensaje2} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-start">
-                                        <div className={`${styles.mensaje1} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-8 mb-3">
-                                    <div className="row d-flex justify-content-end">
-                                        <div className={`${styles.mensaje2} col-8`}>
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit officiis accusamus reprehenderit, praesentium recusandae cum ea magni aspernatur dicta. Dolorem, reprehenderit maiores. Fugit rem reprehenderit deleniti eligendi aut quibusdam dolores unde voluptas maiores adipisci temporibus architecto itaque quo accusamus nulla, laudantium ducimus dolorem? Accusamus, esse reprehenderit nobis fugiat ex facilis eum at officia et id.
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
