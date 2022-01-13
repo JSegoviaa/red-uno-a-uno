@@ -2,10 +2,10 @@ import { Col } from "react-bootstrap";
 import styles from "./FavsCard.module.css";
 
 interface Props {
-  id: number;
-  image: string;
-  titulo: string;
-  icon: string;
+  id: string;
+  image?: string;
+  titulo?: string;
+  icon?: string;
 }
 
 const FavPropertiesCard = ({ titulo, id, image, icon }: Props) => {
@@ -15,7 +15,11 @@ const FavPropertiesCard = ({ titulo, id, image, icon }: Props) => {
         <img className={styles.iconoF} src={icon} alt="..." />
         <img src={image} alt={titulo} />
         <div className={`${styles.proContent} my-3`}>{titulo}</div>
-        <div className="btn-group" role="group" aria-label="Basic mixed styles example">
+        <div
+          className="btn-group"
+          role="group"
+          aria-label="Basic mixed styles example"
+        >
           <button type="button" className={`${styles.customBtn2} btn`}></button>
           <button type="button" className={`${styles.customBtn3} btn`}></button>
           <button type="button" className={`${styles.customBtn4} btn`}></button>
