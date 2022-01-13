@@ -9,11 +9,11 @@ const ContenidoChat = () => {
                     <div className="col-12">
                         <div className={styles.header}>
                             <div className="row">
-                                <div className="col-sm-2 col-xl-1 text-center">
+                                <div className="col-sm-2 col-md-2 col-lg-1 col-xl-1 col-xxl-1 col-2 text-end">
                                     <img className={styles.perfilImg} src="/images/avatares/2.svg" alt="..." />
                                 </div>
-                                <div className="col-sm-9 col-xl-7">
-                                    <div className={`${styles.nombre} mt-2`}>
+                                <div className="col-sm-10 col-md-10 col-lg-11 col-xl-11 col-xxl-11 col-10">
+                                    <div className={`${styles.nombre}`}>
                                         James Franco
                                     </div>
                                     <div className={styles.conexion}>
