@@ -9,8 +9,7 @@ export interface FavResp {
 
 export interface Favorito {
   _id: string;
-  usuario: string;
-  inmueble: string;
+  inmueble: Inmueble;
   createdAt: string;
   updatedAt: string;
 }
@@ -19,6 +18,19 @@ interface Errors {
   msg: string;
   param: string;
   location: string;
+}
+
+interface Inmueble {
+  _id: string;
+  titulo: string;
+  usuario: Usuario;
+  slug: string;
+}
+
+interface Usuario {
+  _id: string;
+  nombre: string;
+  apellido: string;
 }
 
 export interface FavData {

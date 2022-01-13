@@ -20,7 +20,8 @@ const MiListaFavoritos = () => {
               <FavPropertiesCard
                 key={favorito._id}
                 id={favorito._id}
-                // titulo={favorito.titulo}
+                titulo={favorito.inmueble.titulo}
+                slug={favorito.inmueble.slug}
                 // image={favorito.image}
                 // icon={favorito.icon}
               />
