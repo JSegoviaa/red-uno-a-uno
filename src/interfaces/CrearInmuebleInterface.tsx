@@ -90,6 +90,7 @@ export interface InmueblesUsuario {
   lat: number;
   lng: number;
   tipoPropiedad: TipoPropiedad;
+  createdAt: number;
 }
 
 interface Usuario {

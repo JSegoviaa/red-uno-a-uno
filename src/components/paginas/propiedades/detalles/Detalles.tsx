@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Accordion } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { formatPrice } from "../../../../helpers/formatPrice";
+import { publicadoHace } from "../../../../helpers/horaMes";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import styles from "./Inmueble.module.css";
 
@@ -40,7 +41,7 @@ const Detalles = ({ inmuebles }: Props) => {
               </div>
               <div className="col-sm-12 col-md-4 col-lg-4 text-sm-start text-md-start text-lg-end text-start">
                 <div className={`${styles.inmuebleTiempo} mt-3`}>
-                  Publicado hace 9 días
+                  Publicado {publicadoHace(inmuebles.inmueble.createdAt)}
                 </div>
               </div>
             </div>
