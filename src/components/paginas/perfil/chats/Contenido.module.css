@@ -43,24 +43,33 @@
 
 .mensaje1 {
   background-color: tomato;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   color: white;
-  
+  text-align: left;
+  width: fit-content;
+  max-width: 65%;
+  float: left;
   
 }
 .mensaje2 {
   background-color: #7149bc;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   color: white;
-  
+  width: fit-content;
+  max-width: 65%;
+  float: right;
+}
+
+.hoja{
+  border: 2px solid red;
 }
