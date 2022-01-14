@@ -8,10 +8,10 @@
 .customTable tr:nth-child(odd) {
   background-color: #ececec;
 }
-.customTable td:nth-child(odd):hover {
+/* .customTable td:nth-child(odd):hover {
   background-color: #e65a1f;
   color: white;
-}
+} */
 
 .content {
   font-family: "Open Sans";
@@ -32,7 +32,13 @@
   padding: 8px;
 }
 .thover:hover {
-  background: #ffe5da;
-  outline: 1px solid #e65a1f !important;
+  background: #ffe5da !important;
+  outline: 1px solid #e65a1f;
   box-sizing: border-box;
+}
+.deleteI {
+  color: grey;
+}
+.deleteI:hover {
+  color: red;
 }

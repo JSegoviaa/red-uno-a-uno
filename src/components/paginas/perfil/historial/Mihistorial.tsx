@@ -23,13 +23,19 @@ const Mihistorial = () => {
             ) : (
               <tbody>
                 {historial.map((hist, i) => (
-                  <tr key={hist._id} className={`${styles.thover} pointer`}>
+                  <tr key={hist._id} className={`${styles.thover}`}>
                     <td className={styles.tNumber}>{i + 1} </td>
                     <td
                       onClick={() => goToProperty(hist.inmueble.slug)}
-                      className={styles.content}
+                      className={`${styles.content} pointer`}
                     >
                       {hist.inmueble.titulo}
+                    </td>
+                    <td align="center">
+                      visto hace 50 años
+                    </td>
+                    <td align="center">
+                    <i className={`${styles.deleteI} bi bi-x-circle-fill pointer`}></i>
                     </td>
                   </tr>
                 ))}
