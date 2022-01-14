@@ -1,78 +1,45 @@
-import styles from './Mihistorial.module.css';
+import { useContext } from "react";
+import { useRouter } from "next/router";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { useHistorial } from "../../../../hooks/useUserInfo";
+import Loading from "../../../ui/loading/Loading";
+import styles from "./Mihistorial.module.css";
 
 const Mihistorial = () => {
-    return (
-        <section>
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <br />
-                        <table className={`${styles.customTable}`}>
-                            <tbody>
+  const { auth } = useContext(AuthContext);
+  const router = useRouter();
+  const { historial, isLoading } = useHistorial(auth.uid);
 
+  const goToProperty = (slug: string) => router.push("/propiedades/" + slug);
 
-                                {/* ---- empieza fila (datos) ---- */}
-                                <tr className={`${styles.thover} pointer`}>
-                                    <td className={styles.tNumber}>
-                                        10
-                                    </td>
-                                    <td className={styles.content}>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    </td>
-                                </tr>
-                                {/* ---- termina fila (datos) ---- */}
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="col">
+          <br />
+          <table className={`${styles.customTable}`}>
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <tbody>
+                {historial.map((hist, i) => (
+                  <tr key={hist._id} className={`${styles.thover} pointer`}>
+                    <td className={styles.tNumber}>{i + 1} </td>
+                    <td
+                      onClick={() => goToProperty(hist.inmueble.slug)}
+                      className={styles.content}
+                    >
+                      {hist.inmueble.titulo}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-                                {/* ---- empieza fila (datos) ---- */}
-                                <tr className={`${styles.thover} pointer`}>
-                                    <td className={styles.tNumber}>
-                                        2
-                                    </td>
-                                    <td className={styles.content}>
-                                        Lorem ipsum dolor sit amet consectetur.
-                                    </td>
-                                </tr>
-                                {/* ---- termina fila (datos) ---- */}
-
-                                {/* ---- empieza fila (datos) ---- */}
-                                <tr className={`${styles.thover} pointer`}>
-                                    <td className={styles.tNumber}>
-                                        6
-                                    </td>
-                                    <td className={styles.content}>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione, tempora. Alias, minima?
-                                    </td>
-                                </tr>
-                                {/* ---- termina fila (datos) ---- */}
-
-                                {/* ---- empieza fila (datos) ---- */}
-                                <tr className={`${styles.thover} pointer`}>
-                                    <td className={styles.tNumber}>
-                                        22
-                                    </td>
-                                    <td className={styles.content}>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, recusandae rerum id dolores ab dicta atque natus officiis in illum!
-                                    </td>
-                                </tr>
-                                {/* ---- termina fila (datos) ---- */}
-
-                                {/* ---- empieza fila (datos) ---- */}
-                                <tr className={`${styles.thover} pointer`}>
-                                    <td className={styles.tNumber}>
-                                        19
-                                    </td>
-                                    <td className={styles.content}>
-                                        Lorem ipsum, dolor sit amet consectetur adi
-                                    </td>
-                                </tr>
-                                {/* ---- termina fila (datos) ---- */}
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
-}
-
-export default Mihistorial
+export default Mihistorial;
