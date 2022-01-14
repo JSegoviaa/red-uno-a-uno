@@ -27,11 +27,23 @@ const FiltroFavs = () => {
 
                     {favoritos.map((favorito, i) => (
                       <option
-                        key={favorito.inmueble.usuario._id + i}
-                        value={favorito.inmueble.usuario._id}
+                        key={
+                          favorito.inmueble
+                            ? favorito.inmueble.usuario._id + i
+                            : i
+                        }
+                        value={
+                          favorito.inmueble
+                            ? favorito.inmueble.usuario._id
+                            : undefined
+                        }
                       >
-                        {favorito.inmueble.usuario.nombre}{" "}
-                        {favorito.inmueble.usuario.apellido}
+                        {favorito.inmueble
+                          ? favorito.inmueble.usuario.nombre
+                          : null}{" "}
+                        {favorito.inmueble
+                          ? favorito.inmueble.usuario.apellido
+                          : null}
                       </option>
                     ))}
                   </Form.Select>

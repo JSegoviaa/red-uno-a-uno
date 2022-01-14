@@ -17,7 +17,7 @@ export const useFavoritos = (uid: string | null | undefined) => {
 
   useEffect(() => {
     obtenerFavoritos();
-  }, []);
+  }, [favoritos]);
 
   return { favoritos, cargando };
 };

@@ -27,8 +27,12 @@ const MiListaFavoritos = () => {
                   <FavPropertiesCard
                     key={favorito._id}
                     id={favorito._id}
-                    titulo={favorito.inmueble.titulo}
-                    slug={favorito.inmueble.slug}
+                    titulo={
+                      favorito.inmueble
+                        ? favorito.inmueble.titulo
+                        : "Inmueble dado de baja por el promotor"
+                    }
+                    slug={favorito.inmueble ? favorito.inmueble.slug : ""}
                     // image={favorito.image}
                     // icon={favorito.icon}
                   />
