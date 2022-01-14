@@ -205,8 +205,6 @@ const AnadirInmueble = () => {
   const longitudTitulo = titulo.length;
   const longitudOtros = otros.length;
 
-  console.log(tipoPropiedad, "?");
-
   return (
     <section>
       <div className="container">

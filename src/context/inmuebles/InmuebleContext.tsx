@@ -150,8 +150,6 @@ export const InmuebleProvider: FC = ({ children }) => {
       "POST"
     );
 
-    console.log(resp);
-
     if (resp.ok) {
       toast.success(resp.msg);
       router.push("/perfil/mis-propiedades");

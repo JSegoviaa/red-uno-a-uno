@@ -27,7 +27,6 @@ const Ubicacion = ({ inmuebles }: Props) => {
     const favorito = { usuario: auth.uid, inmueble: inmuebleId };
 
     const resp = await agregarFav("favoritos", favorito);
-    console.log(resp, " =?");
 
     if (resp.ok) {
       toast.success(resp.msg);

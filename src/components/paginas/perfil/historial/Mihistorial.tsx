@@ -30,16 +30,16 @@ const Mihistorial = () => {
         <div className="row">
           <div className="col">
             <br />
-            <table className={`${styles.customTable}`}>
-              {isLoading ? (
-                <Loading />
-              ) : (
-                <>
-                  {historial.length === 0 ? (
-                    <div className={`${styles.titulo} text-center`}>
-                      No tienes búsquedas recientes
-                    </div>
-                  ) : (
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <>
+                {historial.length === 0 ? (
+                  <div className={`${styles.titulo} text-center`}>
+                    No tienes búsquedas recientes
+                  </div>
+                ) : (
+                  <table className={`${styles.customTable}`}>
                     <tbody>
                       {historial
                         .map((hist, i) => (
@@ -71,10 +71,10 @@ const Mihistorial = () => {
                         ))
                         .reverse()}
                     </tbody>
-                  )}
-                </>
-              )}
-            </table>
+                  </table>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
