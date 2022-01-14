@@ -167,7 +167,6 @@ export const InmuebleProvider: FC = ({ children }) => {
 
   const eliminarInmueble = async (id: string) => {
     const resp = await fetchBorrarInmueble(`inmuebles/${id}`);
-    router.push("/perfil");
 
     toast.success(resp.msg);
     return resp;

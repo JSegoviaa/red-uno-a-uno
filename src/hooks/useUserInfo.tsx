@@ -32,17 +32,15 @@ export const useUserInmuebles = (uid: string | undefined | null) => {
   const [cargando, setCargando] = useState(true);
 
   const obtenerInmueblesDeUsuario = async () => {
-    setCargando(true);
-
     const data = await fetch(baseURL + "/inmuebles/usuario/" + uid);
     const resp = await data.json();
-    setCargando(false);
     setInmuebles(resp);
+    setCargando(false);
   };
 
   useEffect(() => {
     obtenerInmueblesDeUsuario();
-  }, []);
+  }, [inmuebles?.inmueblesUsuario]);
 
   return { inmuebles, cargando };
 };

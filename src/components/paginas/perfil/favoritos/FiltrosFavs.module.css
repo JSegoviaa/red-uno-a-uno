@@ -1,10 +1,15 @@
-.customSelect{
-    font-family: "Open Sans";
-    font-size: 18px;
-    border-radius: 7px;
+.customSelect {
+  font-family: "Open Sans";
+  font-size: 18px;
+  border-radius: 7px;
 }
-.customSelect:focus{
-    box-shadow: none;
-    border: 1px solid tomato;
+.customSelect:focus {
+  box-shadow: none;
+  border: 1px solid tomato;
 }
 
+.titulo {
+  font-size: 70px;
+  color: #ccc;
+  margin: 150px 0;
+}
