@@ -62,7 +62,7 @@ export const useHistorial = (uid: string | undefined | null) => {
 
   useEffect(() => {
     obtenerHistorial();
-  }, []);
+  }, [historial]);
 
   return { historial, isLoading };
 };

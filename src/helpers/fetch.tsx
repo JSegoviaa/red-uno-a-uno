@@ -158,3 +158,17 @@ export const agregarHist = async (
 
   return await res.json();
 };
+
+export const eliminarHist = async (
+  endpoint: string
+): Promise<HistorialResp> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const res = await fetch(url, {
+    method: "DELETE",
+    headers: { "Content-type": "application/json", "x-token": token },
+  });
+
+  return await res.json();
+};
