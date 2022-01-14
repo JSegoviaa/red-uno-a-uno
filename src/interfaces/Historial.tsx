@@ -16,3 +16,8 @@ export interface Inmueble {
   titulo: string;
   slug: string;
 }
+
+export interface HistData {
+  usuario: string | null | undefined;
+  inmueble: string;
+}

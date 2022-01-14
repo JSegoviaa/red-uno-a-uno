@@ -4,6 +4,8 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { MapContext } from "../../../context/map/MapContext";
 import { useInmuebles } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
+import { AuthContext } from "../../../context/auth/AuthContext";
+import { agregarHist } from "../../../helpers/fetch";
 
 const containerStyle = {
   width: "100%",
@@ -11,10 +13,17 @@ const containerStyle = {
 };
 
 const MapaUbicacion = () => {
+  const { auth } = useContext(AuthContext);
   const router = useRouter();
   const { coordenadas, zoom } = useContext(MapContext);
   const { inmuebles, cargando } = useInmuebles();
-  const goToProperty = (id: string) => router.push("/propiedades/" + id);
+
+  const handleProperty = async (id: string, slug: string) => {
+    const data = { usuario: auth.uid, inmueble: id };
+
+    router.push(`/propiedades/${slug}`);
+    await agregarHist("historial", data);
+  };
 
   return (
     <GoogleMap
@@ -28,7 +37,7 @@ const MapaUbicacion = () => {
         <>
           {inmuebles?.map((inmueble) => (
             <Marker
-              onClick={() => goToProperty(inmueble.slug)}
+              onClick={() => handleProperty(inmueble._id, inmueble.slug)}
               key={inmueble._id}
               position={{ lat: inmueble.lat, lng: inmueble.lng }}
               icon={{
