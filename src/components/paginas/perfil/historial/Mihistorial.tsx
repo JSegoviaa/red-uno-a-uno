@@ -13,7 +13,12 @@ const Mihistorial = () => {
   const router = useRouter();
   const { historial, isLoading } = useHistorial(auth.uid);
 
-  const goToProperty = (slug: string) => router.push("/propiedades/" + slug);
+  const goToProperty = async (slug: string) => {
+    if (slug !== "") {
+      router.push("/propiedades/" + slug);
+    }
+  };
+
   const handleDelete = async (id: string) => {
     const resp = await eliminarHist(`historial/${id}`);
     if (resp.ok) toast.success(resp.msg);
@@ -41,10 +46,16 @@ const Mihistorial = () => {
                           <tr key={hist._id} className={`${styles.thover}`}>
                             <td className={styles.tNumber}>{i + 1} </td>
                             <td
-                              onClick={() => goToProperty(hist.inmueble.slug)}
+                              onClick={() =>
+                                goToProperty(
+                                  hist.inmueble ? hist.inmueble.slug : ""
+                                )
+                              }
                               className={`${styles.content} pointer`}
                             >
-                              {hist.inmueble.titulo}
+                              {hist.inmueble
+                                ? hist.inmueble.titulo
+                                : "Este inmueble ha sido dado de baja por el promotor"}
                             </td>
                             <td align="center">
                               Visto {publicadoHace(hist.createdAt)}
