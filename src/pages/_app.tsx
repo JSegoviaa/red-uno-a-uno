@@ -1,13 +1,13 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
+import moment from "moment";
+import "moment/locale/es";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider } from "../context/auth/AuthContext";
 import Layout from "../components/layout/Layout";
 import { InmuebleProvider } from "../context/inmuebles/InmuebleContext";
 import { MapProvider } from "../context/map/MapContext";
-import moment from "moment";
-import "moment/locale/es";
 moment.locale("es");
 
 function MyApp({ Component, pageProps }: AppProps) {
