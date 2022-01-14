@@ -4,7 +4,6 @@
   background-color: #fffdfd;
 }
 
-
 .customTable tr:nth-child(odd) {
   background-color: #ececec;
 }
@@ -41,4 +40,14 @@
 }
 .deleteI:hover {
   color: red;
+}
+
+.titulo {
+  font-size: 70px;
+  color: #ccc;
+  margin: 150px 0;
+}
+
+.section {
+  min-height: 300px;
 }
