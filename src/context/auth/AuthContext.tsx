@@ -5,8 +5,9 @@ import {
   actualizarPerfilFetch,
   fetchConToken,
   fetchSinToken,
+  subirFotoPerfil,
 } from "../../helpers/fetch";
-import { Auth, Resp } from "../../interfaces/AuthInterface";
+import { Auth, Resp, SubirFoto } from "../../interfaces/AuthInterface";
 import { RespActualizar } from "../../interfaces/UserInterface";
 
 interface ContextProps {
@@ -24,6 +25,7 @@ interface ContextProps {
   signInWithFacebook: () => void;
   verificaToken: () => void;
   actualizarPerfil: (data: any) => Promise<RespActualizar>;
+  fotoPerfil: (data: any) => Promise<SubirFoto>;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -272,6 +274,42 @@ export const AuthProvider: FC = ({ children }) => {
     return resp;
   };
 
+  const fotoPerfil = async (formData: any) => {
+    const resp = await subirFotoPerfil(
+      `subidas/usuarios/${auth.uid}`,
+      formData
+    );
+
+    const { usuario } = resp;
+
+    if (resp.ok) {
+      setAuth({
+        uid: usuario.uid,
+        checking: false,
+        logged: true,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        correo: usuario.correo,
+        direccionFisica: usuario.direccionFisica,
+        facebookpage: usuario.facebookpage,
+        instagram: usuario.instagram,
+        nombreInmobiliaria: usuario.nombreInmobiliaria,
+        telefonoOficina: usuario.telefonoOficina,
+        telefonoPersonal: usuario.telefonoPersonal,
+        twitter: usuario.twitter,
+        youtube: usuario.youtube,
+        perfilEmpresarial: usuario.perfilEmpresarial,
+        linkedin: usuario.linkedin,
+        img: usuario.img,
+        logo: usuario.logo,
+      });
+
+      toast.success(resp.msg);
+    }
+
+    return resp;
+  };
+
   const signInWithGoogle = async () => {
     console.log("Iniciando sesión con google");
   };
@@ -291,6 +329,7 @@ export const AuthProvider: FC = ({ children }) => {
         signInWithFacebook,
         verificaToken,
         actualizarPerfil,
+        fotoPerfil,
       }}
     >
       {children}

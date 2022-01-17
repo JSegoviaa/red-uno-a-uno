@@ -1,19 +1,25 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import Button from "../../../ui/button/Button";
 import styles from "./Perfil.module.css";
 
 const Perfil = () => {
   const router = useRouter();
-
+  const { auth, fotoPerfil } = useContext(AuthContext);
+  const [picture, setPicture] = useState("");
   const misPaquetes = () => router.push("/perfil/mis-paquetes");
   const misPropiedades = () => router.push("/perfil/mis-propiedades");
   const actualizarPerfil = () => router.push("/perfil/actualizar-perfil");
 
-  const { auth } = useContext(AuthContext);
+  const handlePicture = async (e: any) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("picture", picture);
 
+    await fotoPerfil(formData);
+  };
   return (
     <Container>
       <div className="d-flex justify-content-center">
@@ -35,6 +41,15 @@ const Perfil = () => {
         </div>
       </div>
       <hr />
+      <Form onSubmit={handlePicture} encType="multipart/form-data">
+        <Form.Group className="mb-3">
+          <Form.Control
+            type="file"
+            onChange={(e: any) => setPicture(e.target.files[0])}
+          />
+        </Form.Group>
+        <button>enviar</button>
+      </Form>
 
       <div className="py-5">
         <Row className="d-flex justify-content-center text-center">

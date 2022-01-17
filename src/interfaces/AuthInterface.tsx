@@ -40,3 +40,9 @@ export interface RegisterData {
   correo: string;
   password: string;
 }
+
+export interface SubirFoto {
+  ok: boolean;
+  msg: string;
+  usuario: Auth;
+}

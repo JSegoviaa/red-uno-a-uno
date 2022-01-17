@@ -1,5 +1,5 @@
 import { development, production } from "../credentials/credentials";
-import { RegisterData, Resp } from "../interfaces/AuthInterface";
+import { RegisterData, Resp, SubirFoto } from "../interfaces/AuthInterface";
 import { Contact, ContactResp } from "../interfaces/ContactInterface";
 import {
   BorrarInmuebleResp,
@@ -183,4 +183,20 @@ export const eliminarHist = async (
   });
 
   return await res.json();
+};
+
+export const subirFotoPerfil = async (
+  endpoint: string,
+  data: any
+): Promise<SubirFoto> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "x-token": token },
+    body: data,
+  });
+
+  return await resp.json();
 };
