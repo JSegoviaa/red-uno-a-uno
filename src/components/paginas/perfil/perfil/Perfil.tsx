@@ -19,7 +19,11 @@ const Perfil = () => {
       <div className="d-flex justify-content-center">
         <div className="text-center">
           <div className="pt-5 pb-3">
-            <img src="/images/avatares/2.svg" style={{ borderRadius: "50%" }} />
+            <img
+              src={auth.img}
+              style={{ borderRadius: "50%" }}
+              alt="Foto de perfil red1a1"
+            />
           </div>
           <div className={styles.nombre}>
             {auth.nombre} {auth.apellido}

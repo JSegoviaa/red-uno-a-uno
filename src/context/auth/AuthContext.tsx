@@ -45,6 +45,8 @@ const initialState: Auth = {
   youtube: undefined,
   perfilEmpresarial: undefined,
   linkedin: undefined,
+  img: undefined,
+  logo: undefined,
 };
 
 export const AuthProvider: FC = ({ children }) => {
@@ -77,6 +79,8 @@ export const AuthProvider: FC = ({ children }) => {
         youtube: usuario.youtube,
         perfilEmpresarial: usuario.perfilEmpresarial,
         linkedin: usuario.linkedin,
+        img: usuario.img,
+        logo: usuario.logo,
       });
     }
     return resp;
@@ -114,6 +118,8 @@ export const AuthProvider: FC = ({ children }) => {
         youtube: usuario.youtube,
         perfilEmpresarial: usuario.perfilEmpresarial,
         linkedin: auth.linkedin,
+        img: usuario.img,
+        logo: usuario.logo,
       });
     }
 
@@ -141,6 +147,8 @@ export const AuthProvider: FC = ({ children }) => {
         youtube: undefined,
         perfilEmpresarial: undefined,
         linkedin: undefined,
+        img: undefined,
+        logo: undefined,
       });
 
       return false;
@@ -168,6 +176,8 @@ export const AuthProvider: FC = ({ children }) => {
         youtube: usuario.youtube,
         perfilEmpresarial: usuario.perfilEmpresarial,
         linkedin: usuario.linkedin,
+        img: usuario.img,
+        logo: usuario.logo,
       });
       return true;
     } else {
@@ -188,6 +198,8 @@ export const AuthProvider: FC = ({ children }) => {
         youtube: undefined,
         perfilEmpresarial: undefined,
         linkedin: undefined,
+        img: undefined,
+        logo: undefined,
       });
 
       return false;
@@ -213,6 +225,8 @@ export const AuthProvider: FC = ({ children }) => {
       youtube: undefined,
       perfilEmpresarial: undefined,
       linkedin: undefined,
+      img: undefined,
+      logo: undefined,
     });
   };
 
@@ -241,6 +255,8 @@ export const AuthProvider: FC = ({ children }) => {
         youtube: usuario.youtube,
         perfilEmpresarial: usuario.perfilEmpresarial,
         linkedin: usuario.linkedin,
+        img: usuario.img,
+        logo: usuario.logo,
       });
 
       toast.success(resp.msg);

@@ -15,12 +15,14 @@ export interface Auth {
   youtube: string | number | string[] | undefined;
   perfilEmpresarial: string | number | string[] | undefined;
   linkedin: string | number | string[] | undefined;
+  img: string | undefined;
+  logo: string | undefined;
 }
 
 export interface Resp {
   token: string;
   ok: boolean;
-  msg: 'string';
+  msg: "string";
   usuario: Auth;
   errors: Errors[];
 }

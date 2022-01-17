@@ -1,6 +1,5 @@
 import { useContext, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Container, Nav, Navbar, Overlay } from "react-bootstrap";
 import Button from "../button/Button";
 import styles from "./Header.module.css";
@@ -8,8 +7,8 @@ import LoginModal from "../authmodal/LoginModal";
 import RegisterModal from "../authmodal/AuthModal";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import MisChats from "../../paginas/perfil/chats/MisChats";
+
 const Header = () => {
-  const router = useRouter();
   const { auth } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -25,11 +24,9 @@ const Header = () => {
 
   const { logOut } = useContext(AuthContext);
 
-
   const [showCanvas, setShowCanvas] = useState(false);
   const handleCloseCanvas = () => setShowCanvas(false);
   const handleShowCanvas = () => setShowCanvas(true);
-
 
   return (
     <Navbar className={styles.navStyle} bg="light" expand="lg">
@@ -71,7 +68,7 @@ const Header = () => {
                 onClick={() => setShow1(!show1)}
               >
                 <img
-                  src="/images/avatares/2.svg"
+                  src={auth.img}
                   alt="Mi perfil"
                   style={{ width: "100%", borderRadius: "50%" }}
                 />
@@ -140,9 +137,7 @@ const Header = () => {
       </Container>
       <LoginModal show={show} handleClose={handleClose} />
       <RegisterModal show={isOpen} handleClose={closeRegister} />
-      <MisChats showCanvas={showCanvas} handleCloseCanvas={handleCloseCanvas}/>
-      
-
+      <MisChats showCanvas={showCanvas} handleCloseCanvas={handleCloseCanvas} />
     </Navbar>
   );
 };
