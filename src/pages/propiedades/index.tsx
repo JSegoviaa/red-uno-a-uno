@@ -1,5 +1,6 @@
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import ListaPropiedades from "../../components/paginas/propiedades/ListaPropiedades/ListaPropiedades";
 import SEO from "../../components/seo/SEO";
 import Titulo from "../../components/ui/titulo/Titulo";
@@ -22,7 +23,11 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Index = ({ data }: Resp) => {
-  const { asPath } = useRouter();
+  const { asPath, push } = useRouter();
+
+  useEffect(() => {
+    push("/");
+  }, []);
 
   return (
     <>

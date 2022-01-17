@@ -43,6 +43,7 @@ const Propiedad = ({ inmuebles }: Props) => {
         titulo={inmuebles.inmueble.titulo}
         url={`/${inmuebles.inmueble.slug}`}
         descripcion={inmuebles.inmueble.descripcion}
+        img={inmuebles.inmueble.imgs[0] ? inmuebles.inmueble.imgs[0] : ""}
       />
       <Slider inmuebles={inmuebles} />
       <Detalles inmuebles={inmuebles} />

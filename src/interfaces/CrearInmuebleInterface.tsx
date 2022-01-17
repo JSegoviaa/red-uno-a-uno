@@ -91,6 +91,7 @@ export interface InmueblesUsuario {
   lng: number;
   tipoPropiedad: TipoPropiedad;
   createdAt: number;
+  imgs: string[];
 }
 
 interface Usuario {

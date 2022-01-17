@@ -3,16 +3,6 @@ import styles from "./Inmueble.module.css";
 import "swiper/css";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 
-const imagenes = [
-  { id: 1, img: "" },
-  { id: 2, img: "" },
-  { id: 3, img: "" },
-  { id: 4, img: "" },
-  { id: 5, img: "" },
-  { id: 6, img: "" },
-  { id: 7, img: "" },
-];
-
 interface Props {
   inmuebles: {
     inmueble: InmueblesUsuario;
@@ -24,11 +14,19 @@ const Slider = ({ inmuebles }: Props) => {
   return (
     <div className="text-center">
       <Swiper className="mySwiper">
-        {imagenes.map((image) => (
-          <SwiperSlide key={image.id}>
-            <div className={styles.sliderEjemplo}>{image.id}</div>
-          </SwiperSlide>
-        ))}
+        <>
+          {inmuebles.inmueble.imgs.length === 0 ? (
+            "No hay imágenes para mostrar"
+          ) : (
+            <>
+              {inmuebles.inmueble.imgs.map((image) => (
+                <SwiperSlide key={image}>
+                  <img src={image} alt={inmuebles.inmueble.titulo} />
+                </SwiperSlide>
+              ))}
+            </>
+          )}
+        </>
       </Swiper>
     </div>
   );

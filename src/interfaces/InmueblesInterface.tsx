@@ -50,6 +50,7 @@ export interface Inmueble {
   sala?: boolean;
   secadora?: boolean;
   seguridadPrivada?: boolean;
+  imgs: string[];
 }
 
 export interface Categoria {
