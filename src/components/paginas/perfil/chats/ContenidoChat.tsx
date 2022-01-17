@@ -28,7 +28,7 @@ const ContenidoChat = () => {
                             <div className="row d-flex justify-content-center">
                                 <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
-                                        Que pedo maldito drogadicto!
+                                        Que onda!
                                     </div>
                                 </div>
                                 <div className="col-sm-11 col-xl-10 mb-2">
@@ -48,7 +48,7 @@ const ContenidoChat = () => {
                                 </div>
                                 <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje2}>
-                                        Que pexilindro
+                                        Hola!
                                     </div>
                                 </div>
                                 <div className="col-sm-11 col-xl-10 mb-2">
@@ -63,7 +63,7 @@ const ContenidoChat = () => {
                                 </div>
                                 <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje2}>
-                                        Camara pues, deja le aviso al valuador para ir juntos a revisar la casa
+                                        Vale pues, deja le aviso al valuador para ir juntos a revisar la casa
                                     </div>
                                 </div>
                                 <div className="col-sm-11 col-xl-10 mb-2">
@@ -83,7 +83,7 @@ const ContenidoChat = () => {
                                 </div>
                                 <div className="col-sm-11 col-xl-10 mb-2">
                                     <div className={styles.mensaje1}>
-                                        Te debo un porrito jajaja
+                                        Te debo una coca jajaja
                                     </div>
                                 </div>
                             </div>

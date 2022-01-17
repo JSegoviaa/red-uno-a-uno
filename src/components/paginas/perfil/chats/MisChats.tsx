@@ -67,13 +67,13 @@ const chats = [
     id: 11,
     img: "/images/avatares/6.svg",
     nombre: "Gokú",
-    mensaje: "Me convertí en super sayayin fase 90",
+    mensaje: "Me convertí en super sayayin de nuevo",
   },
   {
     id: 11,
     img: "/images/avatares/6.svg",
     nombre: "Barack Obama",
-    mensaje: "Soy negro",
+    mensaje: "Soy el mejor presi",
   },
 ];
 
