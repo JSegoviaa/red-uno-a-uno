@@ -1,5 +1,9 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useRef, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
+import SwiperCore, { Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
 import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { MapContext } from "../../../../context/map/MapContext";
 import { useForm } from "../../../../hooks/useForm";
@@ -12,30 +16,17 @@ import {
   useCategories,
   useTipoPropiedad,
 } from "../../../../hooks/useCategories";
-
-
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination"
-
-// import Swiper core and required modules
-import SwiperCore, {
-  Pagination
-} from 'swiper';
-
-// install Swiper modules
-SwiperCore.use([Pagination]);
-
-
 import Loading from "../../../ui/loading/Loading";
 
+SwiperCore.use([Pagination]);
+
 const AnadirInmueble = () => {
+  const inputFile = useRef<any>(null);
   const { crearInmueble } = useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
   const { categorias, cargando } = useCategories();
   const { loading, propertyTypes } = useTipoPropiedad();
+  const [pictures, setPictures] = useState<FileList>();
   const [categoria, setCategoria] = useState("61cb51ee11b684e8c30cb7cb");
   const [tipoPropiedad, setTipoPropiedad] = useState(
     "61df4edbde1013c85c1f991a"
@@ -219,6 +210,8 @@ const AnadirInmueble = () => {
     );
   };
 
+  const abrirInputfile = () => inputFile.current.click();
+
   const longitudTitulo = titulo.length;
   const longitudOtros = otros.length;
 
@@ -250,7 +243,9 @@ const AnadirInmueble = () => {
                       </Col>
                       <Col className="d-flex justify-content-end">
                         <span
-                          style={{ color: longitudTitulo > 75 ? "red" : "black" }}
+                          style={{
+                            color: longitudTitulo > 75 ? "red" : "black",
+                          }}
                         >
                           {longitudTitulo}
                         </span>
@@ -303,7 +298,10 @@ const AnadirInmueble = () => {
                               onChange={(e) => setCategoria(e.target.value)}
                             >
                               {categorias.map((categoria) => (
-                                <option key={categoria._id} value={categoria._id}>
+                                <option
+                                  key={categoria._id}
+                                  value={categoria._id}
+                                >
                                   {categoria.nombre}
                                 </option>
                               ))}
@@ -338,7 +336,9 @@ const AnadirInmueble = () => {
                     <div className="col-6 mb-3">
                       <div className="row">
                         <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                          <div className={styles.labels}>M² de construcción</div>
+                          <div className={styles.labels}>
+                            M² de construcción
+                          </div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
                           <Form.Control
@@ -519,7 +519,9 @@ const AnadirInmueble = () => {
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
                           <Form.Select
                             value={seguridadPrivada}
-                            onChange={(e) => setSeguridadPrivada(e.target.value)}
+                            onChange={(e) =>
+                              setSeguridadPrivada(e.target.value)
+                            }
                           >
                             <option>No</option>
                             <option>Sí</option>
@@ -595,7 +597,9 @@ const AnadirInmueble = () => {
                     </div>
                   </div>
                   <hr />
-                  <div className={styles.MiniSub}>¿El inmueble está amueblado?</div>
+                  <div className={styles.MiniSub}>
+                    ¿El inmueble está amueblado?
+                  </div>
                   <div className={styles.line}></div>
                   <br />
                   <div className="row">
@@ -725,7 +729,9 @@ const AnadirInmueble = () => {
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
                               <Form.Select
                                 value={refrigerador}
-                                onChange={(e) => setRefrigerador(e.target.value)}
+                                onChange={(e) =>
+                                  setRefrigerador(e.target.value)
+                                }
                               >
                                 <option>No</option>
                                 <option>Sí</option>
@@ -832,7 +838,9 @@ const AnadirInmueble = () => {
                         <div className="col-12 mb-3">
                           <div className="row">
                             <div className="col-3">
-                              <div className={styles.labels}>Otros (opcional):</div>
+                              <div className={styles.labels}>
+                                Otros (opcional):
+                              </div>
                             </div>
                             <div className="col-9">
                               <Form.Control
@@ -846,7 +854,8 @@ const AnadirInmueble = () => {
                                 <Col className="d-flex justify-content-end">
                                   <span
                                     style={{
-                                      color: longitudOtros > 100 ? "red" : "black",
+                                      color:
+                                        longitudOtros > 100 ? "red" : "black",
                                     }}
                                   >
                                     {longitudOtros}
@@ -946,27 +955,53 @@ const AnadirInmueble = () => {
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6 text-center">
             <div className="cargarImagen">
-              <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." />
-            </div>
-            <div className="SliderCustom">
-              <Swiper spaceBetween={30} pagination={{
-                "clickable": true
-              }} className="mySwiper">
-                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
-                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
-                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
-                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
-                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
-                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
-              </Swiper>
-              <br />
-              <Button titulo="Borrar"/>
+              <img
+                onClick={abrirInputfile}
+                className="pointer my-4"
+                src="/images/content/agregafoto.png"
+                alt="red1a1"
+              />
             </div>
 
+            <Form
+              encType="multipart/form-data"
+              className="d-flex justify-content-center"
+            >
+              <Form.Group className="mb-3">
+                <Form.Control
+                  style={{ display: "none" }}
+                  type="file"
+                  ref={inputFile}
+                  multiple
+                  onChange={(e: any) => setPictures(e.target.files)}
+                />
+              </Form.Group>
+            </Form>
+            <div className="SliderCustom">
+              <Swiper
+                spaceBetween={30}
+                pagination={{
+                  clickable: true,
+                }}
+                className="mySwiper"
+              >
+                {/* {pictures.map((picture) => (
+                  <SwiperSlide key={picture.name} >
+                    <img
+                      className="pointer my-4"
+                      src={picture.name}
+                      alt="..."
+                    />
+                  </SwiperSlide>
+                ))} */}
+              </Swiper>
+              <br />
+              <Button titulo="Borrar" />
+            </div>
           </div>
         </div>
       </div>
-    </section >
+    </section>
   );
 };
 
