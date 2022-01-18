@@ -681,7 +681,7 @@ const Detalles = ({ inmuebles }: Props) => {
                       <div className={styles.perfilCard}>
                         <div className={styles.perfilCardImg}>
                           <img
-                            src={auth.img}
+                            src={inmuebles.inmueble.usuario.img}
                             style={{
                               width: "100%",
                               borderTopLeftRadius: 30,
