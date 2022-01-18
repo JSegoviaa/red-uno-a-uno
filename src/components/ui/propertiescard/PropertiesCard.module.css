@@ -5,6 +5,18 @@
     box-sizing: border-box;
     border-radius: 7px;
 }
+.imgContainer{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+    height: 180px;
+}
+.cardImg{
+    background-size: cover;
+    height: 100%;
+    background-repeat: no-repeat;
+    
+}
 
 .proContent{
     font-family: "Open Sans";
