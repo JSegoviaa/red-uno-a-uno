@@ -1,28 +1,41 @@
-import { useRouter } from "next/router";
 import { useContext } from "react";
+import { useRouter } from "next/router";
 import { Col } from "react-bootstrap";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { InmuebleContext } from "../../../context/inmuebles/InmuebleContext";
 import styles from "./PropertiesCard.module.css";
+import { toast } from "react-toastify";
 
 interface Props {
   id: string;
-  image?: string;
   titulo: string;
   slug: string;
+  imgs: string[];
 }
 
-const PropertiesCard = ({ titulo, id, image, slug }: Props) => {
+const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
   const { eliminarInmueble } = useContext(InmuebleContext);
   const router = useRouter();
-
   const goToProperty = () => router.push("/propiedades/" + slug);
   const editarInmueble = () => router.push("/perfil/editar-inmueble");
+
+  const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center ">
       <div className={`${styles.customCard} card pointer`}>
         <div onClick={goToProperty}>
-          <img src={image} alt={titulo} />
+          <img
+            src={imgs[0]}
+            style={{
+              width: "100%",
+              borderTopLeftRadius: "5px",
+              borderTopRightRadius: "5px",
+              overflow: "hidden",
+            }}
+            alt={titulo}
+          />
+
           <div className={`${styles.proContent} my-3`}>{titulo}</div>
         </div>
         <div
@@ -31,7 +44,12 @@ const PropertiesCard = ({ titulo, id, image, slug }: Props) => {
           aria-label="Basic mixed styles example"
         >
           <button type="button" className={`${styles.customBtn1} btn`} />
-          <button type="button" className={`${styles.customBtn2} btn`} />
+          <CopyToClipboard
+            onCopy={compartir}
+            text={`red1a1.com/app/propiedades/${slug}`}
+          >
+            <button type="button" className={`${styles.customBtn2} btn`} />
+          </CopyToClipboard>
           <button
             onClick={editarInmueble}
             type="button"

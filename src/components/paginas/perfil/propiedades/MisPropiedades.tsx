@@ -29,6 +29,7 @@ const MiListaPropiedades = () => {
                     id={inmueble._id}
                     slug={inmueble.slug}
                     titulo={inmueble.titulo}
+                    imgs={inmueble.imgs}
                   />
                 ))}
               </>
