@@ -104,6 +104,7 @@ interface Usuario {
   facebookpage: string;
   instagram: string;
   twitter: string;
+  img: string;
 }
 
 interface TipoPropiedad {
