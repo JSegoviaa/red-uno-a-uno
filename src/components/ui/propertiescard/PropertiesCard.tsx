@@ -26,8 +26,12 @@ const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
       <div className={`${styles.customCard} card pointer`}>
         <div onClick={goToProperty}>
           <div className={styles.imgContainer}>
-            {/* <img className={styles.cardImg} src={imgs[0]} alt={titulo}/> */}
-            <div className={styles.cardImg} style={{ backgroundImage: `url(${imgs[0]})` }}></div>
+            <div
+              className={styles.cardImg}
+              style={{
+                backgroundImage: imgs.length > 0 ? `url(${imgs[0]})` : "",
+              }}
+            ></div>
           </div>
           <div className={`${styles.proContent} my-2`}>{titulo}</div>
         </div>
