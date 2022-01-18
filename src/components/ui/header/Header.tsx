@@ -70,7 +70,7 @@ const Header = () => {
                 <img
                   src={auth.img}
                   alt="Mi perfil"
-                  style={{ width: "100%", borderRadius: "50%" }}
+                  style={{ width: "100%", height: '100%' , borderRadius: "50%" }}
                 />
               </div>
               <Overlay target={target.current} show={show1} placement="right">

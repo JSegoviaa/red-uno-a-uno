@@ -39,7 +39,7 @@ const Perfil = () => {
               onMouseLeave={onMouseLeave}
               className="pointer"
               src={auth.img}
-              style={{ borderRadius: "50%" }}
+              style={{ borderRadius: "50%", width: '350px', height: '350px' }}
               alt="Foto de perfil red1a1"
             />
             {hover ? <div>Cambiar imagen de perfil</div> : null}
