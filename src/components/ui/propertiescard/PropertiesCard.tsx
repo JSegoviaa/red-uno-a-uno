@@ -25,18 +25,11 @@ const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center ">
       <div className={`${styles.customCard} card pointer`}>
         <div onClick={goToProperty}>
-          <img
-            src={imgs[0]}
-            style={{
-              width: "100%",
-              borderTopLeftRadius: "5px",
-              borderTopRightRadius: "5px",
-              overflow: "hidden",
-            }}
-            alt={titulo}
-          />
-
-          <div className={`${styles.proContent} my-3`}>{titulo}</div>
+          <div className={styles.imgContainer}>
+            {/* <img className={styles.cardImg} src={imgs[0]} alt={titulo}/> */}
+            <div className={styles.cardImg} style={{ backgroundImage: `url(${imgs[0]})` }}></div>
+          </div>
+          <div className={`${styles.proContent} my-2`}>{titulo}</div>
         </div>
         <div
           className="btn-group"
