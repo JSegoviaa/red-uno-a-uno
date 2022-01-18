@@ -12,6 +12,23 @@ import {
   useCategories,
   useTipoPropiedad,
 } from "../../../../hooks/useCategories";
+
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination"
+
+// import Swiper core and required modules
+import SwiperCore, {
+  Pagination
+} from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([Pagination]);
+
+
 import Loading from "../../../ui/loading/Loading";
 
 const AnadirInmueble = () => {
@@ -210,725 +227,746 @@ const AnadirInmueble = () => {
       <div className="container">
         <Titulo titulo="Agrega un inmueble" />
         <br />
-        <Form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-6 px-4">
-              <Form.Group className="mb-3">
-                <Form.Label className={`${styles.subTitulo}`}>
-                  Título del inmueble
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  value={titulo}
-                  name="titulo"
-                  onChange={handleChange}
-                />
-                <Row>
-                  <Col>
-                    <Form.Text className="text-muted">
-                      Ej. Casa en venta en Palmaris, Cancún
-                    </Form.Text>
-                  </Col>
-                  <Col className="d-flex justify-content-end">
-                    <span
-                      style={{ color: longitudTitulo > 75 ? "red" : "black" }}
-                    >
-                      {longitudTitulo}
-                    </span>
-                    /75
-                  </Col>
-                </Row>
-              </Form.Group>
-
-              <br />
-              <br />
-
-              <Row>
-                <Col md={6}>
-                  <div className="row mb-3">
-                    <div className="col-sm-5 col-md-4 col-lg-4">
-                      <div className={styles.content}>Tipo</div>
-                    </div>
-                    <div className="col-sm-7 col-md-8 col-lg-8">
-                      {loading ? (
-                        <Loading />
-                      ) : (
-                        <Form.Select
-                          value={tipoPropiedad}
-                          onChange={(e) => setTipoPropiedad(e.target.value)}
+        <div className="row">
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Form onSubmit={handleSubmit}>
+              <div className="row">
+                <div className="col-sm-12 col-md-12 col-lg-12 px-4">
+                  <Form.Group className="mb-3">
+                    <Form.Label className={`${styles.subTitulo}`}>
+                      Título del inmueble
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={titulo}
+                      name="titulo"
+                      onChange={handleChange}
+                    />
+                    <Row>
+                      <Col>
+                        <Form.Text className="text-muted">
+                          Ej. Casa en venta en Palmaris, Cancún
+                        </Form.Text>
+                      </Col>
+                      <Col className="d-flex justify-content-end">
+                        <span
+                          style={{ color: longitudTitulo > 75 ? "red" : "black" }}
                         >
-                          {propertyTypes.map((propertyType) => (
-                            <option
-                              key={propertyType._id}
-                              value={propertyType._id}
+                          {longitudTitulo}
+                        </span>
+                        /75
+                      </Col>
+                    </Row>
+                  </Form.Group>
+
+                  <br />
+                  <br />
+
+                  <Row>
+                    <Col md={6}>
+                      <div className="row mb-3">
+                        <div className="col-sm-5 col-md-4 col-lg-4">
+                          <div className={styles.content}>Tipo</div>
+                        </div>
+                        <div className="col-sm-7 col-md-8 col-lg-8">
+                          {loading ? (
+                            <Loading />
+                          ) : (
+                            <Form.Select
+                              value={tipoPropiedad}
+                              onChange={(e) => setTipoPropiedad(e.target.value)}
                             >
-                              {propertyType.nombre}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      )}
-                    </div>
-                  </div>
-                </Col>
-                <Col md={6}>
-                  <div className="row mb-3">
-                    <div className="col-sm-5 col-md-4 col-lg-4">
-                      <div className={styles.content} />
-                    </div>
-                    <div className="col-sm-7 col-md-8 col-lg-8">
-                      {cargando ? (
-                        <Loading />
-                      ) : (
-                        <Form.Select
-                          value={categoria}
-                          onChange={(e) => setCategoria(e.target.value)}
-                        >
-                          {categorias.map((categoria) => (
-                            <option key={categoria._id} value={categoria._id}>
-                              {categoria.nombre}
-                            </option>
-                          ))}
-                        </Form.Select>
-                      )}
-                    </div>
-                  </div>
-                </Col>
-              </Row>
+                              {propertyTypes.map((propertyType) => (
+                                <option
+                                  key={propertyType._id}
+                                  value={propertyType._id}
+                                >
+                                  {propertyType.nombre}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          )}
+                        </div>
+                      </div>
+                    </Col>
+                    <Col md={6}>
+                      <div className="row mb-3">
+                        <div className="col-sm-5 col-md-4 col-lg-4">
+                          <div className={styles.content} />
+                        </div>
+                        <div className="col-sm-7 col-md-8 col-lg-8">
+                          {cargando ? (
+                            <Loading />
+                          ) : (
+                            <Form.Select
+                              value={categoria}
+                              onChange={(e) => setCategoria(e.target.value)}
+                            >
+                              {categorias.map((categoria) => (
+                                <option key={categoria._id} value={categoria._id}>
+                                  {categoria.nombre}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          )}
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
 
-              <hr />
-              <div className={styles.MiniSub}>Detalles del inmueble</div>
-              <div className={styles.line}></div>
-              <br />
-
-              <div className="row">
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Antigüedad</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={antiguedad}
-                        name="antiguedad"
-                        onChange={handleChange}
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>M² de construcción</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={m2Construidos}
-                        name="m2Construidos"
-                        onChange={handleChange}
-                        type="number"
-                        min={0}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>M² de terreno</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={m2Terreno}
-                        name="m2Terreno"
-                        onChange={handleChange}
-                        type="number"
-                        min={0}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Habitaciones</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={habitaciones}
-                        name="habitaciones"
-                        onChange={handleChange}
-                        type="number"
-                        min={0}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Baños completos</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={baños}
-                        name="baños"
-                        onChange={handleChange}
-                        type="number"
-                        min={0}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Medios baños</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={medioBaños}
-                        name="medioBaños"
-                        onChange={handleChange}
-                        type="number"
-                        min={0}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Estacionamientos</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={parking}
-                        name="parking"
-                        onChange={handleChange}
-                        type="number"
-                        min={0}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Pisos</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Control
-                        value={pisos}
-                        name="pisos"
-                        onChange={handleChange}
-                        type="number"
-                        min={0}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Cuenta con agua</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={agua}
-                        onChange={(e) => setAgua(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Cuenta con luz</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={luz}
-                        onChange={(e) => setLuz(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Cuenta con gas</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={gas}
-                        onChange={(e) => setGas(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Internet</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={internet}
-                        onChange={(e) => setInternet(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Seguridad privada</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={seguridadPrivada}
-                        onChange={(e) => setSeguridadPrivada(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Escuelas cercanas</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={escuelas}
-                        onChange={(e) => setEscuelas(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Mantenimiento</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={mantenimiento}
-                        onChange={(e) => setMantenimiento(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>Alberca</div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={piscina}
-                        onChange={(e) => setPiscina(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 mb-3">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
-                      <div className={styles.labels}>
-                        Acceso a discapacitados
-                      </div>
-                    </div>
-                    <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                      <Form.Select
-                        value={discapacitados}
-                        onChange={(e) => setDiscapacitados(e.target.value)}
-                      >
-                        <option>No</option>
-                        <option>Sí</option>
-                      </Form.Select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr />
-              <div className={styles.MiniSub}>¿El inmueble está amueblado?</div>
-              <div className={styles.line}></div>
-              <br />
-              <div className="row">
-                <div className="col-12 mb-3">
-                  <Form.Check
-                    inline
-                    type="radio"
-                    name="group2"
-                    label="Sí"
-                    onClick={() => {
-                      setAmueblado(true);
-                    }}
-                  />
-                  <Form.Check
-                    inline
-                    type="radio"
-                    name="group2"
-                    label="No"
-                    onClick={() => {
-                      setAmueblado(false);
-                    }}
-                  />
-                </div>
-                {amueblado ? (
-                  <>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Camas</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={camas}
-                            onChange={(e) => setCamas(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Closet</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={closet}
-                            onChange={(e) => setCloset(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Sala</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={sala}
-                            onChange={(e) => setSala(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Comedor</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={comedor}
-                            onChange={(e) => setComedor(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Cocina</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={cocina}
-                            onChange={(e) => setCocina(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>AA</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={AA}
-                            onChange={(e) => setAA(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Refrigerador</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={refrigerador}
-                            onChange={(e) => setRefrigerador(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Estufa</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={estufa}
-                            onChange={(e) => setEstufa(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Microondas</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={microondas}
-                            onChange={(e) => setMicroondas(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Mini horno</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={minihorno}
-                            onChange={(e) => setMinihorno(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Horno</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={horno}
-                            onChange={(e) => setHorno(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Lavadora</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={lavadora}
-                            onChange={(e) => setLavadora(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-6 mb-3">
-                      <div className="row">
-                        <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
-                          <div className={styles.labels}>Secadora</div>
-                        </div>
-                        <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                          <Form.Select
-                            value={secadora}
-                            onChange={(e) => setSecadora(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12 mb-3">
-                      <div className="row">
-                        <div className="col-3">
-                          <div className={styles.labels}>Otros (opcional):</div>
-                        </div>
-                        <div className="col-9">
-                          <Form.Control
-                            type="text"
-                            value={otros}
-                            onChange={handleChange}
-                            name="otros"
-                          />
-                          <Row>
-                            <Col></Col>
-                            <Col className="d-flex justify-content-end">
-                              <span
-                                style={{
-                                  color: longitudOtros > 100 ? "red" : "black",
-                                }}
-                              >
-                                {longitudOtros}
-                              </span>
-                              /100
-                            </Col>
-                          </Row>
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                ) : null}
-              </div>
-              <hr />
-              <div className={styles.MiniSub}>Descripción del inmueble</div>
-              <div className={styles.line}></div>
-              <br />
-              <div className="row">
-                <div className="col-12 mb-3">
-                  <Form.Control
-                    as="textarea"
-                    rows={7}
-                    value={descripcion}
-                    name="descripcion"
-                    onChange={handleChange}
-                    placeholder="Escribe una breve descripción del inmueble..."
-                  />
-                </div>
-                <div className="col-12">
                   <hr />
-                </div>
-                <div className="col-sm-12 col-md-6 col-xxl-6">
-                  <div className="row d-flex justify-content-start">
-                    <div className="col-sm-12 col-xxl-3">
-                      <div className={styles.labels2}>Valor</div>
+                  <div className={styles.MiniSub}>Detalles del inmueble</div>
+                  <div className={styles.line}></div>
+                  <br />
+
+                  <div className="row">
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Antigüedad</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Control
+                            value={antiguedad}
+                            name="antiguedad"
+                            onChange={handleChange}
+                            type="text"
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div className="col-sm-12 col-xxl-7">
-                      <div className="input-group mb-3">
-                        <span className="input-group-text">$</span>
-                        <input
-                          type="number"
-                          className="form-control"
-                          placeholder="5,000.00"
-                          value={precio}
-                          name="precio"
-                          onChange={handleChange}
-                          min={0}
-                        />
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>M² de construcción</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Control
+                            value={m2Construidos}
+                            name="m2Construidos"
+                            onChange={handleChange}
+                            type="number"
+                            min={0}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>M² de terreno</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Control
+                            value={m2Terreno}
+                            name="m2Terreno"
+                            onChange={handleChange}
+                            type="number"
+                            min={0}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Habitaciones</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Control
+                            value={habitaciones}
+                            name="habitaciones"
+                            onChange={handleChange}
+                            type="number"
+                            min={0}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Baños completos</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Control
+                            value={baños}
+                            name="baños"
+                            onChange={handleChange}
+                            type="number"
+                            min={0}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Medios baños</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Control
+                            value={medioBaños}
+                            name="medioBaños"
+                            onChange={handleChange}
+                            type="number"
+                            min={0}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Estacionamientos</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Control
+                            value={parking}
+                            name="parking"
+                            onChange={handleChange}
+                            type="number"
+                            min={0}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Pisos</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Control
+                            value={pisos}
+                            name="pisos"
+                            onChange={handleChange}
+                            type="number"
+                            min={0}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Cuenta con agua</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={agua}
+                            onChange={(e) => setAgua(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Cuenta con luz</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={luz}
+                            onChange={(e) => setLuz(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Cuenta con gas</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={gas}
+                            onChange={(e) => setGas(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Internet</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={internet}
+                            onChange={(e) => setInternet(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Seguridad privada</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={seguridadPrivada}
+                            onChange={(e) => setSeguridadPrivada(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Escuelas cercanas</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={escuelas}
+                            onChange={(e) => setEscuelas(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Mantenimiento</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={mantenimiento}
+                            onChange={(e) => setMantenimiento(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>Alberca</div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={piscina}
+                            onChange={(e) => setPiscina(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 mb-3">
+                      <div className="row">
+                        <div className="col-sm-12 col-md-8 col-lg-7 col-xl-7 col-xxl-8">
+                          <div className={styles.labels}>
+                            Acceso a discapacitados
+                          </div>
+                        </div>
+                        <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
+                          <Form.Select
+                            value={discapacitados}
+                            onChange={(e) => setDiscapacitados(e.target.value)}
+                          >
+                            <option>No</option>
+                            <option>Sí</option>
+                          </Form.Select>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-sm-12 col-md-6 col-xxl-6">
-                  <div className="row d-flex justify-content-end">
-                    <div className="col-sm-12 col-xxl-5">
-                      <div className={styles.labels2}>Comisiones</div>
+                  <hr />
+                  <div className={styles.MiniSub}>¿El inmueble está amueblado?</div>
+                  <div className={styles.line}></div>
+                  <br />
+                  <div className="row">
+                    <div className="col-12 mb-3">
+                      <Form.Check
+                        inline
+                        type="radio"
+                        name="group2"
+                        label="Sí"
+                        onClick={() => {
+                          setAmueblado(true);
+                        }}
+                      />
+                      <Form.Check
+                        inline
+                        type="radio"
+                        name="group2"
+                        label="No"
+                        onClick={() => {
+                          setAmueblado(false);
+                        }}
+                      />
                     </div>
-                    <div className="col-sm-12 col-xxl-5">
-                      <div className="input-group mb-3">
-                        <span className="input-group-text">%</span>
-                        <input
-                          type="number"
-                          className="form-control"
-                          placeholder="5"
-                          value={comisiones}
-                          name="comisiones"
-                          onChange={handleChange}
-                          min={0}
-                        />
+                    {amueblado ? (
+                      <>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Camas</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={camas}
+                                onChange={(e) => setCamas(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Closet</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={closet}
+                                onChange={(e) => setCloset(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Sala</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={sala}
+                                onChange={(e) => setSala(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Comedor</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={comedor}
+                                onChange={(e) => setComedor(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Cocina</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={cocina}
+                                onChange={(e) => setCocina(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>AA</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={AA}
+                                onChange={(e) => setAA(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Refrigerador</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={refrigerador}
+                                onChange={(e) => setRefrigerador(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Estufa</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={estufa}
+                                onChange={(e) => setEstufa(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Microondas</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={microondas}
+                                onChange={(e) => setMicroondas(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Mini horno</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={minihorno}
+                                onChange={(e) => setMinihorno(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Horno</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={horno}
+                                onChange={(e) => setHorno(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Lavadora</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={lavadora}
+                                onChange={(e) => setLavadora(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-6 mb-3">
+                          <div className="row">
+                            <div className="col-sm-12 col-md-7 col-lg-6 col-xxl-7">
+                              <div className={styles.labels}>Secadora</div>
+                            </div>
+                            <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
+                              <Form.Select
+                                value={secadora}
+                                onChange={(e) => setSecadora(e.target.value)}
+                              >
+                                <option>No</option>
+                                <option>Sí</option>
+                              </Form.Select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-12 mb-3">
+                          <div className="row">
+                            <div className="col-3">
+                              <div className={styles.labels}>Otros (opcional):</div>
+                            </div>
+                            <div className="col-9">
+                              <Form.Control
+                                type="text"
+                                value={otros}
+                                onChange={handleChange}
+                                name="otros"
+                              />
+                              <Row>
+                                <Col></Col>
+                                <Col className="d-flex justify-content-end">
+                                  <span
+                                    style={{
+                                      color: longitudOtros > 100 ? "red" : "black",
+                                    }}
+                                  >
+                                    {longitudOtros}
+                                  </span>
+                                  /100
+                                </Col>
+                              </Row>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ) : null}
+                  </div>
+                  <hr />
+                  <div className={styles.MiniSub}>Descripción del inmueble</div>
+                  <div className={styles.line}></div>
+                  <br />
+                  <div className="row">
+                    <div className="col-12 mb-3">
+                      <Form.Control
+                        as="textarea"
+                        rows={7}
+                        value={descripcion}
+                        name="descripcion"
+                        onChange={handleChange}
+                        placeholder="Escribe una breve descripción del inmueble..."
+                      />
+                    </div>
+                    <div className="col-12">
+                      <hr />
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-xxl-6">
+                      <div className="row d-flex justify-content-start">
+                        <div className="col-sm-12 col-xxl-3">
+                          <div className={styles.labels2}>Valor</div>
+                        </div>
+                        <div className="col-sm-12 col-xxl-7">
+                          <div className="input-group mb-3">
+                            <span className="input-group-text">$</span>
+                            <input
+                              type="number"
+                              className="form-control"
+                              placeholder="5,000.00"
+                              value={precio}
+                              name="precio"
+                              onChange={handleChange}
+                              min={0}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-xxl-6">
+                      <div className="row d-flex justify-content-end">
+                        <div className="col-sm-12 col-xxl-5">
+                          <div className={styles.labels2}>Comisiones</div>
+                        </div>
+                        <div className="col-sm-12 col-xxl-5">
+                          <div className="input-group mb-3">
+                            <span className="input-group-text">%</span>
+                            <input
+                              type="number"
+                              className="form-control"
+                              placeholder="5"
+                              value={comisiones}
+                              name="comisiones"
+                              onChange={handleChange}
+                              min={0}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <div className={styles.MiniSub}>Ubicación</div>
+                  <div className={styles.line}></div>
+                  <br />
+                  <div className="row">
+                    <div className="col-12 mb-3">
+                      <SeleccionarLugar />
+                    </div>
+                    <div className="col-12 mb-5">
+                      <MapaUbicacion />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.MiniSub}>Ubicación</div>
-              <div className={styles.line}></div>
-              <br />
-              <div className="row">
-                <div className="col-12 mb-3">
-                  <SeleccionarLugar />
-                </div>
+                <br />
                 <div className="col-12 mb-5">
-                  <MapaUbicacion />
+                  {precio <= 0 || titulo.length <= 0 ? (
+                    <Button titulo="Publicar" btn="Disabled" />
+                  ) : (
+                    <Button titulo="Publicar" />
+                  )}
                 </div>
               </div>
-            </div>
-            <div className="col-sm-12 col-md-12 col-lg-6">
-              <h2>**/ preview load images /**</h2>
-            </div>
-            <br />
-            <div className="col-12 mb-5">
-              {precio <= 0 || titulo.length <= 0 ? (
-                <Button titulo="Publicar" btn="Disabled" />
-              ) : (
-                <Button titulo="Publicar" />
-              )}
-            </div>
+            </Form>
           </div>
-        </Form>
+          <div className="col-sm-12 col-md-12 col-lg-6 text-center">
+            <div className="cargarImagen">
+              <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." />
+            </div>
+            <div className="SliderCustom">
+              <Swiper spaceBetween={30} pagination={{
+                "clickable": true
+              }} className="mySwiper">
+                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
+                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
+                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
+                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
+                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
+                <SwiperSlide> <img className="pointer my-4" src="/images/content/agregafoto.png" alt="..." /></SwiperSlide>
+              </Swiper>
+              <br />
+              <Button titulo="Borrar"/>
+            </div>
+
+          </div>
+        </div>
       </div>
-    </section>
+    </section >
   );
 };
 
