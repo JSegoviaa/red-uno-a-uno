@@ -1,14 +1,15 @@
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { CSSProperties, FormEvent, useContext, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useUserInmuebles } from "../../../../hooks/useUserInfo";
 import Button from "../../../ui/button/Button";
+import styles from './AgregaImg.module.css'
 
 const thumb: any = {
   display: "inline-flex",
   borderRadius: 2,
-  border: "1px solid #eaeaea",
+  border: "1px solid #7149BC",
   marginBottom: 8,
   marginRight: 8,
   width: 100,
@@ -17,10 +18,11 @@ const thumb: any = {
   boxSizing: "border-box",
 };
 
-const thumbInner = {
+const thumbInner:CSSProperties = {
   display: "flex",
   minWidth: 0,
   overflow: "hidden",
+  
 };
 
 const img = {
@@ -61,11 +63,13 @@ const AnadirImagenes = () => {
   const thumbs = pictures.map((file: any, i: number) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
-        <img src={file.preview} style={img} />
+        <img src={file.preview} style={img}/>
+        <img className={`${styles.btnicon} pointer`} onClick={() => remove(i)} src="/images/icons/properties-icons/rechazado.png" alt="" />
       </div>
-      {/* onClick={() => remove(i)} */}
     </div>
   ));
+
+
 
   const uploadPictures = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -76,13 +80,19 @@ const AnadirImagenes = () => {
     <>
       <div className="cargarImagen" {...getRootProps()}>
         <input {...getInputProps()} />
-        <img
-          className="pointer my-4"
-          src="/images/content/agregafoto.png"
-          alt="red1a1"
-        />
+        <div className={`${styles.contenedorClipboard} pointer`}>
+          <div className="text1">
+            Arrastra tus imágenes aquí
+          </div>
+          <div className="my-3">
+            <i className={`${styles.iconAdd} bi bi-plus-circle`}></i>
+          </div>
+          <div className="text2">
+            o da click para agregarlas
+          </div>
+        </div>
       </div>
-      <div style={{ fontSize: 23 }}>
+      <div style={{ fontSize: 18 }}>
         Máximo 20 imágenes. Haz seleccionado{" "}
         <span style={{ color: pictures.length > 20 ? "red" : "black" }}>
           {pictures.length}
@@ -93,6 +103,7 @@ const AnadirImagenes = () => {
       </div>
       <br />
       <div>{thumbs}</div>
+      
 
       <br />
       <Form

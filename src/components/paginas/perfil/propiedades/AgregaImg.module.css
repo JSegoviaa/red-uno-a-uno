@@ -1,0 +1,22 @@
+
+.btnicon{
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 5px;
+    width: 22px;
+}
+.contenedorClipboard{
+    margin-top: 50px;
+    padding: 25px;
+    width: 100%;
+    height: auto;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    color: white;
+    background-color: grey;
+}
+.iconAdd{
+    font-size: 6rem;
+}
