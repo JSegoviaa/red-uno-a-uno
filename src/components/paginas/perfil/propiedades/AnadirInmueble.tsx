@@ -1,5 +1,6 @@
-import { FormEvent, useContext, useRef, useState } from "react";
+import { FormEvent, useCallback, useContext, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
+import { useDropzone } from "react-dropzone";
 import SwiperCore, { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -21,7 +22,6 @@ import Loading from "../../../ui/loading/Loading";
 SwiperCore.use([Pagination]);
 
 const AnadirInmueble = () => {
-  const inputFile = useRef<any>(null);
   const { crearInmueble } = useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
   const { categorias, cargando } = useCategories();
@@ -210,8 +210,6 @@ const AnadirInmueble = () => {
     );
   };
 
-  const abrirInputfile = () => inputFile.current.click();
-
   const selectedFilesChanged = (e: any) => {
     var filesArr = Array.prototype.slice.call(e.target.files);
     setPictures(filesArr);
@@ -219,6 +217,14 @@ const AnadirInmueble = () => {
 
   const longitudTitulo = titulo.length;
   const longitudOtros = otros.length;
+
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+  });
+
+  const files = acceptedFiles.map((file: any) => {
+    return <li key={file.path}>{file.path} </li>;
+  });
 
   return (
     <section>
@@ -959,15 +965,26 @@ const AnadirInmueble = () => {
             </Form>
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6 text-center">
-            <div className="cargarImagen">
+            <div className="cargarImagen" {...getRootProps()}>
+              <input {...getInputProps()} />
               <img
-                onClick={abrirInputfile}
                 className="pointer my-4"
                 src="/images/content/agregafoto.png"
                 alt="red1a1"
               />
             </div>
-
+            <div style={{ fontSize: 23 }}>
+              Máximo 20 imágenes. Haz seleccionado{" "}
+              <span style={{ color: files.length > 20 ? "red" : "black" }}>
+                {files.length}
+              </span>{" "}
+              imágenes.
+              <br />
+              {files.length > 20 && "Selecciona menos imágenes por favor"}
+            </div>
+            <br />
+            <div>{files}</div>
+            <br />
             <Form
               encType="multipart/form-data"
               className="d-flex justify-content-center"
@@ -976,33 +993,19 @@ const AnadirInmueble = () => {
                 <Form.Control
                   style={{ display: "none" }}
                   type="file"
-                  ref={inputFile}
                   multiple
                   accept="image/*"
                   onChange={selectedFilesChanged}
                 />
               </Form.Group>
+              {files.length > 20 ? (
+                <Button titulo="Subir" btn="Disabled" />
+              ) : (
+                <Button titulo="Agregar imágenes" />
+              )}
             </Form>
             <div className="SliderCustom">
-              <Swiper
-                spaceBetween={30}
-                pagination={{
-                  clickable: true,
-                }}
-                className="mySwiper"
-              >
-                {pictures.map((picture: any) => (
-                  <SwiperSlide key={picture.name}>
-                    <img
-                      className="pointer my-4"
-                      src={picture.name}
-                      alt={picture.name}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
               <br />
-              <Button titulo="Borrar" />
             </div>
           </div>
         </div>
