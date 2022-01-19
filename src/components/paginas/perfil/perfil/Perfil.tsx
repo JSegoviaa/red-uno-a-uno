@@ -39,7 +39,7 @@ const Perfil = () => {
               onMouseLeave={onMouseLeave}
               className="pointer"
               src={auth.img}
-              style={{ borderRadius: "50%", width: '350px', height: '350px' }}
+              style={{ borderRadius: "50%", width: "350px", height: "350px" }}
               alt="Foto de perfil red1a1"
             />
             {hover ? <div>Cambiar imagen de perfil</div> : null}
@@ -55,6 +55,7 @@ const Perfil = () => {
                 type="file"
                 ref={inputFile}
                 style={{ display: "none" }}
+                accept="image/*"
                 onChange={(e: any) => setPicture(e.target.files[0])}
               />
             </Form.Group>
