@@ -131,8 +131,8 @@
   margin-top: 10px;
 }
 
-.sliderEjemplo {
-  width: 100%;
+.slideImg {
+  width: auto;
   height: 500px;
   background-color: #5e5e5e;
   margin-bottom: 50px;
