@@ -1,10 +1,5 @@
-import { FormEvent, useCallback, useContext, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
-import { useDropzone } from "react-dropzone";
-import SwiperCore, { Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
 import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { MapContext } from "../../../../context/map/MapContext";
 import { useForm } from "../../../../hooks/useForm";
@@ -18,15 +13,13 @@ import {
   useTipoPropiedad,
 } from "../../../../hooks/useCategories";
 import Loading from "../../../ui/loading/Loading";
-
-SwiperCore.use([Pagination]);
+import AnadirImagenes from "./AnadirImagenes";
 
 const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
   const { categorias, cargando } = useCategories();
   const { loading, propertyTypes } = useTipoPropiedad();
-  const [pictures, setPictures] = useState<any>();
   const [categoria, setCategoria] = useState("61cb51ee11b684e8c30cb7cb");
   const [tipoPropiedad, setTipoPropiedad] = useState(
     "61df4edbde1013c85c1f991a"
@@ -210,21 +203,8 @@ const AnadirInmueble = () => {
     );
   };
 
-  const selectedFilesChanged = (e: any) => {
-    var filesArr = Array.prototype.slice.call(e.target.files);
-    setPictures(filesArr);
-  };
-
   const longitudTitulo = titulo.length;
   const longitudOtros = otros.length;
-
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
-  });
-
-  const files = acceptedFiles.map((file: any) => {
-    return <li key={file.path}>{file.path} </li>;
-  });
 
   return (
     <section>
@@ -964,50 +944,7 @@ const AnadirInmueble = () => {
               </div>
             </Form>
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-6 text-center">
-            <div className="cargarImagen" {...getRootProps()}>
-              <input {...getInputProps()} />
-              <img
-                className="pointer my-4"
-                src="/images/content/agregafoto.png"
-                alt="red1a1"
-              />
-            </div>
-            <div style={{ fontSize: 23 }}>
-              Máximo 20 imágenes. Haz seleccionado{" "}
-              <span style={{ color: files.length > 20 ? "red" : "black" }}>
-                {files.length}
-              </span>{" "}
-              imágenes.
-              <br />
-              {files.length > 20 && "Selecciona menos imágenes por favor"}
-            </div>
-            <br />
-            <div>{files}</div>
-            <br />
-            <Form
-              encType="multipart/form-data"
-              className="d-flex justify-content-center"
-            >
-              <Form.Group className="mb-3">
-                <Form.Control
-                  style={{ display: "none" }}
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={selectedFilesChanged}
-                />
-              </Form.Group>
-              {files.length > 20 ? (
-                <Button titulo="Subir" btn="Disabled" />
-              ) : (
-                <Button titulo="Agregar imágenes" />
-              )}
-            </Form>
-            <div className="SliderCustom">
-              <br />
-            </div>
-          </div>
+          <AnadirImagenes />
         </div>
       </div>
     </section>
