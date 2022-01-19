@@ -14,12 +14,16 @@ import {
 } from "../../../../hooks/useCategories";
 import Loading from "../../../ui/loading/Loading";
 import AnadirImagenes from "./AnadirImagenes";
+import { useRouter } from "next/router";
 
 const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
+  const router = useRouter();
   const { categorias, cargando } = useCategories();
   const { loading, propertyTypes } = useTipoPropiedad();
+  const [mostrarImgFrom, setMostrarImgFrom] = useState(false);
+  const [mostrarPublicar, setMostrarPublicar] = useState(true);
   const [categoria, setCategoria] = useState("61cb51ee11b684e8c30cb7cb");
   const [tipoPropiedad, setTipoPropiedad] = useState(
     "61df4edbde1013c85c1f991a"
@@ -201,6 +205,10 @@ const AnadirInmueble = () => {
       secadora,
       seguridadPrivada
     );
+
+    setMostrarImgFrom(true);
+    setMostrarPublicar(false);
+    router.push("/perfil/agregar-inmueble");
   };
 
   const longitudTitulo = titulo.length;
@@ -938,13 +946,26 @@ const AnadirInmueble = () => {
                   {precio <= 0 || titulo.length <= 0 ? (
                     <Button titulo="Publicar" btn="Disabled" />
                   ) : (
-                    <Button titulo="Publicar" />
+                    <>{mostrarPublicar ? <Button titulo="Publicar" /> : null}</>
                   )}
                 </div>
               </div>
             </Form>
           </div>
-          <AnadirImagenes />
+          <div className="col-sm-12 col-md-12 col-lg-6 text-center">
+            {!mostrarImgFrom ? (
+              <div className={styles.subTitulo}>
+                Para agregar fotos primero llena la información de tu inmueble
+                <img
+                  className="my-4"
+                  src="/images/content/agregafoto.png"
+                  alt="red1a1"
+                />
+              </div>
+            ) : null}
+
+            {mostrarImgFrom ? <AnadirImagenes /> : null}
+          </div>
         </div>
       </div>
     </section>

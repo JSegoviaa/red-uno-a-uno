@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { useUserInmuebles } from "../../../../hooks/useUserInfo";
 import Button from "../../../ui/button/Button";
 
 const thumb: any = {
@@ -28,7 +30,9 @@ const img = {
 };
 
 const AnadirImagenes = () => {
+  const { auth } = useContext(AuthContext);
   const [pictures, setPictures] = useState([]);
+  const { inmuebles } = useUserInmuebles(auth.uid);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -63,8 +67,13 @@ const AnadirImagenes = () => {
     </div>
   ));
 
+  const uploadPictures = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Se suben imágenes");
+  };
+
   return (
-    <div className="col-sm-12 col-md-12 col-lg-6 text-center">
+    <>
       <div className="cargarImagen" {...getRootProps()}>
         <input {...getInputProps()} />
         <img
@@ -87,6 +96,7 @@ const AnadirImagenes = () => {
 
       <br />
       <Form
+        onSubmit={uploadPictures}
         encType="multipart/form-data"
         className="d-flex justify-content-center"
       >
@@ -105,7 +115,7 @@ const AnadirImagenes = () => {
       <div className="SliderCustom">
         <br />
       </div>
-    </div>
+    </>
   );
 };
 

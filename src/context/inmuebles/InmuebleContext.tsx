@@ -1,5 +1,4 @@
 import { createContext, FC } from "react";
-import { useRouter } from "next/router";
 import { toast, ToastContainer } from "react-toastify";
 import { fetchBorrarInmueble, fetchInmueble } from "../../helpers/fetch";
 import {
@@ -57,8 +56,6 @@ interface ContextProps {
 export const InmuebleContext = createContext({} as ContextProps);
 
 export const InmuebleProvider: FC = ({ children }) => {
-  const router = useRouter();
-
   const crearInmueble = async (
     titulo: string,
     categoria: string,
@@ -152,7 +149,7 @@ export const InmuebleProvider: FC = ({ children }) => {
 
     if (resp.ok) {
       toast.success(resp.msg);
-      router.push("/perfil/mis-propiedades");
+      toast.success("Ahora agrega las imágenes de tu inmueble");
     }
 
     if (resp.errors) {
