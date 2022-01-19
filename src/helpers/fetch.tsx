@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { development, production } from "../credentials/credentials";
 import { RegisterData, Resp, SubirFoto } from "../interfaces/AuthInterface";
 import { Contact, ContactResp } from "../interfaces/ContactInterface";
@@ -199,4 +200,26 @@ export const subirFotoPerfil = async (
   });
 
   return await resp.json();
+};
+
+export const subirFotosInmueble = async (
+  endpoint: string,
+  data: any,
+  uid: string,
+  pid: string
+): Promise<any> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const [cargando, setCargando] = useState(true);
+
+  const resp = await fetch(`${url}/subidas/${uid}/${pid}`, {
+    method: "POST",
+    headers: { "x-token": token },
+    body: data,
+  });
+
+  setCargando(false);
+
+  return { cargando, data: await resp.json() };
 };
