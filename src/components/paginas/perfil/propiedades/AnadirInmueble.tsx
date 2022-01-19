@@ -26,7 +26,7 @@ const AnadirInmueble = () => {
   const { ubicacion, direccion } = useContext(MapContext);
   const { categorias, cargando } = useCategories();
   const { loading, propertyTypes } = useTipoPropiedad();
-  const [pictures, setPictures] = useState<FileList>();
+  const [pictures, setPictures] = useState<any>();
   const [categoria, setCategoria] = useState("61cb51ee11b684e8c30cb7cb");
   const [tipoPropiedad, setTipoPropiedad] = useState(
     "61df4edbde1013c85c1f991a"
@@ -211,6 +211,11 @@ const AnadirInmueble = () => {
   };
 
   const abrirInputfile = () => inputFile.current.click();
+
+  const selectedFilesChanged = (e: any) => {
+    var filesArr = Array.prototype.slice.call(e.target.files);
+    setPictures(filesArr);
+  };
 
   const longitudTitulo = titulo.length;
   const longitudOtros = otros.length;
@@ -973,7 +978,8 @@ const AnadirInmueble = () => {
                   type="file"
                   ref={inputFile}
                   multiple
-                  onChange={(e: any) => setPictures(e.target.files)}
+                  accept="image/*"
+                  onChange={selectedFilesChanged}
                 />
               </Form.Group>
             </Form>
@@ -985,15 +991,15 @@ const AnadirInmueble = () => {
                 }}
                 className="mySwiper"
               >
-                {/* {pictures.map((picture) => (
-                  <SwiperSlide key={picture.name} >
+                {pictures.map((picture: any) => (
+                  <SwiperSlide key={picture.name}>
                     <img
                       className="pointer my-4"
                       src={picture.name}
-                      alt="..."
+                      alt={picture.name}
                     />
                   </SwiperSlide>
-                ))} */}
+                ))}
               </Swiper>
               <br />
               <Button titulo="Borrar" />
