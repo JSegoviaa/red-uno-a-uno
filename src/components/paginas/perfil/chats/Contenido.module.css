@@ -1,3 +1,9 @@
+.VentanaChat {
+  width: 400px;
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+}
 .header {
   background-color: #7149bc;
   padding: 10px;
@@ -24,22 +30,42 @@
   color: white;
   padding-right: 10px;
 }
+
 .chatBox {
   box-shadow: 0px 0px 17px 3px rgba(0, 0, 0, 0.29);
   padding: 25px 10px;
   height: 500px;
   overflow-y: scroll;
   overflow-x: hidden;
+  background-color: white;
+  /* background-image: url('/images/content/backgorundChat.jpg');
+  background-size: cover; */
 }
-.sendMensaje {
+.chatBox::-webkit-scrollbar {
+  display: none;
+}
+
+.sendMensajeFooter {
   background-color: #7149bc;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   padding: 15px;
 }
 .btnEnviar {
+  border: 1px solid #7149bc;
+  background: none;
+}
+.iconSend{
   border: none;
   background: none;
+}
+
+.messageBox{
+  border-radius: 20px;
+}
+.messageBox:focus {
+  border: 1px solid tomato;
+  box-shadow: none;
 }
 
 .mensaje1 {
@@ -53,9 +79,8 @@
   color: white;
   text-align: left;
   width: fit-content;
-  max-width: 65%;
+  max-width: 80%;
   float: left;
-  
 }
 .mensaje2 {
   background-color: #7149bc;
@@ -67,16 +92,23 @@
   font-size: 16px;
   color: white;
   width: fit-content;
-  max-width: 65%;
+  max-width: 80%;
   float: right;
 }
 
-.hoja{
-  border: 2px solid red;
-}
 
 @media (max-width: 500px) {
-  .mensaje1, .mensaje2{
-    max-width: 80%;
+    .VentanaChat{
+    width: 350px;
+    right: 5px;
+    bottom: 5px;
+  }
+}
+
+@media (max-width: 360px) {
+  .VentanaChat{
+    width: 320px;
+    right: 5px;
+    bottom: 5px;
   }
 }
