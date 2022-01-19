@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
-import { toast } from "react-toastify";
 import Button from "../../../ui/button/Button";
 
 const thumb: any = {
@@ -60,7 +59,7 @@ const AnadirImagenes = () => {
       <div style={thumbInner}>
         <img src={file.preview} style={img} />
       </div>
-      {/* <button onClick={() => remove(i)}>Borrar</button> */}
+      {/* onClick={() => remove(i)} */}
     </div>
   ));
 
