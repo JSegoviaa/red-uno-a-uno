@@ -69,28 +69,28 @@
 }
 
 .mensaje1 {
-  background-color: tomato;
+  background-color: rgba(255, 99, 71, 0.11);
   padding: 10px;
   border-radius: 10px;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  color: white;
+  color: rgb(0, 0, 0);
   text-align: left;
   width: fit-content;
   max-width: 80%;
   float: left;
 }
 .mensaje2 {
-  background-color: #7149bc;
+  background-color: #7149bc11;
   padding: 10px;
   border-radius: 10px;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  color: white;
+  color: rgb(0, 0, 0);
   width: fit-content;
   max-width: 80%;
   float: right;
