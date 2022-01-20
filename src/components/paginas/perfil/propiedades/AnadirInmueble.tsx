@@ -54,7 +54,7 @@ const AnadirInmueble = () => {
 
   const { formulario, handleChange } = useForm({
     titulo: "",
-    antiguedad: undefined,
+    antiguedad: "",
     m2Construidos: 0,
     m2Terreno: 0,
     habitaciones: 0,
@@ -71,7 +71,7 @@ const AnadirInmueble = () => {
     mantenimiento,
     piscina,
     discapacitados,
-    descripcion: undefined,
+    descripcion: "",
     precio: 0,
     comisiones: 0,
     otros: "",
