@@ -41,6 +41,7 @@ const img = {
 const AnadirImagenes = () => {
   const { auth } = useContext(AuthContext);
   const router = useRouter();
+  const [cargando, setCargando] = useState(false);
   const [pictures, setPictures] = useState<any>([]);
   const { inmuebles } = useUserInmuebles(auth.uid);
   const { subirImagenesInmueble } = useContext(InmuebleContext);
@@ -88,7 +89,7 @@ const AnadirImagenes = () => {
 
   const uploadPictures = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setCargando(true);
     const formData = new FormData();
 
     for (let i = 0; i < pictures.length; i++) {
@@ -97,6 +98,7 @@ const AnadirImagenes = () => {
 
     await subirImagenesInmueble(formData, auth.uid, ultimoInmueble?._id);
 
+    setCargando(false);
     router.push(`/propiedades/${ultimoInmueble?.slug}`);
   };
 
@@ -123,6 +125,7 @@ const AnadirImagenes = () => {
       </div>
       <br />
       <div>{thumbs}</div>
+      {cargando ? "Tus imágenes se están subiendo" : null}
 
       <br />
       <Form
