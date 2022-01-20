@@ -1,10 +1,15 @@
 import { createContext, FC } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { fetchBorrarInmueble, fetchInmueble } from "../../helpers/fetch";
+import {
+  fetchBorrarInmueble,
+  fetchInmueble,
+  subirFotosInmueble,
+} from "../../helpers/fetch";
 import {
   BorrarInmuebleResp,
   CrearInmuebleResp,
 } from "../../interfaces/CrearInmuebleInterface";
+import { SubirImagenesInmueble } from "../../interfaces/InmueblesInterface";
 
 interface ContextProps {
   crearInmueble: (
@@ -51,6 +56,11 @@ interface ContextProps {
     seguridadPrivada?: boolean
   ) => Promise<CrearInmuebleResp>;
   eliminarInmueble: (id: string) => Promise<BorrarInmuebleResp>;
+  subirImagenesInmueble: (
+    data: any,
+    uid: string | null | undefined,
+    pid: string | undefined
+  ) => Promise<SubirImagenesInmueble>;
 }
 
 export const InmuebleContext = createContext({} as ContextProps);
@@ -160,6 +170,26 @@ export const InmuebleProvider: FC = ({ children }) => {
     return resp;
   };
 
+  const subirImagenesInmueble = async (
+    data: any,
+    uid: string | null | undefined,
+    pid: string | undefined
+  ) => {
+    const resp = await subirFotosInmueble(`subidas/${uid}/${pid}`, data);
+
+    if (resp.ok) {
+      toast.success(resp.msg);
+    }
+
+    if (!resp.ok) {
+      toast.error(
+        "Hubo un error al momento de subir las imágenes. Inténtelo nuevamente"
+      );
+    }
+
+    return resp;
+  };
+
   const eliminarInmueble = async (id: string) => {
     const resp = await fetchBorrarInmueble(`inmuebles/${id}`);
 
@@ -168,7 +198,9 @@ export const InmuebleProvider: FC = ({ children }) => {
   };
 
   return (
-    <InmuebleContext.Provider value={{ crearInmueble, eliminarInmueble }}>
+    <InmuebleContext.Provider
+      value={{ crearInmueble, eliminarInmueble, subirImagenesInmueble }}
+    >
       <ToastContainer />
       {children}
     </InmuebleContext.Provider>

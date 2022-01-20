@@ -1,10 +1,17 @@
-import { CSSProperties, FormEvent, useContext, useEffect, useState } from "react";
+import {
+  CSSProperties,
+  FormEvent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Form } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { useUserInmuebles } from "../../../../hooks/useUserInfo";
 import Button from "../../../ui/button/Button";
-import styles from './AgregaImg.module.css'
+import styles from "./AgregaImg.module.css";
 
 const thumb: any = {
   display: "inline-flex",
@@ -18,11 +25,10 @@ const thumb: any = {
   boxSizing: "border-box",
 };
 
-const thumbInner:CSSProperties = {
+const thumbInner: CSSProperties = {
   display: "flex",
   minWidth: 0,
   overflow: "hidden",
-  
 };
 
 const img = {
@@ -33,8 +39,9 @@ const img = {
 
 const AnadirImagenes = () => {
   const { auth } = useContext(AuthContext);
-  const [pictures, setPictures] = useState([]);
+  const [pictures, setPictures] = useState<any>([]);
   const { inmuebles } = useUserInmuebles(auth.uid);
+  const { subirImagenesInmueble } = useContext(InmuebleContext);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -63,17 +70,31 @@ const AnadirImagenes = () => {
   const thumbs = pictures.map((file: any, i: number) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
-        <img src={file.preview} style={img}/>
-        <img className={`${styles.btnicon} pointer`} onClick={() => remove(i)} src="/images/icons/properties-icons/rechazado.png" alt="" />
+        <img src={file.preview} style={img} />
+        <img
+          className={`${styles.btnicon} pointer`}
+          onClick={() => remove(i)}
+          src="/images/icons/properties-icons/rechazado.png"
+          alt=""
+        />
       </div>
     </div>
   ));
 
-
-
-  const uploadPictures = (e: FormEvent<HTMLFormElement>) => {
+  const uploadPictures = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Se suben imágenes");
+
+    const formData = new FormData();
+
+    for (let i = 0; i < pictures.length; i++) {
+      formData.append("pictures", pictures[i]);
+    }
+
+    await subirImagenesInmueble(
+      formData,
+      auth.uid,
+      inmuebles?.inmueblesUsuario[inmuebles.inmueblesUsuario.length - 1]._id
+    );
   };
 
   return (
@@ -81,15 +102,11 @@ const AnadirImagenes = () => {
       <div className="cargarImagen" {...getRootProps()}>
         <input {...getInputProps()} />
         <div className={`${styles.contenedorClipboard} pointer`}>
-          <div className="text1">
-            Arrastra tus imágenes aquí
-          </div>
+          <div className="text1">Arrastra tus imágenes aquí</div>
           <div className="my-3">
             <i className={`${styles.iconAdd} bi bi-plus-circle`}></i>
           </div>
-          <div className="text2">
-            o da click para agregarlas
-          </div>
+          <div className="text2">o da click para agregarlas</div>
         </div>
       </div>
       <div style={{ fontSize: 18 }}>
@@ -103,7 +120,6 @@ const AnadirImagenes = () => {
       </div>
       <br />
       <div>{thumbs}</div>
-      
 
       <br />
       <Form

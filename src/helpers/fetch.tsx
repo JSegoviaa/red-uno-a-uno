@@ -205,14 +205,12 @@ export const subirFotoPerfil = async (
 
 export const subirFotosInmueble = async (
   endpoint: string,
-  data: any,
-  uid: string,
-  pid: string
+  data: any
 ): Promise<SubirImagenesInmueble> => {
   const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
-  const resp = await fetch(`${url}/subidas/${uid}/${pid}`, {
+  const resp = await fetch(url, {
     method: "POST",
     headers: { "x-token": token },
     body: data,
