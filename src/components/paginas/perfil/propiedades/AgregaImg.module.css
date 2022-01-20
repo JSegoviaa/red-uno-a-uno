@@ -1,22 +1,46 @@
+.btnicon {
+  position: absolute;
+  margin-left: 5px;
+  margin-top: 5px;
+  width: 22px;
+}
+.contenedorClipboard {
+  margin-top: 50px;
+  padding: 25px;
+  width: 100%;
+  height: auto;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  color: white;
+  background-color: grey;
+}
+.iconAdd {
+  font-size: 6rem;
+}
 
-.btnicon{
-    position: absolute;
-    margin-left: 5px;
-    margin-top: 5px;
-    width: 22px;
+.VideoInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
 }
-.contenedorClipboard{
-    margin-top: 50px;
-    padding: 25px;
-    width: 100%;
-    height: auto;
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    color: white;
-    background-color: grey;
+
+.VideoInput_input {
+  display: none;
 }
-.iconAdd{
-    font-size: 6rem;
+
+.VideoInput_video {
+  display: block;
+  margin: 0;
+}
+
+.VideoInput_footer {
+  background: #eee;
+  width: 100%;
+  min-height: 40px;
+  line-height: 40px;
+  text-align: center;
 }
