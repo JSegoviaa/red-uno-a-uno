@@ -90,7 +90,7 @@ const ContenidoChat = () => {
                         </div>
                     </div>
                     <div className="col-12">
-                        <div className={styles.sendMensaje}>
+                        <div className={styles.sendMensajeFooter}>
                             <div className="row d-flex justify-content-center">
                                 <div className="col-10">
                                     <div className="input-group">

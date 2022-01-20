@@ -4,12 +4,16 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import Button from "../../../ui/button/Button";
 import styles from "./Perfil.module.css";
+import Loading from "../../../ui/loading/Loading";
 
 const Perfil = () => {
   const router = useRouter();
   const { auth, fotoPerfil } = useContext(AuthContext);
   const [picture, setPicture] = useState("");
   const [hover, setHover] = useState(false);
+
+  const [cargando, setcargando] = useState(false);
+
   const inputFile = useRef<any>(null);
   const misPaquetes = () => router.push("/perfil/mis-paquetes");
   const misPropiedades = () => router.push("/perfil/mis-propiedades");
@@ -19,10 +23,12 @@ const Perfil = () => {
 
   const handlePicture = async (e: any) => {
     e.preventDefault();
+    setcargando(false)
     const formData = new FormData();
     formData.append("picture", picture);
 
     await fotoPerfil(formData);
+    setcargando(true)
   };
 
   const onMouseEnter = () => setHover(true);
@@ -30,19 +36,26 @@ const Perfil = () => {
 
   return (
     <Container>
+      {!cargando?<Loading/>:null}
       <div className="d-flex justify-content-center">
         <div className="text-center">
-          <div className="pt-5 pb-3">
+          <div className={`${styles.imagencontainer} mt-5 mb-2`}>
             <img
               onClick={abrirInputfile}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
-              className="pointer"
+              className={`${styles.perfilImg} pointer`}
               src={auth.img}
-              style={{ borderRadius: "50%", width: "350px", height: "350px" }}
               alt="Foto de perfil red1a1"
             />
-            {hover ? <div>Cambiar imagen de perfil</div> : null}
+            {hover ? 
+              <div onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
+                  onClick={abrirInputfile} 
+                  className={`${styles.cargaImg} pointer`}>
+                    Cambiar imagen <br /> de perfil
+              </div>
+            : null}
           </div>
 
           <Form
