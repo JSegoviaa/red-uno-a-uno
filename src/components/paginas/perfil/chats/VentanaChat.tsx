@@ -25,11 +25,12 @@ const VentanaChat = () => {
                     <div className={`${styles.nombre}`}>James Franco</div>
                     <div className={styles.conexion}>En Linea</div>
                   </div>
-                  <div className="col-2 text-end">
+                  <div className="col-2 text-end p-0">
+                    <i className={`${styles.dashIcon} bi bi-dash-lg me-2 pointer`}></i>
                     <button
                       onClick={ocultarVentana}
                       type="button"
-                      className="btn-close btn-close-white mt-3"
+                      className="btn-close btn-close-white mt-3 me-3"
                       aria-label="Close"
                     />
                   </div>
