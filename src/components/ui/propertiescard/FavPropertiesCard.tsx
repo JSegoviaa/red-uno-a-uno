@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { Col } from "react-bootstrap";
+import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { eliminarFavorito } from "../../../helpers/fetch";
 import styles from "./FavsCard.module.css";
@@ -22,6 +23,8 @@ const FavPropertiesCard = ({ titulo, id, img, slug }: Props) => {
     }
   };
 
+  const compartir = () => toast.success(`Se ha copiado al portapapeles`);
+
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center pointer">
       <div className={`${styles.customCard} card`}>
@@ -42,7 +45,12 @@ const FavPropertiesCard = ({ titulo, id, img, slug }: Props) => {
           aria-label="Basic mixed styles example"
         >
           <button type="button" className={`${styles.customBtn2} btn`} />
-          <button type="button" className={`${styles.customBtn3} btn`} />
+          <CopyToClipboard
+            onCopy={compartir}
+            text={`red1a1.com/app/propiedades/${slug}`}
+          >
+            <button type="button" className={`${styles.customBtn3} btn`} />
+          </CopyToClipboard>
           <button
             type="button"
             className={`${styles.customBtn4} btn`}
