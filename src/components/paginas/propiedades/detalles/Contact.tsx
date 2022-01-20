@@ -35,7 +35,7 @@ const Contact = ({ inmuebles }: Props) => {
                 ? inmuebles.inmueble.usuario.telefonoPersonal
                 : inmuebles.inmueble.usuario.telefonoOficina
                 ? inmuebles.inmueble.usuario.telefonoOficina
-                : "El promotor no ha dado de alta su número telefónico"}
+                : "Número oculto"}
             </div>
           </div>
         </div>
