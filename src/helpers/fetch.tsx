@@ -8,6 +8,7 @@ import {
 } from "../interfaces/CrearInmuebleInterface";
 import { FavData, FavResp } from "../interfaces/Favoritos";
 import { HistData, HistorialResp } from "../interfaces/Historial";
+import { SubirImagenesInmueble } from "../interfaces/InmueblesInterface";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
 const baseURL = production;
@@ -207,11 +208,9 @@ export const subirFotosInmueble = async (
   data: any,
   uid: string,
   pid: string
-): Promise<any> => {
+): Promise<SubirImagenesInmueble> => {
   const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
-
-  const [cargando, setCargando] = useState(true);
 
   const resp = await fetch(`${url}/subidas/${uid}/${pid}`, {
     method: "POST",
@@ -219,7 +218,5 @@ export const subirFotosInmueble = async (
     body: data,
   });
 
-  setCargando(false);
-
-  return { cargando, data: await resp.json() };
+  return await resp.json();
 };
