@@ -8,6 +8,7 @@ import { AuthProvider } from "../context/auth/AuthContext";
 import Layout from "../components/layout/Layout";
 import { InmuebleProvider } from "../context/inmuebles/InmuebleContext";
 import { MapProvider } from "../context/map/MapContext";
+import { ChatProvider } from "../context/chat/ChatContext";
 moment.locale("es");
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -19,11 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         options={{ showSpinner: false }}
       />
       <MapProvider>
-        <Layout>
-          <InmuebleProvider>
-            <Component {...pageProps} />
-          </InmuebleProvider>
-        </Layout>
+        <ChatProvider>
+          <Layout>
+            <InmuebleProvider>
+              <Component {...pageProps} />
+            </InmuebleProvider>
+          </Layout>
+        </ChatProvider>
       </MapProvider>
     </AuthProvider>
   );

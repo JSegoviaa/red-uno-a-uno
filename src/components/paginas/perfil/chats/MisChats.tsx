@@ -1,5 +1,6 @@
-import { useRouter } from "next/router";
+import { useContext } from "react";
 import { Offcanvas } from "react-bootstrap";
+import { ChatContext } from "../../../../context/chat/ChatContext";
 import styles from "./MisChats.module.css";
 
 const chats = [
@@ -83,11 +84,11 @@ interface Props {
 }
 
 const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
-  const router = useRouter();
+  const { setAbrirChat } = useContext(ChatContext);
 
-  const goToChat = (id: number) => {
-    router.push("/perfil/mis-chats/" + id);
+  const openChat = () => {
     handleCloseCanvas();
+    setAbrirChat(true);
   };
 
   return (
@@ -98,8 +99,8 @@ const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
       <Offcanvas.Body className={styles.OFbody}>
         {chats.map((chat) => (
           <div
+            onClick={openChat}
             key={chat.id}
-            onClick={() => goToChat(chat.id)}
             className={`${styles.ChatHover} pointer mb-2`}
           >
             <div className={styles.michat}>
