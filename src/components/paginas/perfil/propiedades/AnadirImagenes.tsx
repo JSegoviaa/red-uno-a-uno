@@ -13,6 +13,7 @@ import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { useUserInmuebles } from "../../../../hooks/useUserInfo";
 import Button from "../../../ui/button/Button";
 import styles from "./AgregaImg.module.css";
+import Loading from "../../../ui/loading/Loading";
 
 const thumb: any = {
   display: "inline-flex",
@@ -125,7 +126,7 @@ const AnadirImagenes = () => {
       </div>
       <br />
       <div>{thumbs}</div>
-      {cargando ? "Tus imágenes se están subiendo" : null}
+      {cargando ? <Loading /> : null}
 
       <br />
       <Form

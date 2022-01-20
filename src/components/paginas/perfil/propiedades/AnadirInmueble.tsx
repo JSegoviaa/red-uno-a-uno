@@ -24,9 +24,9 @@ const AnadirInmueble = () => {
   const { loading, propertyTypes } = useTipoPropiedad();
   const [mostrarImgFrom, setMostrarImgFrom] = useState(false);
   const [mostrarPublicar, setMostrarPublicar] = useState(true);
-  const [categoria, setCategoria] = useState("61cb51ee11b684e8c30cb7cb");
+  const [categoria, setCategoria] = useState("61e99f0e0d3bd9163e4a4b42");
   const [tipoPropiedad, setTipoPropiedad] = useState(
-    "61df4edbde1013c85c1f991a"
+    "61e99edd0d3bd9163e4a4b3a"
   );
   const [agua, setAgua] = useState<any>(false);
   const [luz, setLuz] = useState<any>(false);
