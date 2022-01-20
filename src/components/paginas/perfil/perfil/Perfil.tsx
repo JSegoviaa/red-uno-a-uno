@@ -11,9 +11,7 @@ const Perfil = () => {
   const { auth, fotoPerfil } = useContext(AuthContext);
   const [picture, setPicture] = useState("");
   const [hover, setHover] = useState(false);
-
-  const [cargando, setcargando] = useState(false);
-
+  const [cargando, setCargando] = useState(false);
   const inputFile = useRef<any>(null);
   const misPaquetes = () => router.push("/perfil/mis-paquetes");
   const misPropiedades = () => router.push("/perfil/mis-propiedades");
@@ -23,12 +21,12 @@ const Perfil = () => {
 
   const handlePicture = async (e: any) => {
     e.preventDefault();
-    setcargando(false)
+    setCargando(true);
     const formData = new FormData();
     formData.append("picture", picture);
 
     await fotoPerfil(formData);
-    setcargando(true)
+    setCargando(false);
   };
 
   const onMouseEnter = () => setHover(true);
@@ -36,7 +34,7 @@ const Perfil = () => {
 
   return (
     <Container>
-      {!cargando?<Loading/>:null}
+      {cargando ? <Loading /> : null}
       <div className="d-flex justify-content-center">
         <div className="text-center">
           <div className={`${styles.imagencontainer} mt-5 mb-2`}>
@@ -48,14 +46,16 @@ const Perfil = () => {
               src={auth.img}
               alt="Foto de perfil red1a1"
             />
-            {hover ? 
-              <div onMouseEnter={onMouseEnter}
-                  onMouseLeave={onMouseLeave}
-                  onClick={abrirInputfile} 
-                  className={`${styles.cargaImg} pointer`}>
-                    Cambiar imagen <br /> de perfil
+            {hover ? (
+              <div
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                onClick={abrirInputfile}
+                className={`${styles.cargaImg} pointer`}
+              >
+                Cambiar imagen <br /> de perfil
               </div>
-            : null}
+            ) : null}
           </div>
 
           <Form

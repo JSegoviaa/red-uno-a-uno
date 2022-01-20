@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { ChatContext } from "../../../../context/chat/ChatContext";
 import styles from "./Contenido.module.css";
+
 const VentanaChat = () => {
-  const [mostrar, setMostrar] = useState(true);
+  const { abrirChat, setAbrirChat } = useContext(ChatContext);
 
-  const ocultarVentana = () => setMostrar(false);
-
+  const ocultarVentana = () => setAbrirChat(false);
   return (
     <section>
-      {mostrar ? (
+      {abrirChat ? (
         <div className={styles.VentanaChat}>
           <div className="row">
             <div className="col-12">
@@ -63,7 +64,7 @@ const VentanaChat = () => {
                   <div className="col-11 mb-2">
                     <div className={styles.mensaje2}>
                       O sea que ya se acabron las fiestas alocadas en la
-                      terraza? :(
+                      terraza? :{"("}
                     </div>
                   </div>
                   <div className="col-11 mb-2">
