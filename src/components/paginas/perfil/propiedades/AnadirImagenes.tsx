@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useRouter } from "next/router";
 import { Form } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 import { AuthContext } from "../../../../context/auth/AuthContext";
@@ -39,6 +40,7 @@ const img = {
 
 const AnadirImagenes = () => {
   const { auth } = useContext(AuthContext);
+  const router = useRouter();
   const [pictures, setPictures] = useState<any>([]);
   const { inmuebles } = useUserInmuebles(auth.uid);
   const { subirImagenesInmueble } = useContext(InmuebleContext);
@@ -81,6 +83,9 @@ const AnadirImagenes = () => {
     </div>
   ));
 
+  const ultimoInmueble =
+    inmuebles?.inmueblesUsuario[inmuebles.inmueblesUsuario.length - 1];
+
   const uploadPictures = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -90,11 +95,9 @@ const AnadirImagenes = () => {
       formData.append("pictures", pictures[i]);
     }
 
-    await subirImagenesInmueble(
-      formData,
-      auth.uid,
-      inmuebles?.inmueblesUsuario[inmuebles.inmueblesUsuario.length - 1]._id
-    );
+    await subirImagenesInmueble(formData, auth.uid, ultimoInmueble?._id);
+
+    router.push(`/propiedades/${ultimoInmueble?.slug}`);
   };
 
   return (
