@@ -25,6 +25,7 @@ interface Inmueble {
   titulo: string;
   usuario: Usuario;
   slug: string;
+  imgs: string[];
 }
 
 interface Usuario {

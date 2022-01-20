@@ -7,12 +7,11 @@ import styles from "./FavsCard.module.css";
 interface Props {
   id: string;
   slug: string;
-  image?: string;
+  img: string[];
   titulo: string;
-  icon?: string;
 }
 
-const FavPropertiesCard = ({ titulo, id, image, icon, slug }: Props) => {
+const FavPropertiesCard = ({ titulo, id, img, slug }: Props) => {
   const router = useRouter();
   const goToProperty = () => router.push(`/propiedades/${slug}`);
 
@@ -27,8 +26,14 @@ const FavPropertiesCard = ({ titulo, id, image, icon, slug }: Props) => {
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center pointer">
       <div className={`${styles.customCard} card`}>
         <div onClick={goToProperty}>
-          <img className={styles.iconoF} src={icon} alt="..." />
-          <img src={image} alt={titulo} />
+          <div className={styles.imgContainer}>
+            <div
+              className={styles.cardImg}
+              style={{
+                backgroundImage: img.length > 0 ? `url(${img[0]})` : "",
+              }}
+            />
+          </div>
           <div className={`${styles.proContent} my-3`}>{titulo}</div>
         </div>
         <div
