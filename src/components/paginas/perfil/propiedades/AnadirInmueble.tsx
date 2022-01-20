@@ -20,6 +20,7 @@ const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
   const router = useRouter();
+  const [creando, setCreando] = useState(false);
   const { categorias, cargando } = useCategories();
   const { loading, propertyTypes } = useTipoPropiedad();
   const [mostrarImgFrom, setMostrarImgFrom] = useState(false);
@@ -95,6 +96,7 @@ const AnadirInmueble = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setCreando(true);
 
     if (agua === "Sí") setAgua(true);
     if (agua === "No") setAgua(false);
@@ -162,7 +164,7 @@ const AnadirInmueble = () => {
     if (secadora === "Sí") setSecadora(true);
     if (secadora === "No") setSecadora(false);
 
-    crearInmueble(
+    await crearInmueble(
       titulo,
       categoria,
       precio,
@@ -208,6 +210,7 @@ const AnadirInmueble = () => {
 
     setMostrarImgFrom(true);
     setMostrarPublicar(false);
+    setCreando(false);
     router.push("/perfil/agregar-inmueble");
   };
 
@@ -946,7 +949,10 @@ const AnadirInmueble = () => {
                   {precio <= 0 || titulo.length <= 0 ? (
                     <Button titulo="Publicar" btn="Disabled" />
                   ) : (
-                    <>{mostrarPublicar ? <Button titulo="Publicar" /> : null}</>
+                    <>
+                      {creando ? <Loading /> : null}
+                      {mostrarPublicar ? <Button titulo="Publicar" /> : null}
+                    </>
                   )}
                 </div>
               </div>

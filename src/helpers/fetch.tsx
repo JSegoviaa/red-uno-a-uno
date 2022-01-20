@@ -75,14 +75,13 @@ export const fetchContactForm = async (
 
 export const fetchInmueble = async (
   endpoint: string,
-  data?: any,
-  method = "GET"
+  data?: any
 ): Promise<CrearInmuebleResp> => {
   const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
   const resp = await fetch(url, {
-    method,
+    method: "POST",
     headers: { "Content-type": "application/json", "x-token": token },
     body: JSON.stringify(data),
   });

@@ -71,7 +71,7 @@ const chats = [
     mensaje: "Me convertí en super sayayin de nuevo",
   },
   {
-    id: 11,
+    id: 12,
     img: "/images/avatares/6.svg",
     nombre: "Barack Obama",
     mensaje: "Soy el mejor presi",
@@ -84,11 +84,12 @@ interface Props {
 }
 
 const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
-  const { setAbrirChat } = useContext(ChatContext);
+  const { setAbrirChat, setMinimizarChat } = useContext(ChatContext);
 
   const openChat = () => {
     handleCloseCanvas();
     setAbrirChat(true);
+    setMinimizarChat(true);
   };
 
   return (
