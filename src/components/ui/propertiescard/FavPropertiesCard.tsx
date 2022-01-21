@@ -8,7 +8,7 @@ import styles from "./FavsCard.module.css";
 interface Props {
   id: string;
   slug: string;
-  img: string[];
+  img: string[] | string;
   titulo: string;
 }
 
@@ -37,7 +37,9 @@ const FavPropertiesCard = ({ titulo, id, img, slug }: Props) => {
               }}
             />
           </div>
-          <div className={`${styles.proContent} my-3`}>{titulo}</div>
+          <div className={styles.tituloContainer}>
+            <div className={`${styles.proContent} my-3`}>{titulo}</div>
+          </div>
         </div>
         <div
           className="btn-group"
