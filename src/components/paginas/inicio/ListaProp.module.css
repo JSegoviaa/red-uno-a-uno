@@ -1,5 +1,4 @@
 .containerList {
-  
   max-width: 500px;
   position: absolute;
   z-index: 3;
@@ -47,7 +46,8 @@
   background-color: #7149BC;
 }
 .cardImg {
-  width: 100%;
+  width: 210px;
+  min-height: 200px;
 }
 .cardTitle {
   font-family: "Open Sans";
@@ -66,4 +66,12 @@
   font-size: 15px;
   font-weight: 400;
   color: grey;
+  text-overflow: ellipsis;
+}
+.cardPropBody{
+    height: 170px;
+    overflow: hidden;
+}
+.imgcontainer{
+    overflow: hidden;
 }

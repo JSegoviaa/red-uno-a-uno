@@ -53,9 +53,10 @@ const ListaProp = () => {
                     <>
                       {inmuebles?.map((inmueble) => (
                         <div key={inmueble._id} className="col-12">
-                          <div className="card mb-3">
+                          <div className={`${styles.cardPropBody} card mb-3 pointer`}>
                             <div className="row">
                               <div className="col-4">
+                                <div className={styles.imgcontainer}>
                                 <img
                                   className={styles.cardImg}
                                   src={
@@ -65,6 +66,7 @@ const ListaProp = () => {
                                   }
                                   alt={inmueble.titulo}
                                 />
+                                </div>
                               </div>
                               <div className="col">
                                 <div className={styles.cardTitle}>
