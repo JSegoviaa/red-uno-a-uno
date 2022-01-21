@@ -15,7 +15,7 @@ import Button from "../../../ui/button/Button";
 import styles from "./AgregaImg.module.css";
 import Loading from "../../../ui/loading/Loading";
 
-const thumb: any = {
+const thumb: CSSProperties = {
   display: "inline-flex",
   borderRadius: 2,
   border: "1px solid #7149BC",
@@ -27,7 +27,7 @@ const thumb: any = {
   boxSizing: "border-box",
 };
 
-const thumbInner: CSSProperties = {
+const thumbInner = {
   display: "flex",
   minWidth: 0,
   overflow: "hidden",
@@ -41,11 +41,12 @@ const img = {
 
 const AnadirImagenes = () => {
   const { auth } = useContext(AuthContext);
+  const { subirImagenesInmueble, mostrarImgFrom, setMostrarImgFrom } =
+    useContext(InmuebleContext);
   const router = useRouter();
   const [cargando, setCargando] = useState(false);
   const [pictures, setPictures] = useState<any>([]);
   const { inmuebles } = useUserInmuebles(auth.uid);
-  const { subirImagenesInmueble } = useContext(InmuebleContext);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -100,56 +101,73 @@ const AnadirImagenes = () => {
     await subirImagenesInmueble(formData, auth.uid, ultimoInmueble?._id);
 
     setCargando(false);
+
     router.push(`/propiedades/${ultimoInmueble?.slug}`);
+    setMostrarImgFrom(false);
   };
 
   return (
-    <>
-      <div className="cargarImagen" {...getRootProps()}>
-        <input {...getInputProps()} />
-        <div className={`${styles.contenedorClipboard} pointer`}>
-          <div className="text1">Arrastra tus imágenes aquí</div>
-          <div className="my-3">
-            <i className={`${styles.iconAdd} bi bi-plus-circle`}></i>
-          </div>
-          <div className="text2">o da click para agregarlas</div>
-        </div>
-      </div>
-      <div style={{ fontSize: 18 }}>
-        Máximo 20 imágenes. Haz seleccionado{" "}
-        <span style={{ color: pictures.length > 20 ? "red" : "black" }}>
-          {pictures.length}
-        </span>{" "}
-        imágenes.
-        <br />
-        {pictures.length > 20 && "Selecciona menos imágenes por favor"}
-      </div>
-      <br />
-      <div>{thumbs}</div>
-      {cargando ? <Loading /> : null}
-
-      <br />
-      <Form
-        onSubmit={uploadPictures}
-        encType="multipart/form-data"
-        className="d-flex justify-content-center"
-      >
-        <Form.Group className="mb-3">
-          <Form.Control
-            style={{ display: "none" }}
-            type="file"
-            multiple
-            accept="image/*"
+    <div className="col-sm-12 col-md-12 col-lg-6 text-center">
+      {!mostrarImgFrom ? (
+        <div className={styles.subTitulo}>
+          Para agregar fotos primero llena la información de tu inmueble
+          <img
+            className="my-4"
+            src="/images/content/agregafoto.png"
+            alt="red1a1"
           />
-        </Form.Group>
-        {pictures.length > 20 || pictures.length <= 0 ? null : (
-          <Button titulo="Agregar imágenes" />
-        )}
-      </Form>
-      <div className="SliderCustom">
-        <br />
-      </div>
-    </>
+        </div>
+      ) : null}
+
+      {mostrarImgFrom ? (
+        <>
+          <div className="cargarImagen" {...getRootProps()}>
+            <input {...getInputProps()} />
+            <div className={`${styles.contenedorClipboard} pointer`}>
+              <div className="text1">Arrastra tus imágenes aquí</div>
+              <div className="my-3">
+                <i className={`${styles.iconAdd} bi bi-plus-circle`}></i>
+              </div>
+              <div className="text2">o da click para agregarlas</div>
+            </div>
+          </div>
+          <div style={{ fontSize: 18 }}>
+            Máximo 20 imágenes. Haz seleccionado{" "}
+            <span style={{ color: pictures.length > 20 ? "red" : "black" }}>
+              {pictures.length}
+            </span>{" "}
+            imágenes.
+            <br />
+            {pictures.length > 20 && "Selecciona menos imágenes por favor"}
+          </div>
+          <br />
+          <div>{thumbs}</div>
+          {cargando ? <Loading /> : null}
+
+          <br />
+          <Form
+            onSubmit={uploadPictures}
+            encType="multipart/form-data"
+            className="d-flex justify-content-center"
+          >
+            <Form.Group className="mb-3">
+              <Form.Control
+                style={{ display: "none" }}
+                type="file"
+                multiple
+                accept="image/*"
+              />
+            </Form.Group>
+            {pictures.length > 20 || pictures.length <= 0 ? null : (
+              <Button titulo="Agregar imágenes" />
+            )}
+          </Form>
+          <div className="SliderCustom">
+            <br />
+          </div>
+        </>
+      ) : null}
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { createContext, FC } from "react";
+import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import {
   fetchBorrarInmueble,
@@ -63,11 +63,15 @@ interface ContextProps {
     uid: string | null | undefined,
     pid: string | undefined
   ) => Promise<SubirImagenesInmueble>;
+  mostrarImgFrom: boolean;
+  setMostrarImgFrom: Dispatch<SetStateAction<boolean>>;
 }
 
 export const InmuebleContext = createContext({} as ContextProps);
 
 export const InmuebleProvider: FC = ({ children }) => {
+  const [mostrarImgFrom, setMostrarImgFrom] = useState(false);
+
   const crearInmueble = async (data: InmuebleData) => {
     const resp = await fetchInmueble("inmuebles", data);
 
@@ -113,7 +117,13 @@ export const InmuebleProvider: FC = ({ children }) => {
 
   return (
     <InmuebleContext.Provider
-      value={{ crearInmueble, eliminarInmueble, subirImagenesInmueble }}
+      value={{
+        crearInmueble,
+        eliminarInmueble,
+        subirImagenesInmueble,
+        mostrarImgFrom,
+        setMostrarImgFrom,
+      }}
     >
       <ToastContainer />
       {children}

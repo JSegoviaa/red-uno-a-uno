@@ -26,13 +26,13 @@ const options = [
 ];
 
 const AnadirInmueble = () => {
-  const { crearInmueble } = useContext(InmuebleContext);
+  const { crearInmueble, setMostrarImgFrom, mostrarImgFrom } =
+    useContext(InmuebleContext);
   const { ubicacion, direccion } = useContext(MapContext);
   const router = useRouter();
   const [creando, setCreando] = useState(false);
   const { categorias, cargando } = useCategories();
   const { loading, propertyTypes } = useTipoPropiedad();
-  const [mostrarImgFrom, setMostrarImgFrom] = useState(false);
   const [mostrarPublicar, setMostrarPublicar] = useState(true);
   const [categoria, setCategoria] = useState("61e99f0e0d3bd9163e4a4b42");
   const [tipoPropiedad, setTipoPropiedad] = useState(
@@ -158,7 +158,7 @@ const AnadirInmueble = () => {
       <div className="container">
         <Titulo titulo="Agrega un inmueble" />
         <br />
-        <div className="row">
+        <div className="row ">
           <div className="col-sm-12 col-md-12 col-lg-6">
             <Form onSubmit={handleSubmit}>
               <div className="row">
@@ -868,20 +868,8 @@ const AnadirInmueble = () => {
               </div>
             </Form>
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-6 text-center">
-            {!mostrarImgFrom ? (
-              <div className={styles.subTitulo}>
-                Para agregar fotos primero llena la información de tu inmueble
-                <img
-                  className="my-4"
-                  src="/images/content/agregafoto.png"
-                  alt="red1a1"
-                />
-              </div>
-            ) : null}
 
-            {mostrarImgFrom ? <AnadirImagenes /> : null}
-          </div>
+          <AnadirImagenes />
         </div>
       </div>
     </section>
