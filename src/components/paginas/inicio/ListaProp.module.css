@@ -1,5 +1,5 @@
 .containerList {
-  min-width: 500px;
+  
   max-width: 500px;
   position: absolute;
   z-index: 3;
@@ -44,6 +44,7 @@
 .cardheader {
   border: none;
   padding: 0;
+  background-color: #7149BC;
 }
 .cardImg {
   width: 100%;
