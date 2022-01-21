@@ -11,50 +11,52 @@ import {
 } from "../../interfaces/CrearInmuebleInterface";
 import { SubirImagenesInmueble } from "../../interfaces/InmueblesInterface";
 
+export interface InmuebleData {
+  titulo: string;
+  categoria: string;
+  precio: number;
+  direccion: string | undefined;
+  lat: number;
+  lng: number;
+  tipoPropiedad: string;
+  descripcion?: string;
+  AA?: boolean;
+  agua?: boolean;
+  amueblado?: boolean;
+  antiguedad?: string;
+  baños?: number;
+  camas?: boolean;
+  closet?: boolean;
+  cocina?: boolean;
+  comedor?: boolean;
+  comisiones?: number;
+  discapacitados?: boolean;
+  escuelas?: boolean;
+  estufa?: boolean;
+  gas?: boolean;
+  habitaciones?: number;
+  horno?: boolean;
+  internet?: boolean;
+  lavadora?: boolean;
+  luz?: boolean;
+  m2Construidos?: number;
+  m2Terreno?: number;
+  mantenimiento?: boolean;
+  medioBaños?: number;
+  microondas?: boolean;
+  minihorno?: boolean;
+  otros?: string;
+  parking?: number;
+  piscinas?: boolean;
+  pisos?: number;
+  refrigerador?: boolean;
+  sala?: boolean;
+  secadora?: boolean;
+  seguridadPrivada?: boolean;
+}
+
 interface ContextProps {
-  crearInmueble: (
-    titulo: string,
-    categoria: string,
-    precio: number,
-    direccion: string | undefined,
-    lat: number,
-    lng: number,
-    descripcion?: string,
-    AA?: boolean,
-    agua?: boolean,
-    amueblado?: boolean,
-    antiguedad?: string,
-    baños?: number,
-    camas?: boolean,
-    closet?: boolean,
-    cocina?: boolean,
-    comedor?: boolean,
-    comisiones?: number,
-    discapacitados?: boolean,
-    escuelas?: boolean,
-    estufa?: boolean,
-    gas?: boolean,
-    habitaciones?: number,
-    horno?: boolean,
-    internet?: boolean,
-    lavadora?: boolean,
-    luz?: boolean,
-    m2Construidos?: number,
-    m2Terreno?: number,
-    mantenimiento?: boolean,
-    medioBaños?: number,
-    microondas?: boolean,
-    minihorno?: boolean,
-    otros?: string,
-    parking?: number,
-    piscinas?: boolean,
-    pisos?: number,
-    tipoPropiedad?: string,
-    refrigerador?: boolean,
-    sala?: boolean,
-    secadora?: boolean,
-    seguridadPrivada?: boolean
-  ) => Promise<CrearInmuebleResp>;
+  crearInmueble: (data: InmuebleData) => Promise<CrearInmuebleResp>;
   eliminarInmueble: (id: string) => Promise<BorrarInmuebleResp>;
   subirImagenesInmueble: (
     data: any,
@@ -66,92 +68,8 @@ interface ContextProps {
 export const InmuebleContext = createContext({} as ContextProps);
 
 export const InmuebleProvider: FC = ({ children }) => {
-  const crearInmueble = async (
-    titulo: string,
-    categoria: string,
-    precio: number,
-    direccion: string | undefined,
-    lat: number,
-    lng: number,
-    descripcion?: string,
-    agua?: boolean,
-    AA?: boolean,
-    amueblado?: boolean,
-    antiguedad?: string,
-    baños?: number,
-    camas?: boolean,
-    closet?: boolean,
-    cocina?: boolean,
-    comedor?: boolean,
-    comisiones?: number,
-    discapacitados?: boolean,
-    escuelas?: boolean,
-    estufa?: boolean,
-    gas?: boolean,
-    habitaciones?: number,
-    horno?: boolean,
-    internet?: boolean,
-    lavadora?: boolean,
-    luz?: boolean,
-    m2Construidos?: number,
-    m2Terreno?: number,
-    mantenimiento?: boolean,
-    medioBaños?: number,
-    microondas?: boolean,
-    minihorno?: boolean,
-    otros?: string,
-    parking?: number,
-    piscinas?: boolean,
-    pisos?: number,
-    tipoPropiedad?: string,
-    refrigerador?: boolean,
-    sala?: boolean,
-    secadora?: boolean,
-    seguridadPrivada?: boolean
-  ) => {
-    const resp = await fetchInmueble("inmuebles", {
-      titulo,
-      categoria,
-      precio,
-      direccion,
-      descripcion,
-      AA,
-      agua,
-      amueblado,
-      antiguedad,
-      baños,
-      camas,
-      closet,
-      cocina,
-      comedor,
-      comisiones,
-      discapacitados,
-      escuelas,
-      estufa,
-      gas,
-      habitaciones,
-      horno,
-      internet,
-      lavadora,
-      luz,
-      m2Construidos,
-      m2Terreno,
-      mantenimiento,
-      medioBaños,
-      microondas,
-      minihorno,
-      otros,
-      parking,
-      piscinas,
-      pisos,
-      tipoPropiedad,
-      refrigerador,
-      sala,
-      secadora,
-      seguridadPrivada,
-      lat,
-      lng,
-    });
+  const crearInmueble = async (data: InmuebleData) => {
+    const resp = await fetchInmueble("inmuebles", data);
 
     if (resp.ok) {
       toast.success(resp.msg);

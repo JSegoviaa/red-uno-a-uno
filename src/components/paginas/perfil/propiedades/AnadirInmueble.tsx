@@ -1,6 +1,11 @@
 import { FormEvent, useContext, useState } from "react";
+import { useRouter } from "next/router";
 import { Col, Form, Row } from "react-bootstrap";
-import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
+import Select from "react-select";
+import {
+  InmuebleContext,
+  InmuebleData,
+} from "../../../../context/inmuebles/InmuebleContext";
 import { MapContext } from "../../../../context/map/MapContext";
 import { useForm } from "../../../../hooks/useForm";
 import styles from "./FormDesign.module.css";
@@ -14,7 +19,11 @@ import {
 } from "../../../../hooks/useCategories";
 import Loading from "../../../ui/loading/Loading";
 import AnadirImagenes from "./AnadirImagenes";
-import { useRouter } from "next/router";
+
+const options = [
+  { value: false, label: "No" },
+  { value: true, label: "Sí" },
+];
 
 const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
@@ -29,6 +38,7 @@ const AnadirInmueble = () => {
   const [tipoPropiedad, setTipoPropiedad] = useState(
     "61e99edd0d3bd9163e4a4b3a"
   );
+  const [amueblado, setAmueblado] = useState(false);
   const [agua, setAgua] = useState<any>(false);
   const [luz, setLuz] = useState<any>(false);
   const [gas, setGas] = useState<any>(false);
@@ -38,7 +48,6 @@ const AnadirInmueble = () => {
   const [mantenimiento, setMantenimiento] = useState<any>(false);
   const [piscina, setPiscina] = useState<any>(false);
   const [discapacitados, setDiscapacitados] = useState<any>(false);
-  const [amueblado, setAmueblado] = useState(false);
   const [camas, setCamas] = useState<any>(false);
   const [closet, setCloset] = useState<any>(false);
   const [sala, setSala] = useState<any>(false);
@@ -63,15 +72,6 @@ const AnadirInmueble = () => {
     medioBaños: 0,
     parking: 0,
     pisos: 0,
-    agua,
-    luz,
-    gas,
-    internet,
-    seguridadPrivada,
-    escuelas,
-    mantenimiento,
-    piscina,
-    discapacitados,
     descripcion: "",
     precio: 0,
     comisiones: 0,
@@ -94,119 +94,55 @@ const AnadirInmueble = () => {
     otros,
   } = formulario;
 
+  const dataInmueble: InmuebleData = {
+    titulo,
+    categoria,
+    precio,
+    direccion,
+    lat: ubicacion.lat,
+    lng: ubicacion.lng,
+    tipoPropiedad,
+    descripcion,
+    AA: AA.value,
+    agua: agua.value,
+    amueblado,
+    antiguedad,
+    baños,
+    camas: camas.value,
+    closet: closet.value,
+    cocina: cocina.value,
+    comedor: comedor.value,
+    comisiones,
+    discapacitados: discapacitados.value,
+    escuelas: escuelas.value,
+    estufa: estufa.value,
+    gas: gas.value,
+    habitaciones,
+    horno: horno.value,
+    internet: internet.value,
+    lavadora: lavadora.value,
+    luz: luz.value,
+    m2Construidos,
+    m2Terreno,
+    mantenimiento: mantenimiento.value,
+    medioBaños,
+    microondas: microondas.value,
+    minihorno: minihorno.value,
+    otros,
+    parking,
+    piscinas: piscina.value,
+    pisos,
+    refrigerador: refrigerador.value,
+    sala: sala.value,
+    secadora: secadora.value,
+    seguridadPrivada: seguridadPrivada.value,
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setCreando(true);
 
-    if (agua === "Sí") setAgua(true);
-    if (agua === "No") setAgua(false);
-
-    if (luz === "Sí") setLuz(true);
-    if (luz === "No") setLuz(false);
-
-    if (gas === "Sí") setGas(true);
-    if (gas === "No") setGas(false);
-
-    if (internet === "Sí") setInternet(true);
-    if (internet === "No") setInternet(false);
-
-    if (seguridadPrivada === "Sí") setSeguridadPrivada(true);
-    if (seguridadPrivada === "No") setSeguridadPrivada(false);
-
-    if (escuelas === "Sí") setEscuelas(true);
-    if (escuelas === "No") setEscuelas(false);
-
-    if (mantenimiento === "Sí") setMantenimiento(true);
-    if (mantenimiento === "No") setMantenimiento(false);
-
-    if (piscina === "Sí") setPiscina(true);
-    if (piscina === "No") setPiscina(false);
-
-    if (discapacitados === "Sí") setDiscapacitados(true);
-    if (discapacitados === "No") setDiscapacitados(false);
-
-    if (camas === "Sí") setCamas(true);
-    if (camas === "No") setCamas(false);
-
-    if (closet === "Sí") setCloset(true);
-    if (closet === "No") setCloset(false);
-
-    if (sala === "Sí") setSala(true);
-    if (sala === "No") setSala(false);
-
-    if (comedor === "Sí") setComedor(true);
-    if (comedor === "No") setComedor(false);
-
-    if (cocina === "Sí") setCocina(true);
-    if (cocina === "No") setCocina(false);
-
-    if (AA === "Sí") setAA(true);
-    if (AA === "No") setAA(false);
-
-    if (refrigerador === "Sí") setRefrigerador(true);
-    if (refrigerador === "No") setRefrigerador(false);
-
-    if (estufa === "Sí") setEstufa(true);
-    if (estufa === "No") setEstufa(false);
-
-    if (microondas === "Sí") setMicroondas(true);
-    if (microondas === "No") setMicroondas(false);
-
-    if (minihorno === "Sí") setMinihorno(true);
-    if (minihorno === "No") setMinihorno(false);
-
-    if (horno === "Sí") setHorno(true);
-    if (horno === "No") setHorno(false);
-
-    if (lavadora === "Sí") setLavadora(true);
-    if (lavadora === "No") setLavadora(false);
-
-    if (secadora === "Sí") setSecadora(true);
-    if (secadora === "No") setSecadora(false);
-
-    await crearInmueble(
-      titulo,
-      categoria,
-      precio,
-      direccion,
-      ubicacion.lat,
-      ubicacion.lng,
-      descripcion,
-      agua,
-      AA,
-      amueblado,
-      antiguedad,
-      baños,
-      camas,
-      closet,
-      cocina,
-      comedor,
-      comisiones,
-      discapacitados,
-      escuelas,
-      estufa,
-      gas,
-      habitaciones,
-      horno,
-      internet,
-      lavadora,
-      luz,
-      m2Construidos,
-      m2Terreno,
-      mantenimiento,
-      medioBaños,
-      microondas,
-      minihorno,
-      otros,
-      parking,
-      piscina,
-      pisos,
-      tipoPropiedad,
-      refrigerador,
-      sala,
-      secadora,
-      seguridadPrivada
-    );
+    await crearInmueble(dataInmueble);
 
     setMostrarImgFrom(true);
     setMostrarPublicar(false);
@@ -455,13 +391,12 @@ const AnadirInmueble = () => {
                           <div className={styles.labels}>Cuenta con agua</div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={agua}
-                            onChange={(e) => setAgua(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={agua}
+                            onChange={setAgua}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -471,13 +406,12 @@ const AnadirInmueble = () => {
                           <div className={styles.labels}>Cuenta con luz</div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={luz}
-                            onChange={(e) => setLuz(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={luz}
+                            onChange={setLuz}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -487,13 +421,12 @@ const AnadirInmueble = () => {
                           <div className={styles.labels}>Cuenta con gas</div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={gas}
-                            onChange={(e) => setGas(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={gas}
+                            onChange={setGas}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -503,13 +436,12 @@ const AnadirInmueble = () => {
                           <div className={styles.labels}>Internet</div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={internet}
-                            onChange={(e) => setInternet(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={internet}
+                            onChange={setInternet}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -519,15 +451,12 @@ const AnadirInmueble = () => {
                           <div className={styles.labels}>Seguridad privada</div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={seguridadPrivada}
-                            onChange={(e) =>
-                              setSeguridadPrivada(e.target.value)
-                            }
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={seguridadPrivada}
+                            onChange={setSeguridadPrivada}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -537,13 +466,12 @@ const AnadirInmueble = () => {
                           <div className={styles.labels}>Escuelas cercanas</div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={escuelas}
-                            onChange={(e) => setEscuelas(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={escuelas}
+                            onChange={setEscuelas}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -553,13 +481,12 @@ const AnadirInmueble = () => {
                           <div className={styles.labels}>Mantenimiento</div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={mantenimiento}
-                            onChange={(e) => setMantenimiento(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={mantenimiento}
+                            onChange={setMantenimiento}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -569,13 +496,12 @@ const AnadirInmueble = () => {
                           <div className={styles.labels}>Alberca</div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={piscina}
-                            onChange={(e) => setPiscina(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={piscina}
+                            onChange={setPiscina}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -587,13 +513,12 @@ const AnadirInmueble = () => {
                           </div>
                         </div>
                         <div className="col-sm-12 col-md-4 col-lg-5 col-xl-5 col-xxl-4">
-                          <Form.Select
-                            value={discapacitados}
-                            onChange={(e) => setDiscapacitados(e.target.value)}
-                          >
-                            <option>No</option>
-                            <option>Sí</option>
-                          </Form.Select>
+                          <Select
+                            options={options}
+                            defaultValue={discapacitados}
+                            onChange={setDiscapacitados}
+                            placeholder=""
+                          />
                         </div>
                       </div>
                     </div>
@@ -633,13 +558,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Camas</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={camas}
-                                onChange={(e) => setCamas(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={camas}
+                                onChange={setCamas}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -649,13 +573,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Closet</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={closet}
-                                onChange={(e) => setCloset(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={closet}
+                                onChange={setCloset}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -665,13 +588,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Sala</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={sala}
-                                onChange={(e) => setSala(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={sala}
+                                onChange={setSala}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -681,13 +603,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Comedor</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={comedor}
-                                onChange={(e) => setComedor(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={comedor}
+                                onChange={setComedor}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -697,13 +618,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Cocina</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={cocina}
-                                onChange={(e) => setCocina(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={cocina}
+                                onChange={setCocina}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -713,13 +633,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>AA</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={AA}
-                                onChange={(e) => setAA(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={AA}
+                                onChange={setAA}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -729,15 +648,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Refrigerador</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={refrigerador}
-                                onChange={(e) =>
-                                  setRefrigerador(e.target.value)
-                                }
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={refrigerador}
+                                onChange={setRefrigerador}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -747,13 +663,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Estufa</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={estufa}
-                                onChange={(e) => setEstufa(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={estufa}
+                                onChange={setEstufa}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -763,13 +678,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Microondas</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={microondas}
-                                onChange={(e) => setMicroondas(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={microondas}
+                                onChange={setMicroondas}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -779,13 +693,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Mini horno</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={minihorno}
-                                onChange={(e) => setMinihorno(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={minihorno}
+                                onChange={setMinihorno}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -795,13 +708,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Horno</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={horno}
-                                onChange={(e) => setHorno(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={horno}
+                                onChange={setHorno}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -811,13 +723,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Lavadora</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={lavadora}
-                                onChange={(e) => setLavadora(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={lavadora}
+                                onChange={setLavadora}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>
@@ -827,13 +738,12 @@ const AnadirInmueble = () => {
                               <div className={styles.labels}>Secadora</div>
                             </div>
                             <div className="col-sm-12 col-md-4 col-lg-6 col-xxl-4">
-                              <Form.Select
-                                value={secadora}
-                                onChange={(e) => setSecadora(e.target.value)}
-                              >
-                                <option>No</option>
-                                <option>Sí</option>
-                              </Form.Select>
+                              <Select
+                                options={options}
+                                defaultValue={secadora}
+                                onChange={setSecadora}
+                                placeholder=""
+                              />
                             </div>
                           </div>
                         </div>

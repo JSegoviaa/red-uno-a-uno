@@ -21,6 +21,7 @@
     "react-dropzone": "^11.5.1",
     "react-geosuggest": "^2.14.1",
     "react-number-format": "^4.9.1",
+    "react-select": "^5.2.2",
     "react-toastify": "^8.1.0",
     "swiper": "^7.3.3"
   },
