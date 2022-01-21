@@ -107,15 +107,18 @@ const AnadirImagenes = () => {
   };
 
   return (
-    <div className="col-sm-12 col-md-12 col-lg-6 text-center">
+    <div className="col-sm-12 col-md-12 col-lg-8 text-center">
       {!mostrarImgFrom ? (
         <div className={styles.subTitulo}>
           Para agregar fotos primero llena la información de tu inmueble
-          <img
-            className="my-4"
-            src="/images/content/agregafoto.png"
-            alt="red1a1"
-          />
+          <div className="text-center">
+            <img
+              className="my-4"
+              src="/images/content/agregafoto.png"
+              alt="red1a1"
+              style={{ width: "70%" }}
+            />
+          </div>
         </div>
       ) : null}
 
