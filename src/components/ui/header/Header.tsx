@@ -7,10 +7,11 @@ import LoginModal from "../authmodal/LoginModal";
 import RegisterModal from "../authmodal/AuthModal";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import MisChats from "../../paginas/perfil/chats/MisChats";
+import { ChatContext } from "../../../context/chat/ChatContext";
 
 const Header = () => {
-  const { auth } = useContext(AuthContext);
-  const { logOut } = useContext(AuthContext);
+  const { auth, logOut } = useContext(AuthContext);
+  const { setAbrirChat } = useContext(ChatContext);
   const [show, setShow] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,6 +27,7 @@ const Header = () => {
   const cerrarSesion = () => {
     logOut();
     setShow1(false);
+    setAbrirChat(false);
   };
 
   const [showCanvas, setShowCanvas] = useState(false);
