@@ -33,7 +33,7 @@ const MiListaFavoritos = () => {
                         : "Inmueble dado de baja por el promotor"
                     }
                     slug={favorito.inmueble ? favorito.inmueble.slug : ""}
-                    img={favorito.inmueble.imgs}
+                    img={favorito.inmueble ? favorito.inmueble.imgs : ""}
                     // icon={favorito.icon}
                   />
                 ))}

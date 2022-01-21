@@ -33,7 +33,9 @@ const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
               }}
             ></div>
           </div>
-          <div className={`${styles.proContent} my-2`}>{titulo}</div>
+          <div className={styles.tituloContainer}>
+            <div className={`${styles.proContent} my-2`}>{titulo}</div>
+          </div>
         </div>
         <div
           className="btn-group"

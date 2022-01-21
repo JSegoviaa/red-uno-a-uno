@@ -10,7 +10,7 @@ interface ContextProps {
 export const ChatContext = createContext({} as ContextProps);
 
 export const ChatProvider: FC = ({ children }) => {
-  const [abrirChat, setAbrirChat] = useState(true);
+  const [abrirChat, setAbrirChat] = useState(false);
   const [minimizarChat, setMinimizarChat] = useState(true);
 
   return (

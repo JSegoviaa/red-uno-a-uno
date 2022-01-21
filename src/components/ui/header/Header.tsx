@@ -7,9 +7,11 @@ import LoginModal from "../authmodal/LoginModal";
 import RegisterModal from "../authmodal/AuthModal";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import MisChats from "../../paginas/perfil/chats/MisChats";
+import { ChatContext } from "../../../context/chat/ChatContext";
 
 const Header = () => {
-  const { auth } = useContext(AuthContext);
+  const { auth, logOut } = useContext(AuthContext);
+  const { setAbrirChat } = useContext(ChatContext);
   const [show, setShow] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +24,11 @@ const Header = () => {
   const [show1, setShow1] = useState(false);
   const target = useRef(null);
 
-  const { logOut } = useContext(AuthContext);
+  const cerrarSesion = () => {
+    logOut();
+    setShow1(false);
+    setAbrirChat(false);
+  };
 
   const [showCanvas, setShowCanvas] = useState(false);
   const handleCloseCanvas = () => setShowCanvas(false);
@@ -70,7 +76,7 @@ const Header = () => {
                 <img
                   src={auth.img}
                   alt="Mi perfil"
-                  style={{ width: "100%", height: '100%' , borderRadius: "50%" }}
+                  style={{ width: "100%", height: "100%", borderRadius: "50%" }}
                 />
               </div>
               <Overlay target={target.current} show={show1} placement="right">
@@ -124,7 +130,7 @@ const Header = () => {
                     </Link>
                     <div
                       className={`${styles.menuCerrar} pointer mx-3 my-2`}
-                      onClick={logOut}
+                      onClick={cerrarSesion}
                     >
                       Cerrar sesion
                     </div>

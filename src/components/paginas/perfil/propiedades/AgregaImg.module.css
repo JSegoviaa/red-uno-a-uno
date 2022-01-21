@@ -44,3 +44,11 @@
   line-height: 40px;
   text-align: center;
 }
+
+.subTitulo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  color: #000000;
+}

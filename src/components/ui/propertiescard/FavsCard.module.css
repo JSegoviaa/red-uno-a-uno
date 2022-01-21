@@ -93,3 +93,8 @@
   overflow: hidden;
   height: 180px;
 }
+
+.tituloContainer {
+  height: 60px;
+  overflow: hidden;
+}
