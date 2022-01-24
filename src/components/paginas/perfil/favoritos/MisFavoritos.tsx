@@ -34,7 +34,7 @@ const MiListaFavoritos = () => {
                     }
                     slug={favorito.inmueble ? favorito.inmueble.slug : ""}
                     img={favorito.inmueble ? favorito.inmueble.imgs : ""}
-                    // icon={favorito.icon}
+                    solicitud={favorito.solicitud}
                   />
                 ))}
               </>

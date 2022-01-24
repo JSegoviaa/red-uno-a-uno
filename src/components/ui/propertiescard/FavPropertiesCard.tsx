@@ -5,14 +5,17 @@ import { toast } from "react-toastify";
 import { eliminarFavorito } from "../../../helpers/fetch";
 import styles from "./FavsCard.module.css";
 
+type Solicitud = "Pendiente" | "Aprobado" | "Rechazado";
+
 interface Props {
   id: string;
   slug: string;
   img: string[] | string;
   titulo: string;
+  solicitud: Solicitud;
 }
 
-const FavPropertiesCard = ({ titulo, id, img, slug }: Props) => {
+const FavPropertiesCard = ({ titulo, id, img, slug, solicitud }: Props) => {
   const router = useRouter();
   const goToProperty = () => router.push(`/propiedades/${slug}`);
 
@@ -28,6 +31,28 @@ const FavPropertiesCard = ({ titulo, id, img, slug }: Props) => {
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center pointer">
       <div className={`${styles.customCard} card`}>
+        {/* {solicitud === "Pendiente" ? (
+          <img
+            className={styles.iconoF}
+            src="/images/icons/properties-icons/pendiente.png"
+            alt=""
+          />
+        ) : null}
+        {solicitud === "Aprobado" ? (
+          <img
+            className={styles.iconoF}
+            src="/images/icons/properties-icons/aprobado.png"
+            alt=""
+          />
+        ) : null}
+        {solicitud === "Rechazado" ? (
+          <img
+            className={styles.iconoF}
+            src="/images/icons/properties-icons/rechazado.png"
+            alt=""
+          />
+        ) : null} */}
+
         <div onClick={goToProperty}>
           <div className={styles.imgContainer}>
             <div
