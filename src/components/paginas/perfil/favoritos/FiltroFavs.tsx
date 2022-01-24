@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useFavoritos } from "../../../../hooks/useFavoritos";
@@ -8,6 +8,7 @@ import styles from "./FiltrosFavs.module.css";
 const FiltroFavs = () => {
   const { auth } = useContext(AuthContext);
   const { favoritos, cargando } = useFavoritos(auth.uid);
+  const [solicitud, setSolicitud] = useState("");
   const uniqueValues = new Set();
 
   return (
@@ -67,11 +68,15 @@ const FiltroFavs = () => {
               <Form.Select
                 aria-label="Default select example"
                 className={`${styles.customSelect} mb-4`}
+                value={solicitud}
+                onChange={(e) => {
+                  setSolicitud(e.target.value);
+                }}
               >
                 <option>Solicitudes:</option>
-                <option value="1">En Solicitud</option>
-                <option value="2">Aprobados</option>
-                <option value="3">Rechazados</option>
+                <option value="Pendiente">En Solicitud</option>
+                <option value="Aprobado">Aprobados</option>
+                <option value="Rechazado">Rechazados</option>
               </Form.Select>
             </div>
           </div>
