@@ -13,7 +13,7 @@ export const SocketContext = createContext({} as ContextProps);
 export const SocketProvider: FC = ({ children }) => {
   const { auth } = useContext(AuthContext);
   const { socket, online, conectarSocket, desconectarSocket } = useSocket(
-    'http://localhost:8080'
+    'https://prueba-red1a1.herokuapp.com'
   );
 
   useEffect(() => {
