@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { InmuebleContext } from "../context/inmuebles/InmuebleContext";
 import { InmuebleUsuario } from "../interfaces/CrearInmuebleInterface";
 import { HistorialUsuario } from "../interfaces/Historial";
 import { Usuario } from "../interfaces/UserInterface";
@@ -30,9 +31,12 @@ export const useUserInfo = (uid: string | undefined | null) => {
 export const useUserInmuebles = (uid: string | undefined | null) => {
   const [inmuebles, setInmuebles] = useState<InmuebleUsuario>();
   const [cargando, setCargando] = useState(true);
+  const { orden } = useContext(InmuebleContext);
 
   const obtenerInmueblesDeUsuario = async () => {
-    const data = await fetch(baseURL + "/inmuebles/usuario/" + uid);
+    const data = await fetch(
+      `${baseURL}/inmuebles/usuario/${uid}?orden=${orden}`
+    );
     const resp = await data.json();
     setInmuebles(resp);
     setCargando(false);

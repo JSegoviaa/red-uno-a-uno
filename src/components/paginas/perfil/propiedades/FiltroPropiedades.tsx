@@ -1,9 +1,12 @@
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { Form } from "react-bootstrap";
+import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import Button from "../../../ui/button/Button";
 import styles from "./filtros.module.css";
 
 const FiltroPropiedades = () => {
+  const { orden, setOrden } = useContext(InmuebleContext);
   const router = useRouter();
 
   const agregarPropiedad = () => router.push("/perfil/agregar-inmueble");
@@ -24,13 +27,14 @@ const FiltroPropiedades = () => {
               <Form.Select
                 aria-label="Default select example"
                 className={styles.customSelect}
+                value={orden}
+                onChange={(e) => {
+                  setOrden(e.target.value);
+                }}
               >
-                <option>Ordenar por:</option>
-                <option value="1">Recientes</option>
-                <option value="2">A-Z</option>
-                <option value="3">Propietarios</option>
-                <option value="4">Ubicación (Zonas)</option>
-                <option value="5">Compartidos</option>
+                <option value="createdAt">Recientes</option>
+                <option value="titulo">A-Z</option>
+                <option value="direccion">Ubicación (Zonas)</option>
               </Form.Select>
             </div>
           </div>
