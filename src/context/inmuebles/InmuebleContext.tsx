@@ -65,12 +65,15 @@ interface ContextProps {
   ) => Promise<SubirImagenesInmueble>;
   mostrarImgFrom: boolean;
   setMostrarImgFrom: Dispatch<SetStateAction<boolean>>;
+  orden: string;
+  setOrden: Dispatch<SetStateAction<string>>;
 }
 
 export const InmuebleContext = createContext({} as ContextProps);
 
 export const InmuebleProvider: FC = ({ children }) => {
   const [mostrarImgFrom, setMostrarImgFrom] = useState(false);
+  const [orden, setOrden] = useState<string>("createdAt");
 
   const crearInmueble = async (data: InmuebleData) => {
     const resp = await fetchInmueble("inmuebles", data);
@@ -123,6 +126,8 @@ export const InmuebleProvider: FC = ({ children }) => {
         subirImagenesInmueble,
         mostrarImgFrom,
         setMostrarImgFrom,
+        orden,
+        setOrden,
       }}
     >
       <ToastContainer />

@@ -7,6 +7,7 @@ import Button from "../../../ui/button/Button";
 import styles from "./Inmueble.module.css";
 import { agregarFav } from "../../../../helpers/fetch";
 import { toast } from "react-toastify";
+import { useFavoritos } from "../../../../hooks/useFavoritos";
 
 interface Props {
   inmuebles: {
@@ -22,6 +23,8 @@ const containerStyle = {
 
 const Ubicacion = ({ inmuebles }: Props) => {
   const { auth } = useContext(AuthContext);
+  const { favoritos } = useFavoritos(auth.uid);
+  let existeFavorito;
 
   const agregarFavorito = async (inmuebleId: string) => {
     const favorito = { usuario: auth.uid, inmueble: inmuebleId };
@@ -44,6 +47,11 @@ const Ubicacion = ({ inmuebles }: Props) => {
       }
     }
   };
+
+  favoritos.filter((favorito) => {
+    existeFavorito = favorito.inmueble._id === inmuebles.inmueble._id;
+    return existeFavorito;
+  });
 
   return (
     <section className="mt-5">
@@ -93,10 +101,19 @@ const Ubicacion = ({ inmuebles }: Props) => {
           </div>
           <div className="col-12 text-center my-5">
             {auth.uid ? (
-              <Button
-                titulo="Añadir a favoritos"
-                onClick={() => agregarFavorito(inmuebles.inmueble._id)}
-              />
+              <>
+                {existeFavorito ? (
+                  <Button
+                    titulo="Este inmueble ya está en tus favoritos"
+                    btn="Disabled"
+                  />
+                ) : (
+                  <Button
+                    titulo="Añadir a favoritos"
+                    onClick={() => agregarFavorito(inmuebles.inmueble._id)}
+                  />
+                )}
+              </>
             ) : null}
           </div>
         </Row>
