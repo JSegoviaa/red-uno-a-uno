@@ -8,6 +8,7 @@ import styles from "./FiltrosFavs.module.css";
 const FiltroFavs = () => {
   const { auth } = useContext(AuthContext);
   const { favoritos, cargando } = useFavoritos(auth.uid);
+  const uniqueValues = new Set();
 
   return (
     <div>
@@ -25,27 +26,39 @@ const FiltroFavs = () => {
                   >
                     <option>Agentes:</option>
 
-                    {favoritos.map((favorito, i) => (
-                      <option
-                        key={
-                          favorito.inmueble
-                            ? favorito.inmueble.usuario._id + i
-                            : i
-                        }
-                        value={
-                          favorito.inmueble
-                            ? favorito.inmueble.usuario._id
-                            : undefined
-                        }
-                      >
-                        {favorito.inmueble
-                          ? favorito.inmueble.usuario.nombre
-                          : null}{" "}
-                        {favorito.inmueble
-                          ? favorito.inmueble.usuario.apellido
-                          : null}
-                      </option>
-                    ))}
+                    {favoritos
+                      .filter((nombre) => {
+                        const isPresent = uniqueValues.has(
+                          nombre.inmueble.usuario.nombre +
+                            nombre.inmueble.usuario.apellido
+                        );
+                        uniqueValues.add(
+                          nombre.inmueble.usuario.nombre +
+                            nombre.inmueble.usuario.apellido
+                        );
+                        return !isPresent;
+                      })
+                      .map((favorito, i) => (
+                        <option
+                          key={
+                            favorito.inmueble
+                              ? favorito.inmueble.usuario._id + i
+                              : i
+                          }
+                          value={
+                            favorito.inmueble
+                              ? favorito.inmueble.usuario._id
+                              : undefined
+                          }
+                        >
+                          {favorito.inmueble
+                            ? favorito.inmueble.usuario.nombre
+                            : null}{" "}
+                          {favorito.inmueble
+                            ? favorito.inmueble.usuario.apellido
+                            : null}
+                        </option>
+                      ))}
                   </Form.Select>
                 </>
               )}
