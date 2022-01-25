@@ -1,6 +1,7 @@
 export interface HistorialResp {
   ok: boolean;
   msg: string;
+  total: number;
   historialUsuario: HistorialUsuario[];
 }
 

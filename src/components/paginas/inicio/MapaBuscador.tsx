@@ -1,6 +1,6 @@
 import { memo, useContext } from "react";
 import { useRouter } from "next/router";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { MapContext } from "../../../context/map/MapContext";
 import { useInmuebles } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
@@ -49,6 +49,12 @@ const MapaUbicacion = () => {
                   scaledSize: new google.maps.Size(50, 50),
                 }}
               />
+              // <InfoWindow
+              //   key={inmueble._id}
+              //   position={{ lat: inmueble.lat, lng: inmueble.lng }}
+              // >
+              //   <div>hoao</div>
+              // </InfoWindow>
             ))}
         </>
       )}

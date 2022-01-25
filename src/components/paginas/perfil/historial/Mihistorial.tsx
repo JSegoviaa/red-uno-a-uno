@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { Pagination } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useHistorial } from "../../../../hooks/useUserInfo";
 import Loading from "../../../ui/loading/Loading";
@@ -11,7 +12,9 @@ import { eliminarHist } from "../../../../helpers/fetch";
 const Mihistorial = () => {
   const { auth } = useContext(AuthContext);
   const router = useRouter();
-  const { historial, isLoading } = useHistorial(auth.uid);
+  const [limite, setLimite] = useState(20);
+  const [desde, setDesde] = useState(0);
+  const { historial, isLoading } = useHistorial(auth.uid, limite, desde);
 
   const goToProperty = async (slug: string) => {
     if (slug !== "") {
@@ -34,14 +37,14 @@ const Mihistorial = () => {
               <Loading />
             ) : (
               <>
-                {historial.length === 0 ? (
+                {historial?.historialUsuario.length === 0 ? (
                   <div className={`${styles.titulo} text-center`}>
                     No tienes búsquedas recientes
                   </div>
                 ) : (
                   <table className={`${styles.customTable}`}>
                     <tbody>
-                      {historial
+                      {historial?.historialUsuario
                         .map((hist, i) => (
                           <tr key={hist._id} className={`${styles.thover}`}>
                             <td className={styles.tNumber}>{i + 1} </td>
