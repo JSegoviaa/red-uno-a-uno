@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { Col } from "react-bootstrap";
+import { Col, Form } from "react-bootstrap";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { InmuebleContext } from "../../../context/inmuebles/InmuebleContext";
 import styles from "./PropertiesCard.module.css";
@@ -14,12 +14,19 @@ interface Props {
 }
 
 const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
-  const { eliminarInmueble } = useContext(InmuebleContext);
+  const { eliminarInmueble, actualizarInmueble } = useContext(InmuebleContext);
   const router = useRouter();
+  const [publicado, setPublicado] = useState(true);
   const goToProperty = () => router.push("/propiedades/" + slug);
   const editarInmueble = () => router.push("/perfil/editar-inmueble");
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
+
+  const pausarInmueble = async (pid: string) => {
+    setPublicado(!publicado);
+
+    await actualizarInmueble({ publicado: false }, pid);
+  };
 
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center ">
@@ -42,7 +49,12 @@ const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <button type="button" className={`${styles.customBtn1} btn`} />
+          <button
+            onClick={() => pausarInmueble(id)}
+            type="submit"
+            className={`${styles.customBtn1} btn`}
+          />
+
           <CopyToClipboard
             onCopy={compartir}
             text={`red1a1.com/app/propiedades/${slug}`}

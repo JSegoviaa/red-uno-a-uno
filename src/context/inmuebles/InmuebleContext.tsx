@@ -1,6 +1,7 @@
 import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import {
+  fetchActualizarInmueble,
   fetchBorrarInmueble,
   fetchInmueble,
   subirFotosInmueble,
@@ -55,6 +56,50 @@ export interface InmuebleData {
   seguridadPrivada?: boolean;
 }
 
+export interface ActualizarInmueble {
+  titulo?: string;
+  categoria?: string;
+  precio?: number;
+  direccion?: string | undefined;
+  lat?: number;
+  lng?: number;
+  tipoPropiedad: string;
+  descripcion?: string;
+  AA?: boolean;
+  agua?: boolean;
+  amueblado?: boolean;
+  antiguedad?: string;
+  baños?: number;
+  camas?: boolean;
+  closet?: boolean;
+  cocina?: boolean;
+  comedor?: boolean;
+  comisiones?: number;
+  discapacitados?: boolean;
+  escuelas?: boolean;
+  estufa?: boolean;
+  gas?: boolean;
+  habitaciones?: number;
+  horno?: boolean;
+  internet?: boolean;
+  lavadora?: boolean;
+  luz?: boolean;
+  m2Construidos?: number;
+  m2Terreno?: number;
+  mantenimiento?: boolean;
+  medioBaños?: number;
+  microondas?: boolean;
+  minihorno?: boolean;
+  otros?: string;
+  publicado?: boolean;
+  parking?: number;
+  piscinas?: boolean;
+  pisos?: number;
+  refrigerador?: boolean;
+  sala?: boolean;
+  secadora?: boolean;
+}
+
 interface ContextProps {
   crearInmueble: (data: InmuebleData) => Promise<CrearInmuebleResp>;
   eliminarInmueble: (id: string) => Promise<BorrarInmuebleResp>;
@@ -69,6 +114,7 @@ interface ContextProps {
   setOrden: Dispatch<SetStateAction<string>>;
   solicitud: string;
   setSolicitud: Dispatch<SetStateAction<string>>;
+  actualizarInmueble: (data: any, pid: string) => Promise<any>;
 }
 
 export const InmuebleContext = createContext({} as ContextProps);
@@ -121,6 +167,18 @@ export const InmuebleProvider: FC = ({ children }) => {
     return resp;
   };
 
+  const actualizarInmueble = async (data: ActualizarInmueble, pid: string) => {
+    const resp = await fetchActualizarInmueble(`inmuebles/${pid}`, data);
+    if (resp.ok) {
+      toast.success(resp.msg);
+    }
+    if (!resp.ok) {
+      toast.error(resp.msg);
+    }
+
+    return resp;
+  };
+
   return (
     <InmuebleContext.Provider
       value={{
@@ -133,6 +191,7 @@ export const InmuebleProvider: FC = ({ children }) => {
         setOrden,
         solicitud,
         setSolicitud,
+        actualizarInmueble,
       }}
     >
       <ToastContainer />

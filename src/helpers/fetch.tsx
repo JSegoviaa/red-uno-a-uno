@@ -1,3 +1,4 @@
+import { ActualizarInmueble } from "../context/inmuebles/InmuebleContext";
 import { development, production } from "../credentials/credentials";
 import { RegisterData, Resp, SubirFoto } from "../interfaces/AuthInterface";
 import { Contact, ContactResp } from "../interfaces/ContactInterface";
@@ -7,7 +8,10 @@ import {
 } from "../interfaces/CrearInmuebleInterface";
 import { FavData, FavResp } from "../interfaces/Favoritos";
 import { HistData, HistorialResp } from "../interfaces/Historial";
-import { SubirImagenesInmueble } from "../interfaces/InmueblesInterface";
+import {
+  InmueblesResponse,
+  SubirImagenesInmueble,
+} from "../interfaces/InmueblesInterface";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
 const baseURL = production;
@@ -82,6 +86,22 @@ export const fetchInmueble = async (
 
   const resp = await fetch(url, {
     method: "POST",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await resp.json();
+};
+
+export const fetchActualizarInmueble = async (
+  endpoint: string,
+  data: ActualizarInmueble
+): Promise<InmueblesResponse> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const resp = await fetch(url, {
+    method: "PUT",
     headers: { "Content-type": "application/json", "x-token": token },
     body: JSON.stringify(data),
   });
