@@ -25,11 +25,11 @@ const VentanaChat = () => {
                       alt="..."
                     />
                   </div>
-                  <div className="col-8">
+                  <div className="col-7">
                     <div className={`${styles.nombre}`}>James Franco</div>
                     <div className={styles.conexion}>En Linea</div>
                   </div>
-                  <div className="col-2 text-end p-0">
+                  <div className="col-3 text-end p-0">
                     <i
                       onClick={minimizarVentana}
                       className={`${styles.dashIcon} ${
@@ -75,7 +75,7 @@ const VentanaChat = () => {
                       </div>
                       <div className="col-11 mb-2">
                         <div className={styles.mensaje2}>
-                          O sea que ya se acabron las fiestas alocadas en la
+                          O sea que ya se acabaron las fiestas alocadas en la
                           terraza? :{"("}
                         </div>
                       </div>
