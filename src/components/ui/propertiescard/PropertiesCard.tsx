@@ -1,19 +1,20 @@
-import { FormEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { Col, Form } from "react-bootstrap";
+import { Col } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { InmuebleContext } from "../../../context/inmuebles/InmuebleContext";
 import styles from "./PropertiesCard.module.css";
-import { toast } from "react-toastify";
 
 interface Props {
   id: string;
   titulo: string;
   slug: string;
   imgs: string[];
+  isActive: boolean;
 }
 
-const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
+const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
   const { eliminarInmueble, actualizarInmueble } = useContext(InmuebleContext);
   const router = useRouter();
   const [publicado, setPublicado] = useState(true);
@@ -38,10 +39,22 @@ const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
               style={{
                 backgroundImage: imgs.length > 0 ? `url(${imgs[0]})` : "",
               }}
-            ></div>
+            >
+              {isActive ? null : (
+                <div className={styles.imgPausa}>
+                  <div className={styles.imgTituloPausa}>Inmueble en pausa</div>
+                </div>
+              )}
+            </div>
           </div>
           <div className={styles.tituloContainer}>
-            <div className={`${styles.proContent} my-2`}>{titulo}</div>
+            <div
+              className={`${
+                isActive ? styles.proContent : styles.proContentFalse
+              } my-2`}
+            >
+              {titulo}
+            </div>
           </div>
         </div>
         <div
@@ -55,12 +68,15 @@ const PropertiesCard = ({ titulo, id, slug, imgs }: Props) => {
             className={`${styles.customBtn1} btn`}
           />
 
-          <CopyToClipboard
-            onCopy={compartir}
-            text={`red1a1.com/app/propiedades/${slug}`}
-          >
-            <button type="button" className={`${styles.customBtn2} btn`} />
-          </CopyToClipboard>
+          {isActive ? (
+            <CopyToClipboard
+              onCopy={compartir}
+              text={`red1a1.com/app/propiedades/${slug}`}
+            >
+              <button type="button" className={`${styles.customBtn2} btn`} />
+            </CopyToClipboard>
+          ) : null}
+
           <button
             onClick={editarInmueble}
             type="button"

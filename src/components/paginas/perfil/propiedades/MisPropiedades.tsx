@@ -30,6 +30,7 @@ const MiListaPropiedades = () => {
                     slug={inmueble.slug}
                     titulo={inmueble.titulo}
                     imgs={inmueble.imgs}
+                    isActive={inmueble.publicado}
                   />
                 ))}
               </>
