@@ -35,17 +35,21 @@ const MapaUbicacion = () => {
         <Loading />
       ) : (
         <>
-          {inmuebles?.map((inmueble) => (
-            <Marker
-              onClick={() => handleProperty(inmueble._id, inmueble.slug)}
-              key={inmueble._id}
-              position={{ lat: inmueble.lat, lng: inmueble.lng }}
-              icon={{
-                url: "/images/icons/marcador.svg",
-                scaledSize: new google.maps.Size(50, 50),
-              }}
-            />
-          ))}
+          {inmuebles
+            ?.filter((inmueble) => {
+              return inmueble.publicado === true;
+            })
+            .map((inmueble) => (
+              <Marker
+                onClick={() => handleProperty(inmueble._id, inmueble.slug)}
+                key={inmueble._id}
+                position={{ lat: inmueble.lat, lng: inmueble.lng }}
+                icon={{
+                  url: "/images/icons/marcador.svg",
+                  scaledSize: new google.maps.Size(50, 50),
+                }}
+              />
+            ))}
         </>
       )}
     </GoogleMap>

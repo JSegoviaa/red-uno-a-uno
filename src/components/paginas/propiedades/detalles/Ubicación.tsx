@@ -56,8 +56,6 @@ const Ubicacion = ({ inmuebles }: Props) => {
     return existeFavorito;
   });
 
-  // console.log(existeFavorito, " ?");
-
   return (
     <section className="mt-5">
       <Container>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 import { Col } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -17,23 +17,16 @@ interface Props {
 const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
   const { eliminarInmueble, actualizarInmueble } = useContext(InmuebleContext);
   const router = useRouter();
-  const [publicado, setPublicado] = useState(true);
   const goToProperty = () => router.push("/propiedades/" + slug);
   const editarInmueble = () => router.push("/perfil/editar-inmueble");
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
-  const desactivarInmueble = async (pid: string) => {
-    setPublicado(false);
-
+  const desactivarInmueble = async (pid: string) =>
     await actualizarInmueble({ publicado: false }, pid);
-  };
 
-  const activarInmueble = async (pid: string) => {
-    setPublicado(true);
-
+  const activarInmueble = async (pid: string) =>
     await actualizarInmueble({ publicado: true }, pid);
-  };
 
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center ">
@@ -68,16 +61,14 @@ const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
           role="group"
           aria-label="Basic mixed styles example"
         >
-          {publicado ? (
+          {isActive ? (
             <button
               onClick={() => desactivarInmueble(id)}
-              type="submit"
               className={`${styles.customBtn1} btn`}
             />
           ) : (
             <button
               onClick={() => activarInmueble(id)}
-              type="submit"
               className={`${styles.customBtn1} btn`}
             />
           )}
