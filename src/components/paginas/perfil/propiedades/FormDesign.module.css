@@ -1,3 +1,64 @@
+.stepLineActive{
+  width: 7%;
+  height: 5px;
+  background-color: tomato;
+  position: absolute;
+  transform: translateY(15px);
+  z-index: 1;
+  transition: 300ms;
+}
+.stepLineActive:hover{
+  width: 23%;
+  transition: 900ms;
+}
+.stepLineInactive{
+  width: 45%;
+  height: 5px;
+  background-color: rgb(189, 189, 189);
+  position: absolute;
+  transform: translateY(15px);
+  z-index: -2;
+}
+.step1{
+  position: relative;
+  font-family: "Open Sans";
+  font-size: 23px;
+  font-weight: 700;
+  background-color: tomato;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 50%;
+  z-index: 3;
+}
+.step2{
+  position: relative;
+  font-family: "Open Sans";
+  font-size: 23px;
+  font-weight: 700;
+  background-color: rgb(189, 189, 189);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 50%;
+  z-index: 3;
+  transition: 300ms;
+}
+.step2:hover{
+  background-color: tomato;
+  transition: 900ms;
+  z-index: 3;
+}
+.step3{
+  position: relative;
+  font-family: "Open Sans";
+  font-size: 23px;
+  font-weight: 700;
+  background-color: rgb(189, 189, 189);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 50%;
+  z-index: 3;
+}
+
 .subTitulo {
   font-family: "Open Sans";
   font-style: normal;

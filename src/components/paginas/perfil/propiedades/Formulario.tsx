@@ -156,6 +156,21 @@ const Formulario = () => {
     <div className="col-sm-12 col-md-12 col-lg-8">
       <Form onSubmit={handleSubmit}>
         <div className="row">
+          <div className="col-12 my-4">
+            <div className={styles.stepLineActive}></div>
+            <div className={styles.stepLineInactive}></div>
+            <div className="row d-flex justify-content-between text-center">
+              <div className="col-4">
+                <span className={styles.step1}>1</span>
+              </div>
+              <div className="col-4">
+                <span className={styles.step2}>2</span>
+              </div>
+              <div className="col-4">
+                <span className={styles.step3}>3</span>
+              </div>
+            </div>
+          </div>
           <div className="col-sm-12 col-md-12 col-lg-12 px-4">
             <Form.Group className="mb-3">
               <Form.Label className={`${styles.subTitulo}`}>
@@ -258,6 +273,7 @@ const Formulario = () => {
                       name="antiguedad"
                       onChange={handleChange}
                       type="text"
+                      placeholder="Ej: 5 años"
                     />
                   </div>
                 </div>
