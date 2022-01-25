@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { InmuebleContext } from "../context/inmuebles/InmuebleContext";
 import { production } from "../credentials/credentials";
 import { Favorito } from "../interfaces/Favoritos";
 
@@ -20,4 +21,27 @@ export const useFavoritos = (uid: string | null | undefined) => {
   }, [favoritos]);
 
   return { favoritos, cargando };
+};
+
+export const useFavoritosSol = (uid: string | null | undefined) => {
+  const { solicitud } = useContext(InmuebleContext);
+  const [favSol, setFavSol] = useState<Favorito[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const obtenerFav = async () => {
+    const resp = await fetch(
+      `${production}/favoritos/usuario-solicitud/${uid}?solicitud=${solicitud}`
+    );
+    const data = await resp.json();
+
+    setFavSol(data.favoritosUsuario);
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    obtenerFav();
+  }, []);
+
+  return { favSol, loading };
 };

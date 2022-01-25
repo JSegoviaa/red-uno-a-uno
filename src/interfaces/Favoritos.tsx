@@ -13,6 +13,7 @@ export interface Favorito {
   createdAt: string;
   updatedAt: string;
   solicitud: Solicitud;
+  propietario: string;
 }
 
 interface Errors {
@@ -38,6 +39,7 @@ interface Usuario {
 export interface FavData {
   usuario: string | null | undefined;
   inmueble: string;
+  propietario: string;
 }
 
 export type Solicitud = "Pendiente" | "Aprobado" | "Rechazado";
