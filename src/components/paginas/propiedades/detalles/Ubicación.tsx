@@ -27,8 +27,11 @@ const Ubicacion = ({ inmuebles }: Props) => {
   let existeFavorito;
 
   const agregarFavorito = async (inmuebleId: string) => {
-    const favorito = { usuario: auth.uid, inmueble: inmuebleId };
-
+    const favorito = {
+      usuario: auth.uid,
+      inmueble: inmuebleId,
+      propietario: inmuebles.inmueble.usuario._id,
+    };
     const resp = await agregarFav("favoritos", favorito);
 
     if (resp.ok) {
@@ -52,6 +55,8 @@ const Ubicacion = ({ inmuebles }: Props) => {
     existeFavorito = favorito.inmueble._id === inmuebles.inmueble._id;
     return existeFavorito;
   });
+
+  // console.log(existeFavorito, " ?");
 
   return (
     <section className="mt-5">

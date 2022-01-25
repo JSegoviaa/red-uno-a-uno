@@ -1,14 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Form } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { useFavoritos } from "../../../../hooks/useFavoritos";
 import Loading from "../../../ui/loading/Loading";
 import styles from "./FiltrosFavs.module.css";
 
 const FiltroFavs = () => {
   const { auth } = useContext(AuthContext);
+  const { solicitud, setSolicitud } = useContext(InmuebleContext);
   const { favoritos, cargando } = useFavoritos(auth.uid);
-  const [solicitud, setSolicitud] = useState("");
   const uniqueValues = new Set();
 
   return (
@@ -73,7 +74,6 @@ const FiltroFavs = () => {
                   setSolicitud(e.target.value);
                 }}
               >
-                <option>Solicitudes:</option>
                 <option value="Pendiente">En Solicitud</option>
                 <option value="Aprobado">Aprobados</option>
                 <option value="Rechazado">Rechazados</option>
