@@ -29,8 +29,8 @@ const FavPropertiesCard = ({ titulo, id, img, slug, solicitud }: Props) => {
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
   return (
-    <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center pointer">
-      <div className={`${styles.customCard} card`}>
+    <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center">
+      <div className={`${styles.customCard} card pointer`}>
         {/* {solicitud === "Pendiente" ? (
           <img
             className={styles.iconoF}

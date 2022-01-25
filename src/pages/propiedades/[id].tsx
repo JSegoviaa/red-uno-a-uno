@@ -8,6 +8,7 @@ import SEO from "../../components/seo/SEO";
 import { AuthContext } from "../../context/auth/AuthContext";
 import { production } from "../../credentials/credentials";
 import { InmueblesUsuario } from "../../interfaces/CrearInmuebleInterface";
+import NotFound from "../404";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const resp = await fetch(`${production}/inmuebles/`);
@@ -37,6 +38,11 @@ interface Props {
 
 const Propiedad = ({ inmuebles }: Props) => {
   const { auth } = useContext(AuthContext);
+
+  if (!inmuebles.inmueble.publicado) {
+    return <NotFound />;
+  }
+
   return (
     <>
       <SEO
