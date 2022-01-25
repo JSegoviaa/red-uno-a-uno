@@ -23,10 +23,16 @@ const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
-  const pausarInmueble = async (pid: string) => {
-    setPublicado(!publicado);
+  const desactivarInmueble = async (pid: string) => {
+    setPublicado(false);
 
     await actualizarInmueble({ publicado: false }, pid);
+  };
+
+  const activarInmueble = async (pid: string) => {
+    setPublicado(true);
+
+    await actualizarInmueble({ publicado: true }, pid);
   };
 
   return (
@@ -62,11 +68,19 @@ const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <button
-            onClick={() => pausarInmueble(id)}
-            type="submit"
-            className={`${styles.customBtn1} btn`}
-          />
+          {publicado ? (
+            <button
+              onClick={() => desactivarInmueble(id)}
+              type="submit"
+              className={`${styles.customBtn1} btn`}
+            />
+          ) : (
+            <button
+              onClick={() => activarInmueble(id)}
+              type="submit"
+              className={`${styles.customBtn1} btn`}
+            />
+          )}
 
           {isActive ? (
             <CopyToClipboard
