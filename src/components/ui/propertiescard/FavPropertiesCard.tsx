@@ -31,7 +31,7 @@ const FavPropertiesCard = ({ titulo, id, img, slug, solicitud }: Props) => {
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center pointer">
       <div className={`${styles.customCard} card`}>
-        {solicitud === "Pendiente" ? (
+        {/* {solicitud === "Pendiente" ? (
           <img
             className={styles.iconoF}
             src="/images/icons/properties-icons/pendiente.png"
@@ -51,7 +51,7 @@ const FavPropertiesCard = ({ titulo, id, img, slug, solicitud }: Props) => {
             src="/images/icons/properties-icons/rechazado.png"
             alt=""
           />
-        ) : null}
+        ) : null} */}
 
         <div onClick={goToProperty}>
           <div className={styles.imgContainer}>
