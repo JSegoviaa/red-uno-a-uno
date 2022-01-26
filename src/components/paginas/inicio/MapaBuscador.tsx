@@ -1,4 +1,4 @@
-import { memo, useContext } from "react";
+import { memo, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { MapContext } from "../../../context/map/MapContext";
@@ -20,6 +20,7 @@ const MapaUbicacion = () => {
   const router = useRouter();
   const { coordenadas, zoom } = useContext(MapContext);
   const { inmuebles, cargando } = useInmuebles();
+  const [seleccionado, setSeleccionado] = useState("");
 
   const handleProperty = async (id: string, slug: string) => {
     const data = { usuario: auth.uid, inmueble: id };
@@ -27,6 +28,8 @@ const MapaUbicacion = () => {
     router.push(`/propiedades/${slug}`);
     await agregarHist("historial", data);
   };
+
+  const propiedadSeleccionada = (id: string) => setSeleccionado(id);
 
   return (
     <GoogleMap
@@ -49,57 +52,62 @@ const MapaUbicacion = () => {
               return inmueble.publicado === true;
             })
             .map((inmueble) => (
-              // <Marker
-              //   onClick={() => handleProperty(inmueble._id, inmueble.slug)}
-              //   key={inmueble._id}
-              //   position={{ lat: inmueble.lat, lng: inmueble.lng }}
-              //   icon={{
-              //     url: "/images/icons/marcador.svg",
-              //     scaledSize: new google.maps.Size(50, 50),
-              //   }}
-              // />
-
-              <InfoWindow
+              <Marker
                 key={inmueble._id}
                 position={{ lat: inmueble.lat, lng: inmueble.lng }}
+                icon={{
+                  url: "/images/icons/marcador.svg",
+                  scaledSize: new google.maps.Size(50, 50),
+                }}
+                onClick={() => propiedadSeleccionada(inmueble._id)}
               >
-                <div className={styles.contenedorCard}>
-                  <div className="row">
-                    <div className="col text-center">
-                      <div className={styles.containerimg}>
-                        <img className={styles.imgCard} src={inmueble.imgs[0]} alt="..."/>
-                      </div>
-                      <div className={`${styles.title} mb-2`}>
-                        {inmueble.titulo}
-                      </div>
-                      <div className="mb-2">
-                        <span className={`${styles.ciudad}`}>
-                          {inmueble.direccion}
-                        </span>
-                      </div>
-                      <div className="mb-2">
-                        <span className={`${styles.operacion}`}>
-                          {inmueble.categoria.nombre}
-                        </span>
-                      </div>
-                      <div className={`${styles.descripcion} mb-2`}>
-                        {inmueble.descripcion}
-                      </div>
-                      <div className={`${styles.precio} mb-3`}>
-                        {formatPrice(inmueble.precio)}
-                      </div>
-                      <div className="mb-2">
-                        <Button
-                          titulo="Ver detalles"
-                          onClick={() =>
-                            handleProperty(inmueble._id, inmueble.slug)
-                          }
-                        />
+                {seleccionado === inmueble._id ? (
+                  <InfoWindow
+                    position={{ lat: inmueble.lat, lng: inmueble.lng }}
+                  >
+                    <div className={styles.contenedorCard}>
+                      <div className="row">
+                        <div className="col text-center">
+                          <div className={styles.containerimg}>
+                            <img
+                              className={styles.imgCard}
+                              src={inmueble.imgs[0]}
+                              alt="..."
+                            />
+                          </div>
+                          <div className={`${styles.title} mb-2`}>
+                            {inmueble.titulo}
+                          </div>
+                          <div className="mb-2">
+                            <span className={`${styles.ciudad}`}>
+                              {inmueble.direccion}
+                            </span>
+                          </div>
+                          <div className="mb-2">
+                            <span className={`${styles.operacion}`}>
+                              {inmueble.categoria.nombre}
+                            </span>
+                          </div>
+                          <div className={`${styles.descripcion} mb-2`}>
+                            {inmueble.descripcion}
+                          </div>
+                          <div className={`${styles.precio} mb-3`}>
+                            {formatPrice(inmueble.precio)}
+                          </div>
+                          <div className="mb-2">
+                            <Button
+                              titulo="Ver detalles"
+                              onClick={() =>
+                                handleProperty(inmueble._id, inmueble.slug)
+                              }
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </InfoWindow>
+                  </InfoWindow>
+                ) : null}
+              </Marker>
             ))}
         </>
       )}
