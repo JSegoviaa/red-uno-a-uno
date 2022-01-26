@@ -1,4 +1,4 @@
-.stepLineActive{
+.stepLineActive1 {
   width: 7%;
   height: 5px;
   background-color: tomato;
@@ -7,11 +7,30 @@
   z-index: 1;
   transition: 300ms;
 }
-.stepLineActive:hover{
+
+.stepLineActive2 {
+  width: 22%;
+  height: 5px;
+  background-color: tomato;
+  position: absolute;
+  transform: translateY(15px);
+  z-index: 1;
+  transition: 300ms;
+}
+.stepLineActive3 {
+  width: 45%;
+  height: 5px;
+  background-color: tomato;
+  position: absolute;
+  transform: translateY(15px);
+  z-index: 1;
+  transition: 300ms;
+}
+.stepLineActive:hover {
   width: 23%;
   transition: 900ms;
 }
-.stepLineInactive{
+.stepLineInactive {
   width: 45%;
   height: 5px;
   background-color: rgb(189, 189, 189);
@@ -19,7 +38,7 @@
   transform: translateY(15px);
   z-index: -2;
 }
-.step1{
+.step1 {
   position: relative;
   font-family: "Open Sans";
   font-size: 23px;
@@ -30,7 +49,7 @@
   border-radius: 50%;
   z-index: 3;
 }
-.step2{
+.step2 {
   position: relative;
   font-family: "Open Sans";
   font-size: 23px;
@@ -42,12 +61,8 @@
   z-index: 3;
   transition: 300ms;
 }
-.step2:hover{
-  background-color: tomato;
-  transition: 900ms;
-  z-index: 3;
-}
-.step3{
+
+.step3 {
   position: relative;
   font-family: "Open Sans";
   font-size: 23px;
