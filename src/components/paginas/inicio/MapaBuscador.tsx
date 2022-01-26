@@ -72,7 +72,7 @@ const MapaUbicacion = () => {
                             <img
                               className={styles.imgCard}
                               src={inmueble.imgs[0]}
-                              alt="..."
+                              alt={inmueble.titulo}
                             />
                           </div>
                           <div className={`${styles.title} mb-2`}>
@@ -89,7 +89,9 @@ const MapaUbicacion = () => {
                             </span>
                           </div>
                           <div className={`${styles.descripcion} mb-2`}>
-                            {inmueble.descripcion}
+                            {inmueble.descripcion
+                              ? inmueble.descripcion
+                              : "Sin descripción"}
                           </div>
                           <div className={`${styles.precio} mb-3`}>
                             {formatPrice(inmueble.precio)}
