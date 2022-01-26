@@ -108,8 +108,6 @@ interface ContextProps {
     uid: string | null | undefined,
     pid: string | undefined
   ) => Promise<SubirImagenesInmueble>;
-  mostrarImgFrom: boolean;
-  setMostrarImgFrom: Dispatch<SetStateAction<boolean>>;
   orden: string;
   setOrden: Dispatch<SetStateAction<string>>;
   solicitud: string;
@@ -120,7 +118,6 @@ interface ContextProps {
 export const InmuebleContext = createContext({} as ContextProps);
 
 export const InmuebleProvider: FC = ({ children }) => {
-  const [mostrarImgFrom, setMostrarImgFrom] = useState(false);
   const [orden, setOrden] = useState<string>("createdAt");
   const [solicitud, setSolicitud] = useState("Pendiente");
 
@@ -185,8 +182,6 @@ export const InmuebleProvider: FC = ({ children }) => {
         crearInmueble,
         eliminarInmueble,
         subirImagenesInmueble,
-        mostrarImgFrom,
-        setMostrarImgFrom,
         orden,
         setOrden,
         solicitud,

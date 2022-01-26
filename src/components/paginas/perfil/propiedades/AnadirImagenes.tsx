@@ -41,8 +41,7 @@ const img = {
 
 const AnadirImagenes = () => {
   const { auth } = useContext(AuthContext);
-  const { subirImagenesInmueble, mostrarImgFrom, setMostrarImgFrom } =
-    useContext(InmuebleContext);
+  const { subirImagenesInmueble } = useContext(InmuebleContext);
   const router = useRouter();
   const [cargando, setCargando] = useState(false);
   const [pictures, setPictures] = useState<any>([]);
@@ -103,73 +102,55 @@ const AnadirImagenes = () => {
     setCargando(false);
 
     router.push(`/propiedades/${ultimoInmueble?.slug}`);
-    setMostrarImgFrom(false);
   };
 
   return (
     <>
-      {!mostrarImgFrom ? (
-        <div className={styles.subTitulo}>
-          Para agregar fotos primero llena la información de tu inmueble
-          <div className="text-center">
-            <img
-              className="my-4"
-              src="/images/content/agregafoto.png"
-              alt="red1a1"
-              style={{ width: "70%" }}
-            />
-          </div>
+      <div className="cargarImagen" {...getRootProps()}>
+        <input {...getInputProps()} />
+        <div className="text-center">
+          <img
+            className="my-4 pointer"
+            src="/images/content/agregafoto.png"
+            alt="red1a1"
+            style={{ width: "70%" }}
+          />
         </div>
-      ) : null}
+      </div>
+      <div style={{ fontSize: 22, fontWeight: 700 }} className="text-center">
+        Máximo 20 imágenes. Haz seleccionado{" "}
+        <span style={{ color: pictures.length > 20 ? "red" : "black" }}>
+          {pictures.length}
+        </span>{" "}
+        imágenes.
+        <br />
+        {pictures.length > 20 && "Selecciona menos imágenes por favor"}
+      </div>
+      <br />
+      <div className="text-center">{thumbs}</div>
+      {cargando ? <Loading /> : null}
 
-      {mostrarImgFrom ? (
-        <>
-          <div className="cargarImagen" {...getRootProps()}>
-            <input {...getInputProps()} />
-            <div className={`${styles.contenedorClipboard} pointer`}>
-              <div className="text1">Arrastra tus imágenes aquí</div>
-              <div className="my-3">
-                <i className={`${styles.iconAdd} bi bi-plus-circle`}></i>
-              </div>
-              <div className="text2">o da click para agregarlas</div>
-            </div>
-          </div>
-          <div style={{ fontSize: 18 }}>
-            Máximo 20 imágenes. Haz seleccionado{" "}
-            <span style={{ color: pictures.length > 20 ? "red" : "black" }}>
-              {pictures.length}
-            </span>{" "}
-            imágenes.
-            <br />
-            {pictures.length > 20 && "Selecciona menos imágenes por favor"}
-          </div>
-          <br />
-          <div>{thumbs}</div>
-          {cargando ? <Loading /> : null}
-
-          <br />
-          <Form
-            onSubmit={uploadPictures}
-            encType="multipart/form-data"
-            className="d-flex justify-content-center"
-          >
-            <Form.Group className="mb-3">
-              <Form.Control
-                style={{ display: "none" }}
-                type="file"
-                multiple
-                accept="image/*"
-              />
-            </Form.Group>
-            {pictures.length > 20 || pictures.length <= 0 ? null : (
-              <Button titulo="Agregar imágenes" />
-            )}
-          </Form>
-          <div className="SliderCustom">
-            <br />
-          </div>
-        </>
-      ) : null}
+      <br />
+      <Form
+        onSubmit={uploadPictures}
+        encType="multipart/form-data"
+        className="d-flex justify-content-center"
+      >
+        <Form.Group className="mb-3">
+          <Form.Control
+            style={{ display: "none" }}
+            type="file"
+            multiple
+            accept="image/*"
+          />
+        </Form.Group>
+        {pictures.length > 20 || pictures.length <= 0 ? null : (
+          <Button titulo="Agregar imágenes" />
+        )}
+      </Form>
+      <div className="SliderCustom">
+        <br />
+      </div>
     </>
   );
 };
