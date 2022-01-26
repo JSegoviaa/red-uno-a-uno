@@ -107,7 +107,7 @@ const AnadirImagenes = () => {
   };
 
   return (
-    <div className="col-sm-12 col-md-12 col-lg-8 text-center">
+    <>
       {!mostrarImgFrom ? (
         <div className={styles.subTitulo}>
           Para agregar fotos primero llena la información de tu inmueble
@@ -170,7 +170,7 @@ const AnadirImagenes = () => {
           </div>
         </>
       ) : null}
-    </div>
+    </>
   );
 };
 
