@@ -33,6 +33,12 @@ const MapaUbicacion = () => {
       mapContainerStyle={containerStyle}
       center={{ lat: coordenadas.lat, lng: coordenadas.lng }}
       zoom={zoom}
+      options={{
+        disableDefaultUI: true,
+        streetViewControl: true,
+        zoomControl: true,
+        fullscreenControl: true,
+      }}
     >
       {cargando ? (
         <Loading />
