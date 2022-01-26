@@ -8,12 +8,12 @@ import { AuthContext } from "../../../context/auth/AuthContext";
 import { agregarHist } from "../../../helpers/fetch";
 import Button from "../../ui/button/Button";
 import styles from "./MapCards.module.css";
+import { formatPrice } from "../../../helpers/formatPrice";
 
 const containerStyle = {
   width: "100%",
   height: "87vh",
 };
-
 
 const MapaUbicacion = () => {
   const { auth } = useContext(AuthContext);
@@ -53,7 +53,6 @@ const MapaUbicacion = () => {
               //   }}
               // />
 
-
               <InfoWindow
                 key={inmueble._id}
                 position={{ lat: inmueble.lat, lng: inmueble.lng }}
@@ -62,34 +61,38 @@ const MapaUbicacion = () => {
                   <div className="row">
                     <div className="col text-center">
                       <div className={styles.containerimg}>
-                        <img src="https://res.cloudinary.com/du6f7alxg/image/upload/v1642721019/red1a1/usuarios/61e99df40d3bd9163e4a4b31/inmuebles/61e9eeaa43da359580fc2b8d/zkkfpbxzrjdhtukfhq89.jpg" alt="..." width={"100%"} />
+                        <img src={inmueble.imgs[0]} alt="..." width={"100%"} />
                       </div>
                       <div className={`${styles.title} mb-2`}>
-                        Departamento en 12vo piso en el Shark Tower, Cancún
+                        {inmueble.titulo}
                       </div>
                       <div className="mb-2">
                         <span className={`${styles.ciudad}`}>
-                          Cancún, Q.R., México
+                          {inmueble.direccion}
                         </span>
                       </div>
                       <div className="mb-2">
                         <span className={`${styles.operacion}`}>
-                          Venta
+                          {inmueble.categoria.nombre}
                         </span>
                       </div>
                       <div className={`${styles.descripcion} mb-2`}>
-                        Hermoso departamento en la zona mas exclusiva de Cancún, con una increible vista al Mar, y la mejor plaza comercial del estado.
+                        {inmueble.descripcion}
                       </div>
                       <div className={`${styles.precio} mb-3`}>
-                        $14,500,000
+                        {formatPrice(inmueble.precio)}
                       </div>
                       <div className="mb-2">
-                        <Button titulo="Ver detalles" />
+                        <Button
+                          titulo="Ver detalles"
+                          onClick={() =>
+                            handleProperty(inmueble._id, inmueble.slug)
+                          }
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
-
               </InfoWindow>
             ))}
         </>
