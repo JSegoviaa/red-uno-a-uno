@@ -76,3 +76,22 @@ a {
     width: 100%;
   }
 }
+
+
+.gm-style .gm-style-iw-c{
+  padding: 0;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.gm-style-iw-d{
+  overflow: hidden !important;
+}
+.gm-ui-hover-effect{
+  background-color: white !important;
+  opacity: 100;
+  border-radius: 50%;
+  margin-right: 10px !important;
+  margin-top: 10px !important;
+  
+}

@@ -1,0 +1,53 @@
+.contenedorCard {
+  width: 100%;
+}
+.containerimg {
+  width: 100%;
+  margin-bottom: 8px;
+}
+.title {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 21px;
+  color: #000000;
+  line-height: 20px;
+  padding: 0px 8px;
+}
+.ciudad {
+  border: 1px solid slateblue;
+  background-color: white;
+  border-radius: 15px;
+  padding: 0px 15px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+}
+.operacion {
+  border: 1px solid tomato;
+  background-color: white;
+  border-radius: 15px;
+  padding: 0px 15px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  color: tomato;
+}
+.descripcion {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #5e5e5e;
+  line-height: 18px;
+  padding: 0px 10px;
+}
+.precio {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  color: #13a407;
+}
