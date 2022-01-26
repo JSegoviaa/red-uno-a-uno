@@ -67,7 +67,7 @@ const MapaUbicacion = () => {
                   <div className="row">
                     <div className="col text-center">
                       <div className={styles.containerimg}>
-                        <img src={inmueble.imgs[0]} alt="..." width={"100%"} />
+                        <img className={styles.imgCard} src={inmueble.imgs[0]} alt="..."/>
                       </div>
                       <div className={`${styles.title} mb-2`}>
                         {inmueble.titulo}

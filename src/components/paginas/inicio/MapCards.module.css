@@ -3,7 +3,14 @@
 }
 .containerimg {
   width: 100%;
+  max-height: 200px;
   margin-bottom: 8px;
+  overflow: hidden;
+  
+}
+.imgCard{
+  width: 300px;
+  height: auto;
 }
 .title {
   font-family: "Open Sans";
@@ -43,6 +50,13 @@
   color: #5e5e5e;
   line-height: 18px;
   padding: 0px 10px;
+  white-space: pre-line;
+  display: -webkit-box;
+  max-width: calc(100%);
+  max-height: auto;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .precio {
   font-family: "Open Sans";
