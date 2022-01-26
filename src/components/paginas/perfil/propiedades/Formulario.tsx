@@ -1,23 +1,8 @@
-import { FormEvent, useContext, useState } from "react";
-import { useRouter } from "next/router";
+import { ChangeEvent } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import Select from "react-select";
-import {
-  InmuebleContext,
-  InmuebleData,
-} from "../../../../context/inmuebles/InmuebleContext";
-import { MapContext } from "../../../../context/map/MapContext";
-import {
-  useCategories,
-  useTipoPropiedad,
-} from "../../../../hooks/useCategories";
-import { useForm } from "../../../../hooks/useForm";
-import SeleccionarLugar from "../../../ui/buscador/SeleccionarLugar";
-import Button from "../../../ui/button/Button";
 import Loading from "../../../ui/loading/Loading";
 import styles from "./FormDesign.module.css";
-import MapaUbicacion from "./MapaUbicacion";
-import FormStepOne from "./FormStepOne";
 
 const options = [
   { value: false, label: "No" },
@@ -25,68 +10,70 @@ const options = [
 ];
 
 interface Props {
-  handlePrevStep: () => void;
-  handleNextStep: () => void;
+  handleChange: ({
+    target,
+  }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  antiguedad: string;
+  m2Construidos: number;
+  m2Terreno: number;
+  habitaciones: number;
+  baños: number;
+  medioBaños: number;
+  parking: number;
+  pisos: number;
+  descripcion: string;
+  otros: string;
+  amueblado: any;
+  setAmueblado: any;
+  agua: any;
+  luz: any;
+  gas: any;
+  internet: any;
+  seguridadPrivada: any;
+  escuelas: any;
+  mantenimiento: any;
+  piscina: any;
+  discapacitados: any;
+  camas: any;
+  closet: any;
+  sala: any;
+  comedor: any;
+  cocina: any;
+  AA: any;
+  refrigerador: any;
+  estufa: any;
+  microondas: any;
+  minihorno: any;
+  horno: any;
+  lavadora: any;
+  secadora: any;
+  setAgua: any;
+  setLuz: any;
+  setGas: any;
+  setInternet: any;
+  setSeguridadPrivada: any;
+  setEscuelas: any;
+  setMantenimiento: any;
+  setPiscina: any;
+  setDiscapacitados: any;
+  setCamas: any;
+  setCloset: any;
+  setSala: any;
+  setComedor: any;
+  setCocina: any;
+  setAA: any;
+  setRefrigerador: any;
+  setEstufa: any;
+  setMicroondas: any;
+  setMinihorno: any;
+  setHorno: any;
+  setLavadora: any;
+  setSecadora: any;
+  cargando: boolean;
 }
 
 const Formulario = (props: Props) => {
-  const { handlePrevStep, handleNextStep } = props;
-
-  const router = useRouter();
-  const { ubicacion, direccion } = useContext(MapContext);
-  const { crearInmueble, setMostrarImgFrom, mostrarImgFrom } =
-    useContext(InmuebleContext);
-  const { categorias, cargando } = useCategories();
-  const [creando, setCreando] = useState(false);
-
-  const { loading, propertyTypes } = useTipoPropiedad();
-  const [mostrarPublicar, setMostrarPublicar] = useState(true);
-  const [categoria, setCategoria] = useState("61e99f0e0d3bd9163e4a4b42");
-  const [tipoPropiedad, setTipoPropiedad] = useState(
-    "61e99edd0d3bd9163e4a4b3a"
-  );
-  const [amueblado, setAmueblado] = useState(false);
-  const [agua, setAgua] = useState<any>(false);
-  const [luz, setLuz] = useState<any>(false);
-  const [gas, setGas] = useState<any>(false);
-  const [internet, setInternet] = useState<any>(false);
-  const [seguridadPrivada, setSeguridadPrivada] = useState<any>(false);
-  const [escuelas, setEscuelas] = useState<any>(false);
-  const [mantenimiento, setMantenimiento] = useState<any>(false);
-  const [piscina, setPiscina] = useState<any>(false);
-  const [discapacitados, setDiscapacitados] = useState<any>(false);
-  const [camas, setCamas] = useState<any>(false);
-  const [closet, setCloset] = useState<any>(false);
-  const [sala, setSala] = useState<any>(false);
-  const [comedor, setComedor] = useState<any>(false);
-  const [cocina, setCocina] = useState<any>(false);
-  const [AA, setAA] = useState<any>(false);
-  const [refrigerador, setRefrigerador] = useState<any>(false);
-  const [estufa, setEstufa] = useState<any>(false);
-  const [microondas, setMicroondas] = useState<any>(false);
-  const [minihorno, setMinihorno] = useState<any>(false);
-  const [horno, setHorno] = useState<any>(false);
-  const [lavadora, setLavadora] = useState<any>(false);
-  const [secadora, setSecadora] = useState<any>(false);
-
-  const { formulario, handleChange } = useForm({
-    titulo: "",
-    antiguedad: "",
-    m2Construidos: 0,
-    m2Terreno: 0,
-    habitaciones: 0,
-    baños: 0,
-    medioBaños: 0,
-    parking: 0,
-    pisos: 0,
-    descripcion: "",
-    precio: 0,
-    comisiones: 0,
-    otros: "",
-  });
-
   const {
-    titulo,
     antiguedad,
     m2Construidos,
     m2Terreno,
@@ -96,68 +83,57 @@ const Formulario = (props: Props) => {
     parking,
     pisos,
     descripcion,
-    precio,
-    comisiones,
     otros,
-  } = formulario;
-
-  const dataInmueble: InmuebleData = {
-    titulo,
-    categoria,
-    precio,
-    direccion,
-    lat: ubicacion.lat,
-    lng: ubicacion.lng,
-    tipoPropiedad,
-    descripcion,
-    AA: AA.value,
-    agua: agua.value,
+    handleChange,
     amueblado,
-    antiguedad,
-    baños,
-    camas: camas.value,
-    closet: closet.value,
-    cocina: cocina.value,
-    comedor: comedor.value,
-    comisiones,
-    discapacitados: discapacitados.value,
-    escuelas: escuelas.value,
-    estufa: estufa.value,
-    gas: gas.value,
-    habitaciones,
-    horno: horno.value,
-    internet: internet.value,
-    lavadora: lavadora.value,
-    luz: luz.value,
-    m2Construidos,
-    m2Terreno,
-    mantenimiento: mantenimiento.value,
-    medioBaños,
-    microondas: microondas.value,
-    minihorno: minihorno.value,
-    otros,
-    parking,
-    piscinas: piscina.value,
-    pisos,
-    refrigerador: refrigerador.value,
-    sala: sala.value,
-    secadora: secadora.value,
-    seguridadPrivada: seguridadPrivada.value,
-  };
+    setAmueblado,
+    agua,
+    luz,
+    gas,
+    internet,
+    seguridadPrivada,
+    escuelas,
+    mantenimiento,
+    piscina,
+    discapacitados,
+    camas,
+    closet,
+    sala,
+    comedor,
+    cocina,
+    AA,
+    refrigerador,
+    estufa,
+    microondas,
+    minihorno,
+    horno,
+    lavadora,
+    secadora,
+    setAgua,
+    setLuz,
+    setGas,
+    setInternet,
+    setSeguridadPrivada,
+    setEscuelas,
+    setMantenimiento,
+    setPiscina,
+    setDiscapacitados,
+    setCamas,
+    setCloset,
+    setSala,
+    setComedor,
+    setCocina,
+    setAA,
+    setRefrigerador,
+    setEstufa,
+    setMicroondas,
+    setMinihorno,
+    setHorno,
+    setLavadora,
+    setSecadora,
+    cargando,
+  } = props;
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setCreando(true);
-
-    await crearInmueble(dataInmueble);
-
-    setMostrarImgFrom(true);
-    setMostrarPublicar(false);
-    setCreando(false);
-    router.push("/perfil/agregar-inmueble");
-  };
-
-  const longitudTitulo = titulo.length;
   const longitudOtros = otros.length;
 
   return (
@@ -669,7 +645,7 @@ const Formulario = (props: Props) => {
                         name="otros"
                       />
                       <Row>
-                        <Col></Col>
+                        <Col />
                         <Col className="d-flex justify-content-end">
                           <span
                             style={{
@@ -692,7 +668,7 @@ const Formulario = (props: Props) => {
           <div className={styles.line}></div>
           <br />
           <div className="row">
-            <div className="col-12 mb-3">
+            <div className="col-12 mb-3 ">
               <Form.Control
                 as="textarea"
                 rows={7}
@@ -701,15 +677,13 @@ const Formulario = (props: Props) => {
                 onChange={handleChange}
                 placeholder="Escribe una breve descripción del inmueble..."
               />
+              <div className="d-flex justify-content-center py-4">
+                {cargando ? <Loading /> : null}
+              </div>
             </div>
           </div>
         </div>
         <br />
-        <div className="col-12 my-3">
-          <Button titulo="Anterior" onClick={handlePrevStep} />
-          <span className="mx-2" />
-          <Button titulo="Siguiente" onClick={handleNextStep} />
-        </div>
       </div>
     </>
   );

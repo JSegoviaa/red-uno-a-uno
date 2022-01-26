@@ -37,19 +37,11 @@ const FormStepOne = (props: Props) => {
     categoria,
     setCategoria,
   } = props;
-  const { direccion, ubicacion } = useContext(MapContext);
+  const { direccion } = useContext(MapContext);
   const { categorias, cargando } = useCategories();
   const { loading, propertyTypes } = useTipoPropiedad();
 
   const longitudTitulo = titulo.length;
-  // const dataInmueble: InmuebleData = {
-  //     titulo,
-  //     categoria,
-  //     precio,
-  //     tipoPropiedad,
-  //     descripcion,
-
-  // };
 
   return (
     <>
