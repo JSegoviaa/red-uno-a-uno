@@ -9,11 +9,15 @@ import { useForm } from "../../../../hooks/useForm";
 import { MapContext } from "../../../../context/map/MapContext";
 import Button from "../../../ui/button/Button";
 import Steps from "./Steps";
-import { InmuebleData } from "../../../../context/inmuebles/InmuebleContext";
+import {
+  InmuebleContext,
+  InmuebleData,
+} from "../../../../context/inmuebles/InmuebleContext";
 
 const AnadirInmueble = () => {
   const router = useRouter();
   const { ubicacion, direccion } = useContext(MapContext);
+  const { crearInmueble } = useContext(InmuebleContext);
   const [cargando, setCargando] = useState(false);
   const [steps, setSteps] = useState(1);
   const [tipoPropiedad, setTipoPropiedad] = useState(
@@ -132,6 +136,8 @@ const AnadirInmueble = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setCargando(true);
     e.preventDefault();
+
+    await crearInmueble(dataInmueble);
 
     setCargando(false);
     handleNextStep();
