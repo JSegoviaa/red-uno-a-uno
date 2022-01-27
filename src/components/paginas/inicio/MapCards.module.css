@@ -6,11 +6,10 @@
   max-height: 200px;
   margin-bottom: 8px;
   overflow: hidden;
-  
 }
-.imgCard{
+.imgCard {
   width: 300px;
-  height: auto;
+  height: over;
 }
 .title {
   font-family: "Open Sans";
@@ -72,12 +71,17 @@
   font-size: 20px;
   color: #13a407;
 }
-.btnDetalle{
+.btnDetalle {
   border: none;
   border-radius: 25px;
   padding: 5px 20px;
-  background-color: tomato;
+  background-color: #e54a21;
   color: white;
   font-family: "Open Sans";
   font-size: 18px;
+  transition: 250ms
+}
+.btnDetalle:hover {
+  background-color: #7149BC;
+  transition: 250ms
 }

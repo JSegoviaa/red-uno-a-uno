@@ -10,6 +10,25 @@ import Button from "../../ui/button/Button";
 import styles from "./MapCards.module.css";
 import { formatPrice } from "../../../helpers/formatPrice";
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-cube"
+import "swiper/css/pagination"
+
+
+// import Swiper core and required modules
+import SwiperCore, {
+  EffectCube,Pagination, Autoplay, 
+} from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([EffectCube,Pagination,Autoplay]);
+
+
+
 const containerStyle = {
   width: "100%",
   height: "87vh",
@@ -75,8 +94,19 @@ const MapaUbicacion = () => {
                               alt={inmueble.titulo}
                             /> */}
 
-                            
 
+                            <Swiper effect={'cube'} grabCursor={true} loop autoplay={{delay:2800}} cubeEffect={{
+                              "shadow": true,
+                              "slideShadows": true,
+                              "shadowOffset": 20,
+                              "shadowScale": 0.94,
+                            }} pagination={false} className="mySwiper">
+                              {inmueble.imgs.map(
+                                img=>(
+                                  <SwiperSlide><img className={styles.imgCard} src={img} /></SwiperSlide>
+                                )
+                              )}
+                            </Swiper>
 
                           </div>
                           <div className={`${styles.title} mb-2`}>
