@@ -16,10 +16,17 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: bold;
-  font-size: 21px;
+  font-size: 18px;
   color: #000000;
   line-height: 20px;
   padding: 0px 8px;
+  white-space: pre-line;
+  display: -webkit-box;
+  max-width: calc(100%);
+  max-height: auto;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .ciudad {
   border: 1px solid slateblue;
@@ -54,7 +61,7 @@
   display: -webkit-box;
   max-width: calc(100%);
   max-height: auto;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -62,6 +69,15 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
   color: #13a407;
+}
+.btnDetalle{
+  border: none;
+  border-radius: 25px;
+  padding: 5px 20px;
+  background-color: tomato;
+  color: white;
+  font-family: "Open Sans";
+  font-size: 18px;
 }

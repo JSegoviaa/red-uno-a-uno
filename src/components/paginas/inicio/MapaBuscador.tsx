@@ -69,20 +69,24 @@ const MapaUbicacion = () => {
                       <div className="row">
                         <div className="col text-center">
                           <div className={styles.containerimg}>
-                            <img
+                            {/* <img
                               className={styles.imgCard}
                               src={inmueble.imgs[0]}
                               alt={inmueble.titulo}
-                            />
+                            /> */}
+
+                            
+
+
                           </div>
                           <div className={`${styles.title} mb-2`}>
                             {inmueble.titulo}
                           </div>
-                          <div className="mb-2">
+                          {/* <div className="mb-2">
                             <span className={`${styles.ciudad}`}>
                               {inmueble.direccion}
                             </span>
-                          </div>
+                          </div> */}
                           <div className="mb-2">
                             <span className={`${styles.operacion}`}>
                               {inmueble.categoria.nombre}
@@ -97,12 +101,10 @@ const MapaUbicacion = () => {
                             {formatPrice(inmueble.precio)}
                           </div>
                           <div className="mb-2">
-                            <Button
-                              titulo="Ver detalles"
+                            <button className={styles.btnDetalle}
                               onClick={() =>
                                 handleProperty(inmueble._id, inmueble.slug)
-                              }
-                            />
+                              }>Ver detalles</button>
                           </div>
                         </div>
                       </div>
