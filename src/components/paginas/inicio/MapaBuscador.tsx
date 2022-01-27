@@ -49,6 +49,7 @@ const MapaUbicacion = () => {
             })
             .map((inmueble) => (
               <Marker
+                animation={2}
                 key={inmueble._id}
                 position={{ lat: inmueble.lat, lng: inmueble.lng }}
                 icon={{
