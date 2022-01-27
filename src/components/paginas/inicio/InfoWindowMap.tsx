@@ -53,7 +53,7 @@ const InfoWindowMap = ({ inmueble }: Props) => {
                 className="mySwiper"
               >
                 {inmueble.imgs.map((img) => (
-                  <SwiperSlide>
+                  <SwiperSlide key={img}>
                     <img className={styles.imgCard} src={img} />
                   </SwiperSlide>
                 ))}
