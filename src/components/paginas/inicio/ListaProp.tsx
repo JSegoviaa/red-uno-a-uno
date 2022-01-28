@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import {
   Accordion,
@@ -41,6 +41,7 @@ const ListaProp = () => {
   const { auth } = useContext(AuthContext);
   const router = useRouter();
   const { inmuebles, cargando } = useInmuebles();
+  const [verLista, setVerLista] = useState(false);
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
@@ -77,6 +78,12 @@ const ListaProp = () => {
     await agregarHist("historial", data);
   };
 
+  const cargarMas = () => {
+    console.log("Cargar más propiedades");
+  };
+
+  const handleVerLista = () => setVerLista(!verLista);
+
   return (
     <div className={styles.containerList}>
       <Accordion defaultActiveKey="0">
@@ -84,7 +91,9 @@ const ListaProp = () => {
           <Card.Header className={styles.cardheader}>
             {inmuebles?.length === 0 ? null : (
               <ContextAwareToggle eventKey="1">
-                Vista de lista
+                <div onClick={handleVerLista}>
+                  {verLista ? "Ocultar lista" : "Vista de lista"}
+                </div>
               </ContextAwareToggle>
             )}
           </Card.Header>
@@ -170,6 +179,9 @@ const ListaProp = () => {
                             </div>
                           </div>
                         ))}
+                      <div className="text-center pointer" onClick={cargarMas}>
+                        Cargar más
+                      </div>
                     </>
                   )}
                 </div>
