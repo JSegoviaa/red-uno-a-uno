@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { InmuebleContext } from "../context/inmuebles/InmuebleContext";
 import { InmuebleUsuario } from "../interfaces/CrearInmuebleInterface";
-import { HistorialResp, HistorialUsuario } from "../interfaces/Historial";
+import { HistorialResp } from "../interfaces/Historial";
 import { Usuario } from "../interfaces/UserInterface";
 
 const devURL = "http://localhost:8080/api";
@@ -49,17 +49,13 @@ export const useUserInmuebles = (uid: string | undefined | null) => {
   return { inmuebles, cargando };
 };
 
-export const useHistorial = (
-  uid: string | undefined | null,
-  limite: number,
-  desde: number
-) => {
+export const useHistorial = (uid: string | undefined | null, desde: number) => {
   const [historial, setHistorial] = useState<HistorialResp>();
   const [isLoading, setIsLoading] = useState(true);
 
   const obtenerHistorial = async () => {
     const resp = await fetch(
-      `${baseURL}/historial/usuario/${uid}?limite=${limite}&desde=${desde}`
+      `${baseURL}/historial/usuario/${uid}?desde=${desde}&limite=15`
     );
     const data = await resp.json();
 
@@ -70,7 +66,7 @@ export const useHistorial = (
 
   useEffect(() => {
     obtenerHistorial();
-  }, [historial]);
+  }, [desde, historial]);
 
   return { historial, isLoading };
 };

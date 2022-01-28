@@ -12,9 +12,8 @@ import { eliminarHist } from "../../../../helpers/fetch";
 const Mihistorial = () => {
   const { auth } = useContext(AuthContext);
   const router = useRouter();
-  const [limite, setLimite] = useState(20);
   const [desde, setDesde] = useState(0);
-  const { historial, isLoading } = useHistorial(auth.uid, limite, desde);
+  const { historial, isLoading } = useHistorial(auth.uid, desde);
 
   const goToProperty = async (slug: string) => {
     if (slug !== "") {
@@ -25,6 +24,22 @@ const Mihistorial = () => {
   const handleDelete = async (id: string) => {
     const resp = await eliminarHist(`historial/${id}`);
     if (resp.ok) toast.success(resp.msg);
+  };
+
+  const handlePrevPage = () => {
+    if (desde === 0) {
+      return;
+    } else {
+      setDesde(desde - 15);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (desde < historial!.total - 15) {
+      setDesde(desde + 15);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -44,40 +59,44 @@ const Mihistorial = () => {
                 ) : (
                   <table className={`${styles.customTable}`}>
                     <tbody>
-                      {historial?.historialUsuario
-                        .map((hist, i) => (
-                          <tr key={hist._id} className={`${styles.thover}`}>
-                            <td className={styles.tNumber}>{i + 1} </td>
-                            <td
-                              onClick={() =>
-                                goToProperty(
-                                  hist.inmueble ? hist.inmueble.slug : ""
-                                )
-                              }
-                              className={`${styles.content} pointer`}
-                            >
-                              {hist.inmueble
-                                ? hist.inmueble.titulo
-                                : "Este inmueble ha sido dado de baja por el promotor"}
-                            </td>
-                            <td align="center">
-                              Visto {publicadoHace(hist.createdAt)}
-                            </td>
+                      {historial?.historialUsuario.map((hist, i) => (
+                        <tr key={hist._id} className={`${styles.thover}`}>
+                          <td className={styles.tNumber}>{i + 1} </td>
+                          <td
+                            onClick={() =>
+                              goToProperty(
+                                hist.inmueble ? hist.inmueble.slug : ""
+                              )
+                            }
+                            className={`${styles.content} pointer`}
+                          >
+                            {hist.inmueble
+                              ? hist.inmueble.titulo
+                              : "Este inmueble ha sido dado de baja por el promotor"}
+                          </td>
+                          <td align="center">
+                            Visto {publicadoHace(hist.createdAt)}
+                          </td>
 
-                            <td align="center">
-                              <i
-                                onClick={() => handleDelete(hist._id)}
-                                className={`${styles.deleteI} bi bi-x-circle-fill pointer`}
-                              />
-                            </td>
-                          </tr>
-                        ))
-                        .reverse()}
+                          <td align="center">
+                            <i
+                              onClick={() => handleDelete(hist._id)}
+                              className={`${styles.deleteI} bi bi-x-circle-fill pointer`}
+                            />
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 )}
               </>
             )}
+            <div className="d-flex justify-content-center">
+              <Pagination>
+                <Pagination.Prev onClick={handlePrevPage} />
+                <Pagination.Next onClick={handleNextPage} />
+              </Pagination>
+            </div>
           </div>
         </div>
       </div>
