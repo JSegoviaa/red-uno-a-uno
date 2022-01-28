@@ -59,7 +59,7 @@
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 500;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 35px;
   color: #5e5e5e;
   white-space: pre-line;
@@ -132,11 +132,20 @@
   color: #5e5e5e;
   margin-top: 10px;
 }
-
+.contendorslide{
+  width: 100%;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  z-index: -1;
+}
 .slideImg {
   width: auto;
   height: 500px;
-  background-color: #5e5e5e;
+  background-color: #bb1212;
   margin-bottom: 50px;
 }
 

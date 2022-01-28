@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from "swiper";
+import { url } from "inspector";
 
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
@@ -41,11 +42,13 @@ const Slider = ({ inmuebles }: Props) => {
             <>
               {inmuebles.inmueble.imgs.map((image) => (
                 <SwiperSlide key={image}>
+                  <div className={styles.contendorslide} style={{backgroundImage: `url(${image})` ,}}>
+                  </div>
                   <img
-                    className={styles.slideImg}
-                    src={image}
-                    alt={inmuebles.inmueble.titulo}
-                  />
+                      className={`${styles.slideImg} pointer`}
+                      src={image}
+                      alt={inmuebles.inmueble.titulo}
+                    />
                 </SwiperSlide>
               ))}
             </>

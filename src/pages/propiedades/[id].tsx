@@ -9,6 +9,7 @@ import { AuthContext } from "../../context/auth/AuthContext";
 import { production } from "../../credentials/credentials";
 import { InmueblesUsuario } from "../../interfaces/CrearInmuebleInterface";
 import NotFound from "../404";
+import Galeria from "../../components/paginas/propiedades/detalles/Galeria";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const resp = await fetch(`${production}/inmuebles/`);
@@ -52,6 +53,7 @@ const Propiedad = ({ inmuebles }: Props) => {
         img={inmuebles.inmueble.imgs[0] ? inmuebles.inmueble.imgs[0] : ""}
       />
       <Slider inmuebles={inmuebles} />
+      <Galeria/>
       <Detalles inmuebles={inmuebles} />
       <Ubicacion inmuebles={inmuebles} />
       {auth.uid ? <Contact inmuebles={inmuebles} /> : null}
