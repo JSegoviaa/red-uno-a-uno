@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { FormEvent, Fragment, useContext, useEffect, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { AuthContext } from '../../../../context/auth/AuthContext';
 import { ChatContext } from '../../../../context/chat/ChatContext';
 import { production } from '../../../../credentials/credentials';
-import { Conversacion } from '../../../../interfaces/ChatInterface';
+import { useForm } from '../../../../hooks/useForm';
 import styles from './Contenido.module.css';
 import Mensaje from './Mensaje';
 
@@ -13,8 +14,9 @@ const VentanaChat = () => {
     minimizarChat,
     conversacionActual,
     setConversacionActual,
+    enviarMensaje,
   } = useContext(ChatContext);
-  const [mensajes, setMensajes] = useState<Conversacion>();
+  const [mensajes, setMensajes] = useState<any>([]);
 
   useEffect(() => {
     const obtenerMensajes = async () => {
@@ -22,15 +24,33 @@ const VentanaChat = () => {
         `${production}/mensajes/${conversacionActual?._id}`
       );
       const data = await resp.json();
-      setMensajes(data);
+      setMensajes(data.mensajes);
     };
 
     obtenerMensajes();
   }, [conversacionActual]);
 
+  const { formulario, handleChange, setFormulario } = useForm({ mensaje: '' });
+  const { mensaje } = formulario;
+
   const ocultarVentana = () => setConversacionActual(null);
 
   const minimizarVentana = () => setMinimizarChat(!minimizarChat);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const nuevoMensaje = {
+      remitente: auth.uid,
+      mensaje,
+      conversacion: conversacionActual?._id,
+    };
+
+    const resp = await enviarMensaje(nuevoMensaje);
+    setMensajes([...mensajes, resp.mensajeGuardado]);
+    setFormulario({ mensaje: '' });
+  };
+
   return (
     <section>
       {conversacionActual ? (
@@ -73,12 +93,14 @@ const VentanaChat = () => {
                   <div className={styles.chatBox}>
                     <div className="row d-flex justify-content-center">
                       <>
-                        {mensajes?.mensajes.map((mensaje) => (
-                          <Mensaje
-                            key={mensaje._id}
-                            mensaje={mensaje}
-                            propio={mensaje.remitente === auth.uid}
-                          />
+                        {mensajes?.map((mensaje: any) => (
+                          <Fragment key={mensaje && mensaje._id}>
+                            <Mensaje
+                              key={mensaje && mensaje._id}
+                              mensaje={mensaje && mensaje}
+                              propio={mensaje && mensaje.remitente === auth.uid}
+                            />
+                          </Fragment>
                         ))}
                       </>
                     </div>
@@ -89,23 +111,26 @@ const VentanaChat = () => {
                   <div className={styles.sendMensajeFooter}>
                     <div className="row d-flex justify-content-center">
                       <div className="col-12">
-                        <div className="input-group">
-                          <input
-                            type="text"
-                            className={`${styles.messageBox} form-control`}
-                            placeholder="Mensaje..."
-                            aria-label="Recipient's username"
-                            aria-describedby="basic-addon2"
-                          />
-                          <span
-                            className={`${styles.btnEnviar} input-group-text`}
-                            id="basic-addon2"
-                          >
-                            <button className={styles.iconSend}>
-                              <i className="bi bi-send text-white"></i>
-                            </button>
-                          </span>
-                        </div>
+                        <Form onSubmit={handleSubmit}>
+                          <div className="input-group">
+                            <input
+                              type="text"
+                              className={`${styles.messageBox} form-control`}
+                              placeholder="Mensaje..."
+                              value={mensaje}
+                              onChange={handleChange}
+                              name="mensaje"
+                            />
+                            <span
+                              className={`${styles.btnEnviar} input-group-text`}
+                              id="basic-addon2"
+                            >
+                              <button className={styles.iconSend}>
+                                <i className="bi bi-send text-white"></i>
+                              </button>
+                            </span>
+                          </div>
+                        </Form>
                       </div>
                     </div>
                   </div>

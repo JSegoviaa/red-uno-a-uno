@@ -11,9 +11,9 @@ const Mensaje = ({ mensaje, propio }: Props) => {
   return (
     <div className="col-11 mb-2">
       <div className={propio ? styles.mensaje2 : styles.mensaje1}>
-        {mensaje.mensaje}
+        {mensaje && mensaje.mensaje}
       </div>
-      <div>{horaMes(mensaje.createdAt)}</div>
+      <div>{horaMes(mensaje && mensaje.createdAt)}</div>
     </div>
   );
 };
