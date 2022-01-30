@@ -13,15 +13,9 @@ interface Props {
 }
 
 const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
-  const { setAbrirChat, setMinimizarChat } = useContext(ChatContext);
+  const { setConversacionActual } = useContext(ChatContext);
   const { auth } = useContext(AuthContext);
   const { conversaciones, cargando } = useConversaciones(auth.uid);
-
-  const openChat = () => {
-    handleCloseCanvas();
-    setAbrirChat(true);
-    setMinimizarChat(true);
-  };
 
   return (
     <Offcanvas show={showCanvas} onHide={handleCloseCanvas} placement="end">
@@ -34,7 +28,12 @@ const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
             {cargando ? (
               <Loading />
             ) : (
-              <Chat conversacion={conversacion} openChat={openChat} />
+              <div onClick={() => setConversacionActual(conversacion)}>
+                <Chat
+                  conversacion={conversacion}
+                  handleCloseCanvas={handleCloseCanvas}
+                />
+              </div>
             )}
           </Fragment>
         ))}

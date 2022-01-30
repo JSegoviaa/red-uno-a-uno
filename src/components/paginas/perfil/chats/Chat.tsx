@@ -6,11 +6,11 @@ import { Usuario } from '../../../../interfaces/UserInterface';
 import styles from './MisChats.module.css';
 
 interface Props {
-  openChat: () => void;
+  handleCloseCanvas: any;
   conversacion: Conversacion;
 }
 
-const Chat = ({ openChat, conversacion }: Props) => {
+const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
   const { auth } = useContext(AuthContext);
   const [contacto, setContacto] = useState<Usuario>();
 
@@ -30,7 +30,10 @@ const Chat = ({ openChat, conversacion }: Props) => {
   }, [conversacion, auth]);
 
   return (
-    <div onClick={openChat} className={`${styles.ChatHover} pointer mb-2`}>
+    <div
+      onClick={handleCloseCanvas}
+      className={`${styles.ChatHover} pointer mb-2`}
+    >
       <div className={styles.michat}>
         <div className="row">
           <div className="col-2 text-center">

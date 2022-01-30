@@ -1,18 +1,39 @@
-import { useContext } from "react";
-import { ChatContext } from "../../../../context/chat/ChatContext";
-import styles from "./Contenido.module.css";
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../../../context/auth/AuthContext';
+import { ChatContext } from '../../../../context/chat/ChatContext';
+import { production } from '../../../../credentials/credentials';
+import { Conversacion } from '../../../../interfaces/ChatInterface';
+import styles from './Contenido.module.css';
+import Mensaje from './Mensaje';
 
 const VentanaChat = () => {
-  const { abrirChat, setAbrirChat, setMinimizarChat, minimizarChat } =
-    useContext(ChatContext);
+  const { auth } = useContext(AuthContext);
+  const {
+    setMinimizarChat,
+    minimizarChat,
+    conversacionActual,
+    setConversacionActual,
+  } = useContext(ChatContext);
+  const [mensajes, setMensajes] = useState<Conversacion>();
 
-  const ocultarVentana = () => setAbrirChat(false);
+  useEffect(() => {
+    const obtenerMensajes = async () => {
+      const resp = await fetch(
+        `${production}/mensajes/${conversacionActual?._id}`
+      );
+      const data = await resp.json();
+      setMensajes(data);
+    };
+
+    obtenerMensajes();
+  }, [conversacionActual]);
+
+  const ocultarVentana = () => setConversacionActual(null);
 
   const minimizarVentana = () => setMinimizarChat(!minimizarChat);
-
   return (
     <section>
-      {abrirChat ? (
+      {conversacionActual ? (
         <div className={styles.VentanaChat}>
           <div className="row">
             <div className="col-12">
@@ -33,7 +54,7 @@ const VentanaChat = () => {
                     <i
                       onClick={minimizarVentana}
                       className={`${styles.dashIcon} ${
-                        minimizarChat ? "bi bi-dash-lg" : "bi bi-app"
+                        minimizarChat ? 'bi bi-dash-lg' : 'bi bi-app'
                       }  me-2 pointer`}
                     />
                     <button
@@ -51,65 +72,19 @@ const VentanaChat = () => {
                 <div className="col-12">
                   <div className={styles.chatBox}>
                     <div className="row d-flex justify-content-center">
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje1}>Que onda!</div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje1}>Adivina que xd</div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje1}>
-                          Voy a vender la casa de isla, pero no se que precio
-                          ponerle, puedes pasarme tu contacto del valuador? para
-                          empezar con los tramites, ya sabes tambien te va a
-                          tocar tu comision si la vendes
-                        </div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje1}>
-                          Si quieres venir a verla, avisame
-                        </div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje2}>Hola!</div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje2}>
-                          O sea que ya se acabaron las fiestas alocadas en la
-                          terraza? :{"("}
-                        </div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje1}>
-                          Pues cuando compre la nueva la vamos a inaugurar, tu
-                          tranqui, ya les avise a los demas
-                        </div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje2}>
-                          Vale pues, deja le aviso al valuador para ir juntos a
-                          revisar la casa
-                        </div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje2}>
-                          De todos modos te mando su num para que le marques
-                        </div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje2}>555 12487</div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje1}>Va, gracias!</div>
-                      </div>
-                      <div className="col-11 mb-2">
-                        <div className={styles.mensaje1}>
-                          Te debo una coca jajaja
-                        </div>
-                      </div>
+                      <>
+                        {mensajes?.mensajes.map((mensaje) => (
+                          <Mensaje
+                            key={mensaje._id}
+                            mensaje={mensaje}
+                            propio={mensaje.remitente === auth.uid}
+                          />
+                        ))}
+                      </>
                     </div>
                   </div>
                 </div>
+
                 <div className="col-12">
                   <div className={styles.sendMensajeFooter}>
                     <div className="row d-flex justify-content-center">
