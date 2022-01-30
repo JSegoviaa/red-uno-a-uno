@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useContext, useEffect, useState } from 'react';
+import { FormEvent, useContext, useEffect, useRef, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { AuthContext } from '../../../../context/auth/AuthContext';
 import { ChatContext } from '../../../../context/chat/ChatContext';
@@ -17,6 +17,7 @@ const VentanaChat = () => {
     enviarMensaje,
   } = useContext(ChatContext);
   const [mensajes, setMensajes] = useState<any>([]);
+  const mensajeRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     const obtenerMensajes = async () => {
@@ -29,6 +30,10 @@ const VentanaChat = () => {
 
     obtenerMensajes();
   }, [conversacionActual]);
+
+  useEffect(() => {
+    mensajeRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [mensajes]);
 
   const { formulario, handleChange, setFormulario } = useForm({ mensaje: '' });
   const { mensaje } = formulario;
@@ -94,13 +99,12 @@ const VentanaChat = () => {
                     <div className="row d-flex justify-content-center">
                       <>
                         {mensajes?.map((mensaje: any) => (
-                          <Fragment key={mensaje && mensaje._id}>
+                          <div ref={mensajeRef} key={mensaje && mensaje._id}>
                             <Mensaje
-                              key={mensaje && mensaje._id}
                               mensaje={mensaje && mensaje}
                               propio={mensaje && mensaje.remitente === auth.uid}
                             />
-                          </Fragment>
+                          </div>
                         ))}
                       </>
                     </div>
