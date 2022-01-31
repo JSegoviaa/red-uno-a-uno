@@ -1,10 +1,10 @@
-import { Fragment, useContext } from 'react';
-import { Offcanvas } from 'react-bootstrap';
-import { AuthContext } from '../../../../context/auth/AuthContext';
-import { useConversaciones } from '../../../../hooks/useConversaciones';
-import Loading from '../../../ui/loading/Loading';
-import Chat from './Chat';
-import styles from './MisChats.module.css';
+import { Fragment, useContext } from "react";
+import { Offcanvas } from "react-bootstrap";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { useConversaciones } from "../../../../hooks/useConversaciones";
+import Loading from "../../../ui/loading/Loading";
+import Chat from "./Chat";
+import styles from "./MisChats.module.css";
 
 interface Props {
   showCanvas: boolean;

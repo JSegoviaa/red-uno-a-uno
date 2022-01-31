@@ -5,10 +5,10 @@ import {
   SetStateAction,
   useReducer,
   useState,
-} from 'react';
-import { enviarNuevoMensaje } from '../../helpers/fetch';
-import { Conversacion, MensajesResp } from '../../interfaces/ChatInterface';
-import { ActionType, chatReducer } from './chatReducer';
+} from "react";
+import { enviarNuevoMensaje } from "../../helpers/fetch";
+import { Conversacion, MensajesResp } from "../../interfaces/ChatInterface";
+import { ActionType, chatReducer } from "./chatReducer";
 
 interface NuevoMensaje {
   conversacion: string | undefined;
@@ -24,10 +24,12 @@ interface ContextProps {
   enviarMensaje: (data: NuevoMensaje) => Promise<MensajesResp>;
   chatState: { uid: string; chatActivo: null; mensajes: never[] };
   dispatch: Dispatch<ActionType>;
+  mensajePara: string;
+  setMensajePara: any;
 }
 
 export const initialState: any = {
-  uid: '',
+  uid: "",
   chatActivo: null,
   mensajes: [],
 };
@@ -40,15 +42,16 @@ export const ChatProvider: FC = ({ children }) => {
     initialState,
     undefined
   );
-
+  const [mensajePara, setMensajePara] = useState("");
   const [minimizarChat, setMinimizarChat] = useState(true);
-
   const [conversacionActual, setConversacionActual] = useState(null);
 
   const enviarMensaje = async (data: NuevoMensaje) => {
-    const resp = await enviarNuevoMensaje('mensajes', data);
+    const resp = await enviarNuevoMensaje("mensajes", data);
     return resp;
   };
+
+  console.log(mensajePara, "context");
 
   return (
     <ChatContext.Provider
@@ -60,6 +63,8 @@ export const ChatProvider: FC = ({ children }) => {
         enviarMensaje,
         chatState,
         dispatch,
+        mensajePara,
+        setMensajePara,
       }}
     >
       {children}

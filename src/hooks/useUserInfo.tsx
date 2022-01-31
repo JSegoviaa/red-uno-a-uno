@@ -23,7 +23,7 @@ export const useUserInfo = (uid: string | undefined | null) => {
 
   useEffect(() => {
     getUserInfo();
-  }, []);
+  }, [uid]);
 
   return { user, loading };
 };

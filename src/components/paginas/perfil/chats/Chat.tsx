@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../../../context/auth/AuthContext';
-import { ChatContext } from '../../../../context/chat/ChatContext';
-import { production } from '../../../../credentials/credentials';
-import { Conversacion } from '../../../../interfaces/ChatInterface';
-import { Usuario } from '../../../../interfaces/UserInterface';
-import styles from './MisChats.module.css';
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { ChatContext } from "../../../../context/chat/ChatContext";
+import { production } from "../../../../credentials/credentials";
+import { Conversacion } from "../../../../interfaces/ChatInterface";
+import { Usuario } from "../../../../interfaces/UserInterface";
+import styles from "./MisChats.module.css";
 
 interface Props {
   handleCloseCanvas: any;
@@ -32,7 +32,7 @@ const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
   }, [conversacion, auth]);
 
   const activarChat = async () => {
-    dispatch({ type: 'ActivarChat', payload: contacto?.uid });
+    dispatch({ type: "ActivarChat", payload: contacto?.uid });
   };
 
   return (
@@ -48,7 +48,7 @@ const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
                 <img
                   src={contacto.img}
                   alt={contacto.nombre}
-                  style={{ borderRadius: '50%', width: 55 }}
+                  style={{ borderRadius: "50%", width: 55, height: 55 }}
                 />
               ) : null}
             </div>

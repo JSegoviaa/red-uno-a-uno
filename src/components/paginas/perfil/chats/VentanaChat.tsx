@@ -1,12 +1,12 @@
-import { FormEvent, useContext, useEffect, useRef, useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { AuthContext } from '../../../../context/auth/AuthContext';
-import { ChatContext } from '../../../../context/chat/ChatContext';
-import { SocketContext } from '../../../../context/socket/SocketContext';
-import { production } from '../../../../credentials/credentials';
-import { useForm } from '../../../../hooks/useForm';
-import styles from './Contenido.module.css';
-import Mensaje from './Mensaje';
+import { FormEvent, useContext } from "react";
+import { Form } from "react-bootstrap";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { ChatContext } from "../../../../context/chat/ChatContext";
+import { SocketContext } from "../../../../context/socket/SocketContext";
+import { useForm } from "../../../../hooks/useForm";
+import { useUserInfo } from "../../../../hooks/useUserInfo";
+import styles from "./Contenido.module.css";
+import Mensaje from "./Mensaje";
 
 const VentanaChat = () => {
   const { auth } = useContext(AuthContext);
@@ -17,38 +17,19 @@ const VentanaChat = () => {
     conversacionActual,
     chatState,
     dispatch,
+    mensajePara,
   } = useContext(ChatContext);
-  const [mensajes, setMensajes] = useState<any>([]);
-  const mensajeRef = useRef<null | HTMLDivElement>(null);
+  // const mensajeRef = useRef<null | HTMLDivElement>(null);
+  const { user } = useUserInfo(chatState.chatActivo || mensajePara);
 
-  useEffect(() => {
-    const obtenerMensajes = async () => {
-      const resp = await fetch(
-        `${production}/mensajes/${conversacionActual?._id}`
-      );
-      const data = await resp.json();
-      setMensajes(data.mensajes);
-    };
-
-    obtenerMensajes();
-  }, [conversacionActual]);
-
-  useEffect(() => {
-    mensajeRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [mensajes]);
-
-  const { formulario, handleChange, setFormulario } = useForm({ mensaje: '' });
+  const { formulario, handleChange, setFormulario } = useForm({ mensaje: "" });
   const { mensaje } = formulario;
 
   const ocultarVentana = () => {
-    dispatch({ type: 'DesactivarChat', payload: null });
+    dispatch({ type: "DesactivarChat", payload: null });
   };
 
   const minimizarVentana = () => setMinimizarChat(!minimizarChat);
-
-  const para = conversacionActual?.miembros.filter((mienbro) => {
-    return mienbro !== auth.uid;
-  });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,9 +42,9 @@ const VentanaChat = () => {
       para: chatState.chatActivo,
       conversacion: conversacionActual?._id,
     };
-    socket?.emit('mensaje-personal', nuevoMensaje);
+    socket?.emit("mensaje-personal", nuevoMensaje);
 
-    setFormulario({ mensaje: '' });
+    setFormulario({ mensaje: "" });
   };
 
   return (
@@ -77,19 +58,23 @@ const VentanaChat = () => {
                   <div className="col-2 text-end">
                     <img
                       className={styles.perfilImg}
-                      src="/images/avatares/2.svg"
-                      alt="..."
+                      src={user?.img}
+                      alt={user?.nombre}
                     />
                   </div>
                   <div className="col-7">
-                    <div className={`${styles.nombre}`}>James Franco</div>
-                    <div className={styles.conexion}>En Linea</div>
+                    <div className={`${styles.nombre}`}>
+                      {user?.nombre} {user?.apellido}
+                    </div>
+                    <div className={styles.conexion}>
+                      {user?.online ? "En línea" : "Desconectado"}
+                    </div>
                   </div>
                   <div className="col-3 text-end p-0">
                     <i
                       onClick={minimizarVentana}
                       className={`${styles.dashIcon} ${
-                        minimizarChat ? 'bi bi-dash-lg' : 'bi bi-app'
+                        minimizarChat ? "bi bi-dash-lg" : "bi bi-app"
                       }  me-2 pointer`}
                     />
                     <button
@@ -109,7 +94,7 @@ const VentanaChat = () => {
                     <div className="row d-flex justify-content-center">
                       <>
                         {chatState.mensajes.map((mensaje: any) => (
-                          <div ref={mensajeRef} key={mensaje._id}>
+                          <div key={mensaje._id}>
                             <Mensaje
                               mensaje={mensaje}
                               propio={mensaje.remitente === auth.uid}
