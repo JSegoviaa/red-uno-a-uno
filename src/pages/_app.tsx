@@ -15,22 +15,22 @@ moment.locale('es');
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <SocketProvider>
-        <NextNProgress
-          height={6}
-          color="#7149BC"
-          options={{ showSpinner: false }}
-        />
-        <MapProvider>
-          <ChatProvider>
+      <ChatProvider>
+        <SocketProvider>
+          <NextNProgress
+            height={6}
+            color="#7149BC"
+            options={{ showSpinner: false }}
+          />
+          <MapProvider>
             <Layout>
               <InmuebleProvider>
                 <Component {...pageProps} />
               </InmuebleProvider>
             </Layout>
-          </ChatProvider>
-        </MapProvider>
-      </SocketProvider>
+          </MapProvider>
+        </SocketProvider>
+      </ChatProvider>
     </AuthProvider>
   );
 }

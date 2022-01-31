@@ -1,7 +1,6 @@
 import { Fragment, useContext } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { AuthContext } from '../../../../context/auth/AuthContext';
-import { ChatContext } from '../../../../context/chat/ChatContext';
 import { useConversaciones } from '../../../../hooks/useConversaciones';
 import Loading from '../../../ui/loading/Loading';
 import Chat from './Chat';
@@ -13,7 +12,6 @@ interface Props {
 }
 
 const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
-  const { setConversacionActual } = useContext(ChatContext);
   const { auth } = useContext(AuthContext);
   const { conversaciones, cargando } = useConversaciones(auth.uid);
 
@@ -28,12 +26,10 @@ const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
             {cargando ? (
               <Loading />
             ) : (
-              <div onClick={() => setConversacionActual(conversacion)}>
-                <Chat
-                  conversacion={conversacion}
-                  handleCloseCanvas={handleCloseCanvas}
-                />
-              </div>
+              <Chat
+                conversacion={conversacion}
+                handleCloseCanvas={handleCloseCanvas}
+              />
             )}
           </Fragment>
         ))}

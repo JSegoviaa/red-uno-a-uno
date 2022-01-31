@@ -2,6 +2,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { AuthContext } from '../../../../context/auth/AuthContext';
 import { ChatContext } from '../../../../context/chat/ChatContext';
+import { SocketContext } from '../../../../context/socket/SocketContext';
 import { production } from '../../../../credentials/credentials';
 import { useForm } from '../../../../hooks/useForm';
 import styles from './Contenido.module.css';
@@ -9,12 +10,13 @@ import Mensaje from './Mensaje';
 
 const VentanaChat = () => {
   const { auth } = useContext(AuthContext);
+  const { socket } = useContext(SocketContext);
   const {
     setMinimizarChat,
     minimizarChat,
     conversacionActual,
-    setConversacionActual,
-    enviarMensaje,
+    chatState,
+    dispatch,
   } = useContext(ChatContext);
   const [mensajes, setMensajes] = useState<any>([]);
   const mensajeRef = useRef<null | HTMLDivElement>(null);
@@ -38,27 +40,35 @@ const VentanaChat = () => {
   const { formulario, handleChange, setFormulario } = useForm({ mensaje: '' });
   const { mensaje } = formulario;
 
-  const ocultarVentana = () => setConversacionActual(null);
+  const ocultarVentana = () => {
+    dispatch({ type: 'DesactivarChat', payload: null });
+  };
 
   const minimizarVentana = () => setMinimizarChat(!minimizarChat);
+
+  const para = conversacionActual?.miembros.filter((mienbro) => {
+    return mienbro !== auth.uid;
+  });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (mensaje.length === 0) return;
+
     const nuevoMensaje = {
       remitente: auth.uid,
       mensaje,
+      para: '61e99df40d3bd9163e4a4b31',
       conversacion: conversacionActual?._id,
     };
+    socket?.emit('mensaje-personal', nuevoMensaje);
 
-    const resp = await enviarMensaje(nuevoMensaje);
-    setMensajes([...mensajes, resp.mensajeGuardado]);
     setFormulario({ mensaje: '' });
   };
 
   return (
     <section>
-      {conversacionActual ? (
+      {chatState.chatActivo ? (
         <div className={styles.VentanaChat}>
           <div className="row">
             <div className="col-12">
@@ -98,11 +108,11 @@ const VentanaChat = () => {
                   <div className={styles.chatBox}>
                     <div className="row d-flex justify-content-center">
                       <>
-                        {mensajes?.map((mensaje: any) => (
-                          <div ref={mensajeRef} key={mensaje && mensaje._id}>
+                        {chatState.mensajes.map((mensaje: any) => (
+                          <div ref={mensajeRef} key={mensaje._id}>
                             <Mensaje
-                              mensaje={mensaje && mensaje}
-                              propio={mensaje && mensaje.remitente === auth.uid}
+                              mensaje={mensaje}
+                              propio={mensaje.remitente === auth.uid}
                             />
                           </div>
                         ))}

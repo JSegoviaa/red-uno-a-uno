@@ -1,6 +1,14 @@
-import { createContext, Dispatch, FC, SetStateAction, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useReducer,
+  useState,
+} from 'react';
 import { enviarNuevoMensaje } from '../../helpers/fetch';
 import { Conversacion, MensajesResp } from '../../interfaces/ChatInterface';
+import { ActionType, chatReducer } from './chatReducer';
 
 interface NuevoMensaje {
   conversacion: string | undefined;
@@ -14,11 +22,25 @@ interface ContextProps {
   conversacionActual: Conversacion | null;
   setConversacionActual: any;
   enviarMensaje: (data: NuevoMensaje) => Promise<MensajesResp>;
+  chatState: { uid: string; chatActivo: null; mensajes: never[] };
+  dispatch: Dispatch<ActionType>;
 }
+
+export const initialState: any = {
+  uid: '',
+  chatActivo: null,
+  mensajes: [],
+};
 
 export const ChatContext = createContext({} as ContextProps);
 
 export const ChatProvider: FC = ({ children }) => {
+  const [chatState, dispatch] = useReducer(
+    chatReducer,
+    initialState,
+    undefined
+  );
+
   const [minimizarChat, setMinimizarChat] = useState(true);
 
   const [conversacionActual, setConversacionActual] = useState(null);
@@ -36,6 +58,8 @@ export const ChatProvider: FC = ({ children }) => {
         conversacionActual,
         setConversacionActual,
         enviarMensaje,
+        chatState,
+        dispatch,
       }}
     >
       {children}

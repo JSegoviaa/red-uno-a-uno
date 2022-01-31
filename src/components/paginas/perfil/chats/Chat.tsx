@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../context/auth/AuthContext';
+import { ChatContext } from '../../../../context/chat/ChatContext';
 import { production } from '../../../../credentials/credentials';
 import { Conversacion } from '../../../../interfaces/ChatInterface';
 import { Usuario } from '../../../../interfaces/UserInterface';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
+  const { dispatch } = useContext(ChatContext);
   const { auth } = useContext(AuthContext);
   const [contacto, setContacto] = useState<Usuario>();
 
@@ -29,12 +31,16 @@ const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
     traerContacto();
   }, [conversacion, auth]);
 
+  const activarChat = async () => {
+    dispatch({ type: 'ActivarChat', payload: contacto?.uid });
+  };
+
   return (
     <div
       onClick={handleCloseCanvas}
       className={`${styles.ChatHover} pointer mb-2`}
     >
-      <div className={styles.michat}>
+      <div className={styles.michat} onClick={activarChat}>
         <div className="row">
           <div className="col-2 text-center">
             <div className={styles.backImg}>
