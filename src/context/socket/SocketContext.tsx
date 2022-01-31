@@ -1,6 +1,5 @@
 import { createContext, FC, useContext, useEffect } from "react";
 import { Socket } from "socket.io-client";
-import { scrollToBottomAnimated } from "../../helpers/scrollToBottom";
 import { useSocket } from "../../hooks/useSocket";
 import { AuthContext } from "../auth/AuthContext";
 import { ChatContext } from "../chat/ChatContext";
@@ -16,8 +15,8 @@ export const SocketProvider: FC = ({ children }) => {
   const { auth } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
   const { socket, online, conectarSocket, desconectarSocket } = useSocket(
-    // "https://prueba-red1a1.herokuapp.com"
-    "http://localhost:8080"
+    "https://prueba-red1a1.herokuapp.com"
+    // "http://localhost:8080"
   );
 
   useEffect(() => {
