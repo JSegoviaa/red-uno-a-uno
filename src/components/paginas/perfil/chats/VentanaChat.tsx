@@ -1,4 +1,4 @@
-import { FormEvent, useContext } from "react";
+import { FormEvent, useContext, useEffect, useRef } from "react";
 import { Form } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { ChatContext } from "../../../../context/chat/ChatContext";
@@ -14,14 +14,13 @@ const VentanaChat = () => {
   const {
     setMinimizarChat,
     minimizarChat,
-    conversacionActual,
     chatState,
     dispatch,
     mensajePara,
+    scrollToBotom,
   } = useContext(ChatContext);
-  // const mensajeRef = useRef<null | HTMLDivElement>(null);
   const { user } = useUserInfo(chatState.chatActivo || mensajePara);
-
+  const scrollTo = useRef<HTMLDivElement | null>(null);
   const { formulario, handleChange, setFormulario } = useForm({ mensaje: "" });
   const { mensaje } = formulario;
 
@@ -40,12 +39,16 @@ const VentanaChat = () => {
       remitente: auth.uid,
       mensaje,
       para: chatState.chatActivo,
-      conversacion: conversacionActual?._id,
+      conversacion: chatState.chatActivo,
     };
     socket?.emit("mensaje-personal", nuevoMensaje);
 
     setFormulario({ mensaje: "" });
   };
+
+  useEffect(() => {
+    scrollTo.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatState.mensajes]);
 
   return (
     <section>
@@ -94,11 +97,13 @@ const VentanaChat = () => {
                     <div className="row d-flex justify-content-center">
                       <>
                         {chatState.mensajes.map((mensaje: any) => (
-                          <div key={mensaje._id}>
-                            <Mensaje
-                              mensaje={mensaje}
-                              propio={mensaje.remitente === auth.uid}
-                            />
+                          <div key={mensaje._id} ref={scrollToBotom}>
+                            <div ref={scrollTo}>
+                              <Mensaje
+                                mensaje={mensaje}
+                                propio={mensaje.remitente === auth.uid}
+                              />
+                            </div>
                           </div>
                         ))}
                       </>
@@ -119,6 +124,7 @@ const VentanaChat = () => {
                               value={mensaje}
                               onChange={handleChange}
                               name="mensaje"
+                              autoComplete="off"
                             />
                             <span
                               className={`${styles.btnEnviar} input-group-text`}

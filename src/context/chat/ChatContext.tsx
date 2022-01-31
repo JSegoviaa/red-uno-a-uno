@@ -2,8 +2,10 @@ import {
   createContext,
   Dispatch,
   FC,
+  MutableRefObject,
   SetStateAction,
   useReducer,
+  useRef,
   useState,
 } from "react";
 import { enviarNuevoMensaje } from "../../helpers/fetch";
@@ -26,6 +28,7 @@ interface ContextProps {
   dispatch: Dispatch<ActionType>;
   mensajePara: string;
   setMensajePara: any;
+  scrollToBotom: MutableRefObject<HTMLDivElement | null>;
 }
 
 export const initialState: any = {
@@ -45,6 +48,7 @@ export const ChatProvider: FC = ({ children }) => {
   const [mensajePara, setMensajePara] = useState("");
   const [minimizarChat, setMinimizarChat] = useState(true);
   const [conversacionActual, setConversacionActual] = useState(null);
+  const scrollToBotom = useRef<HTMLDivElement | null>(null);
 
   const enviarMensaje = async (data: NuevoMensaje) => {
     const resp = await enviarNuevoMensaje("mensajes", data);
@@ -63,6 +67,7 @@ export const ChatProvider: FC = ({ children }) => {
         dispatch,
         mensajePara,
         setMensajePara,
+        scrollToBotom,
       }}
     >
       {children}

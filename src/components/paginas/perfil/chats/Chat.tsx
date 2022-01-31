@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { ChatContext } from "../../../../context/chat/ChatContext";
 import { production } from "../../../../credentials/credentials";
+import { obtenerMensajes } from "../../../../helpers/fetch";
 import { Conversacion } from "../../../../interfaces/ChatInterface";
 import { Usuario } from "../../../../interfaces/UserInterface";
 import styles from "./MisChats.module.css";
@@ -12,9 +13,12 @@ interface Props {
 }
 
 const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
-  const { dispatch } = useContext(ChatContext);
+  const { dispatch, setConversacionActual, scrollToBotom } =
+    useContext(ChatContext);
   const { auth } = useContext(AuthContext);
   const [contacto, setContacto] = useState<Usuario>();
+
+  setConversacionActual(conversacion);
 
   useEffect(() => {
     const contacto = conversacion.miembros.find(
@@ -33,6 +37,11 @@ const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
 
   const activarChat = async () => {
     dispatch({ type: "ActivarChat", payload: contacto?.uid });
+
+    const resp = await obtenerMensajes(`mensajes/${contacto?.uid}`);
+    dispatch({ type: "CargarMensajes", payload: resp.mensajes });
+
+    scrollToBotom.current?.scrollIntoView();
   };
 
   return (

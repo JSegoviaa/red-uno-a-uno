@@ -1,13 +1,14 @@
-import { initialState } from './ChatContext';
+import { initialState } from "./ChatContext";
 
 export type ActionType =
-  | { type: 'ActivarChat'; payload: any }
-  | { type: 'DesactivarChat'; payload: any }
-  | { type: 'NuevoMensaje'; payload: any };
+  | { type: "ActivarChat"; payload: any }
+  | { type: "DesactivarChat"; payload: any }
+  | { type: "NuevoMensaje"; payload: any }
+  | { type: "CargarMensajes"; payload: any };
 
 export const chatReducer = (state: typeof initialState, action: ActionType) => {
   switch (action.type) {
-    case 'ActivarChat':
+    case "ActivarChat":
       if (state.chatActivo === action.payload) return state;
 
       return {
@@ -16,10 +17,10 @@ export const chatReducer = (state: typeof initialState, action: ActionType) => {
         mensajes: [],
       };
 
-    case 'DesactivarChat':
+    case "DesactivarChat":
       return { ...state, chatActivo: null, mensajes: [] };
 
-    case 'NuevoMensaje':
+    case "NuevoMensaje":
       if (
         state.chatActivo === action.payload.remitente ||
         state.chatActivo === action.payload.para
@@ -28,6 +29,9 @@ export const chatReducer = (state: typeof initialState, action: ActionType) => {
       } else {
         return state;
       }
+
+    case "CargarMensajes":
+      return { ...state, mensajes: [...action.payload] };
     default:
       return state;
   }

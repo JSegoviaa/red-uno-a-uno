@@ -1,6 +1,7 @@
-import styles from './Contenido.module.css';
-import { MensajeGuardado } from '../../../../interfaces/ChatInterface';
-import { horaMes } from '../../../../helpers/horaMes';
+import styles from "./Contenido.module.css";
+import { MensajeGuardado } from "../../../../interfaces/ChatInterface";
+import { horaMes } from "../../../../helpers/horaMes";
+import { MutableRefObject } from "react";
 
 interface Props {
   mensaje: MensajeGuardado;
