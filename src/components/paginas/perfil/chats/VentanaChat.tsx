@@ -58,7 +58,7 @@ const VentanaChat = () => {
     const nuevoMensaje = {
       remitente: auth.uid,
       mensaje,
-      para: '61e99df40d3bd9163e4a4b31',
+      para: chatState.chatActivo,
       conversacion: conversacionActual?._id,
     };
     socket?.emit('mensaje-personal', nuevoMensaje);
