@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { agregarFav, agregarHist } from "../../../helpers/fetch";
 import { formatPrice } from "../../../helpers/formatPrice";
-import { useInmuebles } from "../../../hooks/useInmuebles";
+import { useListaInmueble } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
 import styles from "./ListaProp.module.css";
 
@@ -40,8 +40,9 @@ function ContextAwareToggle({ children, eventKey, callback }: any) {
 const ListaProp = () => {
   const { auth } = useContext(AuthContext);
   const router = useRouter();
-  const { inmuebles, cargando } = useInmuebles();
   const [verLista, setVerLista] = useState(false);
+  const [limite, setLimite] = useState(10);
+  const { listaInmuebles, cargando } = useListaInmueble(limite);
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
@@ -79,7 +80,9 @@ const ListaProp = () => {
   };
 
   const cargarMas = () => {
-    console.log("Cargar más propiedades");
+    if (limite < listaInmuebles!.total) {
+      setLimite(limite + 10);
+    }
   };
 
   const handleVerLista = () => setVerLista(!verLista);
@@ -89,7 +92,7 @@ const ListaProp = () => {
       <Accordion defaultActiveKey="0">
         <Card className={styles.lista}>
           <Card.Header className={styles.cardheader}>
-            {inmuebles?.length === 0 ? null : (
+            {listaInmuebles?.inmuebles?.length === 0 ? null : (
               <ContextAwareToggle eventKey="1">
                 <div onClick={handleVerLista}>
                   {verLista ? "Ocultar lista" : "Vista de lista"}
@@ -98,7 +101,7 @@ const ListaProp = () => {
             )}
           </Card.Header>
 
-          {inmuebles?.length === 0 ? null : (
+          {listaInmuebles?.inmuebles?.length === 0 ? null : (
             <Accordion.Collapse eventKey="1">
               <Card.Body className={styles.bodyList}>
                 <div className="row">
@@ -106,7 +109,7 @@ const ListaProp = () => {
                     <Loading />
                   ) : (
                     <>
-                      {inmuebles
+                      {listaInmuebles?.inmuebles
                         ?.filter((inmueble) => {
                           return inmueble.publicado === true;
                         })
@@ -179,9 +182,20 @@ const ListaProp = () => {
                             </div>
                           </div>
                         ))}
-                      <div className="text-center pointer" onClick={cargarMas}>
-                        Cargar más
-                      </div>
+                      {limite > listaInmuebles!.total ? null : (
+                        <>
+                          {cargando ? (
+                            <Loading />
+                          ) : (
+                            <div
+                              className="text-center pointer"
+                              onClick={cargarMas}
+                            >
+                              Cargar más
+                            </div>
+                          )}
+                        </>
+                      )}
                     </>
                   )}
                 </div>

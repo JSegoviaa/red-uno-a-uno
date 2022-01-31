@@ -41,6 +41,13 @@ export interface InmuebleBorrado {
 export interface InmuebleUsuario {
   ok: boolean;
   inmueblesUsuario: InmueblesUsuario[];
+  total: number;
+}
+
+export interface ListaInmuebles {
+  ok: boolean;
+  inmuebles: InmueblesUsuario[];
+  total: number;
 }
 
 export interface InmueblesUsuario {

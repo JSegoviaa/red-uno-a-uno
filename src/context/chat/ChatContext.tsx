@@ -51,8 +51,6 @@ export const ChatProvider: FC = ({ children }) => {
     return resp;
   };
 
-  console.log(mensajePara, "context");
-
   return (
     <ChatContext.Provider
       value={{
