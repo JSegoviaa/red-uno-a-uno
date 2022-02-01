@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { crearChat } from "../../helpers/fetch";
+import { crearChat, obtenerMensajes } from "../../helpers/fetch";
 import { ActionType, chatReducer } from "./chatReducer";
 
 export interface CrearChat {
@@ -47,6 +47,12 @@ export const ChatProvider: FC = ({ children }) => {
 
   const iniciarChat = async (data: CrearChat) => {
     await crearChat("chats", data);
+    dispatch({ type: "ActivarChat", payload: data.destinatario });
+
+    const resp = await obtenerMensajes(`mensajes/${data.destinatario}`);
+    dispatch({ type: "CargarMensajes", payload: resp.mensajes });
+
+    scrollToBotom.current?.scrollIntoView();
   };
 
   return (
