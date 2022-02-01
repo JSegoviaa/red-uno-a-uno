@@ -8,25 +8,23 @@ import {
   useRef,
   useState,
 } from "react";
-import { enviarNuevoMensaje } from "../../helpers/fetch";
-import { MensajesResp } from "../../interfaces/ChatInterface";
 import { ActionType, chatReducer } from "./chatReducer";
 
-interface NuevoMensaje {
-  conversacion: string | undefined;
-  remitente: string | undefined | null;
-  mensaje: string;
+export interface CrearChat {
+  miembros: (string | null | undefined)[];
+  remitente: string | null | undefined;
+  para: string;
 }
 
 interface ContextProps {
   minimizarChat: boolean;
   setMinimizarChat: Dispatch<SetStateAction<boolean>>;
-  enviarMensaje: (data: NuevoMensaje) => Promise<MensajesResp>;
   chatState: { uid: string; chatActivo: null; mensajes: never[] };
   dispatch: Dispatch<ActionType>;
   mensajePara: string;
   setMensajePara: any;
   scrollToBotom: MutableRefObject<HTMLDivElement | null>;
+  iniciarChat: (daya: CrearChat) => Promise<void>;
 }
 
 export const initialState: any = {
@@ -47,9 +45,8 @@ export const ChatProvider: FC = ({ children }) => {
   const [minimizarChat, setMinimizarChat] = useState(true);
   const scrollToBotom = useRef<HTMLDivElement | null>(null);
 
-  const enviarMensaje = async (data: NuevoMensaje) => {
-    const resp = await enviarNuevoMensaje("mensajes", data);
-    return resp;
+  const iniciarChat = async (data: CrearChat) => {
+    console.log(data);
   };
 
   return (
@@ -57,12 +54,12 @@ export const ChatProvider: FC = ({ children }) => {
       value={{
         minimizarChat,
         setMinimizarChat,
-        enviarMensaje,
         chatState,
         dispatch,
         mensajePara,
         setMensajePara,
         scrollToBotom,
+        iniciarChat,
       }}
     >
       {children}

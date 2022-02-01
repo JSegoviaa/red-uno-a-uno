@@ -52,6 +52,7 @@ const MiListaFavoritos = () => {
                     slug={favorito.inmueble ? favorito.inmueble.slug : ""}
                     img={favorito.inmueble ? favorito.inmueble.imgs : ""}
                     solicitud={favorito.solicitud}
+                    propietario={favorito.propietario}
                   />
                 ))}
                 {total > 20 ? (

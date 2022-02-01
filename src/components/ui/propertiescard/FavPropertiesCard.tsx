@@ -1,7 +1,10 @@
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { Col } from "react-bootstrap";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../context/auth/AuthContext";
+import { ChatContext, CrearChat } from "../../../context/chat/ChatContext";
 import { eliminarFavorito } from "../../../helpers/fetch";
 import styles from "./FavsCard.module.css";
 
@@ -13,10 +16,14 @@ interface Props {
   img: string[] | string;
   titulo: string;
   solicitud: Solicitud;
+  propietario: string;
 }
 
-const FavPropertiesCard = ({ titulo, id, img, slug, solicitud }: Props) => {
+const FavPropertiesCard = (props: Props) => {
+  const { titulo, id, img, slug, solicitud, propietario } = props;
   const router = useRouter();
+  const { auth } = useContext(AuthContext);
+  const { iniciarChat } = useContext(ChatContext);
   const goToProperty = () => router.push(`/propiedades/${slug}`);
 
   const eliminarFav = async () => {
@@ -27,6 +34,12 @@ const FavPropertiesCard = ({ titulo, id, img, slug, solicitud }: Props) => {
   };
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
+
+  const data: CrearChat = {
+    miembros: [auth.uid, propietario],
+    remitente: auth.uid,
+    para: propietario,
+  };
 
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center">
@@ -71,7 +84,11 @@ const FavPropertiesCard = ({ titulo, id, img, slug, solicitud }: Props) => {
           role="group"
           aria-label="Basic mixed styles example"
         >
-          <button type="button" className={`${styles.customBtn2} btn`} />
+          <button
+            onClick={() => iniciarChat(data)}
+            type="button"
+            className={`${styles.customBtn2} btn`}
+          />
           <CopyToClipboard
             onCopy={compartir}
             text={`red1a1.com/app/propiedades/${slug}`}

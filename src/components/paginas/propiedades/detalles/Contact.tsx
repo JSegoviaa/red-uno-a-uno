@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { ChatContext, CrearChat } from "../../../../context/chat/ChatContext";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import Button from "../../../ui/button/Button";
 import styles from "./Inmueble.module.css";
@@ -10,6 +13,15 @@ interface Props {
 }
 
 const Contact = ({ inmuebles }: Props) => {
+  const { auth } = useContext(AuthContext);
+  const { iniciarChat } = useContext(ChatContext);
+
+  const data: CrearChat = {
+    miembros: [auth.uid, inmuebles.inmueble.usuario._id],
+    remitente: auth.uid,
+    para: inmuebles.inmueble.usuario._id,
+  };
+
   return (
     <section>
       <div className="row w-100 gx-0">
@@ -45,7 +57,7 @@ const Contact = ({ inmuebles }: Props) => {
               Inicia una conversación con el asesor <br /> de este inmueble
             </div>
             <div className="text-center">
-              <Button titulo="iniciar Chat" />
+              <Button titulo="iniciar Chat" onClick={() => iniciarChat(data)} />
             </div>
           </div>
         </div>
