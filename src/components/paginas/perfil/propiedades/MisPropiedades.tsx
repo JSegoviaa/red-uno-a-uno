@@ -8,25 +8,23 @@ import styles from "./MisPropiedades.module.css";
 
 const MiListaPropiedades = () => {
   const { auth } = useContext(AuthContext);
-  const { cargando, inmuebles } = useUserInmuebles(auth.uid);
   const [desde, setDesde] = useState(0);
+  const { cargando, inmuebles, total } = useUserInmuebles(auth.uid, desde);
 
   const handlePrevPage = () => {
-    // if (desde === 0) {
-    //   return;
-    // } else {
-    //   setDesde(desde - 15);
-    // }
-    console.log("Página anterior");
+    if (desde === 0) {
+      return;
+    } else {
+      setDesde(desde - 20);
+    }
   };
 
   const handleNextPage = () => {
-    // if (desde < 15) {
-    //   setDesde(desde + 15);
-    // } else {
-    //   return;
-    // }
-    console.log("Página siguiente");
+    if (desde < total - 20) {
+      setDesde(desde + 20);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -52,12 +50,14 @@ const MiListaPropiedades = () => {
                     isActive={inmueble.publicado}
                   />
                 ))}
-                <div className="d-flex justify-content-center">
-                  <Pagination>
-                    <Pagination.Prev onClick={handlePrevPage} />
-                    <Pagination.Next onClick={handleNextPage} />
-                  </Pagination>
-                </div>
+                {total > 20 ? (
+                  <div className="d-flex justify-content-center">
+                    <Pagination>
+                      <Pagination.Prev onClick={handlePrevPage} />
+                      <Pagination.Next onClick={handleNextPage} />
+                    </Pagination>
+                  </div>
+                ) : null}
               </>
             )}
           </>

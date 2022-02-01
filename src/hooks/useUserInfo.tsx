@@ -28,25 +28,31 @@ export const useUserInfo = (uid: string | undefined | null) => {
   return { user, loading };
 };
 
-export const useUserInmuebles = (uid: string | undefined | null) => {
+export const useUserInmuebles = (
+  uid: string | undefined | null,
+  desde?: number
+) => {
   const [inmuebles, setInmuebles] = useState<InmuebleUsuario>();
   const [cargando, setCargando] = useState(true);
+  const [total, setTotal] = useState(0);
   const { orden } = useContext(InmuebleContext);
 
   const obtenerInmueblesDeUsuario = async () => {
     const data = await fetch(
-      `${baseURL}/inmuebles/usuario/${uid}?orden=${orden}`
+      `${baseURL}/inmuebles/usuario/${uid}?orden=${orden}&desde=${desde}&limite=20`
     );
     const resp = await data.json();
     setInmuebles(resp);
     setCargando(false);
+    // console.log(inmuebles);
+    setTotal(resp.total);
   };
 
   useEffect(() => {
     obtenerInmueblesDeUsuario();
-  }, [inmuebles?.inmueblesUsuario]);
+  }, [inmuebles?.inmueblesUsuario, orden]);
 
-  return { inmuebles, cargando };
+  return { inmuebles, cargando, total };
 };
 
 export const useHistorial = (uid: string | undefined | null, desde: number) => {
