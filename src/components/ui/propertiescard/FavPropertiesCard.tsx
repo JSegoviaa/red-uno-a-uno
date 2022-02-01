@@ -36,9 +36,8 @@ const FavPropertiesCard = (props: Props) => {
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
   const data: CrearChat = {
-    miembros: [auth.uid, propietario],
     remitente: auth.uid,
-    para: propietario,
+    destinatario: propietario,
   };
 
   return (
@@ -85,7 +84,7 @@ const FavPropertiesCard = (props: Props) => {
           aria-label="Basic mixed styles example"
         >
           <button
-            onClick={() => iniciarChat(data)}
+            onClick={async () => await iniciarChat(data)}
             type="button"
             className={`${styles.customBtn2} btn`}
           />

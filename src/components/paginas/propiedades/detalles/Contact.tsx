@@ -17,9 +17,8 @@ const Contact = ({ inmuebles }: Props) => {
   const { iniciarChat } = useContext(ChatContext);
 
   const data: CrearChat = {
-    miembros: [auth.uid, inmuebles.inmueble.usuario._id],
     remitente: auth.uid,
-    para: inmuebles.inmueble.usuario._id,
+    destinatario: inmuebles.inmueble.usuario._id,
   };
 
   return (
@@ -57,7 +56,10 @@ const Contact = ({ inmuebles }: Props) => {
               Inicia una conversación con el asesor <br /> de este inmueble
             </div>
             <div className="text-center">
-              <Button titulo="iniciar Chat" onClick={() => iniciarChat(data)} />
+              <Button
+                titulo="iniciar Chat"
+                onClick={async () => await iniciarChat(data)}
+              />
             </div>
           </div>
         </div>

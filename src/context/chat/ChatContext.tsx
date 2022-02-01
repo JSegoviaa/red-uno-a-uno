@@ -8,12 +8,12 @@ import {
   useRef,
   useState,
 } from "react";
+import { crearChat } from "../../helpers/fetch";
 import { ActionType, chatReducer } from "./chatReducer";
 
 export interface CrearChat {
-  miembros: (string | null | undefined)[];
   remitente: string | null | undefined;
-  para: string;
+  destinatario: string;
 }
 
 interface ContextProps {
@@ -24,7 +24,7 @@ interface ContextProps {
   mensajePara: string;
   setMensajePara: any;
   scrollToBotom: MutableRefObject<HTMLDivElement | null>;
-  iniciarChat: (daya: CrearChat) => Promise<void>;
+  iniciarChat: (data: CrearChat) => Promise<void>;
 }
 
 export const initialState: any = {
@@ -46,7 +46,7 @@ export const ChatProvider: FC = ({ children }) => {
   const scrollToBotom = useRef<HTMLDivElement | null>(null);
 
   const iniciarChat = async (data: CrearChat) => {
-    console.log(data);
+    await crearChat("chats", data);
   };
 
   return (

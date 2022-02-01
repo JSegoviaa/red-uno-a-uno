@@ -1,7 +1,8 @@
+import { CrearChat } from "../context/chat/ChatContext";
 import { ActualizarInmueble } from "../context/inmuebles/InmuebleContext";
 import { development, production } from "../credentials/credentials";
 import { RegisterData, Resp, SubirFoto } from "../interfaces/AuthInterface";
-import { MensajesResp } from "../interfaces/ChatInterface";
+import { CrearChatResponse, MensajesResp } from "../interfaces/ChatInterface";
 import { Contact, ContactResp } from "../interfaces/ContactInterface";
 import {
   BorrarInmuebleResp,
@@ -253,6 +254,22 @@ export const obtenerMensajes = async (endpoint: string): Promise<any> => {
 
   const resp = await fetch(url, {
     headers: { "x-token": token },
+  });
+
+  return await resp.json();
+};
+
+export const crearChat = async (
+  endpoint: string,
+  data: CrearChat
+): Promise<CrearChatResponse> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
   });
 
   return await resp.json();
