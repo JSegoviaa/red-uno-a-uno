@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect, useRef } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { Form } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { ChatContext } from "../../../../context/chat/ChatContext";
@@ -21,6 +21,7 @@ const VentanaChat = () => {
   } = useContext(ChatContext);
   const { user } = useUserInfo(chatState.chatActivo || mensajePara);
   const scrollTo = useRef<HTMLDivElement | null>(null);
+  const [limite, setLimite] = useState(0);
   const { formulario, handleChange, setFormulario } = useForm({ mensaje: "" });
   const { mensaje } = formulario;
 
@@ -48,6 +49,10 @@ const VentanaChat = () => {
   useEffect(() => {
     scrollTo.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatState.mensajes]);
+
+  const cargarMasMensajes = () => {
+    console.log("cargar más mensajes");
+  };
 
   return (
     <section>
@@ -94,6 +99,14 @@ const VentanaChat = () => {
                 <div className="col-12">
                   <div className={styles.chatBox}>
                     <div className="row d-flex justify-content-center">
+                      <div className="text-center">
+                        <i
+                          onClick={cargarMasMensajes}
+                          className="bi bi-arrow-bar-up  pointer"
+                          style={{ fontSize: 25 }}
+                        />
+                      </div>
+
                       <>
                         {chatState.mensajes.map((mensaje: any) => (
                           <div key={mensaje._id} ref={scrollToBotom}>

@@ -31,12 +31,14 @@
   padding-right: 10px;
 }
 
-.dashIcon{
+.dashIcon {
   color: rgb(196, 196, 196);
   font-size: 1.2rem;
-  
 }
 
+.hora {
+  font-size: 9px;
+}
 
 .chatBox {
   box-shadow: 0px 0px 17px 3px rgba(0, 0, 0, 0.29);
@@ -62,12 +64,12 @@
   border: 1px solid #7149bc;
   background: none;
 }
-.iconSend{
+.iconSend {
   border: none;
   background: none;
 }
 
-.messageBox{
+.messageBox {
   border-radius: 20px;
 }
 .messageBox:focus {
@@ -103,9 +105,8 @@
   float: right;
 }
 
-
 @media (max-width: 500px) {
-    .VentanaChat{
+  .VentanaChat {
     width: 350px;
     right: 5px;
     bottom: 5px;
@@ -113,7 +114,7 @@
 }
 
 @media (max-width: 360px) {
-  .VentanaChat{
+  .VentanaChat {
     width: 320px;
     right: 5px;
     bottom: 5px;
@@ -121,10 +122,9 @@
 }
 
 @media (max-width: 330px) {
-  .VentanaChat{
+  .VentanaChat {
     width: 320px;
     right: 0px;
     bottom: 0px;
   }
 }
-
