@@ -23,6 +23,33 @@ export const useFavoritos = (uid: string | null | undefined) => {
   return { favoritos, cargando };
 };
 
+export const useMisFavoritos = (
+  uid: string | null | undefined,
+  desde?: number
+) => {
+  const [misFavoritos, setMisFavoritos] = useState<Favorito[]>([]);
+  const [cargando, setCargando] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  const obtenerFavoritos = async () => {
+    const resp = await fetch(
+      `${production}/favoritos/usuario/${uid}?desde=${desde}&limite=20`
+    );
+    const data = await resp.json();
+
+    setMisFavoritos(data.favoritosUsuario);
+
+    setTotal(data.total);
+    setCargando(false);
+  };
+
+  useEffect(() => {
+    obtenerFavoritos();
+  }, [uid, desde]);
+
+  return { misFavoritos, cargando, total };
+};
+
 // export const useFavoritosSol = (uid: string | null | undefined) => {
 //   const { solicitud } = useContext(InmuebleContext);
 //   const [favSol, setFavSol] = useState<Favorito[]>([]);

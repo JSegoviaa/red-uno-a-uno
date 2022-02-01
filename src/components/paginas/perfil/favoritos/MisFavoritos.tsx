@@ -1,32 +1,30 @@
 import { useContext, useState } from "react";
 import { Container, Pagination, Row } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
-import { useFavoritos } from "../../../../hooks/useFavoritos";
+import { useMisFavoritos } from "../../../../hooks/useFavoritos";
 import Loading from "../../../ui/loading/Loading";
 import FavPropertiesCard from "../../../ui/propertiescard/FavPropertiesCard";
 import styles from "./FiltrosFavs.module.css";
 
 const MiListaFavoritos = () => {
   const { auth } = useContext(AuthContext);
-  const { favoritos, cargando } = useFavoritos(auth.uid);
   const [desde, setDesde] = useState(0);
+  const { misFavoritos, cargando, total } = useMisFavoritos(auth.uid, desde);
 
   const handlePrevPage = () => {
-    // if (desde === 0) {
-    //   return;
-    // } else {
-    //   setDesde(desde - 15);
-    // }
-    console.log("Página anterior");
+    if (desde === 0) {
+      return;
+    } else {
+      setDesde(desde - 20);
+    }
   };
 
   const handleNextPage = () => {
-    // if (desde < 15) {
-    //   setDesde(desde + 15);
-    // } else {
-    //   return;
-    // }
-    console.log("Página siguiente");
+    if (desde < total - 20) {
+      setDesde(desde + 20);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -36,13 +34,13 @@ const MiListaFavoritos = () => {
           <Loading />
         ) : (
           <>
-            {favoritos.length === 0 ? (
+            {misFavoritos.length === 0 ? (
               <div className={`${styles.titulo} text-center`}>
                 Aún no has agregado favoritos
               </div>
             ) : (
               <>
-                {favoritos.map((favorito) => (
+                {misFavoritos.map((favorito) => (
                   <FavPropertiesCard
                     key={favorito._id}
                     id={favorito._id}
