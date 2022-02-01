@@ -1,19 +1,6 @@
 import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import ListaPropiedades from "../../components/paginas/propiedades/ListaPropiedades/ListaPropiedades";
-import SEO from "../../components/seo/SEO";
-import Titulo from "../../components/ui/titulo/Titulo";
 import { production } from "../../credentials/credentials";
-import { Inmueble } from "../../interfaces/InmueblesInterface";
-
-interface Resp {
-  data: {
-    ok: boolean;
-    total: number;
-    inmuebles: Inmueble[];
-  };
-}
+import NotFound from "../404";
 
 export const getStaticProps: GetStaticProps = async () => {
   const resp = await fetch(`${production}/inmuebles/`);
@@ -22,21 +9,8 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { data }, revalidate: 15 };
 };
 
-const Index = ({ data }: Resp) => {
-  const { asPath, push } = useRouter();
-
-  useEffect(() => {
-    push("/");
-  }, []);
-
-  return (
-    <>
-      <SEO titulo="Propiedades" url={asPath} />
-      <Titulo titulo="Resultados de busqueda" />
-      <br />
-      <ListaPropiedades data={data} />
-    </>
-  );
+const Index = () => {
+  return <NotFound />;
 };
 
 export default Index;

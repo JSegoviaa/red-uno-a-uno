@@ -24,9 +24,8 @@ const VentanaChat = () => {
   const { formulario, handleChange, setFormulario } = useForm({ mensaje: "" });
   const { mensaje } = formulario;
 
-  const ocultarVentana = () => {
+  const ocultarVentana = () =>
     dispatch({ type: "DesactivarChat", payload: null });
-  };
 
   const minimizarVentana = () => setMinimizarChat(!minimizarChat);
 

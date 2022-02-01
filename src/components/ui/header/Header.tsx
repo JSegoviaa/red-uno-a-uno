@@ -1,17 +1,17 @@
-import { useContext, useRef, useState } from 'react';
-import Link from 'next/link';
-import { Container, Nav, Navbar, Overlay } from 'react-bootstrap';
-import Button from '../button/Button';
-import styles from './Header.module.css';
-import LoginModal from '../authmodal/LoginModal';
-import RegisterModal from '../authmodal/AuthModal';
-import { AuthContext } from '../../../context/auth/AuthContext';
-import MisChats from '../../paginas/perfil/chats/MisChats';
-import { ChatContext } from '../../../context/chat/ChatContext';
+import { useContext, useRef, useState } from "react";
+import Link from "next/link";
+import { Container, Nav, Navbar, Overlay } from "react-bootstrap";
+import Button from "../button/Button";
+import styles from "./Header.module.css";
+import LoginModal from "../authmodal/LoginModal";
+import RegisterModal from "../authmodal/AuthModal";
+import { AuthContext } from "../../../context/auth/AuthContext";
+import MisChats from "../../paginas/perfil/chats/MisChats";
+import { ChatContext } from "../../../context/chat/ChatContext";
 
 const Header = () => {
   const { auth, logOut } = useContext(AuthContext);
-  const { setConversacionActual } = useContext(ChatContext);
+  const { chatState } = useContext(ChatContext);
   const [show, setShow] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,7 +27,7 @@ const Header = () => {
   const cerrarSesion = () => {
     logOut();
     setShow1(false);
-    setConversacionActual(null);
+    // chatState.chatActivo = null;
   };
 
   const [showCanvas, setShowCanvas] = useState(false);
@@ -76,7 +76,7 @@ const Header = () => {
                 <img
                   src={auth.img}
                   alt="Mi perfil"
-                  style={{ width: '100%', height: '100%', borderRadius: '50%' }}
+                  style={{ width: "100%", height: "100%", borderRadius: "50%" }}
                 />
               </div>
               <Overlay target={target.current} show={show1} placement="right">

@@ -13,12 +13,9 @@ interface Props {
 }
 
 const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
-  const { dispatch, setConversacionActual, scrollToBotom } =
-    useContext(ChatContext);
+  const { dispatch, scrollToBotom } = useContext(ChatContext);
   const { auth } = useContext(AuthContext);
   const [contacto, setContacto] = useState<Usuario>();
-
-  setConversacionActual(conversacion);
 
   useEffect(() => {
     const contacto = conversacion.miembros.find(

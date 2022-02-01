@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { enviarNuevoMensaje } from "../../helpers/fetch";
-import { Conversacion, MensajesResp } from "../../interfaces/ChatInterface";
+import { MensajesResp } from "../../interfaces/ChatInterface";
 import { ActionType, chatReducer } from "./chatReducer";
 
 interface NuevoMensaje {
@@ -21,8 +21,6 @@ interface NuevoMensaje {
 interface ContextProps {
   minimizarChat: boolean;
   setMinimizarChat: Dispatch<SetStateAction<boolean>>;
-  conversacionActual: Conversacion | null;
-  setConversacionActual: any;
   enviarMensaje: (data: NuevoMensaje) => Promise<MensajesResp>;
   chatState: { uid: string; chatActivo: null; mensajes: never[] };
   dispatch: Dispatch<ActionType>;
@@ -47,7 +45,6 @@ export const ChatProvider: FC = ({ children }) => {
   );
   const [mensajePara, setMensajePara] = useState("");
   const [minimizarChat, setMinimizarChat] = useState(true);
-  const [conversacionActual, setConversacionActual] = useState(null);
   const scrollToBotom = useRef<HTMLDivElement | null>(null);
 
   const enviarMensaje = async (data: NuevoMensaje) => {
@@ -60,8 +57,6 @@ export const ChatProvider: FC = ({ children }) => {
       value={{
         minimizarChat,
         setMinimizarChat,
-        conversacionActual,
-        setConversacionActual,
         enviarMensaje,
         chatState,
         dispatch,

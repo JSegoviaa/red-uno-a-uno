@@ -23,7 +23,7 @@ const containerStyle = {
 
 const Ubicacion = ({ inmuebles }: Props) => {
   const { auth } = useContext(AuthContext);
-  const { favoritos } = useFavoritos(auth.uid);
+  const { favoritos } = useFavoritos(auth.uid || "61e99ddc0d3bd9163e4a4b2d");
   let existeFavorito;
 
   const agregarFavorito = async (inmuebleId: string) => {
