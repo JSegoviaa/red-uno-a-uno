@@ -91,12 +91,14 @@ const Mihistorial = () => {
                 )}
               </>
             )}
-            <div className="d-flex justify-content-center">
-              <Pagination>
-                <Pagination.Prev onClick={handlePrevPage} />
-                <Pagination.Next onClick={handleNextPage} />
-              </Pagination>
-            </div>
+            {historial && historial.total > 15 ? (
+              <div className="d-flex justify-content-center">
+                <Pagination>
+                  <Pagination.Prev onClick={handlePrevPage} />
+                  <Pagination.Next onClick={handleNextPage} />
+                </Pagination>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

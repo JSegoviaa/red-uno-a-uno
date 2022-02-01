@@ -54,12 +54,14 @@ const MiListaFavoritos = () => {
                     solicitud={favorito.solicitud}
                   />
                 ))}
-                <div className="d-flex justify-content-center">
-                  <Pagination>
-                    <Pagination.Prev onClick={handlePrevPage} />
-                    <Pagination.Next onClick={handleNextPage} />
-                  </Pagination>
-                </div>
+                {total > 20 ? (
+                  <div className="d-flex justify-content-center">
+                    <Pagination>
+                      <Pagination.Prev onClick={handlePrevPage} />
+                      <Pagination.Next onClick={handleNextPage} />
+                    </Pagination>
+                  </div>
+                ) : null}
               </>
             )}
           </>
