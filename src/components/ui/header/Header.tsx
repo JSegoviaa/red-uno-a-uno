@@ -27,7 +27,7 @@ const Header = () => {
   const cerrarSesion = () => {
     logOut();
     setShow1(false);
-    // chatState.chatActivo = null;
+    chatState.chatActivo = null;
   };
 
   const [showCanvas, setShowCanvas] = useState(false);
