@@ -46,6 +46,8 @@ export const ChatProvider: FC = ({ children }) => {
   const scrollToBotom = useRef<HTMLDivElement | null>(null);
 
   const iniciarChat = async (data: CrearChat) => {
+    if (data.destinatario === data.remitente) return;
+
     await crearChat("chats", data);
     dispatch({ type: "ActivarChat", payload: data.destinatario });
 

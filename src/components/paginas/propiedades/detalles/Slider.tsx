@@ -2,17 +2,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Inmueble.module.css";
 import "swiper/css";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
-
-// Import Swiper styles
-import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-// import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from "swiper";
-import { url } from "inspector";
 
-// install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
 interface Props {
@@ -40,17 +33,38 @@ const Slider = ({ inmuebles }: Props) => {
             "No hay imágenes para mostrar"
           ) : (
             <>
-              {inmuebles.inmueble.imgs.map((image) => (
-                <SwiperSlide key={image}>
-                  <div className={styles.contendorslide} style={{backgroundImage: `url(${image})` ,}}>
-                  </div>
-                  <img
-                      className={`${styles.slideImg} pointer`}
-                      src={image}
-                      alt={inmuebles.inmueble.titulo}
+              {inmuebles.inmueble.imgs.map((image) => {
+                const sepracion = image.split(".");
+
+                const extension = sepracion[sepracion.length - 1];
+                const extensionesValidas = ["mp4"];
+                return (
+                  <SwiperSlide key={image}>
+                    <div
+                      className={styles.contendorslide}
+                      style={{ backgroundImage: `url(${image})` }}
                     />
-                </SwiperSlide>
-              ))}
+
+                    {extensionesValidas.includes(extension) ? (
+                      <iframe
+                        src={image}
+                        scrolling="no"
+                        style={{
+                          height: 450,
+                          width: "100%",
+                          overflow: "hidden",
+                        }}
+                      />
+                    ) : (
+                      <img
+                        className={`${styles.slideImg} pointer`}
+                        src={image}
+                        alt={inmuebles.inmueble.titulo}
+                      />
+                    )}
+                  </SwiperSlide>
+                );
+              })}
             </>
           )}
         </Swiper>
