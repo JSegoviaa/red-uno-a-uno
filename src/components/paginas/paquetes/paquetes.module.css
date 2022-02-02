@@ -8,8 +8,7 @@
   position: relative;
 }
 .paquetesCard:hover {
-  box-shadow: 0px 6px 17px 2px 
-    rgba(134,89,219,0.53);
+  box-shadow: 0px 6px 17px 2px rgba(134, 89, 219, 0.53);
   transform: translateY(-10px);
   transition: 200ms;
 }
@@ -133,4 +132,21 @@
   .section2 {
     margin-top: 170px;
   }
+}
+
+.precio {
+  color: #13a407;
+  font-weight: 500;
+}
+
+.paqueteInvalido {
+  color: #ef1414;
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.precioAPagar {
+  color: #13a407;
+  font-size: 26px;
+  font-weight: 500;
 }
