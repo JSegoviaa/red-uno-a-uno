@@ -4,6 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
+import styles from './Inmueble.module.css'
 
 SwiperCore.use([Pagination, Navigation]);
 
@@ -37,18 +38,15 @@ const SliderInmuebles = ({ inmuebles }: Props) => {
             return (
               <SwiperSlide key={image}>
                 {extensionesValidas.includes(extension) ? (
-                  <iframe
+                  <iframe className={styles.video}
                     src={image}
                     scrolling="no"
-                    style={{
-                      height: 450,
-                      width: "100%",
-                      overflow: "hidden",
-                    }}
                   />
                 ) : (
                   <div className="text-center">
-                    <img src={image} alt={inmuebles.inmueble.titulo} />
+                    <div className={styles.contenedorimg}>
+                      <img className={styles.imagenes} src={image} alt={inmuebles.inmueble.titulo} />
+                    </div>
                   </div>
                 )}
               </SwiperSlide>

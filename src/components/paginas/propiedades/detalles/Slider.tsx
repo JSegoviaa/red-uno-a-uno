@@ -80,8 +80,8 @@ const Slider = ({ inmuebles }: Props) => {
         )}
       </Swiper>
 
-      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
+      <Modal contentClassName={styles.modalBackG} show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+        <Modal.Header closeButton closeVariant="white" className={`${styles.modalHeader} close-white`}>
           <Modal.Title>{inmuebles.inmueble.titulo}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
