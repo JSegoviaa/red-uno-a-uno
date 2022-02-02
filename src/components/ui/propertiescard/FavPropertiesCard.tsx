@@ -75,7 +75,7 @@ const FavPropertiesCard = (props: Props) => {
             />
           </div>
           <div className={styles.tituloContainer}>
-            <div className={`${styles.proContent} my-3`}>{titulo}</div>
+            <div className={`${styles.proContent} my-2`}>{titulo}</div>
           </div>
         </div>
         <div
