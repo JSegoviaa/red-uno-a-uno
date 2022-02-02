@@ -74,13 +74,22 @@ const Footer = () => {
                 <p className={styles.footerPhone}>442 543 9190</p>
               </div>
 
-              <a className="me-2" href="https://www.facebook.com">
+              <a
+                className="me-2"
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   src="/images/icons/facebook.png"
                   alt="Síguenos en facebook"
                 />
               </a>
-              <a href="https://wa.link/8udscw">
+              <a
+                href="https://wa.link/8udscw"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   src="/images/icons/whatsapp.png"
                   alt="Comunícate por whatsapp"
