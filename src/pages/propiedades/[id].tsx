@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
+import dynamic from "next/dynamic";
 import Detalles from "../../components/paginas/propiedades/detalles/Detalles";
 import Slider from "../../components/paginas/propiedades/detalles/Slider";
-import Ubicacion from "../../components/paginas/propiedades/detalles/Ubicación";
 import Contact from "../../components/paginas/propiedades/detalles/Contact";
 import SEO from "../../components/seo/SEO";
 import { AuthContext } from "../../context/auth/AuthContext";
@@ -37,6 +37,11 @@ interface Props {
   };
 }
 
+const Ubicacion: any = dynamic(
+  () => import("../../components/paginas/propiedades/detalles/Ubicación"),
+  { ssr: false }
+);
+
 const Propiedad = ({ inmuebles }: Props) => {
   const { auth } = useContext(AuthContext);
 
@@ -53,7 +58,7 @@ const Propiedad = ({ inmuebles }: Props) => {
         img={inmuebles.inmueble.imgs[0] ? inmuebles.inmueble.imgs[0] : ""}
       />
       <Slider inmuebles={inmuebles} />
-      <Galeria/>
+      <Galeria />
       <Detalles inmuebles={inmuebles} />
       <Ubicacion inmuebles={inmuebles} />
       {auth.uid ? <Contact inmuebles={inmuebles} /> : null}

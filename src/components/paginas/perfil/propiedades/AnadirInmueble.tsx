@@ -1,10 +1,11 @@
 import { FormEvent, useContext, useState } from "react";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import { Form } from "react-bootstrap";
 import Titulo from "../../../ui/titulo/Titulo";
 import AnadirImagenes from "./AnadirImagenes";
 import Formulario from "./Formulario";
-import FormStepOne from "./FormStepOne";
+// import FormStepOne from "./FormStepOne";
 import { useForm } from "../../../../hooks/useForm";
 import { MapContext } from "../../../../context/map/MapContext";
 import Button from "../../../ui/button/Button";
@@ -13,6 +14,8 @@ import {
   InmuebleContext,
   InmuebleData,
 } from "../../../../context/inmuebles/InmuebleContext";
+
+const FormStepOne: any = dynamic(() => import("./FormStepOne"), { ssr: false });
 
 const AnadirInmueble = () => {
   const router = useRouter();

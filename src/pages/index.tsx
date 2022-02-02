@@ -1,21 +1,21 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import Info from "../components/paginas/inicio/Info";
 import ListaProp from "../components/paginas/inicio/ListaProp";
-import MapaBuscador from "../components/paginas/inicio/MapaBuscador";
 import SEO from "../components/seo/SEO";
 
-
+const MapaBuscador: any = dynamic(
+  () => import("../components/paginas/inicio/MapaBuscador"),
+  { ssr: false }
+);
 
 const Home: NextPage = () => {
   const { asPath } = useRouter();
   return (
     <>
       <SEO titulo="Inicio" url={asPath} />
-      <ListaProp/>
-      
-
-
+      <ListaProp />
       <MapaBuscador />
       <Info />
     </>
