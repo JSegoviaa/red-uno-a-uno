@@ -28,8 +28,10 @@ const PaquetesCards = () => {
               precio={3199}
               descripcion="Precio especial al contratar de 3 a 5 usuarios."
               options={basico}
+              usuario={3}
             />
             <PaqueteMultiple
+              usuario={6}
               titulo="Intermedio"
               precio={2799}
               descripcion="Precio especial al contratar de 6 a 10 usuarios."

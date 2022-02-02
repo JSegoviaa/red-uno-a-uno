@@ -11,7 +11,6 @@ const Individual = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Individual");
   };
 
   return (

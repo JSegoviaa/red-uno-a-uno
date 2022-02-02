@@ -11,19 +11,16 @@ interface Props {
   titulo: string;
   precio: number;
   descripcion: string;
-  options?: Options[];
+  options?: any;
   avanzado?: boolean;
-}
-
-interface Options {
-  value: number;
-  label: string;
+  usuario?: number;
 }
 
 const PaqueteMultiple = (props: Props) => {
-  const { titulo, precio, descripcion, options, avanzado } = props;
+  const { titulo, precio, descripcion, options, avanzado, usuario } = props;
   const [show, setShow] = useState(false);
-  const [usuariosSeleccionados, setUsuariosSeleccionados] = useState(0);
+  const [usuariosSeleccionados, setUsuariosSeleccionados] =
+    useState<any>(usuario);
   const { formulario, handleChange } = useForm({ usuarios: 11 });
   const { usuarios } = formulario;
 
@@ -31,7 +28,6 @@ const PaqueteMultiple = (props: Props) => {
   const handleShow = () => setShow(true);
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(titulo);
   };
 
   return (
@@ -87,22 +83,41 @@ const PaqueteMultiple = (props: Props) => {
                       Paquete válido para 11 usuarios en adelante
                     </div>
                   ) : (
-                    <div className={`${styles.precioAPagar} text-center`}>
-                      {formatPrice(precio * usuarios)}
-                    </div>
+                    <>
+                      <div className={`${styles.precioAPagar} text-center`}>
+                        {formatPrice(precio * usuarios)}
+                      </div>
+                      <div className="text-center">
+                        <Button titulo="Siguiente" />
+                      </div>
+                    </>
                   )}
                 </>
               ) : (
                 <>
                   <div className="col-6">Número de usuarios</div>
                   <div className="col-6">
-                    <Select options={options} />
+                    <Select
+                      defaultValue={usuariosSeleccionados}
+                      onChange={setUsuariosSeleccionados}
+                      options={options}
+                    />
+                  </div>
+                  <div className="text-center">
+                    {usuariosSeleccionados.value ? (
+                      <div className={`${styles.precioAPagar} text-center`}>
+                        {formatPrice(precio * usuariosSeleccionados.value)}
+                      </div>
+                    ) : null}
+
+                    {!usuariosSeleccionados.value ? (
+                      <Button titulo="Siguiente" btn="Disabled" />
+                    ) : (
+                      <Button titulo="Siguiente" />
+                    )}
                   </div>
                 </>
               )}
-            </div>
-            <div className="text-center">
-              <Button titulo="Siguiente" />
             </div>
           </Form>
         </Modal.Body>
