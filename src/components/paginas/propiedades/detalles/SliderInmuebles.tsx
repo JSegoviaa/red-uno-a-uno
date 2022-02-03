@@ -38,10 +38,14 @@ const SliderInmuebles = ({ inmuebles }: Props) => {
             return (
               <SwiperSlide key={image}>
                 {extensionesValidas.includes(extension) ? (
-                  <iframe className={styles.video}
+                  <div className={styles.boxVideo}>
+                    <video className={styles.video}
                     src={image}
-                    scrolling="no"
+                    controls
+                    controlsList="nodownload"
+                    
                   />
+                  </div>
                 ) : (
                   <div className="text-center">
                     <div className={styles.contenedorimg}>
