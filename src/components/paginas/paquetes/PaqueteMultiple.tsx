@@ -1,6 +1,7 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import Select from "react-select";
+import { AuthContext } from "../../../context/auth/AuthContext";
 import { formatPrice } from "../../../helpers/formatPrice";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../ui/button/Button";
@@ -18,6 +19,7 @@ interface Props {
 
 const PaqueteMultiple = (props: Props) => {
   const { titulo, precio, descripcion, options, avanzado, usuario } = props;
+  const { auth, abrirLogin } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [usuariosSeleccionados, setUsuariosSeleccionados] =
     useState<any>(usuario);
@@ -48,13 +50,25 @@ const PaqueteMultiple = (props: Props) => {
           <li className={styles.listItems}>{descripcion}</li>
         </ul>
         <div className={`${styles.ajusteBtn} text-center`}>
-          <button
-            onClick={handleShow}
-            type="button"
-            className={styles.btnContratar}
-          >
-            CONTRATAR
-          </button>
+          <>
+            {auth.uid ? (
+              <button
+                onClick={handleShow}
+                type="button"
+                className={styles.btnContratar}
+              >
+                CONTRATAR
+              </button>
+            ) : (
+              <button
+                onClick={abrirLogin}
+                type="button"
+                className={styles.btnContratar}
+              >
+                CONTRATAR
+              </button>
+            )}
+          </>
         </div>
       </div>
       <Modal show={show} onHide={handleClose}>

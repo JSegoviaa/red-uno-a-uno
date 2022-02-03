@@ -1,10 +1,12 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Form, Modal } from "react-bootstrap";
+import { AuthContext } from "../../../context/auth/AuthContext";
 import Button from "../../ui/button/Button";
 import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
 
 const Individual = () => {
+  const { auth, abrirLogin } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -57,13 +59,23 @@ const Individual = () => {
           </li>
         </ul>
         <div className={`${styles.ajusteBtn} text-center`}>
-          <button
-            onClick={handleShow}
-            type="button"
-            className={styles.btnContratar}
-          >
-            CONTRATAR
-          </button>
+          {auth.uid ? (
+            <button
+              onClick={handleShow}
+              type="button"
+              className={styles.btnContratar}
+            >
+              CONTRATAR
+            </button>
+          ) : (
+            <button
+              onClick={abrirLogin}
+              type="button"
+              className={styles.btnContratar}
+            >
+              CONTRATAR
+            </button>
+          )}
         </div>
       </div>
       <Modal show={show} onHide={handleClose}>
