@@ -9,14 +9,10 @@ import Modaltitle from "../modaltitle/Modaltitle";
 import styles from "./AuthModal.module.css";
 import "react-toastify/dist/ReactToastify.css";
 
-interface Props {
-  show: boolean;
-  handleClose: () => void;
-}
-
-const LoginModal = ({ show, handleClose }: Props) => {
+const LoginModal = () => {
   const router = useRouter();
-  const { login } = useContext(AuthContext);
+  const { login, mostrarLogin, cerrarLogin, abrirRegistro } =
+    useContext(AuthContext);
   const { formulario, handleChange, setFormulario } = useForm({
     correo: "",
     password: "",
@@ -55,14 +51,19 @@ const LoginModal = ({ show, handleClose }: Props) => {
 
     if (resp.ok) {
       router.push("/perfil");
-      handleClose();
+      cerrarLogin();
     }
+  };
+
+  const handleModals = () => {
+    cerrarLogin();
+    abrirRegistro();
   };
 
   return (
     <Modal
-      show={show}
-      onHide={handleClose}
+      show={mostrarLogin}
+      onHide={cerrarLogin}
       contentClassName={styles.modalContent}
     >
       <Modal.Header
@@ -148,6 +149,11 @@ const LoginModal = ({ show, handleClose }: Props) => {
               ) : (
                 <Button titulo="Iniciar sesión" btn="Disabled" />
               )}
+            </div>
+            <div className="text-center" style={{ color: "#3D87F6" }}>
+              <span onClick={handleModals} className="pointer">
+                ¿Aún no tienes cuenta? ¡Regístrate!
+              </span>
             </div>
           </div>
         </Form>

@@ -9,15 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { useRouter } from "next/router";
 
-interface Props {
-  show: boolean;
-  handleClose: () => void;
-}
-
-const RegisterModal = ({ show, handleClose }: Props) => {
+const RegisterModal = () => {
   const router = useRouter();
 
-  const { register } = useContext(AuthContext);
+  const { register, mostrarRegistro, cerrarRegistro, abrirLogin } =
+    useContext(AuthContext);
   const { formulario, handleChange } = useForm({
     nombre: "",
     apellido: "",
@@ -49,16 +45,21 @@ const RegisterModal = ({ show, handleClose }: Props) => {
 
       if (resp.ok) {
         router.push("/perfil");
-        handleClose();
+        cerrarRegistro();
       }
     }
+  };
+
+  const handleModals = () => {
+    cerrarRegistro();
+    abrirLogin();
   };
 
   return (
     <>
       <Modal
-        show={show}
-        onHide={handleClose}
+        show={mostrarRegistro}
+        onHide={cerrarRegistro}
         contentClassName={styles.modalContent}
       >
         <Modal.Header
@@ -146,6 +147,15 @@ const RegisterModal = ({ show, handleClose }: Props) => {
                 ) : (
                   <Button titulo="Registrarse" btn="Disabled" />
                 )}
+              </div>
+              <div className="text-center">
+                <span
+                  onClick={handleModals}
+                  className="pointer"
+                  style={{ color: "#3D87F6" }}
+                >
+                  ¿Ya tienes cuenta? ¡Inicia sesión!
+                </span>
               </div>
             </div>
           </Form>

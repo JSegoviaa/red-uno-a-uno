@@ -6,13 +6,16 @@ import RegisterModal from "../authmodal/AuthModal";
 import { AuthContext } from "../../../context/auth/AuthContext";
 
 const Footer = () => {
-  const { auth } = useContext(AuthContext);
+  const {
+    auth,
+    abrirRegistro,
+    cerrarRegistro,
+    mostrarRegistro,
+    setMostrarRegistro,
+  } = useContext(AuthContext);
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
 
   const goToHome = () => router.push("/");
-  const closeRegister = () => setIsOpen(false);
-  const openRegister = () => setIsOpen(true);
 
   return (
     <footer
@@ -53,7 +56,7 @@ const Footer = () => {
               </Link>
               {!auth.logged ? (
                 <p
-                  onClick={openRegister}
+                  onClick={abrirRegistro}
                   className={`${styles.footerLink} pointer`}
                 >
                   Registro
@@ -114,7 +117,7 @@ const Footer = () => {
         </Link>
         . Todos los derechos reservados.
       </div>
-      <RegisterModal show={isOpen} handleClose={closeRegister} />
+      <RegisterModal show={mostrarRegistro} handleClose={cerrarRegistro} />
     </footer>
   );
 };

@@ -10,23 +10,23 @@ import MisChats from "../../paginas/perfil/chats/MisChats";
 import { ChatContext } from "../../../context/chat/ChatContext";
 
 const Header = () => {
-  const { auth, logOut } = useContext(AuthContext);
+  const {
+    auth,
+    logOut,
+    abrirRegistro,
+    abrirLogin,
+    cerrarLogin,
+    cerrarRegistro,
+    mostrarLogin,
+    mostrarRegistro,
+  } = useContext(AuthContext);
   const { chatState } = useContext(ChatContext);
-  const [show, setShow] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const closeRegister = () => setIsOpen(false);
-  const openRegister = () => setIsOpen(true);
-
-  const [show1, setShow1] = useState(false);
+  const [mostrarMenu, setMostrarMenu] = useState(false);
   const target = useRef(null);
 
   const cerrarSesion = () => {
     logOut();
-    setShow1(false);
+    setMostrarMenu(false);
     chatState.chatActivo = null;
   };
 
@@ -51,13 +51,13 @@ const Header = () => {
           {!auth.logged ? (
             <Nav className="ms-auto my-2" navbarScroll>
               <div
-                onClick={openRegister}
+                onClick={abrirRegistro}
                 className={`${styles.navEnlace} pointer ms-3`}
               >
                 Regístrate
               </div>
 
-              <Button titulo="Inicia sesión" onClick={handleShow} />
+              <Button titulo="Inicia sesión" onClick={abrirLogin} />
             </Nav>
           ) : (
             <Nav className="ms-auto my-2" navbarScroll>
@@ -71,7 +71,7 @@ const Header = () => {
               <div
                 className={`${styles.navPerfil} pointer ms-3`}
                 ref={target}
-                onClick={() => setShow1(!show1)}
+                onClick={() => setMostrarMenu(!mostrarMenu)}
               >
                 <img
                   src={auth.img}
@@ -79,7 +79,11 @@ const Header = () => {
                   style={{ width: "100%", height: "100%", borderRadius: "50%" }}
                 />
               </div>
-              <Overlay target={target.current} show={show1} placement="right">
+              <Overlay
+                target={target.current}
+                show={mostrarMenu}
+                placement="right"
+              >
                 {({ placement, arrowProps, show: _show, popper, ...props }) => (
                   <div
                     className={styles.menu}
@@ -92,7 +96,7 @@ const Header = () => {
                       <div
                         className={`${styles.menuItem} pointer mx-3 my-2`}
                         onClick={() => {
-                          setShow1(false);
+                          setMostrarMenu(false);
                         }}
                       >
                         Mi Perfil
@@ -102,7 +106,7 @@ const Header = () => {
                       <div
                         className={`${styles.menuItem} pointer mx-3 my-2`}
                         onClick={() => {
-                          setShow1(false);
+                          setMostrarMenu(false);
                         }}
                       >
                         Mis Usuarios
@@ -112,7 +116,7 @@ const Header = () => {
                       <div
                         className={`${styles.menuItem} pointer mx-3 my-2`}
                         onClick={() => {
-                          setShow1(false);
+                          setMostrarMenu(false);
                         }}
                       >
                         Mis Paquetes
@@ -122,7 +126,7 @@ const Header = () => {
                       <div
                         className={`${styles.menuItem} pointer mx-3 my-2`}
                         onClick={() => {
-                          setShow1(false);
+                          setMostrarMenu(false);
                         }}
                       >
                         Mis Pagos
@@ -141,8 +145,8 @@ const Header = () => {
           )}
         </Navbar.Collapse>
       </Container>
-      <LoginModal show={show} handleClose={handleClose} />
-      <RegisterModal show={isOpen} handleClose={closeRegister} />
+      <LoginModal />
+      <RegisterModal />
       <MisChats showCanvas={showCanvas} handleCloseCanvas={handleCloseCanvas} />
     </Navbar>
   );

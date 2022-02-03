@@ -1,5 +1,12 @@
 import { useRouter } from "next/router";
-import { createContext, FC, useCallback, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useCallback,
+  useState,
+} from "react";
 import { toast } from "react-toastify";
 import {
   actualizarPerfilFetch,
@@ -26,6 +33,14 @@ interface ContextProps {
   verificaToken: () => void;
   actualizarPerfil: (data: any) => Promise<RespActualizar>;
   fotoPerfil: (data: any) => Promise<SubirFoto>;
+  mostrarLogin: boolean;
+  mostrarRegistro: boolean;
+  setMostrarLogin: Dispatch<SetStateAction<boolean>>;
+  setMostrarRegistro: Dispatch<SetStateAction<boolean>>;
+  abrirLogin: () => void;
+  cerrarLogin: () => void;
+  abrirRegistro: () => void;
+  cerrarRegistro: () => void;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -54,6 +69,12 @@ const initialState: Auth = {
 export const AuthProvider: FC = ({ children }) => {
   const [auth, setAuth] = useState(initialState);
   const router = useRouter();
+  const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [mostrarRegistro, setMostrarRegistro] = useState(false);
+  const abrirLogin = () => setMostrarLogin(true);
+  const cerrarLogin = () => setMostrarLogin(false);
+  const abrirRegistro = () => setMostrarRegistro(true);
+  const cerrarRegistro = () => setMostrarRegistro(false);
 
   const login = async (correo: string, password: string) => {
     const resp = await fetchSinToken(
@@ -330,6 +351,14 @@ export const AuthProvider: FC = ({ children }) => {
         verificaToken,
         actualizarPerfil,
         fotoPerfil,
+        mostrarLogin,
+        mostrarRegistro,
+        setMostrarLogin,
+        setMostrarRegistro,
+        abrirLogin,
+        cerrarLogin,
+        abrirRegistro,
+        cerrarRegistro,
       }}
     >
       {children}
