@@ -4,10 +4,11 @@ import dynamic from "next/dynamic";
 import Info from "../components/paginas/inicio/Info";
 import ListaProp from "../components/paginas/inicio/ListaProp";
 import SEO from "../components/seo/SEO";
+import Loading from "../components/ui/loading/Loading";
 
 const MapaBuscador: any = dynamic(
   () => import("../components/paginas/inicio/MapaBuscador"),
-  { ssr: false }
+  { loading: () => <Loading />, ssr: false }
 );
 
 const Home: NextPage = () => {
