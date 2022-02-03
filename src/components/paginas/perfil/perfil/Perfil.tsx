@@ -78,7 +78,11 @@ const Perfil = () => {
           <div className={styles.nombre}>
             {auth.nombre} {auth.apellido}
           </div>
-          <div className={styles.paquete}>Paquete básico</div>
+
+          {auth.paqueteAdquirido ? (
+            <div className={styles.paquete}>Paquete {auth.role}</div>
+          ) : null}
+
           <div className={styles.empresa}>{auth.nombreInmobiliaria}</div>
           <div className={styles.correo}>{auth.correo} </div>
           <div className={styles.telefono}>{auth.telefonoPersonal}</div>

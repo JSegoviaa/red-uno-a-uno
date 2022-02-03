@@ -10,6 +10,7 @@ import {
 import { toast } from "react-toastify";
 import {
   actualizarPerfilFetch,
+  actualizarRolUsuario,
   fetchConToken,
   fetchSinToken,
   subirFotoPerfil,
@@ -41,6 +42,7 @@ interface ContextProps {
   cerrarLogin: () => void;
   abrirRegistro: () => void;
   cerrarRegistro: () => void;
+  actualizarRol: (data: any) => Promise<RespActualizar>;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -64,6 +66,8 @@ const initialState: Auth = {
   linkedin: undefined,
   img: undefined,
   logo: undefined,
+  role: undefined,
+  paqueteAdquirido: undefined,
 };
 
 export const AuthProvider: FC = ({ children }) => {
@@ -104,6 +108,8 @@ export const AuthProvider: FC = ({ children }) => {
         linkedin: usuario.linkedin,
         img: usuario.img,
         logo: usuario.logo,
+        role: usuario.role,
+        paqueteAdquirido: usuario.paqueteAdquirido,
       });
     }
     return resp;
@@ -143,6 +149,8 @@ export const AuthProvider: FC = ({ children }) => {
         linkedin: auth.linkedin,
         img: usuario.img,
         logo: usuario.logo,
+        role: usuario.role,
+        paqueteAdquirido: usuario.paqueteAdquirido,
       });
     }
 
@@ -172,6 +180,8 @@ export const AuthProvider: FC = ({ children }) => {
         linkedin: undefined,
         img: undefined,
         logo: undefined,
+        role: undefined,
+        paqueteAdquirido: undefined,
       });
 
       return false;
@@ -201,6 +211,8 @@ export const AuthProvider: FC = ({ children }) => {
         linkedin: usuario.linkedin,
         img: usuario.img,
         logo: usuario.logo,
+        role: usuario.role,
+        paqueteAdquirido: usuario.paqueteAdquirido,
       });
       return true;
     } else {
@@ -223,6 +235,8 @@ export const AuthProvider: FC = ({ children }) => {
         linkedin: undefined,
         img: undefined,
         logo: undefined,
+        role: undefined,
+        paqueteAdquirido: undefined,
       });
 
       return false;
@@ -250,6 +264,8 @@ export const AuthProvider: FC = ({ children }) => {
       linkedin: undefined,
       img: undefined,
       logo: undefined,
+      role: undefined,
+      paqueteAdquirido: undefined,
     });
   };
 
@@ -280,6 +296,8 @@ export const AuthProvider: FC = ({ children }) => {
         linkedin: usuario.linkedin,
         img: usuario.img,
         logo: usuario.logo,
+        role: usuario.role,
+        paqueteAdquirido: usuario.paqueteAdquirido,
       });
 
       toast.success(resp.msg);
@@ -289,6 +307,37 @@ export const AuthProvider: FC = ({ children }) => {
     if (!resp.ok) {
       resp.errors.map((error) => {
         toast.error(error.msg);
+      });
+    }
+
+    return resp;
+  };
+
+  const actualizarRol = async (data: any) => {
+    const resp = await actualizarRolUsuario(`usuarios/rol/${auth.uid}`, data);
+    const { usuario } = resp;
+    if (resp.ok) {
+      setAuth({
+        uid: usuario.uid,
+        checking: false,
+        logged: true,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        correo: usuario.correo,
+        direccionFisica: usuario.direccionFisica,
+        facebookpage: usuario.facebookpage,
+        instagram: usuario.instagram,
+        nombreInmobiliaria: usuario.nombreInmobiliaria,
+        telefonoOficina: usuario.telefonoOficina,
+        telefonoPersonal: usuario.telefonoPersonal,
+        twitter: usuario.twitter,
+        youtube: usuario.youtube,
+        perfilEmpresarial: usuario.perfilEmpresarial,
+        linkedin: usuario.linkedin,
+        img: usuario.img,
+        logo: usuario.logo,
+        role: usuario.role,
+        paqueteAdquirido: usuario.paqueteAdquirido,
       });
     }
 
@@ -323,6 +372,8 @@ export const AuthProvider: FC = ({ children }) => {
         linkedin: usuario.linkedin,
         img: usuario.img,
         logo: usuario.logo,
+        role: usuario.role,
+        paqueteAdquirido: usuario.paqueteAdquirido,
       });
 
       toast.success(resp.msg);
@@ -359,6 +410,7 @@ export const AuthProvider: FC = ({ children }) => {
         cerrarLogin,
         abrirRegistro,
         cerrarRegistro,
+        actualizarRol,
       }}
     >
       {children}

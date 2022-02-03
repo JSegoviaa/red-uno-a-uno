@@ -17,12 +17,14 @@ export interface Auth {
   linkedin: string | number | string[] | undefined;
   img: string | undefined;
   logo: string | undefined;
+  role: string | undefined;
+  paqueteAdquirido: string | undefined;
 }
 
 export interface Resp {
   token: string;
   ok: boolean;
-  msg: "string";
+  msg: string;
   usuario: Auth;
   errors: Errors[];
 }

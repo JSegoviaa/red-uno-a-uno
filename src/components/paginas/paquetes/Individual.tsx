@@ -13,7 +13,7 @@ import { Pedido } from "../../../interfaces/PedidosInterface";
 import { toast } from "react-toastify";
 
 const Individual = () => {
-  const { auth, abrirLogin } = useContext(AuthContext);
+  const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
   const [precioSeleccionado, setPrecioSeleccionado] = useState("");
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -42,8 +42,9 @@ const Individual = () => {
 
     const resp = await anadirPaqueteInv("pedidos", body);
 
-    await actualizarRolUsuario(`usuarios/rol/${auth.uid}`, {
+    await actualizarRol({
       role: paquete?.nombre,
+      paqueteAdquirido: paquete?._id,
     });
 
     if (resp.ok) {

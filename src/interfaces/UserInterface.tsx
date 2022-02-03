@@ -81,4 +81,5 @@ export interface Usuario {
   twitter: string;
   youtube: string;
   uid: string;
+  paqueteAdquirido: string;
 }

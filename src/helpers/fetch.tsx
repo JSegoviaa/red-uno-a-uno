@@ -143,7 +143,10 @@ export const actualizarPerfilFetch = async (
   return await resp.json();
 };
 
-export const actualizarRolUsuario = async (endpoint: string, data: any) => {
+export const actualizarRolUsuario = async (
+  endpoint: string,
+  data: any
+): Promise<RespActualizar> => {
   const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
