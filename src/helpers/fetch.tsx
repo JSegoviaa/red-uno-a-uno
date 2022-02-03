@@ -14,6 +14,7 @@ import {
   InmueblesResponse,
   SubirImagenesInmueble,
 } from "../interfaces/InmueblesInterface";
+import { Pedido, PedidoIndividualResp } from "../interfaces/PedidosInterface";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
 const baseURL = production;
@@ -263,6 +264,22 @@ export const crearChat = async (
   endpoint: string,
   data: CrearChat
 ): Promise<CrearChatResponse> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await resp.json();
+};
+
+export const anadirPaqueteInv = async (
+  endpoint: string,
+  data: Pedido
+): Promise<PedidoIndividualResp> => {
   const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 

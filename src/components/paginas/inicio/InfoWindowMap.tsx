@@ -60,9 +60,10 @@ const InfoWindowMap = ({ inmueble }: Props) => {
                   return (
                     <SwiperSlide key={img}>
                       {extensionesValidas.includes(extension) ? (
-                        <iframe
+                        <video
                           src={img}
-                          scrolling="no"
+                          controls
+                          controlsList="nodownload"
                           style={{
                             height: 200,
                             width: "100%",

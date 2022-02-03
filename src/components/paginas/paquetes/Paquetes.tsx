@@ -1,4 +1,3 @@
-import { usePaquetes } from "../../../hooks/usePaquetes";
 import Individual from "./Individual";
 import PaqueteMultiple from "./PaqueteMultiple";
 import styles from "./paquetes.module.css";
@@ -18,8 +17,6 @@ const intermedio = [
 ];
 
 const PaquetesCards = () => {
-  const { paquetes, cargando } = usePaquetes();
-
   return (
     <div>
       <section className="my-5">
