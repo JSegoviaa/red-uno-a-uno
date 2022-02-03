@@ -143,6 +143,19 @@ export const actualizarPerfilFetch = async (
   return await resp.json();
 };
 
+export const actualizarRolUsuario = async (endpoint: string, data: any) => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const resp = await fetch(url, {
+    method: "PUT",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await resp.json();
+};
+
 export const agregarFav = async (
   endpoint: string,
   data: FavData

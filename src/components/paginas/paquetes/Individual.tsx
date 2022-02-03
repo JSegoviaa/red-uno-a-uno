@@ -8,7 +8,7 @@ import Button from "../../ui/button/Button";
 import Loading from "../../ui/loading/Loading";
 import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
-import { anadirPaqueteInv } from "../../../helpers/fetch";
+import { actualizarRolUsuario, anadirPaqueteInv } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 import { toast } from "react-toastify";
 
@@ -41,6 +41,10 @@ const Individual = () => {
     };
 
     const resp = await anadirPaqueteInv("pedidos", body);
+
+    await actualizarRolUsuario(`usuarios/rol/${auth.uid}`, {
+      role: paquete?.nombre,
+    });
 
     if (resp.ok) {
       toast.success(resp.msg);
