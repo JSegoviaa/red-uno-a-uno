@@ -52,11 +52,29 @@ const InfoWindowMap = ({ inmueble }: Props) => {
                 }}
                 className="mySwiper"
               >
-                {inmueble.imgs.map((img) => (
-                  <SwiperSlide key={img}>
-                    <img className={styles.imgCard} src={img} />
-                  </SwiperSlide>
-                ))}
+                {inmueble.imgs.map((img) => {
+                  const sepracion = img.split(".");
+
+                  const extension = sepracion[sepracion.length - 1];
+                  const extensionesValidas = ["mp4"];
+                  return (
+                    <SwiperSlide key={img}>
+                      {extensionesValidas.includes(extension) ? (
+                        <iframe
+                          src={img}
+                          scrolling="no"
+                          style={{
+                            height: 200,
+                            width: "100%",
+                            overflow: "hidden",
+                          }}
+                        />
+                      ) : (
+                        <img className={styles.imgCard} src={img} />
+                      )}
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
             </div>
             <div className={`${styles.title} mb-2`}>{inmueble.titulo}</div>
