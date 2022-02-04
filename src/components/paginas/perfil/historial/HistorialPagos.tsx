@@ -26,25 +26,27 @@ const HistorialPagos = () => {
               <div className="table-responsive-xxl">
                 <table className={`${styles.customTable} table`}>
                   <tbody>
-                    <th>id</th>
-                    <th>Fecha y hora</th>
-                    <th>Paquete</th>
-                    <th>PPU</th>
+                    <th className="">ID de pago</th>
+                    <th className="">Fecha y hora</th>
+                    <th className="">Paquete</th>
+                    <th className="">PPU</th>
                     <th className="text-center">Usuarios</th>
-                    <th>Importe</th>
+                    <th className="">Importe</th>
 
                     {historialPago.map((pago) => (
                       <tr className={`${styles.thover} `}>
-                        <td className={styles.content}>{pago._id}</td>
-                        <td className={styles.content}>
+                        <td className={`${styles.content}`}>{pago._id}</td>
+                        <td className={`${styles.content}`}>
                           {horaMes(pago.fechaPago)}
                         </td>
-                        <td className={styles.content}>{pago.paquete}</td>
-                        <td className={styles.content}>
+                        <td className={`${styles.content}`}>
+                          {pago.paquete.nombre}
+                        </td>
+                        <td className={`${styles.content}`}>
                           {formatPrice(pago.precio)}
                         </td>
                         <td className={`${styles.content} text-center`}>8</td>
-                        <td className={styles.content}>
+                        <td className={`${styles.content}`}>
                           {formatPrice(pago.importe)}
                         </td>
                       </tr>

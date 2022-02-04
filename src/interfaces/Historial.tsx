@@ -35,7 +35,7 @@ export interface HistorialPagosResp {
 export interface PedidosUsuario {
   _id: string;
   usuario: string;
-  paquete: string;
+  paquete: Paquete;
   precio: number;
   importe: number;
   fechaPago: string;
@@ -46,4 +46,9 @@ export interface PedidosUsuario {
   createdAt: string;
   updatedAt: string;
   __v: number;
+}
+
+interface Paquete {
+  _id: string;
+  nombre: string;
 }
