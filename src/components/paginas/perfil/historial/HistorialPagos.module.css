@@ -3,10 +3,10 @@
   margin-bottom: 50px;
   background-color: #fffdfd;
 }
-.customTable th{
-    font-family: "Open Sans";
-    color: #7149BC;
-    padding-left: 8px;
+.customTable th {
+  font-family: "Open Sans";
+  color: #7149bc;
+  padding-left: 8px;
 }
 .customTable tr:nth-child(odd) {
   background-color: #ececec;
@@ -33,14 +33,19 @@
   outline: 1px solid #e65a1f !important;
   box-sizing: border-box;
 }
-.sign{
-    width: 5px;
+.sign {
+  width: 5px;
 }
-.id{
-    width: auto;
-    font-family: "Open Sans";
+.id {
+  width: auto;
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   color: #5e5e5e;
+}
+.titulo {
+  font-size: 70px;
+  color: #ccc;
+  margin: 150px 0;
 }

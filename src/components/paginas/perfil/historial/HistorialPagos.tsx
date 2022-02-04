@@ -1,222 +1,63 @@
-import React from 'react'
-import Titulo from '../../../ui/titulo/Titulo'
-import styles from './HistorialPagos.module.css';
+import { useContext } from "react";
+import { AuthContext } from "../../../../context/auth/AuthContext";
+import { formatPrice } from "../../../../helpers/formatPrice";
+import { horaMes } from "../../../../helpers/horaMes";
+import { useHistorialPagos } from "../../../../hooks/useUserInfo";
+import Loading from "../../../ui/loading/Loading";
+import styles from "./HistorialPagos.module.css";
 
 const HistorialPagos = () => {
-    return (
-        <section>
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="table-responsive-xxl">
-                            <table className={`${styles.customTable} table`}>
-                                <tbody>
-                                    <th className='text-center'>#</th>
-                                    <th>id</th>
-                                    <th>Fecha y hora</th>
-                                    <th>Paquete</th>
-                                    <th></th>
-                                    <th>PPU</th>
-                                    <th className='text-center'>Usuarios</th>
-                                    <th></th>
-                                    <th>Importe</th>
+  const { auth } = useContext(AuthContext);
+  const { cargando, historialPago } = useHistorialPagos(auth.uid);
 
-                                    {/* ---- empieza fila (datos) ---- */}
-                                    <tr className={`${styles.thover} `}>
-                                        <td className={styles.tNumber}>
-                                            1
-                                        </td>
-                                        <td className={styles.content}>
-                                            as5c1a6sc8a6sfd1a6
-                                        </td>
-                                        <td className={styles.content}>
-                                            05/12/2021-17:15:01
-                                        </td>
-                                        <td className={styles.content}>
-                                            Avanzado
-                                        </td>
-                                        <td className={styles.sign}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            1,000.00
-                                        </td>
-                                        <td className={`${styles.content} text-center`}>
-                                            8
-                                        </td>
-                                        <td className={styles.sign}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            8,000.00
-                                        </td>
-                                    </tr>
-                                    {/* ---- termina fila (datos) ---- */}
-                                    {/* ---- empieza fila (datos) ---- */}
-                                    <tr className={`${styles.thover} `}>
-                                        <td className={styles.tNumber}>
-                                            1
-                                        </td>
-                                        <td className={styles.content}>
-                                            as5c1a6sc8a6sfd1a6
-                                        </td>
-                                        <td className={styles.content}>
-                                            05/12/2021-17:15:01
-                                        </td>
-                                        <td className={styles.content}>
-                                            Avanzado
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            1,000.00
-                                        </td>
-                                        <td className={`${styles.content} text-center`}>
-                                            8
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            8,000.00
-                                        </td>
-                                    </tr>
-                                    {/* ---- termina fila (datos) ---- */}
-                                    {/* ---- empieza fila (datos) ---- */}
-                                    <tr className={`${styles.thover} `}>
-                                        <td className={styles.tNumber}>
-                                            1
-                                        </td>
-                                        <td className={styles.content}>
-                                            as5c1a6sc8a6sfd1a6
-                                        </td>
-                                        <td className={styles.content}>
-                                            05/12/2021-17:15:01
-                                        </td>
-                                        <td className={styles.content}>
-                                            Avanzado
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            1,000.00
-                                        </td>
-                                        <td className={`${styles.content} text-center`}>
-                                            8
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            8,000.00
-                                        </td>
-                                    </tr>
-                                    {/* ---- termina fila (datos) ---- */}
-                                    {/* ---- empieza fila (datos) ---- */}
-                                    <tr className={`${styles.thover} `}>
-                                        <td className={styles.tNumber}>
-                                            1
-                                        </td>
-                                        <td className={styles.content}>
-                                            as5c1a6sc8a6sfd1a6
-                                        </td>
-                                        <td className={styles.content}>
-                                            05/12/2021-17:15:01
-                                        </td>
-                                        <td className={styles.content}>
-                                            Avanzado
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            1,000.00
-                                        </td>
-                                        <td className={`${styles.content} text-center`}>
-                                            8
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            8,000.00
-                                        </td>
-                                    </tr>
-                                    {/* ---- termina fila (datos) ---- */}
-                                    {/* ---- empieza fila (datos) ---- */}
-                                    <tr className={`${styles.thover} `}>
-                                        <td className={styles.tNumber}>
-                                            1
-                                        </td>
-                                        <td className={styles.content}>
-                                            as5c1a6sc8a6sfd1a6
-                                        </td>
-                                        <td className={styles.content}>
-                                            05/12/2021-17:15:01
-                                        </td>
-                                        <td className={styles.content}>
-                                            Avanzado
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            1,000.00
-                                        </td>
-                                        <td className={`${styles.content} text-center`}>
-                                            8
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            8,000.00
-                                        </td>
-                                    </tr>
-                                    {/* ---- termina fila (datos) ---- */}
-                                    {/* ---- empieza fila (datos) ---- */}
-                                    <tr className={`${styles.thover} `}>
-                                        <td className={styles.tNumber}>
-                                            1
-                                        </td>
-                                        <td className={styles.content}>
-                                            as5c1a6sc8a6sfd1a6
-                                        </td>
-                                        <td className={styles.content}>
-                                            05/12/2021-17:15:01
-                                        </td>
-                                        <td className={styles.content}>
-                                            Avanzado
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            1,000.00
-                                        </td>
-                                        <td className={`${styles.content} text-center`}>
-                                            8
-                                        </td>
-                                        <td className={styles.content}>
-                                            $
-                                        </td>
-                                        <td className={styles.content}>
-                                            8,000.00
-                                        </td>
-                                    </tr>
-                                    {/* ---- termina fila (datos) ---- */}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <div className="container">
+      <br />
+      {cargando ? (
+        <Loading />
+      ) : (
+        <div className="row">
+          {historialPago.length === 0 ? (
+            <div className={`${styles.titulo} text-center`}>
+              Aún no has añadido ningún paquete
             </div>
-        </section>
-    )
-}
+          ) : (
+            <div className="col-12">
+              <div className="table-responsive-xxl">
+                <table className={`${styles.customTable} table`}>
+                  <tbody>
+                    <th>id</th>
+                    <th>Fecha y hora</th>
+                    <th>Paquete</th>
+                    <th>PPU</th>
+                    <th className="text-center">Usuarios</th>
+                    <th>Importe</th>
 
-export default HistorialPagos
+                    {historialPago.map((pago) => (
+                      <tr className={`${styles.thover} `}>
+                        <td className={styles.content}>{pago._id}</td>
+                        <td className={styles.content}>
+                          {horaMes(pago.fechaPago)}
+                        </td>
+                        <td className={styles.content}>{pago.paquete}</td>
+                        <td className={styles.content}>
+                          {formatPrice(pago.precio)}
+                        </td>
+                        <td className={`${styles.content} text-center`}>8</td>
+                        <td className={styles.content}>
+                          {formatPrice(pago.importe)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 
-
+export default HistorialPagos;

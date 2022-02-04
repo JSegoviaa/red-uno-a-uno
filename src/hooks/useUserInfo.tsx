@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { InmuebleContext } from "../context/inmuebles/InmuebleContext";
+import { production } from "../credentials/credentials";
 import { InmuebleUsuario } from "../interfaces/CrearInmuebleInterface";
-import { HistorialResp } from "../interfaces/Historial";
+import { HistorialResp, PedidosUsuario } from "../interfaces/Historial";
 import { Usuario } from "../interfaces/UserInterface";
 
 const devURL = "http://localhost:8080/api";
@@ -75,4 +76,23 @@ export const useHistorial = (uid: string | undefined | null, desde: number) => {
   }, [desde, historial]);
 
   return { historial, isLoading };
+};
+
+export const useHistorialPagos = (uid: string | undefined | null) => {
+  const [historialPago, setHistorialPago] = useState<PedidosUsuario[]>([]);
+  const [cargando, setCargando] = useState(true);
+
+  const obtenerHistorialPagos = async () => {
+    const resp = await fetch(`${production}/pedidos/usuarios/${uid}`);
+    const data = await resp.json();
+
+    setHistorialPago(data.pedidosUsuario);
+    setCargando(false);
+  };
+
+  useEffect(() => {
+    obtenerHistorialPagos();
+  }, []);
+
+  return { historialPago, cargando };
 };

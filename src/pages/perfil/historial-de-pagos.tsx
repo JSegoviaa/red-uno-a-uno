@@ -1,15 +1,18 @@
-import React from 'react'
-import HistorialPagos from '../../components/paginas/perfil/historial/HistorialPagos'
-import Titulo from '../../components/ui/titulo/Titulo'
+import { useRouter } from "next/router";
+import HistorialPagos from "../../components/paginas/perfil/historial/HistorialPagos";
+import SEO from "../../components/seo/SEO";
+import Titulo from "../../components/ui/titulo/Titulo";
 
 const HistorialDePagos = () => {
-    return (
-        <div>
-            <Titulo titulo='Mis pagos'/>
-            <br />
-            <HistorialPagos/>
-        </div>
-    )
-}
+  const router = useRouter();
 
-export default HistorialDePagos
+  return (
+    <div>
+      <SEO titulo="Historial de pagos" url={router.asPath} />
+      <Titulo titulo="Mis pagos" />
+      <HistorialPagos />
+    </div>
+  );
+};
+
+export default HistorialDePagos;
