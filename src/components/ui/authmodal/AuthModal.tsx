@@ -1,4 +1,4 @@
-import { FormEvent, useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "../../../hooks/useForm";
@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 
 const RegisterModal = () => {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
 
   const { register, mostrarRegistro, cerrarRegistro, abrirLogin } =
     useContext(AuthContext);
@@ -54,6 +56,10 @@ const RegisterModal = () => {
     cerrarRegistro();
     abrirLogin();
   };
+
+  const mostrarContraseña = () => setShowPassword(!showPassword);
+
+  const mostrarContraseña2 = () => setShowPassword2(!showPassword2);
 
   return (
     <>
@@ -115,34 +121,51 @@ const RegisterModal = () => {
               <div className="col-10">
                 <label className={styles.modalLabels}>Contraseña</label>
                 <br />
-                <input
-                  className={`${styles.modalInputs} mb-4`}
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={handleChange}
-                  required
-                />
+                <div>
+                  <input
+                    className={`${styles.modalInputs} mb-4`}
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                    required
+                  />
+                  <i
+                    onClick={mostrarContraseña}
+                    className={`${
+                      showPassword ? "bi bi-eye-slash" : "bi bi-eye"
+                    } ${styles.mostrarContraseña}`}
+                  />
+                </div>
               </div>
               <div className="col-10">
                 <label className={styles.modalLabels}>
                   Confirme su contraseña
                 </label>
                 <br />
-                <input
-                  className={`${styles.modalInputs} mb-4`}
-                  type="password"
-                  name="password2"
-                  value={password2}
-                  onChange={handleChange}
-                  required
-                />
+                <div>
+                  <input
+                    className={`${styles.modalInputs} mb-4`}
+                    type={showPassword2 ? "text" : "password"}
+                    name="password2"
+                    value={password2}
+                    onChange={handleChange}
+                    required
+                  />
+                  <i
+                    onClick={mostrarContraseña2}
+                    className={`${
+                      showPassword2 ? "bi bi-eye-slash" : "bi bi-eye"
+                    } ${styles.mostrarContraseña}`}
+                  />
+                </div>
               </div>
               <div className="col-10 mb-3 text-center">
                 {nombre.length > 0 &&
                 apellido.length > 0 &&
                 correo.length > 0 &&
-                password.length > 0 ? (
+                password.length > 0 &&
+                password2.length > 0 ? (
                   <Button titulo="Registrarse" />
                 ) : (
                   <Button titulo="Registrarse" btn="Disabled" />

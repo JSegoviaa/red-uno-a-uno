@@ -56,3 +56,9 @@
   border-radius: 15px;
   border: none;
 }
+
+.mostrarContraseña {
+  font-size: 19px;
+  position: absolute;
+  right: 70px;
+}

@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Form, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const LoginModal = () => {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
   const { login, mostrarLogin, cerrarLogin, abrirRegistro } =
     useContext(AuthContext);
   const { formulario, handleChange, setFormulario } = useForm({
@@ -55,6 +56,8 @@ const LoginModal = () => {
     }
   };
 
+  const mostrarContraseña = () => setShowPassword(!showPassword);
+
   const handleModals = () => {
     cerrarLogin();
     abrirRegistro();
@@ -93,14 +96,22 @@ const LoginModal = () => {
             <div className="col-10">
               <label className={styles.modalLabels}>Contraseña</label>
               <br />
-              <input
-                className={`${styles.modalInputs} mb-4`}
-                type="password"
-                name="password"
-                value={password}
-                onChange={handleChange}
-                required
-              />
+              <div>
+                <input
+                  className={`${styles.modalInputs} mb-4`}
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  required
+                />
+                <i
+                  onClick={mostrarContraseña}
+                  className={`${
+                    showPassword ? "bi bi-eye-slash" : "bi bi-eye"
+                  } ${styles.mostrarContraseña}`}
+                />
+              </div>
             </div>
             <div className="col-4 my-4">
               <hr />
