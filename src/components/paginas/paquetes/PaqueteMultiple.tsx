@@ -75,70 +75,91 @@ const PaqueteMultiple = (props: Props) => {
         <Modal.Header closeButton className={styles.modalS2header} />
         <Modal.Body>
           <div className={styles.headTitle}>
-            <Modaltitle titulo="Básico" />
+            <Modaltitle titulo={titulo} />
           </div>
           <div className={`${styles.S2content} text-center mt-5 mb-4`}>
             Especifique el número de <br /> usuarios a contratar.
           </div>
           <Form onSubmit={onSubmit}>
-            <div className="row">
-              {avanzado ? (
-                <>
-                  <div className="col-9">
-                    <div className="row">
-                      <div className="col-6">Digite el número de usuarios</div>
-                      <div className="col-6">
+            {avanzado ? (
+              <>
+                <div className="row d-flex justify-content-center">
+                  <div className="col-10">
+                    <div className="row d-flex justify-content-between">
+                      <div className="col-9">
+                        <div className={`${styles.S2labels}`}>
+                          Digite el número de usuarios
+                        </div>
+                      </div>
+                      <div className="col-3">
                         <input
                           type="number"
                           min={11}
                           name="usuarios"
                           value={usuarios}
                           onChange={handleChange}
+                          className={styles.inputS2}
                         />
                       </div>
                       {usuarios < 11 ? (
-                        <div className={`text-center ${styles.paqueteInvalido}`}>
+                        <div className={`col-12 text-center my-4 ${styles.paqueteInvalido}`}>
                           Paquete válido para 11 usuarios en adelante
                         </div>
                       ) : (
                         <>
-                          <div className={`${styles.precioAPagar} text-center`}>
+                          <div className={`${styles.precioAPagar} col-12 text-center mt-4 mb-5`}>
                             {formatPrice(precio * usuarios)}
                           </div>
-                          <div className="text-center">
+                          <div className="col-12 text-center">
                             <Button titulo="Siguiente" />
                           </div>
                         </>
                       )}
                     </div>
                   </div>
-                </>
-              ) : (
-                <>
-                  <div className="col-6">Número de usuarios</div>
-                  <div className="col-6">
-                    <Select
-                      defaultValue={usuariosSeleccionados}
-                      onChange={setUsuariosSeleccionados}
-                      options={options}
-                    />
-                  </div>
-                  <div className="text-center">
-                    {usuariosSeleccionados.value ? (
-                      <div className={`${styles.precioAPagar} text-center`}>
-                        {formatPrice(precio * usuariosSeleccionados.value)}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="row d-flex justify-content-center ">
+                  <div className="col-sm-12 col-md-12 col-lg-9">
+                    <div className="row d-flex justify-content-between">
+                      <div className="col-8">
+                        <div className={`${styles.S2labels}`}>
+                          Número de usuarios
+                        </div>
                       </div>
-                    ) : null}
-
-                    {!usuariosSeleccionados.value ? (
-                      <Button titulo="Siguiente" btn="Disabled" />
-                    ) : (
-                      <Button titulo="Siguiente" />
-                    )}
+                      <div className="col-4">
+                        <Select
+                          defaultValue={usuariosSeleccionados}
+                          onChange={setUsuariosSeleccionados}
+                          options={options}
+                          classNamePrefix={styles.selectS2}
+                        />
+                      </div>
+                      <div className="col-12">
+                        <div className="text-center mt-4">
+                          {usuariosSeleccionados.value ? (
+                            <div className={`${styles.precioAPagar} text-center`}>
+                              {formatPrice(precio * usuariosSeleccionados.value) + " MXN"}
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+                      <div className="col-12">
+                        <div className="text-center mt-5">
+                          {!usuariosSeleccionados.value ? (
+                            <Button titulo="Siguiente" btn="Disabled" />
+                          ) : (
+                            <Button titulo="Siguiente" />
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
           </Form>
         </Modal.Body>
       </Modal>

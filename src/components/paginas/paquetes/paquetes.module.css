@@ -153,13 +153,15 @@
   font-weight: 500;
 }
 
-.modalS1, .modalS2 {
+.modalS1,
+.modalS2 {
   margin-top: 30vh;
   border-radius: 20px;
   border: none;
   box-shadow: 0px 0px 13px 5px rgba(0, 0, 0, 0.07);
 }
-.modalS1header, .modalS2header {
+.modalS1header,
+.modalS2header {
   border: none;
 }
 .headTitle {
@@ -167,7 +169,8 @@
   left: 50%;
   transform: translate(-50%, -20px);
 }
-.S1content, .S2content {
+.S1content,
+.S2content {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: normal;
@@ -175,9 +178,35 @@
   line-height: 31px;
   color: #5e5e5e;
 }
-.S1labels {
+.S1labels,
+.S2labels {
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
   color: #5e5e5e;
+}
+.inputS2 {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  width: 80px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #5e5e5e;
+  padding: 4px;
+}
+.inputS2:focus{
+  outline: none;
+  border: 1px solid tomato;
+}
+.selectS2{
+  outline: none;
+  border: 1px solid tomato;
 }
