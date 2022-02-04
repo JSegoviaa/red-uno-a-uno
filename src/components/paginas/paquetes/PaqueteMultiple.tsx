@@ -71,41 +71,47 @@ const PaqueteMultiple = (props: Props) => {
           </>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton />
+      <Modal show={show} onHide={handleClose} contentClassName={styles.modalS2}>
+        <Modal.Header closeButton className={styles.modalS2header} />
         <Modal.Body>
-          <Modaltitle titulo={titulo} />
-          <div className="text-center">
-            Especifique el número de usuarios a contratar
+          <div className={styles.headTitle}>
+            <Modaltitle titulo="Básico" />
+          </div>
+          <div className={`${styles.S2content} text-center mt-5 mb-4`}>
+            Especifique el número de <br /> usuarios a contratar.
           </div>
           <Form onSubmit={onSubmit}>
             <div className="row">
               {avanzado ? (
                 <>
-                  <div className="col-6">Digite el número de usuarios</div>
-                  <div className="col-6">
-                    <input
-                      type="number"
-                      min={11}
-                      name="usuarios"
-                      value={usuarios}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  {usuarios < 11 ? (
-                    <div className={`text-center ${styles.paqueteInvalido}`}>
-                      Paquete válido para 11 usuarios en adelante
+                  <div className="col-9">
+                    <div className="row">
+                      <div className="col-6">Digite el número de usuarios</div>
+                      <div className="col-6">
+                        <input
+                          type="number"
+                          min={11}
+                          name="usuarios"
+                          value={usuarios}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      {usuarios < 11 ? (
+                        <div className={`text-center ${styles.paqueteInvalido}`}>
+                          Paquete válido para 11 usuarios en adelante
+                        </div>
+                      ) : (
+                        <>
+                          <div className={`${styles.precioAPagar} text-center`}>
+                            {formatPrice(precio * usuarios)}
+                          </div>
+                          <div className="text-center">
+                            <Button titulo="Siguiente" />
+                          </div>
+                        </>
+                      )}
                     </div>
-                  ) : (
-                    <>
-                      <div className={`${styles.precioAPagar} text-center`}>
-                        {formatPrice(precio * usuarios)}
-                      </div>
-                      <div className="text-center">
-                        <Button titulo="Siguiente" />
-                      </div>
-                    </>
-                  )}
+                  </div>
                 </>
               ) : (
                 <>

@@ -126,62 +126,80 @@ const Individual = () => {
           </>
         )}
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton />
+
+
+      <Modal show={show} onHide={handleClose} contentClassName={styles.modalS1}>
+        <Modal.Header closeButton className={styles.modalS1header} />
         <Modal.Body>
-          <Modaltitle titulo="Individual" />
-          <div className="text-center">Selccione el tipo de plan que desea</div>
+          <div className={styles.headTitle}>
+            <Modaltitle titulo="Individual" />
+          </div>
+          <div className={`${styles.S1content} text-center mt-5 mb-4`}>
+            Selecciona el tipo de plan que desea.
+          </div>
           {loading ? <Loading /> : null}
           <Form onSubmit={onSubmit}>
-            <div className="row d-flex text-center">
-              <div className="col-6">Anual</div>
-              <div className="col-6">
-                <input
-                  value={paquete?.precioAnual}
-                  onChange={(e) => setPrecioSeleccionado(e.target.value)}
-                  type="radio"
-                  name="individual"
-                />
-                <span className={styles.precio}>
-                  {paquete ? (
-                    <>{formatPrice(paquete?.precioAnual)} MXN</>
-                  ) : null}
-                </span>
+            <div className="row d-flex justify-content-center">
+              <div className="col-sm-12 col-md-12 col-lg-9">
+                <div className="row d-flex justify-content-center">
+                  <div className="col-4">
+                    <div className={`${styles.S1labels}`}>
+                      Anual
+                    </div>
+                  </div>
+                  <div className="col-7 text-end mb-2">
+                    <input
+                      value={paquete?.precioAnual}
+                      onChange={(e) => setPrecioSeleccionado(e.target.value)}
+                      type="radio"
+                      name="individual"
+                    />
+                    <span className={`${styles.precio} ms-2`}>
+                      {paquete ? (
+                        <>{formatPrice(paquete?.precioAnual)} MXN</>
+                      ) : null}
+                    </span>
+                  </div>
+                  <div className="col-4">
+                    <div className={`${styles.S1labels}`}>
+                      Semestral
+                    </div>
+                  </div>
+                  <div className="col-7 text-end mb-2">
+                    <input
+                      value={paquete?.precioSemestral}
+                      onChange={(e) => setPrecioSeleccionado(e.target.value)}
+                      type="radio"
+                      name="individual"
+                    />
+                    <span className={`${styles.precio} ms-2`}>
+                      {paquete ? (
+                        <>{formatPrice(paquete.precioSemestral)} MXN</>
+                      ) : null}
+                    </span>
+                  </div>
+                  <div className="col-4">
+                    <div className={`${styles.S1labels}`}>
+                      Trimestral
+                    </div>
+                  </div>
+                  <div className="col-7 text-end mb-2">
+                    <input
+                      value={paquete?.precioTrimestral}
+                      type="radio"
+                      name="individual"
+                      onChange={(e) => setPrecioSeleccionado(e.target.value)}
+                    />
+                    <span className={`${styles.precio} ms-2`}>
+                      {paquete ? (
+                        <>{formatPrice(paquete!.precioTrimestral)} MXN</>
+                      ) : null}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="row d-flex text-center">
-              <div className="col-6">Semestral</div>
-              <div className="col-6">
-                <input
-                  value={paquete?.precioSemestral}
-                  onChange={(e) => setPrecioSeleccionado(e.target.value)}
-                  type="radio"
-                  name="individual"
-                />
-                <span className={styles.precio}>
-                  {paquete ? (
-                    <>{formatPrice(paquete.precioSemestral)} MXN</>
-                  ) : null}
-                </span>
-              </div>
-            </div>
-            <div className="row d-flex text-center">
-              <div className="col-6">Trimestral</div>
-              <div className="col-6">
-                <input
-                  value={paquete?.precioTrimestral}
-                  type="radio"
-                  name="individual"
-                  onChange={(e) => setPrecioSeleccionado(e.target.value)}
-                />
-                <span className={styles.precio}>
-                  {paquete ? (
-                    <>{formatPrice(paquete!.precioTrimestral)} MXN</>
-                  ) : null}
-                </span>
-              </div>
-            </div>
-            <div className="text-center">
+            <div className="text-center mt-5">
               <Button titulo="Siguiente" />
             </div>
           </Form>

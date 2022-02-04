@@ -135,8 +135,10 @@
 }
 
 .precio {
-  color: #13a407;
+  font-style: normal;
   font-weight: 500;
+  font-size: 21px;
+  color: #13a407;
 }
 
 .paqueteInvalido {
@@ -149,4 +151,33 @@
   color: #13a407;
   font-size: 26px;
   font-weight: 500;
+}
+
+.modalS1, .modalS2 {
+  margin-top: 30vh;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0px 0px 13px 5px rgba(0, 0, 0, 0.07);
+}
+.modalS1header, .modalS2header {
+  border: none;
+}
+.headTitle {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -20px);
+}
+.S1content, .S2content {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 21px;
+  line-height: 31px;
+  color: #5e5e5e;
+}
+.S1labels {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  color: #5e5e5e;
 }

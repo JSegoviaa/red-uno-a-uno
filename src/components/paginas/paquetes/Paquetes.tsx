@@ -1,3 +1,4 @@
+import Loading from "../../ui/loading/Loading";
 import Individual from "./Individual";
 import PaqueteMultiple from "./PaqueteMultiple";
 import styles from "./paquetes.module.css";
