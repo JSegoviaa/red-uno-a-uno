@@ -40,6 +40,7 @@ export interface PedidosUsuario {
   importe: number;
   fechaPago: string;
   fechaVencimiento: string;
+  totalUsuarios: number;
   metodoPago: string;
   vigencia: boolean;
   idStripe: string;

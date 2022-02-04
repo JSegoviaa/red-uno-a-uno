@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { Pagination } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { formatPrice } from "../../../../helpers/formatPrice";
 import { horaMes } from "../../../../helpers/horaMes";
@@ -8,7 +9,24 @@ import styles from "./HistorialPagos.module.css";
 
 const HistorialPagos = () => {
   const { auth } = useContext(AuthContext);
-  const { cargando, historialPago } = useHistorialPagos(auth.uid);
+  const [desde, setDesde] = useState(0);
+  const { cargando, historialPago, total } = useHistorialPagos(auth.uid, desde);
+
+  const handlePrevPage = () => {
+    if (desde === 0) {
+      return;
+    } else {
+      setDesde(desde - 15);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (desde < total - 15) {
+      setDesde(desde + 15);
+    } else {
+      return;
+    }
+  };
 
   return (
     <div className="container">
@@ -45,7 +63,9 @@ const HistorialPagos = () => {
                         <td className={`${styles.content}`}>
                           {formatPrice(pago.precio)}
                         </td>
-                        <td className={`${styles.content} text-center`}>8</td>
+                        <td className={`${styles.content} text-center`}>
+                          {pago.totalUsuarios ? pago.totalUsuarios : "N/A"}
+                        </td>
                         <td className={`${styles.content}`}>
                           {formatPrice(pago.importe)}
                         </td>
@@ -56,6 +76,12 @@ const HistorialPagos = () => {
               </div>
             </div>
           )}
+          <div className="d-flex justify-content-center">
+            <Pagination>
+              <Pagination.Prev onClick={handlePrevPage} />
+              <Pagination.Next onClick={handleNextPage} />
+            </Pagination>
+          </div>
         </div>
       )}
     </div>

@@ -8,7 +8,7 @@ import Button from "../../ui/button/Button";
 import Loading from "../../ui/loading/Loading";
 import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
-import { actualizarRolUsuario, anadirPaqueteInv } from "../../../helpers/fetch";
+import { anadirPaqueteInv } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 import { toast } from "react-toastify";
 
@@ -127,7 +127,6 @@ const Individual = () => {
         )}
       </div>
 
-
       <Modal show={show} onHide={handleClose} contentClassName={styles.modalS1}>
         <Modal.Header closeButton className={styles.modalS1header} />
         <Modal.Body>
@@ -143,9 +142,7 @@ const Individual = () => {
               <div className="col-sm-12 col-md-12 col-lg-9">
                 <div className="row d-flex justify-content-center">
                   <div className="col-4">
-                    <div className={`${styles.S1labels}`}>
-                      Anual
-                    </div>
+                    <div className={`${styles.S1labels}`}>Anual</div>
                   </div>
                   <div className="col-7 text-end mb-2">
                     <input
@@ -161,9 +158,7 @@ const Individual = () => {
                     </span>
                   </div>
                   <div className="col-4">
-                    <div className={`${styles.S1labels}`}>
-                      Semestral
-                    </div>
+                    <div className={`${styles.S1labels}`}>Semestral</div>
                   </div>
                   <div className="col-7 text-end mb-2">
                     <input
@@ -179,9 +174,7 @@ const Individual = () => {
                     </span>
                   </div>
                   <div className="col-4">
-                    <div className={`${styles.S1labels}`}>
-                      Trimestral
-                    </div>
+                    <div className={`${styles.S1labels}`}>Trimestral</div>
                   </div>
                   <div className="col-7 text-end mb-2">
                     <input

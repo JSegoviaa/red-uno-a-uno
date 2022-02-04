@@ -78,21 +78,28 @@ export const useHistorial = (uid: string | undefined | null, desde: number) => {
   return { historial, isLoading };
 };
 
-export const useHistorialPagos = (uid: string | undefined | null) => {
+export const useHistorialPagos = (
+  uid: string | undefined | null,
+  desde: number
+) => {
   const [historialPago, setHistorialPago] = useState<PedidosUsuario[]>([]);
   const [cargando, setCargando] = useState(true);
+  const [total, setTotal] = useState(0);
 
   const obtenerHistorialPagos = async () => {
-    const resp = await fetch(`${production}/pedidos/usuarios/${uid}`);
+    const resp = await fetch(
+      `${production}/pedidos/usuarios/${uid}?desde=${desde}&limite=15`
+    );
     const data = await resp.json();
 
+    setTotal(data.total);
     setHistorialPago(data.pedidosUsuario);
     setCargando(false);
   };
 
   useEffect(() => {
     obtenerHistorialPagos();
-  }, []);
+  }, [desde]);
 
-  return { historialPago, cargando };
+  return { historialPago, cargando, total };
 };
