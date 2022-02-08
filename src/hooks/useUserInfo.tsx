@@ -29,10 +29,7 @@ export const useUserInfo = (uid: string | undefined | null) => {
   return { user, loading };
 };
 
-export const useUserInmuebles = (
-  uid: string | undefined | null,
-  desde: number
-) => {
+export const useUserInmuebles = (uid: string | undefined | null, desde = 0) => {
   const [inmuebles, setInmuebles] = useState<InmuebleUsuario>();
   const [cargando, setCargando] = useState(true);
   const [total, setTotal] = useState(0);
