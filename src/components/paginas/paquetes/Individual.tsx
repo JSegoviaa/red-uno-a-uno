@@ -1,6 +1,8 @@
 import { FormEvent, useContext, useState } from "react";
 import moment from "moment";
 import { Form, Modal } from "react-bootstrap";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { formatPrice } from "../../../helpers/formatPrice";
 import { usePaqueteInd } from "../../../hooks/usePaquetes";
@@ -10,21 +12,23 @@ import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
 import { anadirPaqueteInv } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
-import { toast } from "react-toastify";
-import Pagar from "./Pagar";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const Individual = () => {
   const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
   const [precioSeleccionado, setPrecioSeleccionado] = useState("");
+  const stripe = useStripe();
+  const elements = useElements();
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const { paquete, cargando } = usePaqueteInd();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [mostrarPago, setMostrarPago] = useState(false);
-  const stripe = useStripe();
-  const elements = useElements();
+
+  const handleClose = () => {
+    setPrecioSeleccionado("");
+    setShow(false);
+  };
+
+  const handleShow = () => setShow(true);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,25 +37,13 @@ const Individual = () => {
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement),
+      card: elements.getElement(CardElement) as any,
     });
 
     setLoading(true);
 
     const fechaPago = moment().format();
     const fechaVencimiento = moment(fechaPago).add(1, "y").format();
-
-    // const resp = await anadirPaqueteInv("pedidos", body);
-
-    // await actualizarRol({
-    //   role: paquete?.nombre,
-    //   paqueteAdquirido: paquete?._id,
-    // });
-
-    // if (resp.ok) {
-    //   toast.success(resp.msg);
-    // }
-    // setLoading(false);
 
     if (!error) {
       const pago = paymentMethod;
@@ -69,20 +61,16 @@ const Individual = () => {
       };
 
       try {
-        const resp = await fetch("http://localhost:8080/api/pedidos", {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(body),
-        });
+        const resp = await anadirPaqueteInv("pedidos", body);
 
         await actualizarRol({
           role: paquete?.nombre,
           paqueteAdquirido: paquete?._id,
         });
 
-        // if (resp.ok) {
-        //   toast.success(resp.msg);
-        // }
+        if (resp.ok) {
+          toast.success(resp.msg);
+        }
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -91,7 +79,14 @@ const Individual = () => {
     }
   };
 
-  const pagar = () => setMostrarPago(true);
+  const pagar = () => {
+    handleClose();
+    setMostrarPago(true);
+  };
+
+  const ocultarPago = () => setMostrarPago(false);
+
+  console.log(precioSeleccionado, "????[-");
 
   return (
     <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4">
@@ -177,7 +172,7 @@ const Individual = () => {
             Selecciona el tipo de plan que desea.
           </div>
           {loading ? <Loading /> : null}
-          <div onClick={pagar}>
+          <div>
             <div className="row d-flex justify-content-center">
               <div className="col-sm-12 col-md-12 col-lg-9">
                 <div className="row d-flex justify-content-center">
@@ -233,13 +228,18 @@ const Individual = () => {
               </div>
             </div>
             <div className="text-center mt-5">
-              <Button titulo="Siguiente" />
+              {precioSeleccionado ? (
+                <Button titulo="Siguiente" onClick={pagar} />
+              ) : (
+                <Button titulo="Siguiente" onClick={pagar} btn="Disabled" />
+              )}
             </div>
           </div>
         </Modal.Body>
       </Modal>
 
-      <Modal show={mostrarPago}>
+      <Modal show={mostrarPago} onHide={ocultarPago}>
+        <Modal.Header closeButton />
         <Form onSubmit={onSubmit}>
           <div className="form-group">
             <CardElement />
@@ -252,7 +252,6 @@ const Individual = () => {
           )}
         </Form>
       </Modal>
-      {/* <Pagar mostrarPago={mostrarPago} /> */}
     </div>
   );
 };
