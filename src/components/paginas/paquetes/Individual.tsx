@@ -37,7 +37,7 @@ const Individual = () => {
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement) as any,
+      card: elements.getElement(CardElement)!,
     });
 
     setLoading(true);

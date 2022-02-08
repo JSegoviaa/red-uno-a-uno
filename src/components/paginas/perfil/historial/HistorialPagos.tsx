@@ -52,7 +52,7 @@ const HistorialPagos = () => {
                     <th className="">Importe</th>
 
                     {historialPago.map((pago) => (
-                      <tr className={`${styles.thover} `}>
+                      <tr key={pago._id} className={`${styles.thover} `}>
                         <td className={`${styles.content}`}>{pago._id}</td>
                         <td className={`${styles.content}`}>
                           {horaMes(pago.fechaPago)}
