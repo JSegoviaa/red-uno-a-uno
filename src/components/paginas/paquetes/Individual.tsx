@@ -1,4 +1,5 @@
 import { FormEvent, useContext, useState } from "react";
+import { useRouter } from "next/router";
 import moment from "moment";
 import { Form, Modal } from "react-bootstrap";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
@@ -10,13 +11,13 @@ import Button from "../../ui/button/Button";
 import Loading from "../../ui/loading/Loading";
 import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
-import styleModal from "./IndividualModal.module.css";
 import { anadirPaqueteInv } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 
 const Individual = () => {
   const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
   const [precioSeleccionado, setPrecioSeleccionado] = useState("");
+  const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
   const [show, setShow] = useState(false);
@@ -29,11 +30,17 @@ const Individual = () => {
     setShow(false);
   };
 
+  const handleNext = () => setShow(false);
   const handleShow = () => setShow(true);
+  const ocultarPago = () => setMostrarPago(false);
+
+  const pagar = () => {
+    handleNext();
+    setMostrarPago(true);
+  };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (!stripe || !elements) return;
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -58,7 +65,7 @@ const Individual = () => {
         metodoPago: pago?.type,
         vigencia: true,
         idStripe: pago?.id,
-        totalUsuarios: 0,
+        totalUsuarios: 1,
       };
 
       try {
@@ -71,6 +78,8 @@ const Individual = () => {
 
         if (resp.ok) {
           toast.success(resp.msg);
+          ocultarPago();
+          router.push("/perfil/historial-de-pagos");
         }
         setLoading(false);
       } catch (error) {
@@ -79,13 +88,6 @@ const Individual = () => {
       setLoading(false);
     }
   };
-
-  const pagar = () => {
-    handleClose();
-    setMostrarPago(true);
-  };
-
-  const ocultarPago = () => setMostrarPago(false);
 
   return (
     <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4">
@@ -160,7 +162,6 @@ const Individual = () => {
           </>
         )}
       </div>
-
       <Modal show={show} onHide={handleClose} contentClassName={styles.modalS1}>
         <Modal.Header closeButton className={styles.modalS1header} />
         <Modal.Body>
@@ -230,25 +231,59 @@ const Individual = () => {
               {precioSeleccionado ? (
                 <Button titulo="Siguiente" onClick={pagar} />
               ) : (
-                <Button titulo="Siguiente" onClick={pagar} btn="Disabled" />
+                <Button titulo="Siguiente" btn="Disabled" />
               )}
             </div>
           </div>
         </Modal.Body>
       </Modal>
 
-      <Modal show={mostrarPago} onHide={ocultarPago} contentClassName={styleModal.pagoS2}>
-        <Modal.Header closeButton className={styleModal.headerMod} />
+      <Modal
+        contentClassName={styles.modalS1}
+        show={mostrarPago}
+        onHide={ocultarPago}
+      >
+        <Modal.Header closeButton className={styles.modalS1header} />
+        <Modaltitle titulo="Paquete individual" />
+
+        <div className="text-center">
+          Cantidad a pagar: {formatPrice(Number(precioSeleccionado))} MXN
+        </div>
+        <div className="text-center">
+          Ingrese los datos para continuar con su compra
+        </div>
+        <br />
         <Form onSubmit={onSubmit}>
           <div className="form-group px-4">
-            <CardElement />
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    iconColor: "#2C2C2C",
+                    color: "#2C2C2C",
+                    fontWeight: "500",
+                    fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+                    fontSize: "16px",
+                    "::placeholder": {
+                      color: "#757575",
+                    },
+                  },
+                  invalid: {
+                    iconColor: "#E44122",
+                    color: "#E44122",
+                  },
+                },
+              }}
+            />
           </div>
 
           <div className="text-center my-3">
             {!stripe ? (
               <Button titulo="Pagar" btn="Disabled" />
             ) : (
-              <div>{loading ? <Loading /> : <Button titulo="Pagar" />}</div>
+              <div>
+                {loading ? <Loading /> : <Button titulo="Finalizar pedido" />}
+              </div>
             )}
           </div>
         </Form>

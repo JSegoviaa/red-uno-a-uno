@@ -1,4 +1,9 @@
 import { FormEvent, useContext, useState } from "react";
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { Form, Modal } from "react-bootstrap";
 import Select from "react-select";
 import { AuthContext } from "../../../context/auth/AuthContext";
@@ -21,6 +26,9 @@ const PaqueteMultiple = (props: Props) => {
   const { titulo, precio, descripcion, options, avanzado, usuario } = props;
   const { auth, abrirLogin } = useContext(AuthContext);
   const [show, setShow] = useState(false);
+  const [mostrarPago, setMostrarPago] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
   const [usuariosSeleccionados, setUsuariosSeleccionados] =
     useState<any>(usuario);
   const { formulario, handleChange } = useForm({ usuarios: 11 });
@@ -28,8 +36,18 @@ const PaqueteMultiple = (props: Props) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const ocultarPago = () => setMostrarPago(false);
+  const handleNext = () => setShow(false);
+
+  const pagar = () => {
+    handleNext();
+    setMostrarPago(true);
+  };
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!stripe || !elements) return;
   };
 
   return (
@@ -102,16 +120,20 @@ const PaqueteMultiple = (props: Props) => {
                         />
                       </div>
                       {usuarios < 11 ? (
-                        <div className={`col-12 text-center my-4 ${styles.paqueteInvalido}`}>
+                        <div
+                          className={`col-12 text-center my-4 ${styles.paqueteInvalido}`}
+                        >
                           Paquete válido para 11 usuarios en adelante
                         </div>
                       ) : (
                         <>
-                          <div className={`${styles.precioAPagar} col-12 text-center mt-4 mb-5`}>
+                          <div
+                            className={`${styles.precioAPagar} col-12 text-center mt-4 mb-5`}
+                          >
                             {formatPrice(precio * usuarios)}
                           </div>
                           <div className="col-12 text-center">
-                            <Button titulo="Siguiente" />
+                            <Button titulo="Siguiente" onClick={pagar} />
                           </div>
                         </>
                       )}
@@ -140,8 +162,12 @@ const PaqueteMultiple = (props: Props) => {
                       <div className="col-12">
                         <div className="text-center mt-4">
                           {usuariosSeleccionados.value ? (
-                            <div className={`${styles.precioAPagar} text-center`}>
-                              {formatPrice(precio * usuariosSeleccionados.value) + " MXN"}
+                            <div
+                              className={`${styles.precioAPagar} text-center`}
+                            >
+                              {formatPrice(
+                                precio * usuariosSeleccionados.value
+                              ) + " MXN"}
                             </div>
                           ) : null}
                         </div>
@@ -151,7 +177,7 @@ const PaqueteMultiple = (props: Props) => {
                           {!usuariosSeleccionados.value ? (
                             <Button titulo="Siguiente" btn="Disabled" />
                           ) : (
-                            <Button titulo="Siguiente" />
+                            <Button titulo="Siguiente" onClick={pagar} />
                           )}
                         </div>
                       </div>
@@ -162,6 +188,11 @@ const PaqueteMultiple = (props: Props) => {
             )}
           </Form>
         </Modal.Body>
+      </Modal>
+
+      <Modal show={mostrarPago} onHide={ocultarPago}>
+        <Modal.Header closeButton className={styles.modalS2header} />
+        <PaymentElement id="payment-element" />
       </Modal>
     </div>
   );

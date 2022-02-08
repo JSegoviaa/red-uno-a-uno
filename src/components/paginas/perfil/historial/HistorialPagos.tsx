@@ -64,7 +64,7 @@ const HistorialPagos = () => {
                           {formatPrice(pago.precio)}
                         </td>
                         <td className={`${styles.content} text-center`}>
-                          {pago.totalUsuarios ? pago.totalUsuarios : "N/A"}
+                          {pago.totalUsuarios <= 1 ? "N/A" : pago.totalUsuarios}
                         </td>
                         <td className={`${styles.content}`}>
                           {formatPrice(pago.importe)}
