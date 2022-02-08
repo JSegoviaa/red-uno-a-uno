@@ -31,7 +31,7 @@ export const useUserInfo = (uid: string | undefined | null) => {
 
 export const useUserInmuebles = (
   uid: string | undefined | null,
-  desde?: number
+  desde: number
 ) => {
   const [inmuebles, setInmuebles] = useState<InmuebleUsuario>();
   const [cargando, setCargando] = useState(true);
@@ -51,7 +51,7 @@ export const useUserInmuebles = (
 
   useEffect(() => {
     obtenerInmueblesDeUsuario();
-  }, [inmuebles?.inmueblesUsuario, orden]);
+  }, [orden, desde]);
 
   return { inmuebles, cargando, total };
 };

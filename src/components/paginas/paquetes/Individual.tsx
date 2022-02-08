@@ -11,6 +11,7 @@ import styles from "./paquetes.module.css";
 import { anadirPaqueteInv } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 import { toast } from "react-toastify";
+import Pagar from "./Pagar";
 
 const Individual = () => {
   const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
@@ -20,37 +21,39 @@ const Individual = () => {
   const { paquete, cargando } = usePaqueteInd();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [mostrarPago, setMostrarPago] = useState(false);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fechaPago = moment().format();
-    const fechaVencimiento = moment(fechaPago).add(1, "y").format();
+    // const fechaPago = moment().format();
+    // const fechaVencimiento = moment(fechaPago).add(1, "y").format();
 
-    setLoading(true);
+    // setLoading(true);
 
-    const body: Pedido = {
-      usuario: auth.uid,
-      paquete: paquete?._id,
-      precio: Number(precioSeleccionado),
-      importe: Number(precioSeleccionado),
-      fechaPago,
-      fechaVencimiento,
-      metodoPago: "Tarjeta",
-      vigencia: true,
-      idStripe: "123123",
-    };
+    // const body: Pedido = {
+    //   usuario: auth.uid,
+    //   paquete: paquete?._id,
+    //   precio: Number(precioSeleccionado),
+    //   importe: Number(precioSeleccionado),
+    //   fechaPago,
+    //   fechaVencimiento,
+    //   metodoPago: "Tarjeta",
+    //   vigencia: true,
+    //   idStripe: "123123",
+    // };
 
-    const resp = await anadirPaqueteInv("pedidos", body);
+    // const resp = await anadirPaqueteInv("pedidos", body);
 
-    await actualizarRol({
-      role: paquete?.nombre,
-      paqueteAdquirido: paquete?._id,
-    });
+    // await actualizarRol({
+    //   role: paquete?.nombre,
+    //   paqueteAdquirido: paquete?._id,
+    // });
 
-    if (resp.ok) {
-      toast.success(resp.msg);
-    }
-    setLoading(false);
+    // if (resp.ok) {
+    //   toast.success(resp.msg);
+    // }
+    // setLoading(false);
+    setMostrarPago(true);
   };
 
   return (
@@ -198,6 +201,7 @@ const Individual = () => {
           </Form>
         </Modal.Body>
       </Modal>
+      <Pagar mostrarPago={mostrarPago} />
     </div>
   );
 };

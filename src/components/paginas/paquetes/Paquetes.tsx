@@ -1,4 +1,5 @@
-import Loading from "../../ui/loading/Loading";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import Individual from "./Individual";
 import PaqueteMultiple from "./PaqueteMultiple";
 import styles from "./paquetes.module.css";
@@ -17,9 +18,13 @@ const intermedio = [
   { value: 10, label: "10" },
 ];
 
+const stripePromise = loadStripe(
+  "pk_test_51JaTznCGqe3RvXVDQxhEnjQ1bLyso24Cy7whGP7B39Y2a8qCZEsEHEtCi1zxSfx0XbWiAUfqW10HbeCiyg4phaTy00Qu5iDasP"
+);
+
 const PaquetesCards = () => {
   return (
-    <div>
+    <Elements stripe={stripePromise}>
       <section className="my-5">
         <div className="container">
           <div className="row">
@@ -53,7 +58,7 @@ const PaquetesCards = () => {
           </div>
         </div>
       </section>
-    </div>
+    </Elements>
   );
 };
 
