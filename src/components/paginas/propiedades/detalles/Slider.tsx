@@ -40,7 +40,9 @@ const Slider = ({ inmuebles }: Props) => {
         className="mySwiper"
       >
         {inmuebles.inmueble.imgs.length === 0 ? (
-          "No hay imágenes para mostrar"
+          <div className={styles.noImage}>
+            Aun no hay imágenes <br /> para mostrar :(
+          </div>
         ) : (
           <>
             {inmuebles.inmueble.imgs.map((image, i) => {
