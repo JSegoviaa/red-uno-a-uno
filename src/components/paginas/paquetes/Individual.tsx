@@ -12,6 +12,7 @@ import { anadirPaqueteInv } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 import { toast } from "react-toastify";
 import Pagar from "./Pagar";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const Individual = () => {
   const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
@@ -22,25 +23,23 @@ const Individual = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [mostrarPago, setMostrarPago] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const fechaPago = moment().format();
-    // const fechaVencimiento = moment(fechaPago).add(1, "y").format();
 
-    // setLoading(true);
+    if (!stripe || !elements) return;
 
-    // const body: Pedido = {
-    //   usuario: auth.uid,
-    //   paquete: paquete?._id,
-    //   precio: Number(precioSeleccionado),
-    //   importe: Number(precioSeleccionado),
-    //   fechaPago,
-    //   fechaVencimiento,
-    //   metodoPago: "Tarjeta",
-    //   vigencia: true,
-    //   idStripe: "123123",
-    // };
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
+    });
+
+    setLoading(true);
+
+    const fechaPago = moment().format();
+    const fechaVencimiento = moment(fechaPago).add(1, "y").format();
 
     // const resp = await anadirPaqueteInv("pedidos", body);
 
@@ -53,8 +52,46 @@ const Individual = () => {
     //   toast.success(resp.msg);
     // }
     // setLoading(false);
-    setMostrarPago(true);
+
+    if (!error) {
+      const pago = paymentMethod;
+      const body: Pedido = {
+        usuario: auth.uid,
+        paquete: paquete?._id,
+        precio: Number(precioSeleccionado),
+        importe: Number(precioSeleccionado),
+        fechaPago,
+        fechaVencimiento,
+        metodoPago: pago?.type,
+        vigencia: true,
+        idStripe: pago?.id,
+        totalUsuarios: 0,
+      };
+
+      try {
+        const resp = await fetch("http://localhost:8080/api/pedidos", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(body),
+        });
+
+        await actualizarRol({
+          role: paquete?.nombre,
+          paqueteAdquirido: paquete?._id,
+        });
+
+        // if (resp.ok) {
+        //   toast.success(resp.msg);
+        // }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    }
   };
+
+  const pagar = () => setMostrarPago(true);
 
   return (
     <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4">
@@ -140,7 +177,7 @@ const Individual = () => {
             Selecciona el tipo de plan que desea.
           </div>
           {loading ? <Loading /> : null}
-          <Form onSubmit={onSubmit}>
+          <div onClick={pagar}>
             <div className="row d-flex justify-content-center">
               <div className="col-sm-12 col-md-12 col-lg-9">
                 <div className="row d-flex justify-content-center">
@@ -198,10 +235,24 @@ const Individual = () => {
             <div className="text-center mt-5">
               <Button titulo="Siguiente" />
             </div>
-          </Form>
+          </div>
         </Modal.Body>
       </Modal>
-      <Pagar mostrarPago={mostrarPago} />
+
+      <Modal show={mostrarPago}>
+        <Form onSubmit={onSubmit}>
+          <div className="form-group">
+            <CardElement />
+          </div>
+
+          {!stripe ? (
+            <Button titulo="Pagar" btn="Disabled" />
+          ) : (
+            <div>{loading ? <Loading /> : <Button titulo="Pagar" />}</div>
+          )}
+        </Form>
+      </Modal>
+      {/* <Pagar mostrarPago={mostrarPago} /> */}
     </div>
   );
 };

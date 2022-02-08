@@ -19,7 +19,7 @@ const Pagar = ({ mostrarPago, cerrarPago }: Props) => {
 
     if (!stripe || !elements) return;
 
-    const { error, paymentMethod } = await stripe!.createPaymentMethod({
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
@@ -28,12 +28,14 @@ const Pagar = ({ mostrarPago, cerrarPago }: Props) => {
 
     if (!error) {
       const pago = paymentMethod;
+      const data = { stripeId: pago?.id };
+      console.log(data, "id");
 
       try {
-        const resp = await fetch("http://localhost:3001/api/checkout", {
+        const resp = await fetch("http://localhost:8080/api/pedidos", {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify(""),
+          body: JSON.stringify(data),
         });
       } catch (error) {
         console.log(error);
