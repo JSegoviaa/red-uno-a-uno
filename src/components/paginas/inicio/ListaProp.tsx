@@ -151,15 +151,21 @@ const ListaProp = () => {
                               >
                                 <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-12 p-0">
                                   <div className={styles.imgcontainer}>
-                                    <img
-                                      className={styles.cardImg}
-                                      src={
-                                        inmueble.imgs.length > 0
-                                          ? inmueble.imgs[0]
-                                          : ""
-                                      }
-                                      alt={inmueble.titulo}
-                                    />
+                                    {inmueble.imgs.length > 0 ?
+                                      <img
+                                        className={styles.cardImg}
+                                        src={
+                                          inmueble.imgs.length > 0
+                                            ? inmueble.imgs[0]
+                                            : ""
+                                        }
+                                        alt={inmueble.titulo}
+                                      /> :
+                                      <div className={styles.noImage}>
+                                        <div className={styles.textNoImage}>
+                                          Aún no hay <br /> imagenes <br /> para mostrar :(
+                                        </div>
+                                      </div>}
                                   </div>
                                 </div>
                                 <div className="col-sm-12 col-md-8 col-lg-8 col-xl-8 col-12">

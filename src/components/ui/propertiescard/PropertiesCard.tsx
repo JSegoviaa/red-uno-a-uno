@@ -48,7 +48,7 @@ const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
               </div> :
               <div className={styles.noImage}>
                 <div className={styles.noImageText}>
-                  Aun no hay imagenes para mostrar :(
+                  Aún no hay imagenes para mostrar :(
                 </div> 
               </div>
             }
