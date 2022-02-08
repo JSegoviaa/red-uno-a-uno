@@ -40,7 +40,7 @@ export const useUserInmuebles = (
 
   const obtenerInmueblesDeUsuario = async () => {
     const data = await fetch(
-      `${baseURL}/inmuebles/usuario/${uid}?orden=${orden}&desde=${desde}&limite=20`
+      `${baseURL}/inmuebles/usuario/${uid}?orden=${orden}&limite=20&desde=${desde}`
     );
     const resp = await data.json();
     setInmuebles(resp);
