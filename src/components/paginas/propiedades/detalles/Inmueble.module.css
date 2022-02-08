@@ -272,3 +272,11 @@
   border: none;
   
 }
+
+.noImage{
+  font-family: "Open Sans";
+  font-size: 3vw;
+  font-weight: bold;
+  margin: 150px 0px;
+  color: rgb(216, 216, 216);
+}

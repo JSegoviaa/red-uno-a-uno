@@ -33,24 +33,30 @@ const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
       <div className={`${styles.customCard} card pointer`}>
         <div onClick={goToProperty}>
           <div className={styles.imgContainer}>
-            <div
-              className={styles.cardImg}
-              style={{
-                backgroundImage: imgs.length > 0 ? `url(${imgs[0]})` : "",
-              }}
-            >
-              {isActive ? null : (
-                <div className={styles.imgPausa}>
-                  <div className={styles.imgTituloPausa}>Inmueble en pausa</div>
-                </div>
-              )}
-            </div>
+            {imgs.length > 0 ?
+              <div
+                className={styles.cardImg}
+                style={{
+                  backgroundImage: imgs.length > 0 ? `url(${imgs[0]})` : "",
+                }}
+              >
+                {isActive ? null : (
+                  <div className={styles.imgPausa}>
+                    <div className={styles.imgTituloPausa}>Inmueble en pausa</div>
+                  </div>
+                )}
+              </div> :
+              <div className={styles.noImage}>
+                <div className={styles.noImageText}>
+                  Aún no hay imagenes para mostrar :(
+                </div> 
+              </div>
+            }
           </div>
           <div className={styles.tituloContainer}>
             <div
-              className={`${
-                isActive ? styles.proContent : styles.proContentFalse
-              } my-2`}
+              className={`${isActive ? styles.proContent : styles.proContentFalse
+                } my-2`}
             >
               {titulo}
             </div>
