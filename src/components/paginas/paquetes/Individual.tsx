@@ -10,6 +10,7 @@ import Button from "../../ui/button/Button";
 import Loading from "../../ui/loading/Loading";
 import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
+import styleModal from "./IndividualModal.module.css";
 import { anadirPaqueteInv } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 
@@ -236,18 +237,20 @@ const Individual = () => {
         </Modal.Body>
       </Modal>
 
-      <Modal show={mostrarPago} onHide={ocultarPago}>
-        <Modal.Header closeButton />
+      <Modal show={mostrarPago} onHide={ocultarPago} contentClassName={styleModal.pagoS2}>
+        <Modal.Header closeButton className={styleModal.headerMod} />
         <Form onSubmit={onSubmit}>
-          <div className="form-group">
+          <div className="form-group px-4">
             <CardElement />
           </div>
 
-          {!stripe ? (
-            <Button titulo="Pagar" btn="Disabled" />
-          ) : (
-            <div>{loading ? <Loading /> : <Button titulo="Pagar" />}</div>
-          )}
+          <div className="text-center my-3">
+            {!stripe ? (
+              <Button titulo="Pagar" btn="Disabled" />
+            ) : (
+              <div>{loading ? <Loading /> : <Button titulo="Pagar" />}</div>
+            )}
+          </div>
         </Form>
       </Modal>
     </div>
