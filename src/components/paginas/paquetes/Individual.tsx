@@ -86,8 +86,6 @@ const Individual = () => {
 
   const ocultarPago = () => setMostrarPago(false);
 
-  console.log(precioSeleccionado, "????[-");
-
   return (
     <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4">
       <div className={styles.paquetesCard}>

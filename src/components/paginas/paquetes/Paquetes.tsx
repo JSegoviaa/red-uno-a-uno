@@ -24,7 +24,10 @@ const stripePromise = loadStripe(
 
 const PaquetesCards = () => {
   return (
-    <Elements stripe={stripePromise}>
+    <Elements
+      stripe={stripePromise}
+      options={{ appearance: { theme: "stripe" } }}
+    >
       <section className="my-5">
         <div className="container">
           <div className="row">
