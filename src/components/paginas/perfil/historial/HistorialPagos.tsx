@@ -76,12 +76,14 @@ const HistorialPagos = () => {
               </div>
             </div>
           )}
-          <div className="d-flex justify-content-center">
-            <Pagination>
-              <Pagination.Prev onClick={handlePrevPage} />
-              <Pagination.Next onClick={handleNextPage} />
-            </Pagination>
-          </div>
+          {total > 15 ? (
+            <div className="d-flex justify-content-center">
+              <Pagination>
+                <Pagination.Prev onClick={handlePrevPage} />
+                <Pagination.Next onClick={handleNextPage} />
+              </Pagination>
+            </div>
+          ) : null}
         </div>
       )}
     </div>
