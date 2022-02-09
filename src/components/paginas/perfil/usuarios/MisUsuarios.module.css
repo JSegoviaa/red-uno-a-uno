@@ -1,44 +1,53 @@
 .customTable {
-    width: 100%;
-    margin-bottom: 50px;
-    background-color: #fffdfd;
-  }
-  .customTable th{
-      font-family: "Open Sans";
-      color: #7149BC;
-      padding-left: 8px;
-  }
-  .customTable tr:nth-child(odd) {
-    background-color: #ececec;
-  }
-  
-  .content {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    color: #5e5e5e;
-  }
-  
-  .tNumber {
-    font-family: "Open Sans";
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: center;
-    color: #5e5e5e;
-  }
-  .thover:hover {
-    background: #ffe5da;
-    outline: 1px solid #e65a1f !important;
-    box-sizing: border-box;
-  }
-  
+  width: 100%;
+  margin-bottom: 50px;
+  background-color: #fffdfd;
+}
+.customTable th {
+  font-family: "Open Sans";
+  color: #7149bc;
+  padding-left: 8px;
+}
+.customTable tr:nth-child(odd) {
+  background-color: #ececec;
+}
 
-  .btnBorrar{
-      border: 1px solid crimson;
-      border-radius: 8px;
-      background-color: crimson;
-      color: white;
-      font-family: "Open Sans";
-  }
+.content {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  color: #5e5e5e;
+}
+
+.tNumber {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  color: #5e5e5e;
+}
+.thover:hover {
+  background: #ffe5da;
+  outline: 1px solid #e65a1f !important;
+  box-sizing: border-box;
+}
+
+.btnBorrar {
+  border: 1px solid crimson;
+  border-radius: 8px;
+  background-color: crimson;
+  color: white;
+  font-family: "Open Sans";
+}
+
+.relative {
+  position: relative;
+}
+.mostrarContraseña {
+  font-size: 19px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}

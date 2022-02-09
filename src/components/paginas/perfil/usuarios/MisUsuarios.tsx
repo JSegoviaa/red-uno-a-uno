@@ -1,5 +1,6 @@
-import React, { FormEvent } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { Container, Form, Row } from "react-bootstrap";
+import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useForm } from "../../../../hooks/useForm";
 import Button from "../../../ui/button/Button";
 import styles from "./MisUsuarios.module.css";
@@ -43,6 +44,9 @@ const usuarios = [
 ];
 
 const MisUsuarios = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const { auth } = useContext(AuthContext);
   const { formulario, handleChange, setFormulario } = useForm({
     nombre: "",
     apellido: "",
@@ -64,6 +68,10 @@ const MisUsuarios = () => {
     });
   };
 
+  const mostrarContraseña = () => setShowPassword(!showPassword);
+
+  const mostrarContraseña2 = () => setShowPassword2(!showPassword2);
+
   const borrarUsuario = async () => {
     console.log("Usuario borrado");
   };
@@ -79,6 +87,7 @@ const MisUsuarios = () => {
                   <Form.Group className="mb-3">
                     <Form.Label>Nombre(s)</Form.Label>
                     <Form.Control
+                      autoComplete="off"
                       value={nombre}
                       onChange={handleChange}
                       name="nombre"
@@ -90,6 +99,7 @@ const MisUsuarios = () => {
                   <Form.Group className="mb-3">
                     <Form.Label>Apellidos</Form.Label>
                     <Form.Control
+                      autoComplete="off"
                       value={apellido}
                       onChange={handleChange}
                       name="apellido"
@@ -103,6 +113,7 @@ const MisUsuarios = () => {
                   <Form.Group className="mb-3">
                     <Form.Label>Correo</Form.Label>
                     <Form.Control
+                      autoComplete="off"
                       type="email"
                       value={correo}
                       onChange={handleChange}
@@ -114,23 +125,39 @@ const MisUsuarios = () => {
                 <div className="col-sm-12 col-md-12 col-lg-4">
                   <Form.Group className="mb-3">
                     <Form.Label>Contraseña</Form.Label>
-                    <Form.Control
-                      type="password"
-                      value={password}
-                      onChange={handleChange}
-                      name="password"
-                    />
+                    <div className={styles.relative}>
+                      <Form.Control
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={handleChange}
+                        name="password"
+                      />
+                      <i
+                        onClick={mostrarContraseña}
+                        className={`${
+                          showPassword ? "bi bi-eye-slash" : "bi bi-eye"
+                        } ${styles.mostrarContraseña}`}
+                      />
+                    </div>
                   </Form.Group>
                 </div>
                 <div className="col-sm-12 col-md-12 col-lg-4">
                   <Form.Group className="mb-3">
                     <Form.Label>Confirma contraseña</Form.Label>
-                    <Form.Control
-                      type="password"
-                      value={password2}
-                      onChange={handleChange}
-                      name="password2"
-                    />
+                    <div className={styles.relative}>
+                      <Form.Control
+                        type={showPassword2 ? "text" : "password"}
+                        value={password2}
+                        onChange={handleChange}
+                        name="password2"
+                      />
+                      <i
+                        onClick={mostrarContraseña2}
+                        className={`${
+                          showPassword2 ? "bi bi-eye-slash" : "bi bi-eye"
+                        } ${styles.mostrarContraseña}`}
+                      />
+                    </div>
                   </Form.Group>
                 </div>
               </div>
@@ -144,51 +171,50 @@ const MisUsuarios = () => {
         </Container>
       </Form>
       <br />
-      <section>
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="table-responsive-xxl">
-                <table className={`${styles.customTable} table caption-top`}>
-                  <caption>Total de usuarios permitidos: 9</caption>
 
-                  <th className="text-center">#</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Correo</th>
-                  <th>Estatus</th>
-                  <th></th>
+      <Container>
+        <Row>
+          <div className="col-12">
+            <div className="table-responsive-xxl">
+              <table className={`${styles.customTable} table caption-top`}>
+                <caption>Total de usuarios permitidos: {auth.usuarios}</caption>
 
-                  <tbody>
-                    {usuarios.map((usuario) => (
-                      <tr key={usuario.id} className={`${styles.thover} `}>
-                        <td className={styles.tNumber}>{usuario.id}</td>
-                        <td className={styles.content}>{usuario.nombre}</td>
-                        <td className={styles.content}>{usuario.apellido}</td>
-                        <td className={styles.content}>{usuario.correo} </td>
-                        <td className={styles.sign}>
-                          {usuario.estado ? "Activo" : "Inactivo"}
-                        </td>
-                        <td className={`${styles.content} text-center`}>
-                          <button
-                            className={styles.btnBorrar}
-                            onClick={borrarUsuario}
-                          >
-                            <img
-                              src="/images/icons/properties-icons/4-white.png"
-                              alt="..."
-                            />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                <th className="text-center">#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Estatus</th>
+                <th></th>
+
+                <tbody>
+                  {usuarios.map((usuario, i) => (
+                    <tr key={usuario.id} className={`${styles.thover}`}>
+                      <td className={styles.tNumber}>{i + 1}</td>
+                      <td className={styles.content}>{usuario.nombre}</td>
+                      <td className={styles.content}>{usuario.apellido}</td>
+                      <td className={styles.content}>{usuario.correo} </td>
+                      <td className={styles.sign}>
+                        {usuario.estado ? "Activo" : "Inactivo"}
+                      </td>
+                      <td className={`${styles.content} text-center`}>
+                        <button
+                          className={styles.btnBorrar}
+                          onClick={borrarUsuario}
+                        >
+                          <img
+                            src="/images/icons/properties-icons/4-white.png"
+                            alt="borrar usuario"
+                          />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        </div>
-      </section>
+        </Row>
+      </Container>
     </>
   );
 };

@@ -82,4 +82,5 @@ export interface Usuario {
   youtube: string;
   uid: string;
   paqueteAdquirido: string;
+  usuarios: number | undefined;
 }

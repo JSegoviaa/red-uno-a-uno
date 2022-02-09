@@ -68,6 +68,7 @@ const initialState: Auth = {
   logo: undefined,
   role: undefined,
   paqueteAdquirido: undefined,
+  usuarios: undefined,
 };
 
 export const AuthProvider: FC = ({ children }) => {
@@ -110,6 +111,7 @@ export const AuthProvider: FC = ({ children }) => {
         logo: usuario.logo,
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
+        usuarios: usuario.usuarios,
       });
     }
     return resp;
@@ -151,6 +153,7 @@ export const AuthProvider: FC = ({ children }) => {
         logo: usuario.logo,
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
+        usuarios: usuario.usuarios,
       });
     }
 
@@ -182,6 +185,7 @@ export const AuthProvider: FC = ({ children }) => {
         logo: undefined,
         role: undefined,
         paqueteAdquirido: undefined,
+        usuarios: undefined,
       });
 
       return false;
@@ -213,6 +217,7 @@ export const AuthProvider: FC = ({ children }) => {
         logo: usuario.logo,
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
+        usuarios: usuario.usuarios,
       });
       return true;
     } else {
@@ -237,6 +242,7 @@ export const AuthProvider: FC = ({ children }) => {
         logo: undefined,
         role: undefined,
         paqueteAdquirido: undefined,
+        usuarios: undefined,
       });
 
       return false;
@@ -266,6 +272,7 @@ export const AuthProvider: FC = ({ children }) => {
       logo: undefined,
       role: undefined,
       paqueteAdquirido: undefined,
+      usuarios: undefined,
     });
   };
 
@@ -298,6 +305,7 @@ export const AuthProvider: FC = ({ children }) => {
         logo: usuario.logo,
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
+        usuarios: usuario.usuarios,
       });
 
       toast.success(resp.msg);
@@ -338,6 +346,7 @@ export const AuthProvider: FC = ({ children }) => {
         logo: usuario.logo,
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
+        usuarios: usuario.usuarios,
       });
     }
 
@@ -374,6 +383,7 @@ export const AuthProvider: FC = ({ children }) => {
         logo: usuario.logo,
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
+        usuarios: usuario.usuarios,
       });
 
       toast.success(resp.msg);

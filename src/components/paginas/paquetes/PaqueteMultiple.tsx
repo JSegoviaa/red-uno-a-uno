@@ -79,13 +79,13 @@ const PaqueteMultiple = (props: Props) => {
         idStripe: pago?.id,
         totalUsuarios: avanzado ? usuarios : usuariosSeleccionados,
       };
-      console.log(body);
       try {
         const resp = await anadirPaqueteInv("pedidos", body);
 
         await actualizarRol({
           role: titulo,
           paqueteAdquirido: id,
+          usuarios: avanzado ? usuarios : usuariosSeleccionados,
         });
 
         if (resp.ok) {

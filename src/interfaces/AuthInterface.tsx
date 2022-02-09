@@ -19,6 +19,7 @@ export interface Auth {
   logo: string | undefined;
   role: string | undefined;
   paqueteAdquirido: string | undefined;
+  usuarios: number | undefined;
 }
 
 export interface Resp {
