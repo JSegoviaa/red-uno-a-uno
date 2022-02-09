@@ -1,19 +1,22 @@
 import { FormEvent, useContext, useState } from "react";
-import {
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { useRouter } from "next/router";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Form, Modal } from "react-bootstrap";
 import Select from "react-select";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { formatPrice } from "../../../helpers/formatPrice";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../ui/button/Button";
 import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
+import moment from "moment";
+import { Pedido } from "../../../interfaces/PedidosInterface";
+import { anadirPaqueteInv } from "../../../helpers/fetch";
+import Loading from "../../ui/loading/Loading";
 
 interface Props {
+  id: string;
   titulo: string;
   precio: number;
   descripcion: string;
@@ -23,10 +26,12 @@ interface Props {
 }
 
 const PaqueteMultiple = (props: Props) => {
-  const { titulo, precio, descripcion, options, avanzado, usuario } = props;
-  const { auth, abrirLogin } = useContext(AuthContext);
+  const { titulo, precio, descripcion, options, avanzado, usuario, id } = props;
+  const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [mostrarPago, setMostrarPago] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
   const [usuariosSeleccionados, setUsuariosSeleccionados] =
@@ -42,12 +47,59 @@ const PaqueteMultiple = (props: Props) => {
   const pagar = () => {
     handleNext();
     setMostrarPago(true);
+    !avanzado ? setUsuariosSeleccionados(usuariosSeleccionados.value) : null;
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!stripe || !elements) return;
+
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement)!,
+    });
+
+    setLoading(true);
+
+    const fechaPago = moment().format();
+    const fechaVencimiento = moment(fechaPago).add(1, "y").format();
+
+    if (!error) {
+      const pago = paymentMethod;
+      const body: Pedido = {
+        usuario: auth.uid,
+        paquete: id,
+        precio: Number(precio),
+        importe: Number(precio) * usuariosSeleccionados,
+        fechaPago,
+        fechaVencimiento,
+        metodoPago: pago?.type,
+        vigencia: true,
+        idStripe: pago?.id,
+        totalUsuarios: avanzado ? usuarios : usuariosSeleccionados,
+      };
+      console.log(body);
+      try {
+        const resp = await anadirPaqueteInv("pedidos", body);
+
+        await actualizarRol({
+          role: titulo,
+          paqueteAdquirido: id,
+        });
+
+        if (resp.ok) {
+          toast.success(resp.msg);
+          ocultarPago();
+          router.push("/perfil/historial-de-pagos");
+        }
+        if (!resp.ok) toast.error(resp.msg);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    }
   };
 
   return (
@@ -98,7 +150,7 @@ const PaqueteMultiple = (props: Props) => {
           <div className={`${styles.S2content} text-center mt-5 mb-4`}>
             Especifique el número de <br /> usuarios a contratar.
           </div>
-          <Form onSubmit={onSubmit}>
+          <div>
             {avanzado ? (
               <>
                 <div className="row d-flex justify-content-center">
@@ -186,13 +238,59 @@ const PaqueteMultiple = (props: Props) => {
                 </div>
               </>
             )}
-          </Form>
+          </div>
         </Modal.Body>
       </Modal>
 
       <Modal show={mostrarPago} onHide={ocultarPago}>
-        <Modal.Header closeButton className={styles.modalS2header} />
-        <PaymentElement id="payment-element" />
+        <Modal.Header closeButton className={styles.modalS1header} />
+        <Modaltitle titulo={titulo} />
+
+        <div className={`${styles.S1content} text-center`}>
+          Cantidad a pagar:{" "}
+          <span className={`${styles.precio}`}>
+            {avanzado
+              ? formatPrice(Number(precio) * Number(usuarios))
+              : formatPrice(Number(precio) * usuariosSeleccionados)}
+            MXN
+          </span>
+        </div>
+
+        <br />
+        <Form onSubmit={onSubmit}>
+          <div className="form-group px-4">
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    iconColor: "#2C2C2C",
+                    color: "#2C2C2C",
+                    fontWeight: "500",
+                    fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+                    fontSize: "16px",
+                    "::placeholder": {
+                      color: "#757575",
+                    },
+                  },
+                  invalid: {
+                    iconColor: "#E44122",
+                    color: "#E44122",
+                  },
+                },
+              }}
+            />
+          </div>
+
+          <div className="text-center my-3">
+            {!stripe ? (
+              <Button titulo="Pagar" btn="Disabled" />
+            ) : (
+              <div>
+                {loading ? <Loading /> : <Button titulo="Finalizar pedido" />}
+              </div>
+            )}
+          </div>
+        </Form>
       </Modal>
     </div>
   );

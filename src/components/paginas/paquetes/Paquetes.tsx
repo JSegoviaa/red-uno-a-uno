@@ -1,5 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { usePaquetes } from "../../../hooks/usePaquetes";
 import Individual from "./Individual";
 import PaqueteMultiple from "./PaqueteMultiple";
 import styles from "./paquetes.module.css";
@@ -23,6 +24,8 @@ const stripePromise = loadStripe(
 );
 
 const PaquetesCards = () => {
+  const { paquetes } = usePaquetes();
+
   return (
     <Elements
       stripe={stripePromise}
@@ -32,26 +35,32 @@ const PaquetesCards = () => {
         <div className="container">
           <div className="row">
             <Individual />
-            <PaqueteMultiple
-              titulo="Básico"
-              precio={3199}
-              descripcion="Precio especial al contratar de 3 a 5 usuarios."
-              options={basico}
-              usuario={3}
-            />
-            <PaqueteMultiple
-              usuario={6}
-              titulo="Intermedio"
-              precio={2799}
-              descripcion="Precio especial al contratar de 6 a 10 usuarios."
-              options={intermedio}
-            />
-            <PaqueteMultiple
-              titulo="Avanzado"
-              precio={2499}
-              descripcion="Precio especial de 11 usuarios en adelante."
-              avanzado
-            />
+            <>
+              {paquetes.map((paquete) => (
+                <PaqueteMultiple
+                  key={paquete._id}
+                  id={paquete._id}
+                  titulo={paquete.nombre}
+                  precio={paquete.precioAnual}
+                  descripcion={paquete.descripcion}
+                  usuario={
+                    paquete.nombre === "Básico"
+                      ? 3
+                      : paquete.nombre === "Intermedio"
+                      ? 6
+                      : 11
+                  }
+                  options={
+                    paquete.nombre === "Básico"
+                      ? basico
+                      : paquete.nombre === "Intermedio"
+                      ? intermedio
+                      : null
+                  }
+                  avanzado={paquete.nombre === "Avanzado" ? true : false}
+                />
+              ))}
+            </>
 
             <div className="col-12">
               <div className={`${styles.advice} text-center`}>

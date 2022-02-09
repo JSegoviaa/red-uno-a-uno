@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { production } from "../credentials/credentials";
-import { PaqueteIndividual } from "../interfaces/PaquetesInterface";
+import { development, production } from "../credentials/credentials";
+import { Paquete, PaqueteIndividual } from "../interfaces/PaquetesInterface";
 
 export const usePaqueteInd = () => {
   const [paquete, setPaquete] = useState<PaqueteIndividual>();
@@ -19,4 +19,23 @@ export const usePaqueteInd = () => {
   }, []);
 
   return { paquete, cargando };
+};
+
+export const usePaquetes = () => {
+  const [paquetes, setPaquetes] = useState<Paquete[]>([]);
+  const [cargando, setCargando] = useState(true);
+
+  const obtenerPaquetes = async () => {
+    const resp = await fetch(`${development}/paquetes?desde=1`);
+    const data = await resp.json();
+
+    setPaquetes(data.paquetes);
+    setCargando(false);
+  };
+
+  useEffect(() => {
+    obtenerPaquetes();
+  }, []);
+
+  return { paquetes, cargando };
 };
