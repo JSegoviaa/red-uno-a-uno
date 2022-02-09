@@ -70,7 +70,6 @@ const Individual = () => {
 
       try {
         const resp = await anadirPaqueteInv("pedidos", body);
-
         await actualizarRol({
           role: paquete?.nombre,
           paqueteAdquirido: paquete?._id,
@@ -81,6 +80,9 @@ const Individual = () => {
           ocultarPago();
           router.push("/perfil/historial-de-pagos");
         }
+
+        if (!resp.ok) toast.error(resp.msg);
+
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -246,12 +248,13 @@ const Individual = () => {
         <Modal.Header closeButton className={styles.modalS1header} />
         <Modaltitle titulo="Paquete individual" />
 
-        <div className="text-center">
-          Cantidad a pagar: {formatPrice(Number(precioSeleccionado))} MXN
+        <div className={`${styles.S1content} text-center`}>
+          Cantidad a pagar:{" "}
+          <span className={`${styles.precio}`}>
+            {formatPrice(Number(precioSeleccionado))} MXN
+          </span>
         </div>
-        <div className="text-center">
-          Ingrese los datos para continuar con su compra
-        </div>
+
         <br />
         <Form onSubmit={onSubmit}>
           <div className="form-group px-4">
