@@ -144,13 +144,21 @@ const Individual = () => {
             </ul>
             <div className={`${styles.ajusteBtn} text-center`}>
               {auth.uid ? (
-                <button
-                  onClick={handleShow}
-                  type="button"
-                  className={styles.btnContratar}
-                >
-                  CONTRATAR
-                </button>
+                <>
+                  {auth.role === "Individual" ? (
+                    <button type="button" className={styles.btnContratar}>
+                      CONTRATADO
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleShow}
+                      type="button"
+                      className={styles.btnContratar}
+                    >
+                      CONTRATAR
+                    </button>
+                  )}
+                </>
               ) : (
                 <button
                   onClick={abrirLogin}
