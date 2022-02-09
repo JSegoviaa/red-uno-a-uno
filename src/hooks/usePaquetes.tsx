@@ -26,7 +26,7 @@ export const usePaquetes = () => {
   const [cargando, setCargando] = useState(true);
 
   const obtenerPaquetes = async () => {
-    const resp = await fetch(`${development}/paquetes?desde=1`);
+    const resp = await fetch(`${production}/paquetes?desde=1`);
     const data = await resp.json();
 
     setPaquetes(data.paquetes);

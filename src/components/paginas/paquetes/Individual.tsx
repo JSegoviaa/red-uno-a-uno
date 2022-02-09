@@ -146,17 +146,23 @@ const Individual = () => {
               {auth.uid ? (
                 <>
                   {auth.role === "Individual" ? (
-                    <button type="button" className={styles.btnContratar}>
-                      CONTRATADO
-                    </button>
+                    <Button titulo="Contratado" btn="Disabled" />
                   ) : (
-                    <button
-                      onClick={handleShow}
-                      type="button"
-                      className={styles.btnContratar}
-                    >
-                      CONTRATAR
-                    </button>
+                    <>
+                      {auth.role === "Básico" ||
+                      auth.role === "Intermedio" ||
+                      auth.role === "Avanzado" ? (
+                        <Button titulo="Contratar" btn="Disabled" />
+                      ) : (
+                        <button
+                          onClick={handleShow}
+                          type="button"
+                          className={styles.btnContratar}
+                        >
+                          CONTRATAR
+                        </button>
+                      )}
+                    </>
                   )}
                 </>
               ) : (

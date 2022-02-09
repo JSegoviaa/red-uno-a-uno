@@ -122,13 +122,31 @@ const PaqueteMultiple = (props: Props) => {
         <div className={`${styles.ajusteBtn} text-center`}>
           <>
             {auth.uid ? (
-              <button
-                onClick={handleShow}
-                type="button"
-                className={styles.btnContratar}
-              >
-                CONTRATAR
-              </button>
+              <>
+                {auth.role === titulo ? (
+                  <Button titulo="Contratado" btn="Disabled" />
+                ) : (
+                  <>
+                    {auth.role === "Intermedio" ? (
+                      <Button titulo="Contratar" btn="Disabled" />
+                    ) : (
+                      <>
+                        {auth.role === "Avanzado" ? (
+                          <Button titulo="Contratar" btn="Disabled" />
+                        ) : (
+                          <button
+                            onClick={handleShow}
+                            type="button"
+                            className={styles.btnContratar}
+                          >
+                            CONTRATAR
+                          </button>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
             ) : (
               <button
                 onClick={abrirLogin}

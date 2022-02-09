@@ -1,11 +1,7 @@
-import { ToastContainer } from "react-toastify";
+import { PrivateRoute } from "../../hooks/usePrivateRoute";
 
 const EditarInmueble = () => {
-  return (
-    <div>
-      <ToastContainer />
-    </div>
-  );
+  return <div></div>;
 };
 
-export default EditarInmueble;
+export default PrivateRoute(EditarInmueble);

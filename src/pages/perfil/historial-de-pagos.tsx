@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import HistorialPagos from "../../components/paginas/perfil/historial/HistorialPagos";
 import SEO from "../../components/seo/SEO";
 import Titulo from "../../components/ui/titulo/Titulo";
+import { PrivateRoute } from "../../hooks/usePrivateRoute";
 
 const HistorialDePagos = () => {
   const router = useRouter();
@@ -15,4 +16,4 @@ const HistorialDePagos = () => {
   );
 };
 
-export default HistorialDePagos;
+export default PrivateRoute(HistorialDePagos);
