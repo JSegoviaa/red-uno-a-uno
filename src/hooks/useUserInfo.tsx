@@ -107,10 +107,10 @@ export const useMisUsuarios = (uid: string | undefined | null) => {
   const [cargando, setCargando] = useState(true);
 
   const obtenerMisUsuarios = async () => {
-    const res = await fetch(`${devURL}/usuarios-pagados/usuarios/${uid}`);
+    const res = await fetch(`${baseURL}/usuarios/propietario/${uid}`);
     const data = await res.json();
 
-    setMisUsuarios(data.usuariosPagados);
+    setMisUsuarios(data.misUsuarios);
     setCargando(false);
   };
 
@@ -118,5 +118,5 @@ export const useMisUsuarios = (uid: string | undefined | null) => {
     obtenerMisUsuarios();
   }, []);
 
-  return { misUsuarios, cargando };
+  return { misUsuarios, cargando, setMisUsuarios };
 };

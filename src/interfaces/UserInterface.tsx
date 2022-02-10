@@ -83,4 +83,5 @@ export interface Usuario {
   uid: string;
   paqueteAdquirido: string;
   usuarios: number | undefined;
+  propietario: string | undefined;
 }

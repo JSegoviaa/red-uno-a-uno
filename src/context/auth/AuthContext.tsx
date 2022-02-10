@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import {
   actualizarPerfilFetch,
   actualizarRolUsuario,
+  crearUsuarioFetch,
   fetchConToken,
   fetchSinToken,
   subirFotoPerfil,
@@ -28,6 +29,14 @@ interface ContextProps {
     correo: string,
     password: string,
     role: string
+  ) => Promise<Resp>;
+  crearUsuario: (
+    nombre: string,
+    apellido: string,
+    correo: string,
+    password: string,
+    role: string,
+    propietario: string | undefined | null
   ) => Promise<Resp>;
   signInWithGoogle: () => void;
   signInWithFacebook: () => void;
@@ -69,6 +78,7 @@ const initialState: Auth = {
   role: undefined,
   paqueteAdquirido: undefined,
   usuarios: undefined,
+  propietario: undefined,
 };
 
 export const AuthProvider: FC = ({ children }) => {
@@ -112,6 +122,7 @@ export const AuthProvider: FC = ({ children }) => {
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
+        propietario: usuario.propietario,
       });
     }
     return resp;
@@ -154,6 +165,55 @@ export const AuthProvider: FC = ({ children }) => {
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
+        propietario: usuario.propietario,
+      });
+    }
+
+    return resp;
+  };
+
+  const crearUsuario = async (
+    nombre: string,
+    apellido: string,
+    correo: string,
+    password: string,
+    role: string,
+    propietario: string | undefined | null
+  ): Promise<Resp> => {
+    const resp = await crearUsuarioFetch("usuarios/propietario", {
+      nombre,
+      apellido,
+      correo,
+      password,
+      role,
+      propietario,
+    });
+    if (resp.token) {
+      localStorage.setItem("token", resp.token);
+      const { usuario } = resp;
+      setAuth({
+        uid: usuario.uid,
+        checking: false,
+        logged: true,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        correo: usuario.correo,
+        direccionFisica: usuario.direccionFisica,
+        facebookpage: usuario.facebookpage,
+        instagram: usuario.instagram,
+        nombreInmobiliaria: usuario.nombreInmobiliaria,
+        telefonoOficina: usuario.telefonoOficina,
+        telefonoPersonal: usuario.telefonoPersonal,
+        twitter: usuario.twitter,
+        youtube: usuario.youtube,
+        perfilEmpresarial: usuario.perfilEmpresarial,
+        linkedin: auth.linkedin,
+        img: usuario.img,
+        logo: usuario.logo,
+        role: usuario.role,
+        paqueteAdquirido: usuario.paqueteAdquirido,
+        usuarios: usuario.usuarios,
+        propietario: usuario.propietario,
       });
     }
 
@@ -186,6 +246,7 @@ export const AuthProvider: FC = ({ children }) => {
         role: undefined,
         paqueteAdquirido: undefined,
         usuarios: undefined,
+        propietario: undefined,
       });
 
       return false;
@@ -218,6 +279,7 @@ export const AuthProvider: FC = ({ children }) => {
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
+        propietario: usuario.propietario,
       });
       return true;
     } else {
@@ -243,6 +305,7 @@ export const AuthProvider: FC = ({ children }) => {
         role: undefined,
         paqueteAdquirido: undefined,
         usuarios: undefined,
+        propietario: undefined,
       });
 
       return false;
@@ -273,6 +336,7 @@ export const AuthProvider: FC = ({ children }) => {
       role: undefined,
       paqueteAdquirido: undefined,
       usuarios: undefined,
+      propietario: undefined,
     });
   };
 
@@ -306,6 +370,7 @@ export const AuthProvider: FC = ({ children }) => {
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
+        propietario: usuario.propietario,
       });
 
       toast.success(resp.msg);
@@ -347,6 +412,7 @@ export const AuthProvider: FC = ({ children }) => {
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
+        propietario: usuario.propietario,
       });
     }
 
@@ -384,6 +450,7 @@ export const AuthProvider: FC = ({ children }) => {
         role: usuario.role,
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
+        propietario: usuario.propietario,
       });
 
       toast.success(resp.msg);
@@ -421,6 +488,7 @@ export const AuthProvider: FC = ({ children }) => {
         abrirRegistro,
         cerrarRegistro,
         actualizarRol,
+        crearUsuario,
       }}
     >
       {children}

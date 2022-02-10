@@ -14,6 +14,10 @@ import {
   InmueblesResponse,
   SubirImagenesInmueble,
 } from "../interfaces/InmueblesInterface";
+import {
+  CrearUsuarioResp,
+  UsuariosPagado,
+} from "../interfaces/MisUsuariosInterface";
 import { Pedido, PedidoIndividualResp } from "../interfaces/PedidosInterface";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
 
@@ -39,6 +43,20 @@ export const fetchSinToken = async (
 
     return await resp.json();
   }
+};
+
+export const crearUsuarioFetch = async (
+  endpoint: string,
+  data: RegisterData
+): Promise<Resp> => {
+  const url = `${baseURL}/${endpoint}`;
+
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return await resp.json();
 };
 
 export const fetchConToken = async (
@@ -297,6 +315,22 @@ export const anadirPaqueteInv = async (
   data: Pedido
 ): Promise<PedidoIndividualResp> => {
   const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await resp.json();
+};
+
+export const agregarUsuario = async (
+  endpoint: string,
+  data: UsuariosPagado
+): Promise<CrearUsuarioResp> => {
+  const url = `${devURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
   const resp = await fetch(url, {

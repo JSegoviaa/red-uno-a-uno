@@ -20,6 +20,7 @@ export interface Auth {
   role: string | undefined;
   paqueteAdquirido: string | undefined;
   usuarios: number | undefined;
+  propietario: string | undefined;
 }
 
 export interface Resp {
@@ -42,6 +43,7 @@ export interface RegisterData {
   role?: string;
   correo: string;
   password: string;
+  propietario?: string | undefined | null;
 }
 
 export interface SubirFoto {
