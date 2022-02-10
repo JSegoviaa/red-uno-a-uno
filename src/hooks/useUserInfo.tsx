@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { InmuebleContext } from "../context/inmuebles/InmuebleContext";
 import { production } from "../credentials/credentials";
+import { Auth } from "../interfaces/AuthInterface";
 import { InmuebleUsuario } from "../interfaces/CrearInmuebleInterface";
 import { HistorialResp, PedidosUsuario } from "../interfaces/Historial";
 import { UsuariosPagado } from "../interfaces/MisUsuariosInterface";
@@ -103,7 +104,8 @@ export const useHistorialPagos = (
 };
 
 export const useMisUsuarios = (uid: string | undefined | null) => {
-  const [misUsuarios, setMisUsuarios] = useState<UsuariosPagado[]>([]);
+  // const [misUsuarios, setMisUsuarios] = useState<UsuariosPagado[]>([]);
+  const [misUsuarios, setMisUsuarios] = useState<any>([]);
   const [cargando, setCargando] = useState(true);
 
   const obtenerMisUsuarios = async () => {

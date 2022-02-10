@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useForm } from "../../../../hooks/useForm";
 import { useMisUsuarios } from "../../../../hooks/useUserInfo";
+import { UsuariosPagado } from "../../../../interfaces/MisUsuariosInterface";
 import Button from "../../../ui/button/Button";
 import Loading from "../../../ui/loading/Loading";
 import styles from "./MisUsuarios.module.css";
@@ -43,7 +44,10 @@ const MisUsuarios = () => {
         propietario
       );
 
-      // setMisUsuarios([...misUsuarios, resp.usuario]);
+      if (resp.ok) toast.success(resp.msg);
+
+      setMisUsuarios([...misUsuarios, resp.usuario]);
+
       if (resp.errors) {
         resp.errors.map((e) => {
           return toast.error(e.msg);
@@ -197,27 +201,36 @@ const MisUsuarios = () => {
                       <Loading />
                     ) : (
                       <>
-                        {misUsuarios.map((usuario, i) => (
-                          <tr key={usuario.uid} className={`${styles.thover}`}>
-                            <td className={styles.tNumber}>{i + 1}</td>
-                            <td className={styles.content}>{usuario.nombre}</td>
-                            <td className={styles.content}>
-                              {usuario.apellido}
-                            </td>
-                            <td className={styles.content}>{usuario.correo}</td>
-                            <td className={`${styles.content} text-center`}>
-                              <button
-                                className={styles.btnBorrar}
-                                onClick={borrarUsuario}
-                              >
-                                <img
-                                  src="/images/icons/properties-icons/4-white.png"
-                                  alt="borrar usuario"
-                                />
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
+                        {misUsuarios.map(
+                          (usuario: UsuariosPagado, i: number) => (
+                            <tr
+                              key={usuario.uid}
+                              className={`${styles.thover}`}
+                            >
+                              <td className={styles.tNumber}>{i + 1}</td>
+                              <td className={styles.content}>
+                                {usuario.nombre}
+                              </td>
+                              <td className={styles.content}>
+                                {usuario.apellido}
+                              </td>
+                              <td className={styles.content}>
+                                {usuario.correo}
+                              </td>
+                              <td className={`${styles.content} text-center`}>
+                                <button
+                                  className={styles.btnBorrar}
+                                  onClick={borrarUsuario}
+                                >
+                                  <img
+                                    src="/images/icons/properties-icons/4-white.png"
+                                    alt="borrar usuario"
+                                  />
+                                </button>
+                              </td>
+                            </tr>
+                          )
+                        )}
                       </>
                     )}
                   </tbody>
