@@ -10,16 +10,7 @@ import MisChats from "../../paginas/perfil/chats/MisChats";
 import { ChatContext } from "../../../context/chat/ChatContext";
 
 const Header = () => {
-  const {
-    auth,
-    logOut,
-    abrirRegistro,
-    abrirLogin,
-    cerrarLogin,
-    cerrarRegistro,
-    mostrarLogin,
-    mostrarRegistro,
-  } = useContext(AuthContext);
+  const { auth, logOut, abrirRegistro, abrirLogin } = useContext(AuthContext);
   const { chatState } = useContext(ChatContext);
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const target = useRef(null);
@@ -102,16 +93,19 @@ const Header = () => {
                         Mi Perfil
                       </div>
                     </Link>
-                    <Link href="/perfil/mis-usuarios">
-                      <div
-                        className={`${styles.menuItem} pointer mx-3 my-2`}
-                        onClick={() => {
-                          setMostrarMenu(false);
-                        }}
-                      >
-                        Mis Usuarios
-                      </div>
-                    </Link>
+
+                    {auth.role === "Individual" ? null : (
+                      <Link href="/perfil/mis-usuarios">
+                        <div
+                          className={`${styles.menuItem} pointer mx-3 my-2`}
+                          onClick={() => {
+                            setMostrarMenu(false);
+                          }}
+                        >
+                          Mis Usuarios
+                        </div>
+                      </Link>
+                    )}
                     <Link href="/perfil/mis-paquetes">
                       <div
                         className={`${styles.menuItem} pointer mx-3 my-2`}

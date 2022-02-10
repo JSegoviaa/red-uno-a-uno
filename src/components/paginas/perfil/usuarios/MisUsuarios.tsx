@@ -1,52 +1,18 @@
 import { FormEvent, useContext, useState } from "react";
 import { Container, Form, Row } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import { development } from "../../../../credentials/credentials";
 import { useForm } from "../../../../hooks/useForm";
+import { useMisUsuarios } from "../../../../hooks/useUserInfo";
 import Button from "../../../ui/button/Button";
+import Loading from "../../../ui/loading/Loading";
 import styles from "./MisUsuarios.module.css";
-
-const usuarios = [
-  {
-    id: 1,
-    nombre: "Juan",
-    apellido: "Espinito",
-    correo: "juan@test.com",
-    estado: true,
-  },
-  {
-    id: 2,
-    nombre: "Juan",
-    apellido: "Espinito",
-    correo: "juan@test.com",
-    estado: true,
-  },
-  {
-    id: 3,
-    nombre: "Juan",
-    apellido: "Espinito",
-    correo: "juan@test.com",
-    estado: true,
-  },
-  {
-    id: 4,
-    nombre: "Juan",
-    apellido: "Espinito",
-    correo: "juan@test.com",
-    estado: true,
-  },
-  {
-    id: 5,
-    nombre: "Juan",
-    apellido: "Espinito",
-    correo: "juan@test.com",
-    estado: true,
-  },
-];
 
 const MisUsuarios = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const { auth } = useContext(AuthContext);
+  const { misUsuarios, cargando } = useMisUsuarios(auth.uid);
   const { formulario, handleChange, setFormulario } = useForm({
     nombre: "",
     apellido: "",
@@ -57,8 +23,16 @@ const MisUsuarios = () => {
 
   const { nombre, apellido, correo, password, password2 } = formulario;
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const body = { nombre, usuario: auth.uid };
+    const resp = await fetch(`${development}/usuarios-pagados`, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
     setFormulario({
       nombre: "",
       apellido: "",
@@ -187,28 +161,32 @@ const MisUsuarios = () => {
                 <th></th>
 
                 <tbody>
-                  {usuarios.map((usuario, i) => (
-                    <tr key={usuario.id} className={`${styles.thover}`}>
-                      <td className={styles.tNumber}>{i + 1}</td>
-                      <td className={styles.content}>{usuario.nombre}</td>
-                      <td className={styles.content}>{usuario.apellido}</td>
-                      <td className={styles.content}>{usuario.correo} </td>
-                      <td className={styles.sign}>
-                        {usuario.estado ? "Activo" : "Inactivo"}
-                      </td>
-                      <td className={`${styles.content} text-center`}>
-                        <button
-                          className={styles.btnBorrar}
-                          onClick={borrarUsuario}
-                        >
-                          <img
-                            src="/images/icons/properties-icons/4-white.png"
-                            alt="borrar usuario"
-                          />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {cargando ? (
+                    <Loading />
+                  ) : (
+                    <>
+                      {misUsuarios.map((usuario, i) => (
+                        <tr key={usuario.uid} className={`${styles.thover}`}>
+                          <td className={styles.tNumber}>{i + 1}</td>
+                          <td className={styles.content}>{usuario.nombre}</td>
+                          <td className={styles.content}>apellido</td>
+                          <td className={styles.content}>correo</td>
+                          <td className={styles.sign}>estado</td>
+                          <td className={`${styles.content} text-center`}>
+                            <button
+                              className={styles.btnBorrar}
+                              onClick={borrarUsuario}
+                            >
+                              <img
+                                src="/images/icons/properties-icons/4-white.png"
+                                alt="borrar usuario"
+                              />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </>
+                  )}
                 </tbody>
               </table>
             </div>

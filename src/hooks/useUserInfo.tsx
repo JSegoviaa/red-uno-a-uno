@@ -3,6 +3,7 @@ import { InmuebleContext } from "../context/inmuebles/InmuebleContext";
 import { production } from "../credentials/credentials";
 import { InmuebleUsuario } from "../interfaces/CrearInmuebleInterface";
 import { HistorialResp, PedidosUsuario } from "../interfaces/Historial";
+import { UsuariosPagado } from "../interfaces/MisUsuariosInterface";
 import { Usuario } from "../interfaces/UserInterface";
 
 const devURL = "http://localhost:8080/api";
@@ -99,4 +100,23 @@ export const useHistorialPagos = (
   }, [desde]);
 
   return { historialPago, cargando, total };
+};
+
+export const useMisUsuarios = (uid: string | undefined | null) => {
+  const [misUsuarios, setMisUsuarios] = useState<UsuariosPagado[]>([]);
+  const [cargando, setCargando] = useState(true);
+
+  const obtenerMisUsuarios = async () => {
+    const res = await fetch(`${devURL}/usuarios-pagados/usuarios/${uid}`);
+    const data = await res.json();
+
+    setMisUsuarios(data.usuariosPagados);
+    setCargando(false);
+  };
+
+  useEffect(() => {
+    obtenerMisUsuarios();
+  }, []);
+
+  return { misUsuarios, cargando };
 };
