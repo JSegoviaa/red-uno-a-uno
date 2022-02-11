@@ -18,9 +18,9 @@ export const useFavoritos = (uid: string | null | undefined) => {
 
   useEffect(() => {
     obtenerFavoritos();
-  }, [favoritos]);
+  }, [uid]);
 
-  return { favoritos, cargando };
+  return { favoritos, cargando, setFavoritos };
 };
 
 export const useMisFavoritos = (
