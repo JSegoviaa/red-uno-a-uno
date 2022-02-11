@@ -113,30 +113,41 @@ const AnadirImagenes = () => {
 
   return (
     <>
-      <div className="cargarImagen" {...getRootProps()}>
-        <input {...getInputProps()} />
-        <div className="text-center">
-          <img
-            className="my-4 pointer"
-            src="/images/content/agregafoto.png"
-            alt="red1a1"
-            style={{ width: "70%" }}
-          />
-        </div>
-      </div>
-      <div style={{ fontSize: 22, fontWeight: 700 }} className="text-center">
-        Máximo 20 imágenes. Haz seleccionado{" "}
-        <span style={{ color: pictures.length > 20 ? "red" : "black" }}>
-          {pictures.length}
-        </span>{" "}
-        imágenes.
-        <br />
-        {pictures.length > 20 && "Selecciona menos imágenes por favor"}
-      </div>
-      <br />
-      <div className="text-center">{thumbs}</div>
+      {
+        <>
+          {!opciones ? (
+            <>
+              <div className="cargarImagen" {...getRootProps()}>
+                <input {...getInputProps()} />
+                <div className="text-center">
+                  <img
+                    className="my-4 pointer"
+                    src="/images/content/agregafoto.png"
+                    alt="red1a1"
+                    style={{ width: "70%" }}
+                  />
+                </div>
+              </div>
+              <div
+                style={{ fontSize: 22, fontWeight: 700 }}
+                className="text-center"
+              >
+                Máximo 20 imágenes. Haz seleccionado{" "}
+                <span style={{ color: pictures.length > 20 ? "red" : "black" }}>
+                  {pictures.length}
+                </span>{" "}
+                imágenes.
+                <br />
+                {pictures.length > 20 && "Selecciona menos imágenes por favor"}
+              </div>
+              <br />
+              <div className="text-center">{thumbs}</div>
 
-      {cargando ? <Loading /> : null}
+              {cargando ? <Loading /> : null}
+            </>
+          ) : null}
+        </>
+      }
 
       <br />
       <Form
@@ -168,19 +179,7 @@ const AnadirImagenes = () => {
         </div>
       ) : null}
 
-      {agregarVideo ? (
-        <div className="cargarImagen" {...getRootProps()}>
-          <input {...getInputProps()} />
-          <div className="text-center">
-            <img
-              className="my-4 pointer"
-              src="/images/content/agregafoto.png"
-              alt="red1a1"
-              style={{ width: "70%" }}
-            />
-          </div>
-        </div>
-      ) : null}
+      {agregarVideo ? <div>Aquí se va amostrar la carga de vídeo</div> : null}
       <div className="SliderCustom">
         <br />
       </div>
