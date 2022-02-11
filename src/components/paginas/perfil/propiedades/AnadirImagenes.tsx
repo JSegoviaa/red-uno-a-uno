@@ -46,6 +46,8 @@ const AnadirImagenes = () => {
   const [cargando, setCargando] = useState(false);
   const [pictures, setPictures] = useState<any>([]);
   const { inmuebles } = useUserInmuebles(auth.uid);
+  const [opciones, setOpciones] = useState(false);
+  const [agregarVideo, setAgregarVideo] = useState(false);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -85,8 +87,7 @@ const AnadirImagenes = () => {
     </div>
   ));
 
-  const ultimoInmueble =
-    inmuebles?.inmueblesUsuario[inmuebles.inmueblesUsuario.length - 1];
+  const ultimoInmueble = inmuebles ? inmuebles[inmuebles!.length - 1] : null;
 
   const uploadPictures = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -100,9 +101,15 @@ const AnadirImagenes = () => {
     await subirImagenesInmueble(formData, auth.uid, ultimoInmueble?._id);
 
     setCargando(false);
-
-    router.push(`/propiedades/${ultimoInmueble?.slug}`);
+    setOpciones(true);
   };
+
+  const inmuebleCreado = () =>
+    router.push(`/propiedades/${ultimoInmueble?.slug}`);
+
+  const verMisInmuebles = () => router.push("/perfil/mis-propiedades");
+
+  const mostrarVideoUpload = () => setAgregarVideo(!agregarVideo);
 
   return (
     <>
@@ -128,6 +135,7 @@ const AnadirImagenes = () => {
       </div>
       <br />
       <div className="text-center">{thumbs}</div>
+
       {cargando ? <Loading /> : null}
 
       <br />
@@ -144,10 +152,35 @@ const AnadirImagenes = () => {
             accept="image/*"
           />
         </Form.Group>
-        {pictures.length > 20 || pictures.length <= 0 ? null : (
+
+        {pictures.length > 20 || pictures.length <= 0 || opciones ? null : (
           <Button titulo="Agregar imágenes" />
         )}
       </Form>
+      {opciones ? (
+        <div className="d-flex justify-content-around">
+          <Button
+            titulo={!agregarVideo ? "Agregar video" : "Continuar"}
+            onClick={!agregarVideo ? mostrarVideoUpload : verMisInmuebles}
+          />
+          <Button titulo="Ver mis inmuebles" onClick={verMisInmuebles} />
+          <Button titulo="Ver inmueble que agregué" onClick={inmuebleCreado} />
+        </div>
+      ) : null}
+
+      {agregarVideo ? (
+        <div className="cargarImagen" {...getRootProps()}>
+          <input {...getInputProps()} />
+          <div className="text-center">
+            <img
+              className="my-4 pointer"
+              src="/images/content/agregafoto.png"
+              alt="red1a1"
+              style={{ width: "70%" }}
+            />
+          </div>
+        </div>
+      ) : null}
       <div className="SliderCustom">
         <br />
       </div>
