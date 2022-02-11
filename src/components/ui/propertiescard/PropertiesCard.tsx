@@ -1,9 +1,7 @@
-import { useContext } from "react";
 import { useRouter } from "next/router";
 import { Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { InmuebleContext } from "../../../context/inmuebles/InmuebleContext";
 import styles from "./PropertiesCard.module.css";
 
 interface Props {
@@ -13,22 +11,26 @@ interface Props {
   imgs: string[];
   isActive: boolean;
   handleDelete: (pid: string) => Promise<void>;
+  handleActivar: (pid: string) => Promise<void>;
+  handleDesactivar: (pid: string) => Promise<void>;
 }
 
 const PropertiesCard = (props: Props) => {
-  const { titulo, id, slug, imgs, isActive, handleDelete } = props;
-  const { actualizarInmueble } = useContext(InmuebleContext);
+  const {
+    titulo,
+    id,
+    slug,
+    imgs,
+    isActive,
+    handleDelete,
+    handleActivar,
+    handleDesactivar,
+  } = props;
   const router = useRouter();
   const goToProperty = () => router.push("/propiedades/" + slug);
   const editarInmueble = () => router.push("/perfil/editar-inmueble");
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
-
-  const desactivarInmueble = async (pid: string) =>
-    await actualizarInmueble({ publicado: false }, pid);
-
-  const activarInmueble = async (pid: string) =>
-    await actualizarInmueble({ publicado: true }, pid);
 
   return (
     <Col xs={6} md={4} lg={4} xl={3} className="py-3 text-center ">
@@ -75,12 +77,12 @@ const PropertiesCard = (props: Props) => {
         >
           {isActive ? (
             <button
-              onClick={() => desactivarInmueble(id)}
+              onClick={() => handleDesactivar(id)}
               className={`${styles.customBtn1} btn`}
             />
           ) : (
             <button
-              onClick={() => activarInmueble(id)}
+              onClick={() => handleActivar(id)}
               className={`${styles.customBtn1} btn`}
             />
           )}

@@ -9,12 +9,13 @@ import styles from "./MisPropiedades.module.css";
 
 const MiListaPropiedades = () => {
   const { auth } = useContext(AuthContext);
-  const { eliminarInmueble } = useContext(InmuebleContext);
+  const { eliminarInmueble, actualizarInmueble } = useContext(InmuebleContext);
   const [desde, setDesde] = useState(0);
   const { cargando, inmuebles, total, setInmuebles } = useUserInmuebles(
     auth.uid,
     desde
   );
+
   const handlePrevPage = () => {
     if (desde === 0) {
       return;
@@ -39,6 +40,34 @@ const MiListaPropiedades = () => {
     setInmuebles(nuevosInmuebles);
   };
 
+  const handleActivar = async (pid: string) => {
+    await actualizarInmueble({ publicado: true }, pid);
+
+    const inmuebleActualizado = inmuebles?.map((inmueble) => {
+      if (inmueble._id === pid) {
+        return { ...inmueble, publicado: true };
+      }
+
+      return inmueble;
+    });
+
+    setInmuebles(inmuebleActualizado);
+  };
+
+  const handleDesactivar = async (pid: string) => {
+    await actualizarInmueble({ publicado: false }, pid);
+
+    const inmuebleActualizado = inmuebles?.map((inmueble) => {
+      if (inmueble._id === pid) {
+        return { ...inmueble, publicado: false };
+      }
+
+      return inmueble;
+    });
+
+    setInmuebles(inmuebleActualizado);
+  };
+
   return (
     <Container>
       <Row>
@@ -61,6 +90,8 @@ const MiListaPropiedades = () => {
                     imgs={inmueble.imgs}
                     isActive={inmueble.publicado}
                     handleDelete={handleDelete}
+                    handleActivar={handleActivar}
+                    handleDesactivar={handleDesactivar}
                   />
                 ))}
                 {total > 20 ? (
