@@ -10,7 +10,7 @@ import { formatPrice } from "../../../helpers/formatPrice";
 import styles from "./MapCards.module.css";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { agregarHist } from "../../../helpers/fetch";
-import { InmueblesUsuario } from "../../../interfaces/CrearInmuebleInterface";
+import { InmueblesUsuario } from "interfaces/CrearInmuebleInterface";
 
 SwiperCore.use([EffectCube, Pagination, Autoplay]);
 
