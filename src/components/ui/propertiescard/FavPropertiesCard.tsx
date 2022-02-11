@@ -17,21 +17,15 @@ interface Props {
   titulo: string;
   solicitud: Solicitud;
   propietario: string;
+  handleDelete: (id: string) => Promise<void>;
 }
 
 const FavPropertiesCard = (props: Props) => {
-  const { titulo, id, img, slug, solicitud, propietario } = props;
+  const { titulo, id, img, slug, solicitud, propietario, handleDelete } = props;
   const router = useRouter();
   const { auth } = useContext(AuthContext);
   const { iniciarChat } = useContext(ChatContext);
   const goToProperty = () => router.push(`/propiedades/${slug}`);
-
-  const eliminarFav = async () => {
-    const resp = await eliminarFavorito(`favoritos/${id}`);
-    if (resp.ok) {
-      toast.success(resp.msg);
-    }
-  };
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
@@ -97,7 +91,7 @@ const FavPropertiesCard = (props: Props) => {
           <button
             type="button"
             className={`${styles.customBtn4} btn`}
-            onClick={eliminarFav}
+            onClick={() => handleDelete(id)}
           />
         </div>
       </div>

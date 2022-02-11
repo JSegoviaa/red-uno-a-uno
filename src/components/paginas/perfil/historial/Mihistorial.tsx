@@ -13,7 +13,10 @@ const Mihistorial = () => {
   const { auth } = useContext(AuthContext);
   const router = useRouter();
   const [desde, setDesde] = useState(0);
-  const { historial, isLoading } = useHistorial(auth.uid, desde);
+  const { historial, isLoading, setHistorial, total } = useHistorial(
+    auth.uid,
+    desde
+  );
 
   const goToProperty = async (slug: string) => {
     if (slug !== "") {
@@ -23,6 +26,12 @@ const Mihistorial = () => {
 
   const handleDelete = async (id: string) => {
     const resp = await eliminarHist(`historial/${id}`);
+
+    const nuevoHistorial = historial?.filter(
+      (historial) => historial._id !== id
+    );
+
+    setHistorial(nuevoHistorial);
     if (resp.ok) toast.success(resp.msg);
   };
 
@@ -35,7 +44,7 @@ const Mihistorial = () => {
   };
 
   const handleNextPage = () => {
-    if (desde < historial!.total - 15) {
+    if (desde < total - 15) {
       setDesde(desde + 15);
     } else {
       return;
@@ -52,14 +61,14 @@ const Mihistorial = () => {
               <Loading />
             ) : (
               <>
-                {historial?.historialUsuario.length === 0 ? (
+                {historial?.length === 0 ? (
                   <div className={`${styles.titulo} text-center`}>
                     No tienes búsquedas recientes
                   </div>
                 ) : (
                   <table className={`${styles.customTable}`}>
                     <tbody>
-                      {historial?.historialUsuario.map((hist, i) => (
+                      {historial?.map((hist, i) => (
                         <tr key={hist._id} className={`${styles.thover}`}>
                           <td className={styles.tNumber}>{i + 1} </td>
                           <td
@@ -91,7 +100,7 @@ const Mihistorial = () => {
                 )}
               </>
             )}
-            {historial && historial.total > 15 ? (
+            {historial && total > 15 ? (
               <div className="d-flex justify-content-center">
                 <Pagination>
                   <Pagination.Prev onClick={handlePrevPage} />

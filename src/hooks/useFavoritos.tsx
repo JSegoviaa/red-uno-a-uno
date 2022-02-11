@@ -47,7 +47,7 @@ export const useMisFavoritos = (
     obtenerFavoritos();
   }, [uid, desde]);
 
-  return { misFavoritos, cargando, total };
+  return { misFavoritos, cargando, total, setMisFavoritos };
 };
 
 // export const useFavoritosSol = (uid: string | null | undefined) => {

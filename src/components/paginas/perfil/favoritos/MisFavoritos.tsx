@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { Container, Pagination, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import { eliminarFavorito } from "../../../../helpers/fetch";
 import { useMisFavoritos } from "../../../../hooks/useFavoritos";
 import Loading from "../../../ui/loading/Loading";
 import FavPropertiesCard from "../../../ui/propertiescard/FavPropertiesCard";
@@ -9,7 +11,10 @@ import styles from "./FiltrosFavs.module.css";
 const MiListaFavoritos = () => {
   const { auth } = useContext(AuthContext);
   const [desde, setDesde] = useState(0);
-  const { misFavoritos, cargando, total } = useMisFavoritos(auth.uid, desde);
+  const { misFavoritos, cargando, total, setMisFavoritos } = useMisFavoritos(
+    auth.uid,
+    desde
+  );
 
   const handlePrevPage = () => {
     if (desde === 0) {
@@ -25,6 +30,19 @@ const MiListaFavoritos = () => {
     } else {
       return;
     }
+  };
+
+  const handleDelete = async (id: string) => {
+    const resp = await eliminarFavorito(`favoritos/${id}`);
+    if (resp.ok) {
+      toast.success(resp.msg);
+    }
+
+    const nuevosFavoritos = misFavoritos.filter(
+      (favorito) => favorito._id !== id
+    );
+
+    setMisFavoritos(nuevosFavoritos);
   };
 
   return (
@@ -53,6 +71,7 @@ const MiListaFavoritos = () => {
                     img={favorito.inmueble ? favorito.inmueble.imgs : ""}
                     solicitud={favorito.solicitud}
                     propietario={favorito.propietario}
+                    handleDelete={handleDelete}
                   />
                 ))}
                 {total > 20 ? (

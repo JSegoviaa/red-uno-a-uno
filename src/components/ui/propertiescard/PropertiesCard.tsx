@@ -12,10 +12,12 @@ interface Props {
   slug: string;
   imgs: string[];
   isActive: boolean;
+  handleDelete: (pid: string) => Promise<void>;
 }
 
-const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
-  const { eliminarInmueble, actualizarInmueble } = useContext(InmuebleContext);
+const PropertiesCard = (props: Props) => {
+  const { titulo, id, slug, imgs, isActive, handleDelete } = props;
+  const { actualizarInmueble } = useContext(InmuebleContext);
   const router = useRouter();
   const goToProperty = () => router.push("/propiedades/" + slug);
   const editarInmueble = () => router.push("/perfil/editar-inmueble");
@@ -33,7 +35,7 @@ const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
       <div className={`${styles.customCard} card pointer`}>
         <div onClick={goToProperty}>
           <div className={styles.imgContainer}>
-            {imgs.length > 0 ?
+            {imgs.length > 0 ? (
               <div
                 className={styles.cardImg}
                 style={{
@@ -42,21 +44,25 @@ const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
               >
                 {isActive ? null : (
                   <div className={styles.imgPausa}>
-                    <div className={styles.imgTituloPausa}>Inmueble en pausa</div>
+                    <div className={styles.imgTituloPausa}>
+                      Inmueble en pausa
+                    </div>
                   </div>
                 )}
-              </div> :
+              </div>
+            ) : (
               <div className={styles.noImage}>
                 <div className={styles.noImageText}>
-                  Aún no hay imagenes para mostrar :(
-                </div> 
+                  Aún no hay imagenes para mostrar{" :("}
+                </div>
               </div>
-            }
+            )}
           </div>
           <div className={styles.tituloContainer}>
             <div
-              className={`${isActive ? styles.proContent : styles.proContentFalse
-                } my-2`}
+              className={`${
+                isActive ? styles.proContent : styles.proContentFalse
+              } my-2`}
             >
               {titulo}
             </div>
@@ -94,7 +100,7 @@ const PropertiesCard = ({ titulo, id, slug, imgs, isActive }: Props) => {
             className={`${styles.customBtn3} btn`}
           />
           <button
-            onClick={() => eliminarInmueble(id)}
+            onClick={() => handleDelete(id)}
             type="button"
             className={`${styles.customBtn4} btn`}
           />

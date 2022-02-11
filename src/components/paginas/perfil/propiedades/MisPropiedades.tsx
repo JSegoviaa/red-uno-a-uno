@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Container, Pagination, Row } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
+import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
 import { useUserInmuebles } from "../../../../hooks/useUserInfo";
 import Loading from "../../../ui/loading/Loading";
 import PropertiesCard from "../../../ui/propertiescard/PropertiesCard";
@@ -8,9 +9,12 @@ import styles from "./MisPropiedades.module.css";
 
 const MiListaPropiedades = () => {
   const { auth } = useContext(AuthContext);
+  const { eliminarInmueble } = useContext(InmuebleContext);
   const [desde, setDesde] = useState(0);
-  const { cargando, inmuebles, total } = useUserInmuebles(auth.uid, desde);
-
+  const { cargando, inmuebles, total, setInmuebles } = useUserInmuebles(
+    auth.uid,
+    desde
+  );
   const handlePrevPage = () => {
     if (desde === 0) {
       return;
@@ -27,6 +31,14 @@ const MiListaPropiedades = () => {
     }
   };
 
+  const handleDelete = async (pid: string) => {
+    await eliminarInmueble(pid);
+    const nuevosInmuebles = inmuebles?.filter(
+      (inmueble) => inmueble._id !== pid
+    );
+    setInmuebles(nuevosInmuebles);
+  };
+
   return (
     <Container>
       <Row>
@@ -34,13 +46,13 @@ const MiListaPropiedades = () => {
           <Loading />
         ) : (
           <>
-            {inmuebles?.inmueblesUsuario.length === 0 ? (
+            {inmuebles?.length === 0 ? (
               <h1 className={`${styles.titulo} text-center`}>
                 Al parecer aún no tienes ningún inmueble
               </h1>
             ) : (
               <>
-                {inmuebles?.inmueblesUsuario.map((inmueble) => (
+                {inmuebles?.map((inmueble) => (
                   <PropertiesCard
                     key={inmueble._id}
                     id={inmueble._id}
@@ -48,6 +60,7 @@ const MiListaPropiedades = () => {
                     titulo={inmueble.titulo}
                     imgs={inmueble.imgs}
                     isActive={inmueble.publicado}
+                    handleDelete={handleDelete}
                   />
                 ))}
                 {total > 20 ? (

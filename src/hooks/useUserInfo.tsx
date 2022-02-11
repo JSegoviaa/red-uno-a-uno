@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { InmuebleContext } from "../context/inmuebles/InmuebleContext";
 import { production } from "../credentials/credentials";
-import { Auth } from "../interfaces/AuthInterface";
-import { InmuebleUsuario } from "../interfaces/CrearInmuebleInterface";
-import { HistorialResp, PedidosUsuario } from "../interfaces/Historial";
-import { UsuariosPagado } from "../interfaces/MisUsuariosInterface";
+import { InmueblesUsuario } from "../interfaces/CrearInmuebleInterface";
+import { HistorialUsuario, PedidosUsuario } from "../interfaces/Historial";
 import { Usuario } from "../interfaces/UserInterface";
 
 const devURL = "http://localhost:8080/api";
@@ -32,7 +30,7 @@ export const useUserInfo = (uid: string | undefined | null) => {
 };
 
 export const useUserInmuebles = (uid: string | undefined | null, desde = 0) => {
-  const [inmuebles, setInmuebles] = useState<InmuebleUsuario>();
+  const [inmuebles, setInmuebles] = useState<InmueblesUsuario[]>();
   const [cargando, setCargando] = useState(true);
   const [total, setTotal] = useState(0);
   const { orden } = useContext(InmuebleContext);
@@ -42,39 +40,38 @@ export const useUserInmuebles = (uid: string | undefined | null, desde = 0) => {
       `${baseURL}/inmuebles/usuario/${uid}?orden=${orden}&limite=20&desde=${desde}`
     );
     const resp = await data.json();
-    setInmuebles(resp);
+    setInmuebles(resp.inmueblesUsuario);
     setCargando(false);
-    // console.log(inmuebles);
     setTotal(resp.total);
   };
 
   useEffect(() => {
     obtenerInmueblesDeUsuario();
-  }, [orden, desde]);
+  }, [orden, desde, uid]);
 
-  return { inmuebles, cargando, total };
+  return { inmuebles, cargando, total, setInmuebles };
 };
 
 export const useHistorial = (uid: string | undefined | null, desde: number) => {
-  const [historial, setHistorial] = useState<HistorialResp>();
+  const [historial, setHistorial] = useState<HistorialUsuario[]>();
   const [isLoading, setIsLoading] = useState(true);
-
+  const [total, setTotal] = useState(0);
   const obtenerHistorial = async () => {
     const resp = await fetch(
       `${baseURL}/historial/usuario/${uid}?desde=${desde}&limite=15`
     );
     const data = await resp.json();
 
-    setHistorial(data);
-
+    setHistorial(data.historialUsuario);
+    setTotal(data.total);
     setIsLoading(false);
   };
 
   useEffect(() => {
     obtenerHistorial();
-  }, [desde, historial]);
+  }, [desde, uid]);
 
-  return { historial, isLoading };
+  return { historial, isLoading, setHistorial, total };
 };
 
 export const useHistorialPagos = (
@@ -98,7 +95,7 @@ export const useHistorialPagos = (
 
   useEffect(() => {
     obtenerHistorialPagos();
-  }, [desde]);
+  }, [desde, uid]);
 
   return { historialPago, cargando, total };
 };
@@ -118,7 +115,7 @@ export const useMisUsuarios = (uid: string | undefined | null) => {
 
   useEffect(() => {
     obtenerMisUsuarios();
-  }, []);
+  }, [uid]);
 
   return { misUsuarios, cargando, setMisUsuarios };
 };
