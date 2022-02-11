@@ -1,5 +1,6 @@
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { Col } from "react-bootstrap";
+import { Col, Overlay } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import styles from "./PropertiesCard.module.css";
@@ -27,6 +28,9 @@ const PropertiesCard = (props: Props) => {
     handleDesactivar,
   } = props;
   const router = useRouter();
+  const target = useRef(null);
+  const [mostrarMenu, setMostrarMenu] = useState(false);
+
   const goToProperty = () => router.push("/propiedades/" + slug);
   const editarInmueble = () => router.push("/perfil/editar-inmueble");
 
@@ -97,10 +101,41 @@ const PropertiesCard = (props: Props) => {
           ) : null}
 
           <button
-            onClick={editarInmueble}
+            ref={target}
+            onClick={() => setMostrarMenu(!mostrarMenu)}
             type="button"
             className={`${styles.customBtn3} btn`}
-          />
+          >
+            <Overlay
+              target={target.current}
+              show={mostrarMenu}
+              placement="right"
+            >
+              {({ placement, arrowProps, show: _show, popper, ...props }) => (
+                <div
+                  className={styles.menu}
+                  {...props}
+                  style={{
+                    ...props.style,
+                  }}
+                >
+                  <div
+                    className={`${styles.menuItem} pointer mx-3 my-2`}
+                    onClick={editarInmueble}
+                  >
+                    Editar información
+                  </div>
+
+                  <div
+                    className={`${styles.menuItem} pointer mx-3 my-2`}
+                    onClick={editarInmueble}
+                  >
+                    Editar imágenes
+                  </div>
+                </div>
+              )}
+            </Overlay>
+          </button>
           <button
             onClick={() => handleDelete(id)}
             type="button"
