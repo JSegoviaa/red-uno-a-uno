@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import {
   createContext,
   Dispatch,
@@ -7,6 +6,8 @@ import {
   useCallback,
   useState,
 } from "react";
+import { useRouter } from "next/router";
+import { GoogleLoginResponse, useGoogleLogout } from "react-google-login";
 import { toast } from "react-toastify";
 import {
   actualizarPerfilFetch,
@@ -14,6 +15,7 @@ import {
   crearUsuarioFetch,
   fetchConToken,
   fetchSinToken,
+  googleLogin,
   subirFotoPerfil,
 } from "../../helpers/fetch";
 import { Auth, Resp, SubirFoto } from "../../interfaces/AuthInterface";
@@ -38,7 +40,7 @@ interface ContextProps {
     role: string,
     propietario: string | undefined | null
   ) => Promise<Resp>;
-  signInWithGoogle: () => void;
+  signInWithGoogle: (response: any) => void /* response:GoogleLoginResponse */;
   signInWithFacebook: () => void;
   verificaToken: () => void;
   actualizarPerfil: (data: any) => Promise<RespActualizar>;
@@ -52,6 +54,7 @@ interface ContextProps {
   abrirRegistro: () => void;
   cerrarRegistro: () => void;
   actualizarRol: (data: any) => Promise<RespActualizar>;
+  signOut: () => void;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -79,6 +82,7 @@ const initialState: Auth = {
   paqueteAdquirido: undefined,
   usuarios: undefined,
   propietario: undefined,
+  google: undefined,
 };
 
 export const AuthProvider: FC = ({ children }) => {
@@ -123,6 +127,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
+        google: undefined,
       });
     }
     return resp;
@@ -166,6 +171,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
+        google: undefined,
       });
     }
 
@@ -214,6 +220,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
+        google: undefined,
       });
     }
 
@@ -247,6 +254,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: undefined,
         usuarios: undefined,
         propietario: undefined,
+        google: undefined,
       });
 
       return false;
@@ -280,6 +288,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
+        google: true,
       });
       return true;
     } else {
@@ -306,6 +315,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: undefined,
         usuarios: undefined,
         propietario: undefined,
+        google: undefined,
       });
 
       return false;
@@ -337,6 +347,7 @@ export const AuthProvider: FC = ({ children }) => {
       paqueteAdquirido: undefined,
       usuarios: undefined,
       propietario: undefined,
+      google: undefined,
     });
   };
 
@@ -371,6 +382,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
+        google: undefined,
       });
 
       toast.success(resp.msg);
@@ -413,6 +425,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
+        google: undefined,
       });
     }
 
@@ -451,6 +464,7 @@ export const AuthProvider: FC = ({ children }) => {
         paqueteAdquirido: usuario.paqueteAdquirido,
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
+        google: undefined,
       });
 
       toast.success(resp.msg);
@@ -459,9 +473,86 @@ export const AuthProvider: FC = ({ children }) => {
     return resp;
   };
 
-  const signInWithGoogle = async () => {
-    console.log("Iniciando sesión con google");
+  const signInWithGoogle = async (response: any) => {
+    /* response:GoogleLoginResponse */
+    const id_token = response.getAuthResponse().id_token;
+    const body = { id_token };
+
+    const res = await googleLogin("auth/google", body);
+
+    if (res.ok) {
+      localStorage.setItem("token", res.token);
+      const { usuario } = res;
+      setAuth({
+        uid: usuario.uid,
+        checking: false,
+        logged: true,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        correo: usuario.correo,
+        direccionFisica: usuario.direccionFisica,
+        facebookpage: usuario.facebookpage,
+        instagram: usuario.instagram,
+        nombreInmobiliaria: usuario.nombreInmobiliaria,
+        telefonoOficina: usuario.telefonoOficina,
+        telefonoPersonal: usuario.telefonoPersonal,
+        twitter: usuario.twitter,
+        youtube: usuario.youtube,
+        perfilEmpresarial: usuario.perfilEmpresarial,
+        linkedin: usuario.linkedin,
+        img: usuario.img,
+        logo: usuario.logo,
+        role: usuario.role,
+        paqueteAdquirido: usuario.paqueteAdquirido,
+        usuarios: usuario.usuarios,
+        propietario: usuario.propietario,
+        google: true,
+      });
+    }
+    setMostrarLogin(false);
+    setMostrarRegistro(false);
+    return res;
   };
+
+  const onLogoutSuccess = () => {
+    localStorage.removeItem("token");
+    setAuth({
+      uid: null,
+      checking: false,
+      logged: false,
+      nombre: undefined,
+      apellido: undefined,
+      correo: undefined,
+      telefonoOficina: undefined,
+      telefonoPersonal: undefined,
+      direccionFisica: undefined,
+      facebookpage: undefined,
+      instagram: undefined,
+      nombreInmobiliaria: undefined,
+      twitter: undefined,
+      youtube: undefined,
+      perfilEmpresarial: undefined,
+      linkedin: undefined,
+      img: undefined,
+      logo: undefined,
+      role: undefined,
+      paqueteAdquirido: undefined,
+      usuarios: undefined,
+      propietario: undefined,
+      google: undefined,
+    });
+    router.push("/");
+  };
+  const onFailure = () => {
+    console.log("logout fail");
+  };
+
+  const { signOut } = useGoogleLogout({
+    clientId:
+      "89650619107-jecf46e28s507h50vrtpfadtf44u2hmc.apps.googleusercontent.com",
+    onLogoutSuccess: onLogoutSuccess,
+    onFailure: onFailure,
+  });
 
   const signInWithFacebook = async () => {
     console.log("Iniciando sesión con facebook");
@@ -489,6 +580,7 @@ export const AuthProvider: FC = ({ children }) => {
         cerrarRegistro,
         actualizarRol,
         crearUsuario,
+        signOut,
       }}
     >
       {children}

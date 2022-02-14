@@ -21,6 +21,7 @@ export interface Auth {
   paqueteAdquirido: string | undefined;
   usuarios: number | undefined;
   propietario: string | undefined;
+  google: true | undefined;
 }
 
 export interface Resp {

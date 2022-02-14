@@ -1,4 +1,5 @@
 import { FormEvent, useContext, useState } from "react";
+import { useRouter } from "next/router";
 import { Form, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "../../../hooks/useForm";
@@ -7,15 +8,21 @@ import Modaltitle from "../modaltitle/Modaltitle";
 import styles from "./AuthModal.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../context/auth/AuthContext";
-import { useRouter } from "next/router";
+import GoogleLogin from "react-google-login";
 
 const RegisterModal = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
-  const { register, mostrarRegistro, cerrarRegistro, abrirLogin } =
-    useContext(AuthContext);
+  const {
+    register,
+    mostrarRegistro,
+    cerrarRegistro,
+    abrirLogin,
+    signInWithGoogle,
+  } = useContext(AuthContext);
+
   const { formulario, handleChange } = useForm({
     nombre: "",
     apellido: "",
@@ -171,6 +178,37 @@ const RegisterModal = () => {
                   <Button titulo="Registrarse" btn="Disabled" />
                 )}
               </div>
+
+              <div className="col-4 my-4">
+                <hr />
+              </div>
+              <div className="col-2 text-center my-4 modal-labels">O</div>
+              <div className="col-4 my-4">
+                <hr />
+              </div>
+              <GoogleLogin
+                clientId="89650619107-jecf46e28s507h50vrtpfadtf44u2hmc.apps.googleusercontent.com"
+                buttonText="Inicia sesión con google"
+                onSuccess={signInWithGoogle}
+                onFailure={signInWithGoogle}
+                cookiePolicy={"single_host_origin"}
+                render={(renderProps) => (
+                  <div
+                    onClick={renderProps.onClick}
+                    className="col-10 mb-3 text-center pointer"
+                  >
+                    <div className={styles.modalGoogleBtn}>
+                      <img
+                        className="me-3"
+                        src="/images/icons/google-icon.png"
+                        alt="Inicia sesión con google"
+                      />
+                      Regístrate con Google
+                    </div>
+                  </div>
+                )}
+              />
+
               <div className="text-center">
                 <span
                   onClick={handleModals}

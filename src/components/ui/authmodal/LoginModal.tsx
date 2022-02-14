@@ -2,6 +2,7 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Form, Modal } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
+import { GoogleLogin } from "react-google-login";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../button/Button";
@@ -12,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 const LoginModal = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const { login, mostrarLogin, cerrarLogin, abrirRegistro } =
+  const { login, mostrarLogin, cerrarLogin, abrirRegistro, signInWithGoogle } =
     useContext(AuthContext);
   const { formulario, handleChange, setFormulario } = useForm({
     correo: "",
@@ -121,17 +122,30 @@ const LoginModal = () => {
               <hr />
             </div>
 
-            <div className="col-10 mb-3 text-center">
-              <div className={styles.modalGoogleBtn}>
-                <img
-                  className="me-3"
-                  src="/images/icons/google-icon.png"
-                  alt="Inicia sesión con google"
-                />
-                Inicia sesión con Google
-              </div>
-            </div>
-            <div className="col-10 mb-3 text-center">
+            <GoogleLogin
+              clientId="89650619107-jecf46e28s507h50vrtpfadtf44u2hmc.apps.googleusercontent.com"
+              buttonText="Inicia sesión con google"
+              onSuccess={signInWithGoogle}
+              onFailure={signInWithGoogle}
+              cookiePolicy={"single_host_origin"}
+              render={(renderProps) => (
+                <div
+                  onClick={renderProps.onClick}
+                  className="col-10 mb-3 text-center pointer"
+                >
+                  <div className={styles.modalGoogleBtn}>
+                    <img
+                      className="me-3"
+                      src="/images/icons/google-icon.png"
+                      alt="Inicia sesión con google"
+                    />
+                    Inicia sesión con Google
+                  </div>
+                </div>
+              )}
+            />
+
+            {/* <div className="col-10 mb-3 text-center">
               <div className={styles.modalFbBtn}>
                 <img
                   className="me-3"
@@ -140,7 +154,7 @@ const LoginModal = () => {
                 />
                 Inicia sesión con Facebook
               </div>
-            </div>
+            </div> */}
             <div className="col-10 mb-3">
               <div className="form-check" onClick={() => toggleCheck()}>
                 <input

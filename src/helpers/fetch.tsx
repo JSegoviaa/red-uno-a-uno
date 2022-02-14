@@ -45,6 +45,23 @@ export const fetchSinToken = async (
   }
 };
 
+export const googleLogin = async (
+  endpoint: string,
+  body: any
+): Promise<Resp> => {
+  const url = `${baseURL}/${endpoint}`;
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  const data = await res.json();
+
+  return data;
+};
+
 export const crearUsuarioFetch = async (
   endpoint: string,
   data: RegisterData
