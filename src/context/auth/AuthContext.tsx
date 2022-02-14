@@ -54,7 +54,6 @@ interface ContextProps {
   abrirRegistro: () => void;
   cerrarRegistro: () => void;
   actualizarRol: (data: any) => Promise<RespActualizar>;
-  signOut: () => void;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -514,46 +513,6 @@ export const AuthProvider: FC = ({ children }) => {
     return res;
   };
 
-  const onLogoutSuccess = () => {
-    localStorage.removeItem("token");
-    setAuth({
-      uid: null,
-      checking: false,
-      logged: false,
-      nombre: undefined,
-      apellido: undefined,
-      correo: undefined,
-      telefonoOficina: undefined,
-      telefonoPersonal: undefined,
-      direccionFisica: undefined,
-      facebookpage: undefined,
-      instagram: undefined,
-      nombreInmobiliaria: undefined,
-      twitter: undefined,
-      youtube: undefined,
-      perfilEmpresarial: undefined,
-      linkedin: undefined,
-      img: undefined,
-      logo: undefined,
-      role: undefined,
-      paqueteAdquirido: undefined,
-      usuarios: undefined,
-      propietario: undefined,
-      google: undefined,
-    });
-    router.push("/");
-  };
-  const onFailure = () => {
-    console.log("logout fail");
-  };
-
-  const { signOut } = useGoogleLogout({
-    clientId:
-      "89650619107-jecf46e28s507h50vrtpfadtf44u2hmc.apps.googleusercontent.com",
-    onLogoutSuccess: onLogoutSuccess,
-    onFailure: onFailure,
-  });
-
   const signInWithFacebook = async () => {
     console.log("Iniciando sesión con facebook");
   };
@@ -580,7 +539,6 @@ export const AuthProvider: FC = ({ children }) => {
         cerrarRegistro,
         actualizarRol,
         crearUsuario,
-        signOut,
       }}
     >
       {children}

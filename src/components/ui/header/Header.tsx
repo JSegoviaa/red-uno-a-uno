@@ -8,11 +8,9 @@ import RegisterModal from "../authmodal/AuthModal";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import MisChats from "../../paginas/perfil/chats/MisChats";
 import { ChatContext } from "../../../context/chat/ChatContext";
-import { GoogleLogout } from "react-google-login";
 
 const Header = () => {
-  const { auth, logOut, abrirRegistro, abrirLogin, signOut } =
-    useContext(AuthContext);
+  const { auth, logOut, abrirRegistro, abrirLogin } = useContext(AuthContext);
   const { chatState } = useContext(ChatContext);
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const target = useRef(null);
@@ -128,30 +126,12 @@ const Header = () => {
                         Mis Pagos
                       </div>
                     </Link>
-                    <>
-                      {auth.google ? (
-                        <GoogleLogout
-                          clientId="89650619107-jecf46e28s507h50vrtpfadtf44u2hmc.apps.googleusercontent.com"
-                          buttonText="Logout"
-                          onLogoutSuccess={signOut}
-                          render={(renderProps) => (
-                            <div
-                              className={`${styles.menuCerrar} pointer mx-3 my-2`}
-                              onClick={renderProps.onClick}
-                            >
-                              Cerrar sesion
-                            </div>
-                          )}
-                        ></GoogleLogout>
-                      ) : (
-                        <div
-                          className={`${styles.menuCerrar} pointer mx-3 my-2`}
-                          onClick={cerrarSesion}
-                        >
-                          Cerrar sesion
-                        </div>
-                      )}
-                    </>
+                    <div
+                      className={`${styles.menuCerrar} pointer mx-3 my-2`}
+                      onClick={cerrarSesion}
+                    >
+                      Cerrar sesion
+                    </div>
                   </div>
                 )}
               </Overlay>
