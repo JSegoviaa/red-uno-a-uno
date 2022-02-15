@@ -135,7 +135,7 @@ export const fetchActualizarInmueble = async (
   endpoint: string,
   data: ActualizarInmueble
 ): Promise<InmueblesResponse> => {
-  const url = `${devURL}/${endpoint}`;
+  const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
   const resp = await fetch(url, {
