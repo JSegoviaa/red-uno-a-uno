@@ -2,9 +2,10 @@ import styles from "./FormDesign.module.css";
 
 interface Props {
   steps: number;
+  editar?: boolean;
 }
 
-const Steps = ({ steps }: Props) => {
+const Steps = ({ steps, editar }: Props) => {
   return (
     <div className="col-sm-12 col-md-12 col-lg-8">
       <div className="col-12 my-4">
@@ -13,7 +14,9 @@ const Steps = ({ steps }: Props) => {
             steps === 1
               ? styles.stepLineActive1
               : steps === 2
-              ? styles.stepLineActive2
+              ? editar
+                ? styles.stepLineActive3
+                : styles.stepLineActive2
               : steps === 3
               ? styles.stepLineActive3
               : ""
@@ -37,9 +40,13 @@ const Steps = ({ steps }: Props) => {
               2
             </span>
           </div>
-          <div className="col-4">
-            <span className={steps === 3 ? styles.step1 : styles.step3}>3</span>
-          </div>
+          {!editar ? (
+            <div className="col-4">
+              <span className={steps === 3 ? styles.step1 : styles.step3}>
+                3
+              </span>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

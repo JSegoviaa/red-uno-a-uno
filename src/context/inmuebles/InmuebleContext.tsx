@@ -101,6 +101,7 @@ export interface ActualizarInmueble {
   refrigerador?: boolean;
   sala?: boolean;
   secadora?: boolean;
+  seguridadPrivada?: boolean;
 }
 
 interface ContextProps {
