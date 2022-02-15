@@ -1,0 +1,15 @@
+.subTitulo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  color: #000000;
+}
+
+.content {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  color: #5e5e5e;
+}

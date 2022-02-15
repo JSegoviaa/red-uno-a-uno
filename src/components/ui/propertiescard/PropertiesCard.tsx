@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { Col, Overlay } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import styles from "./PropertiesCard.module.css";
+import { InmuebleContext } from "context/inmuebles/InmuebleContext";
 
 interface Props {
   id: string;
@@ -27,12 +28,24 @@ const PropertiesCard = (props: Props) => {
     handleActivar,
     handleDesactivar,
   } = props;
+  const { setEditar, setIdInmueble } = useContext(InmuebleContext);
   const router = useRouter();
   const target = useRef(null);
   const [mostrarMenu, setMostrarMenu] = useState(false);
 
   const goToProperty = () => router.push("/propiedades/" + slug);
-  const editarInmueble = () => router.push("/perfil/editar-inmueble");
+
+  const editarInmuebleInfo = (id: string) => {
+    setIdInmueble(id);
+    setEditar("Información");
+    router.push("/perfil/editar-inmueble");
+  };
+
+  const editarInmuebleImg = (id: string) => {
+    setIdInmueble(id);
+    setEditar("Imágenes");
+    router.push("/perfil/editar-inmueble");
+  };
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 
@@ -121,14 +134,14 @@ const PropertiesCard = (props: Props) => {
                 >
                   <div
                     className={`${styles.menuItem} pointer mx-3 my-2`}
-                    onClick={editarInmueble}
+                    onClick={() => editarInmuebleInfo(id)}
                   >
                     Editar información
                   </div>
 
                   <div
                     className={`${styles.menuItem} pointer mx-3 my-2`}
-                    onClick={editarInmueble}
+                    onClick={() => editarInmuebleImg(id)}
                   >
                     Editar imágenes
                   </div>

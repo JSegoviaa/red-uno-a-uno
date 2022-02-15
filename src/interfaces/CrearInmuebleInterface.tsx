@@ -44,6 +44,11 @@ export interface InmuebleUsuario {
   total: number;
 }
 
+export interface InmuebleUsuarioRes {
+  ok: boolean;
+  inmueble: InmueblesUsuario;
+}
+
 export interface ListaInmuebles {
   ok: boolean;
   inmuebles: InmueblesUsuario[];

@@ -1,16 +1,19 @@
 import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import {
+  InmueblesResponse,
+  SubirImagenesInmueble,
+} from "interfaces/InmueblesInterface";
+import {
+  BorrarInmuebleResp,
+  CrearInmuebleResp,
+} from "interfaces/CrearInmuebleInterface";
+import {
   fetchActualizarInmueble,
   fetchBorrarInmueble,
   fetchInmueble,
   subirFotosInmueble,
-} from "../../helpers/fetch";
-import {
-  BorrarInmuebleResp,
-  CrearInmuebleResp,
-} from "../../interfaces/CrearInmuebleInterface";
-import { SubirImagenesInmueble } from "../../interfaces/InmueblesInterface";
+} from "helpers/fetch";
 
 export interface InmuebleData {
   titulo: string;
@@ -63,7 +66,7 @@ export interface ActualizarInmueble {
   direccion?: string | undefined;
   lat?: number;
   lng?: number;
-  tipoPropiedad: string;
+  tipoPropiedad?: string;
   descripcion?: string;
   AA?: boolean;
   agua?: boolean;
@@ -112,14 +115,72 @@ interface ContextProps {
   setOrden: Dispatch<SetStateAction<string>>;
   solicitud: string;
   setSolicitud: Dispatch<SetStateAction<string>>;
-  actualizarInmueble: (data: any, pid: string) => Promise<any>;
+  actualizarInmueble: (
+    data: ActualizarInmueble,
+    pid: string
+  ) => Promise<InmueblesResponse>;
+  editar: EditarInmueble | undefined;
+  setEditar: Dispatch<SetStateAction<EditarInmueble | undefined>>;
+  idInmueble: string;
+  setIdInmueble: Dispatch<SetStateAction<string>>;
+  inmuebleState: ActualizarInmueble;
+  setInmuebleState: Dispatch<SetStateAction<ActualizarInmueble>>;
 }
 
+type EditarInmueble = "Información" | "Imágenes";
+
 export const InmuebleContext = createContext({} as ContextProps);
+
+const InmuebleState: ActualizarInmueble = {
+  titulo: undefined,
+  categoria: undefined,
+  precio: undefined,
+  direccion: undefined,
+  lat: undefined,
+  lng: undefined,
+  tipoPropiedad: undefined,
+  descripcion: undefined,
+  AA: undefined,
+  agua: undefined,
+  amueblado: undefined,
+  antiguedad: undefined,
+  baños: undefined,
+  camas: undefined,
+  closet: undefined,
+  cocina: undefined,
+  comedor: undefined,
+  comisiones: undefined,
+  discapacitados: undefined,
+  escuelas: undefined,
+  estufa: undefined,
+  gas: undefined,
+  habitaciones: undefined,
+  horno: undefined,
+  internet: undefined,
+  lavadora: undefined,
+  luz: undefined,
+  m2Construidos: undefined,
+  m2Terreno: undefined,
+  mantenimiento: undefined,
+  medioBaños: undefined,
+  microondas: undefined,
+  minihorno: undefined,
+  otros: undefined,
+  publicado: undefined,
+  parking: undefined,
+  piscinas: undefined,
+  pisos: undefined,
+  refrigerador: undefined,
+  sala: undefined,
+  secadora: undefined,
+};
 
 export const InmuebleProvider: FC = ({ children }) => {
   const [orden, setOrden] = useState<string>("createdAt");
   const [solicitud, setSolicitud] = useState("Pendiente");
+  const [editar, setEditar] = useState<EditarInmueble>();
+  const [idInmueble, setIdInmueble] = useState("");
+  const [inmuebleState, setInmuebleState] = useState(InmuebleState);
 
   const crearInmueble = async (data: InmuebleData) => {
     const resp = await fetchInmueble("inmuebles", data);
@@ -187,6 +248,12 @@ export const InmuebleProvider: FC = ({ children }) => {
         solicitud,
         setSolicitud,
         actualizarInmueble,
+        editar,
+        setEditar,
+        idInmueble,
+        setIdInmueble,
+        inmuebleState,
+        setInmuebleState,
       }}
     >
       <ToastContainer />
