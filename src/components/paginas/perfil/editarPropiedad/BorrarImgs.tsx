@@ -1,4 +1,4 @@
-import { CSSProperties, useContext, useEffect } from "react";
+import { CSSProperties, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
   ActualizarInmueble,
@@ -8,6 +8,8 @@ import { useInmueble } from "hooks/useInmuebles";
 import Loading from "components/ui/loading/Loading";
 import styles from "./Editar.module.css";
 import Button from "components/ui/button/Button";
+import { production } from "credentials/credentials";
+import { AuthContext } from "context/auth/AuthContext";
 
 const imagen: CSSProperties = {
   display: "block",
@@ -21,11 +23,14 @@ const thumbInner = {
   overflow: "hidden",
 };
 
+const token = localStorage.getItem("token") || "";
+
 const BorrarImgs = () => {
   const { idInmueble, actualizarInmueble, inmuebleState, setInmuebleState } =
     useContext(InmuebleContext);
+  const { auth } = useContext(AuthContext);
   const router = useRouter();
-
+  const [borrarImgs, setBorrarImgs] = useState<string[]>([]);
   const { imgs, cargando, setImgs, inmueble } = useInmueble(idInmueble);
 
   useEffect(() => {
@@ -76,14 +81,25 @@ const BorrarImgs = () => {
 
   const handleDelete = (id: string) => {
     const nuevasImg = imgs?.filter((img) => img !== id);
-
+    imgs?.filter((img) => {
+      img === id;
+      setBorrarImgs([...borrarImgs, id]);
+    });
     setImgs(nuevasImg);
   };
 
   const actualizarImgs = async () => {
     const data: ActualizarInmueble = { ...inmuebleState, imgs };
-    console.log(data);
+    const imgsAborrar = { imgs: borrarImgs };
+
+    await fetch(`${production}/subidas/imagenes/${auth.uid}/${idInmueble}`, {
+      method: "PUT",
+      headers: { "Content-type": "application/json", "x-token": token },
+      body: JSON.stringify(imgsAborrar),
+    });
+
     await actualizarInmueble(data, idInmueble);
+
     router.push("/perfil/mis-propiedades");
   };
 
