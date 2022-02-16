@@ -23,8 +23,6 @@ const thumbInner = {
   overflow: "hidden",
 };
 
-const token = localStorage.getItem("token") || "";
-
 const BorrarImgs = () => {
   const { idInmueble, actualizarInmueble, inmuebleState, setInmuebleState } =
     useContext(InmuebleContext);
@@ -89,6 +87,8 @@ const BorrarImgs = () => {
   };
 
   const actualizarImgs = async () => {
+    const token = localStorage.getItem("token") || "";
+
     const data: ActualizarInmueble = { ...inmuebleState, imgs };
     const imgsAborrar = { imgs: borrarImgs };
 
