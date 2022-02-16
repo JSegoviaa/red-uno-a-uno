@@ -16,8 +16,9 @@ const EditarImgs = () => {
     setEliminarImg(false);
     setSubirImg(true);
   };
+
   return (
-    <>
+    <div style={{ minHeight: 300 }}>
       <br />
 
       <div className="d-flex justify-content-center">
@@ -33,7 +34,7 @@ const EditarImgs = () => {
 
       {eliminarImg ? <BorrarImgs /> : null}
       {subirImg ? <SubirImgs /> : null}
-    </>
+    </div>
   );
 };
 

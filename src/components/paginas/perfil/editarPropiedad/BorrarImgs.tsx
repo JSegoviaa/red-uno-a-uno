@@ -84,6 +84,7 @@ const BorrarImgs = () => {
     const data: ActualizarInmueble = { ...inmuebleState, imgs };
     console.log(data);
     await actualizarInmueble(data, idInmueble);
+    router.push("/perfil/mis-propiedades");
   };
 
   const cancelar = () => router.push("/perfil/mis-propiedades");

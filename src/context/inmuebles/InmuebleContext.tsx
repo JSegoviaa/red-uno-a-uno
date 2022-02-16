@@ -111,7 +111,8 @@ interface ContextProps {
   subirImagenesInmueble: (
     data: any,
     uid: string | null | undefined,
-    pid: string | undefined
+    pid: string | undefined,
+    endpoint: string
   ) => Promise<SubirImagenesInmueble>;
   orden: string;
   setOrden: Dispatch<SetStateAction<string>>;
@@ -203,9 +204,13 @@ export const InmuebleProvider: FC = ({ children }) => {
   const subirImagenesInmueble = async (
     data: any,
     uid: string | null | undefined,
-    pid: string | undefined
+    pid: string | undefined,
+    endpoint = ""
   ) => {
-    const resp = await subirFotosInmueble(`subidas/${uid}/${pid}`, data);
+    const resp = await subirFotosInmueble(
+      `subidas/${endpoint}${uid}/${pid}`,
+      data
+    );
 
     if (resp.ok) {
       toast.success(resp.msg);
