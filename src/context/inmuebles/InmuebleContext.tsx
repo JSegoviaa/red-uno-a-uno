@@ -102,6 +102,7 @@ export interface ActualizarInmueble {
   sala?: boolean;
   secadora?: boolean;
   seguridadPrivada?: boolean;
+  imgs?: string[];
 }
 
 interface ContextProps {

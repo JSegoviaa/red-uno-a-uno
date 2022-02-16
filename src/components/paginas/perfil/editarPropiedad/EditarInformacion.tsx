@@ -109,8 +109,6 @@ const EditarInformacion = () => {
     router.push("/perfil/mis-propiedades");
   };
 
-  console.log(inmuebleState, "??");
-
   return (
     <Container>
       <div className="row d-flex justify-content-center">

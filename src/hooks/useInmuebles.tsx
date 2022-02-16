@@ -54,12 +54,14 @@ export const useListaInmueble = (limite: number) => {
 export const useInmueble = (id: string) => {
   const [inmueble, setInmueble] = useState<InmueblesUsuario>();
   const [cargando, setCargando] = useState(true);
+  const [imgs, setImgs] = useState<string[]>([]);
 
   const obtenerInmueble = async () => {
     const res = await fetch(`${production}/inmuebles/${id}`);
     const data: InmuebleUsuarioRes = await res.json();
 
     setInmueble(data.inmueble);
+    setImgs(data.inmueble.imgs);
     setCargando(false);
   };
 
@@ -67,5 +69,5 @@ export const useInmueble = (id: string) => {
     obtenerInmueble();
   }, []);
 
-  return { inmueble, cargando };
+  return { inmueble, cargando, imgs, setImgs };
 };
