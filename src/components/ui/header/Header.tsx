@@ -14,16 +14,19 @@ const Header = () => {
   const { chatState } = useContext(ChatContext);
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const target = useRef(null);
+  const [notificaciones, setNotificaciones] = useState(false);
 
   const cerrarSesion = () => {
     logOut();
     setMostrarMenu(false);
+    setNotificaciones(false);
     chatState.chatActivo = null;
   };
 
   const [showCanvas, setShowCanvas] = useState(false);
   const handleCloseCanvas = () => setShowCanvas(false);
   const handleShowCanvas = () => setShowCanvas(true);
+  const mostrarNotificaciones = () => setNotificaciones(!notificaciones);
 
   return (
     <Navbar className={styles.navStyle} bg="light" expand="lg">
@@ -132,6 +135,29 @@ const Header = () => {
                     >
                       Cerrar sesion
                     </div>
+                  </div>
+                )}
+              </Overlay>
+
+              <i
+                onClick={mostrarNotificaciones}
+                style={{ fontSize: 30, color: "#7149BC" }}
+                className="bi bi-bell pointer px-2"
+              />
+              <Overlay
+                target={target.current}
+                show={notificaciones}
+                placement="right"
+              >
+                {({ placement, arrowProps, show: _show, popper, ...props }) => (
+                  <div
+                    className={styles.notificaciones}
+                    {...props}
+                    style={{
+                      ...props.style,
+                    }}
+                  >
+                    <div>Marcar</div>
                   </div>
                 )}
               </Overlay>
