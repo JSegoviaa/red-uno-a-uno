@@ -11,3 +11,8 @@ export const horaMes = (fecha: number | string) => {
 
   return hoyMes.format("HH:mm a - D/MM/YY");
 };
+
+export const hora = (fecha: number | string) => {
+  const hoyMes = moment(fecha);
+  return hoyMes.format("HH:mm a");
+};

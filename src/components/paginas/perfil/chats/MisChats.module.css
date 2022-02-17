@@ -4,7 +4,7 @@
 .ChatHover:hover {
   background-color: #ececec;
 }
-.OFhead{
+.OFhead {
   background-color: slateblue;
   color: white;
 }
@@ -12,7 +12,10 @@
   padding: 0;
 }
 
-
+.hora {
+  font-size: 12px;
+  margin-top: 3px;
+}
 
 .nombre {
   font-family: "Open Sans";

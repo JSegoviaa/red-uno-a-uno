@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
+import { useUltimoMsg } from "hooks/useConversaciones";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { ChatContext } from "../../../../context/chat/ChatContext";
 import { production } from "../../../../credentials/credentials";
 import { obtenerMensajes } from "../../../../helpers/fetch";
 import { Conversacion } from "../../../../interfaces/ChatInterface";
 import { Usuario } from "../../../../interfaces/UserInterface";
+import { hora } from "helpers/horaMes";
 import styles from "./MisChats.module.css";
 
 interface Props {
@@ -16,6 +18,8 @@ const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
   const { dispatch, scrollToBotom } = useContext(ChatContext);
   const { auth } = useContext(AuthContext);
   const [contacto, setContacto] = useState<Usuario>();
+  const { ultimoMsg } = useUltimoMsg(conversacion.remitente, conversacion.para);
+  const ultimo = ultimoMsg && ultimoMsg.length - 1;
 
   useEffect(() => {
     const contacto = conversacion.miembros.find(
@@ -67,7 +71,21 @@ const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
                 </>
               ) : null}
             </div>
-            <div className={styles.mensaje}>Mensaje estático</div>
+            <div className={styles.mensaje}>
+              <div className={`d-flex justify-content-between `}>
+                {ultimoMsg.length === 0 ? (
+                  "Aún no hay mensajes"
+                ) : (
+                  <>
+                    <span>{ultimoMsg[ultimo]?.mensaje}</span>
+
+                    <span className={styles.hora}>
+                      {hora(ultimoMsg[ultimo]?.createdAt)}
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
