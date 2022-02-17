@@ -20,7 +20,7 @@ const MisUsuarios = () => {
     correo: "",
     password: "",
     password2: "",
-    role: "Usuario",
+    role: "UsuarioPagado",
   });
 
   const { nombre, apellido, correo, password, password2, role } = formulario;
@@ -61,7 +61,7 @@ const MisUsuarios = () => {
       correo: "",
       password: "",
       password2: "",
-      role: "Usuario",
+      role: "UsuarioPagado",
     });
   };
 
