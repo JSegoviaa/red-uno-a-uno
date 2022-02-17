@@ -7,22 +7,22 @@ export interface Contact {
 }
 
 export interface NuevoPedido {
-  nombre: string;
-  apellido: string;
-  correo: string;
-  nombrePaquete: string;
-  precio: number;
-  importe: number;
-  idCompra: string;
+  nombre: string | number | string[] | undefined;
+  apellido: string | number | string[] | undefined;
+  correo: string | number | string[] | undefined;
+  nombrePaquete: string | undefined;
+  precio: number | undefined;
+  importe: number | undefined;
+  idCompra: string | undefined;
 }
 
 export interface NuevoPedidoAdmin {
-  nombre: string;
-  apellido: string;
-  nombrePaquete: string;
-  precio: number;
-  importe: number;
-  idCompra: string;
+  nombre: string | number | string[] | undefined;
+  apellido: string | number | string[] | undefined;
+  nombrePaquete: string | undefined;
+  precio: number | undefined;
+  importe: number | undefined;
+  idCompra: string | undefined;
 }
 
 export interface ContactResp {

@@ -4,16 +4,21 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Form, Modal } from "react-bootstrap";
 import Select from "react-select";
 import { toast } from "react-toastify";
+import moment from "moment";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { formatPrice } from "../../../helpers/formatPrice";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../ui/button/Button";
 import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
-import moment from "moment";
 import { Pedido } from "../../../interfaces/PedidosInterface";
-import { anadirPaqueteInv } from "../../../helpers/fetch";
+import {
+  anadirPaqueteInv,
+  nuevoPedido,
+  nuevoPedidoAdmin,
+} from "../../../helpers/fetch";
 import Loading from "../../ui/loading/Loading";
+import { NuevoPedido, NuevoPedidoAdmin } from "interfaces/ContactInterface";
 
 interface Props {
   id: string;
@@ -79,6 +84,26 @@ const PaqueteMultiple = (props: Props) => {
         idStripe: pago?.id,
         totalUsuarios: avanzado ? usuarios : usuariosSeleccionados,
       };
+
+      const correoPedido: NuevoPedido = {
+        apellido: auth.apellido,
+        nombre: auth.nombre,
+        correo: auth.correo,
+        idCompra: pago?.id,
+        nombrePaquete: titulo,
+        precio: Number(precio),
+        importe: Number(precio) * usuariosSeleccionados,
+      };
+
+      const correoPedidoAdmin: NuevoPedidoAdmin = {
+        apellido: auth.apellido,
+        nombre: auth.nombre,
+        idCompra: pago?.id,
+        nombrePaquete: titulo,
+        precio: Number(precio),
+        importe: Number(precio) * usuariosSeleccionados,
+      };
+
       try {
         const resp = await anadirPaqueteInv("pedidos", body);
 
@@ -87,6 +112,9 @@ const PaqueteMultiple = (props: Props) => {
           paqueteAdquirido: id,
           usuarios: avanzado ? usuarios : usuariosSeleccionados,
         });
+
+        await nuevoPedido("correos/nuevo-pedido", correoPedido);
+        await nuevoPedidoAdmin("correos/nuevo-pedido-admin", correoPedidoAdmin);
 
         if (resp.ok) {
           toast.success(resp.msg);

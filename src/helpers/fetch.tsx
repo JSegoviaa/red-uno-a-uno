@@ -3,7 +3,12 @@ import { ActualizarInmueble } from "../context/inmuebles/InmuebleContext";
 import { development, production } from "../credentials/credentials";
 import { RegisterData, Resp, SubirFoto } from "../interfaces/AuthInterface";
 import { CrearChatResponse, MensajesResp } from "../interfaces/ChatInterface";
-import { Contact, ContactResp } from "../interfaces/ContactInterface";
+import {
+  Contact,
+  ContactResp,
+  NuevoPedido,
+  NuevoPedidoAdmin,
+} from "../interfaces/ContactInterface";
 import {
   BorrarInmuebleResp,
   CrearInmuebleResp,
@@ -113,6 +118,36 @@ export const fetchContactForm = async (
   });
 
   return await resp.json();
+};
+
+export const nuevoPedido = async (
+  endpoint: string,
+  data: NuevoPedido
+): Promise<ContactResp> => {
+  const url = `${baseURL}/${endpoint}`;
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  return await res.json();
+};
+
+export const nuevoPedidoAdmin = async (
+  endpoint: string,
+  data: NuevoPedidoAdmin
+): Promise<ContactResp> => {
+  const url = `${baseURL}/${endpoint}`;
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  return await res.json();
 };
 
 export const fetchInmueble = async (

@@ -11,8 +11,13 @@ import Button from "../../ui/button/Button";
 import Loading from "../../ui/loading/Loading";
 import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
-import { anadirPaqueteInv } from "../../../helpers/fetch";
+import {
+  anadirPaqueteInv,
+  nuevoPedido,
+  nuevoPedidoAdmin,
+} from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
+import { NuevoPedido, NuevoPedidoAdmin } from "interfaces/ContactInterface";
 
 const Individual = () => {
   const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
@@ -68,12 +73,34 @@ const Individual = () => {
         totalUsuarios: 1,
       };
 
+      const correoPedido: NuevoPedido = {
+        apellido: auth.apellido,
+        nombre: auth.nombre,
+        correo: auth.correo,
+        idCompra: pago?.id,
+        nombrePaquete: paquete?.nombre,
+        precio: Number(precioSeleccionado),
+        importe: Number(precioSeleccionado),
+      };
+
+      const correoPedidoAdmin: NuevoPedidoAdmin = {
+        apellido: auth.apellido,
+        nombre: auth.nombre,
+        idCompra: pago?.id,
+        nombrePaquete: paquete?.nombre,
+        precio: Number(precioSeleccionado),
+        importe: Number(precioSeleccionado),
+      };
+
       try {
         const resp = await anadirPaqueteInv("pedidos", body);
         await actualizarRol({
           role: paquete?.nombre,
           paqueteAdquirido: paquete?._id,
         });
+
+        await nuevoPedido("correos/nuevo-pedido", correoPedido);
+        await nuevoPedidoAdmin("correos/nuevo-pedido-admin", correoPedidoAdmin);
 
         if (resp.ok) {
           toast.success(resp.msg);
