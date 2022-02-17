@@ -6,6 +6,25 @@ export interface Contact {
   mensaje: string;
 }
 
+export interface NuevoPedido {
+  nombre: string;
+  apellido: string;
+  correo: string;
+  nombrePaquete: string;
+  precio: number;
+  importe: number;
+  idCompra: string;
+}
+
+export interface NuevoPedidoAdmin {
+  nombre: string;
+  apellido: string;
+  nombrePaquete: string;
+  precio: number;
+  importe: number;
+  idCompra: string;
+}
+
 export interface ContactResp {
   ok: boolean;
   msg: string;
