@@ -164,7 +164,7 @@ const Header = () => {
                 )}
               </Overlay>
 
-              <i
+              {/* <i
                 onClick={mostrarNotificaciones}
                 style={{ fontSize: 30, color: "#7149BC" }}
                 className="bi bi-bell pointer px-2"
@@ -223,7 +223,7 @@ const Header = () => {
                     </div>
                   )}
                 </Overlay>
-              ) : null}
+              ) : null} */}
             </Nav>
           )}
         </Navbar.Collapse>
