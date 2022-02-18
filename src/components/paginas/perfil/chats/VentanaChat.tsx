@@ -41,7 +41,17 @@ const VentanaChat = () => {
       para: chatState.chatActivo,
       conversacion: chatState.chatActivo,
     };
+
+    const notificacion = {
+      remitente: auth.uid,
+      para: chatState.chatActivo,
+      nombre: auth.nombre,
+      apellido: auth.apellido,
+      mensaje,
+    };
+
     socket?.emit("mensaje-personal", nuevoMensaje);
+    socket?.emit("nueva-notificacion", notificacion);
 
     setFormulario({ mensaje: "" });
   };

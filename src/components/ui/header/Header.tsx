@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Container, Nav, Navbar, Overlay } from "react-bootstrap";
 import Button from "../button/Button";
@@ -8,13 +8,27 @@ import RegisterModal from "../authmodal/AuthModal";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import MisChats from "../../paginas/perfil/chats/MisChats";
 import { ChatContext } from "../../../context/chat/ChatContext";
+import { SocketContext } from "context/socket/SocketContext";
+
+interface Notificacion {
+  de: string;
+  para: string;
+  nombre: string;
+  apellido: string;
+  mensaje: string;
+}
 
 const Header = () => {
   const { auth, logOut, abrirRegistro, abrirLogin } = useContext(AuthContext);
-  const { chatState } = useContext(ChatContext);
+  const { chatState, iniciarChat } = useContext(ChatContext);
+  const { socket } = useContext(SocketContext);
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const target = useRef(null);
   const [notificaciones, setNotificaciones] = useState(false);
+  const [nuevaNotificacion, setNuevaNotificacion] = useState<Notificacion[]>(
+    []
+  );
+  const uniqueValues = new Set();
 
   const cerrarSesion = () => {
     logOut();
@@ -27,6 +41,15 @@ const Header = () => {
   const handleCloseCanvas = () => setShowCanvas(false);
   const handleShowCanvas = () => setShowCanvas(true);
   const mostrarNotificaciones = () => setNotificaciones(!notificaciones);
+
+  useEffect(() => {
+    socket?.on("obtener-notificacion", (notificacion) => {
+      console.log(notificacion, "sa");
+      setNuevaNotificacion((noti) => [...noti, notificacion]);
+    });
+  }, []);
+
+  const marcarComoLeido = () => setNuevaNotificacion([]);
 
   return (
     <Navbar className={styles.navStyle} bg="light" expand="lg">
@@ -97,7 +120,9 @@ const Header = () => {
                       </div>
                     </Link>
 
-                    {auth.role === "Individual" ? null : (
+                    {auth.role === "Individual" ||
+                    auth.role === "Usuario" ||
+                    auth.role === "UsuarioPagado" ? null : (
                       <Link href="/perfil/mis-usuarios">
                         <div
                           className={`${styles.menuItem} pointer mx-3 my-2`}
@@ -144,23 +169,61 @@ const Header = () => {
                 style={{ fontSize: 30, color: "#7149BC" }}
                 className="bi bi-bell pointer px-2"
               />
-              <Overlay
-                target={target.current}
-                show={notificaciones}
-                placement="right"
-              >
-                {({ placement, arrowProps, show: _show, popper, ...props }) => (
-                  <div
-                    className={styles.notificaciones}
-                    {...props}
-                    style={{
-                      ...props.style,
-                    }}
-                  >
-                    <div>Marcar</div>
-                  </div>
-                )}
-              </Overlay>
+              {nuevaNotificacion.length > 0 ? (
+                <Overlay
+                  target={target.current}
+                  show={notificaciones}
+                  placement="right"
+                >
+                  {({
+                    placement,
+                    arrowProps,
+                    show: _show,
+                    popper,
+                    ...props
+                  }) => (
+                    <div
+                      className={styles.notificaciones}
+                      {...props}
+                      style={{
+                        ...props.style,
+                      }}
+                    >
+                      <div>
+                        {nuevaNotificacion
+                          // .filter((nombre) => {
+                          //   const isPresent = uniqueValues.has(
+                          //     nombre.nombre + nombre.apellido
+                          //   );
+                          //   uniqueValues.add(nombre.nombre + nombre.apellido);
+                          //   return !isPresent;
+                          // })
+                          .map((notificacion, i) => (
+                            <div key={i}>
+                              {notificacion.de === auth.uid ? null : (
+                                <div
+                                  onClick={async () =>
+                                    await iniciarChat({
+                                      remitente: auth.uid,
+                                      destinatario: notificacion.para,
+                                    })
+                                  }
+                                  className="pointer"
+                                >
+                                  Tienes un nuevo mensaje de{" "}
+                                  {notificacion.nombre}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        <div className="pointer" onClick={marcarComoLeido}>
+                          Marcar como leído
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </Overlay>
+              ) : null}
             </Nav>
           )}
         </Navbar.Collapse>

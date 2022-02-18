@@ -7,7 +7,6 @@ import {
   useState,
 } from "react";
 import { useRouter } from "next/router";
-import { GoogleLoginResponse, useGoogleLogout } from "react-google-login";
 import { toast } from "react-toastify";
 import {
   actualizarPerfilFetch,
