@@ -2,6 +2,8 @@
   color: #7149bc;
   font-weight: 700;
   font-size: 33.49px;
+  text-align: center;
+  border: 1px solid red;
 }
 .paquete {
   color: #5e5e5e;
@@ -30,14 +32,13 @@
 .imagencontainer {
   overflow: hidden;
   border-radius: 50%;
-  width: 350px;
-  height: 350px;
-  max-height: 350px;
-}
-.perfilImg {
   position: relative;
   left: 50%;
-  transform: translate(-50%,0);
+  transform: translate(-50%);
+  width: 200px;
+  height: 200px;
+}
+.perfilImg {
   width: 100%;
   height: 100%;
 }
@@ -50,7 +51,7 @@
   );
   position: relative;
   text-align: center;
-  width: 250px;
+  width: 200px;
   height: 180px;
   left: 50%;
   transform: translate(-50%, -50px);
