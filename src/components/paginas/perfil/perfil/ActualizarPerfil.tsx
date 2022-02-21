@@ -139,9 +139,14 @@ const ActualizarPerfilForm = () => {
         </Form.Group>
 
         <div>Redes sociales</div>
-
+        <br />
         <Form.Group className="mb-3">
           <Form.Label>Facebook</Form.Label>
+          <br />
+          <Form.Text muted>
+            Escriba su página de facebook sin https://www. Ejemplo:
+            facebook.com/mi-pagina-de-facebook
+          </Form.Text>
           <Form.Control
             type="text"
             value={facebookpage}
@@ -151,6 +156,11 @@ const ActualizarPerfilForm = () => {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Instagram</Form.Label>
+          <br />
+          <Form.Text muted>
+            Escriba su página de instagram sin https://www. Ejemplo:
+            instagram.com/mi-pagina-de-instagram
+          </Form.Text>
           <Form.Control
             type="text"
             value={instagram}
