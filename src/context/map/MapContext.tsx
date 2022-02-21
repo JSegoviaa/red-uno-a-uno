@@ -1,4 +1,12 @@
-import { createContext, Dispatch, FC, SetStateAction, useState } from "react";
+import { obtenerUbicacionUsuario } from "helpers/obtenerUbicación";
+import {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { Location } from "../../interfaces/MapInterfaces";
 
 interface ContextProps {
@@ -12,6 +20,7 @@ interface ContextProps {
   setDirMapa: any;
   zoom: number;
   setZoom: any;
+  ubicacionUsuario: Location;
 }
 
 export const MapContext = createContext({} as ContextProps);
@@ -27,11 +36,22 @@ export const MapProvider: FC = ({ children }) => {
     lng: -99.133208,
   });
 
+  const [ubicacionUsuario, setUbicacionUsuario] = useState<Location>({
+    lat: 0,
+    lng: 0,
+  });
+
   const [direccion, setDireccion] = useState();
 
   const [dirMapa, setDirMapa] = useState("Ciudad de México, CDMX, México");
 
   const [zoom, setZoom] = useState(5);
+
+  useEffect(() => {
+    obtenerUbicacionUsuario().then((lngLat) =>
+      setUbicacionUsuario({ lat: lngLat.lat, lng: lngLat.lng })
+    );
+  }, []);
 
   return (
     <MapContext.Provider
@@ -46,6 +66,7 @@ export const MapProvider: FC = ({ children }) => {
         setDirMapa,
         zoom,
         setZoom,
+        ubicacionUsuario,
       }}
     >
       {children}
