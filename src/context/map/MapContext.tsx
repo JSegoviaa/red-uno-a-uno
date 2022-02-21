@@ -1,4 +1,3 @@
-import { obtenerUbicacionUsuario } from "helpers/obtenerUbicación";
 import {
   createContext,
   Dispatch,
@@ -7,6 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { obtenerUbicacionUsuario } from "helpers/obtenerUbicación";
 import { Location } from "../../interfaces/MapInterfaces";
 
 interface ContextProps {

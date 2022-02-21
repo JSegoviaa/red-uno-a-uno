@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { useContext, useEffect, useState } from "react";
+import { DirectionsRenderer, GoogleMap, Marker } from "@react-google-maps/api";
 import { Container, Row } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
@@ -7,6 +7,7 @@ import Button from "../../../ui/button/Button";
 import styles from "./Inmueble.module.css";
 import { agregarFav } from "../../../../helpers/fetch";
 import { toast } from "react-toastify";
+import { MapContext } from "context/map/MapContext";
 
 interface Props {
   inmuebles: {
@@ -22,6 +23,9 @@ const containerStyle = {
 
 const Ubicacion = ({ inmuebles }: Props) => {
   const { auth } = useContext(AuthContext);
+  const { ubicacionUsuario } = useContext(MapContext);
+  const [comoLLegar, setComoLLegar] = useState(false);
+  const [direcciones, setDirecciones] = useState<any>();
 
   const agregarFavorito = async (inmuebleId: string) => {
     const favorito = {
@@ -48,6 +52,33 @@ const Ubicacion = ({ inmuebles }: Props) => {
     }
   };
 
+  const comoLlegar = () => setComoLLegar(!comoLLegar);
+
+  const destination = {
+    lat: inmuebles.inmueble.lat,
+    lng: inmuebles.inmueble.lng,
+  };
+
+  const origin = { lat: ubicacionUsuario.lat, lng: ubicacionUsuario.lng };
+
+  useEffect(() => {
+    const directionsService = new google.maps.DirectionsService();
+    directionsService.route(
+      {
+        origin: new google.maps.LatLng(origin.lat, origin.lng),
+        destination: new google.maps.LatLng(destination.lat, destination.lng),
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          setDirecciones(result);
+        } else {
+          console.error(`error fetching directions ${result}`);
+        }
+      }
+    );
+  }, [direcciones]);
+
   return (
     <section className="mt-5">
       <Container>
@@ -59,7 +90,7 @@ const Ubicacion = ({ inmuebles }: Props) => {
                 lat: inmuebles.inmueble.lat,
                 lng: inmuebles.inmueble.lng,
               }}
-              zoom={16}
+              zoom={comoLLegar ? 10 : 16}
             >
               <Marker
                 position={{
@@ -68,7 +99,30 @@ const Ubicacion = ({ inmuebles }: Props) => {
                 }}
                 icon={{ url: "/images/icons/marcador.svg" }}
               />
+
+              {comoLLegar ? (
+                <Marker
+                  position={{
+                    lat: ubicacionUsuario.lat,
+                    lng: ubicacionUsuario.lng,
+                  }}
+                  icon={{ url: "/images/icons/marcador.svg" }}
+                />
+              ) : null}
+              {comoLLegar ? (
+                <DirectionsRenderer directions={direcciones} />
+              ) : null}
             </GoogleMap>
+
+            <h3 className="text-center py-3">
+              {ubicacionUsuario.lat === 0 ||
+              ubicacionUsuario.lat === 0 ? null : (
+                <Button
+                  titulo={!comoLLegar ? "Mostrar ruta" : "Ocultar ruta"}
+                  onClick={comoLlegar}
+                />
+              )}
+            </h3>
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
             <div className={`${styles.inmuebleTitleUbicacion} mb-4`}>
