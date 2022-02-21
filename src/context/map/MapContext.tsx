@@ -21,6 +21,13 @@ interface ContextProps {
   zoom: number;
   setZoom: any;
   ubicacionUsuario: Location;
+  southEast: Bounds;
+  setSouthEast: Dispatch<SetStateAction<Bounds>>;
+}
+
+interface Bounds {
+  lng: number | undefined;
+  lat: number | undefined;
 }
 
 export const MapContext = createContext({} as ContextProps);
@@ -40,6 +47,8 @@ export const MapProvider: FC = ({ children }) => {
     lat: 0,
     lng: 0,
   });
+
+  const [southEast, setSouthEast] = useState<Bounds>({ lat: 0, lng: 0 });
 
   const [direccion, setDireccion] = useState();
 
@@ -67,6 +76,8 @@ export const MapProvider: FC = ({ children }) => {
         zoom,
         setZoom,
         ubicacionUsuario,
+        southEast,
+        setSouthEast,
       }}
     >
       {children}
