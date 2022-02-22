@@ -28,6 +28,8 @@ interface ContextProps {
   setSouthWest: Dispatch<SetStateAction<google.maps.LatLngLiteral | undefined>>;
   northEast: google.maps.LatLngLiteral | undefined;
   setNorthEast: Dispatch<SetStateAction<google.maps.LatLngLiteral | undefined>>;
+  ubicacionUsuario: Location;
+  setUbicacionUsuario: Dispatch<SetStateAction<Location>>;
 }
 
 interface Bounds {
@@ -48,6 +50,10 @@ export const MapProvider: FC = ({ children }) => {
     lng: -99.133208,
   });
 
+  const [ubicacionUsuario, setUbicacionUsuario] = useState<Location>({
+    lat: 0,
+    lng: 0,
+  });
   const [southEast, setSouthEast] = useState<Bounds>({ lat: 0, lng: 0 });
   const [northWest, setNorthWest] = useState<Bounds>({ lat: 0, lng: 0 });
   const [southWest, setSouthWest] = useState<
@@ -64,9 +70,10 @@ export const MapProvider: FC = ({ children }) => {
   const [zoom, setZoom] = useState(5);
 
   useEffect(() => {
-    obtenerUbicacionUsuario().then((lngLat) =>
-      setCoordenadas({ lat: lngLat.lat, lng: lngLat.lng })
-    );
+    obtenerUbicacionUsuario().then((lngLat) => {
+      setUbicacionUsuario({ lat: lngLat.lat, lng: lngLat.lng });
+      setCoordenadas({ lat: lngLat.lat, lng: lngLat.lng });
+    });
   }, []);
 
   useEffect(() => {
@@ -96,6 +103,8 @@ export const MapProvider: FC = ({ children }) => {
         setSouthWest,
         northEast,
         setNorthEast,
+        ubicacionUsuario,
+        setUbicacionUsuario,
       }}
     >
       {children}
