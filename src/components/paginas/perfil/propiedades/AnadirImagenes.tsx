@@ -98,7 +98,7 @@ const AnadirImagenes = () => {
       formData.append("pictures", pictures[i]);
     }
 
-    await subirImagenesInmueble(formData, auth.uid, ultimoInmueble?._id);
+    await subirImagenesInmueble(formData, auth.uid, ultimoInmueble?._id, "");
 
     setCargando(false);
     setOpciones(true);
@@ -109,7 +109,7 @@ const AnadirImagenes = () => {
 
   const verMisInmuebles = () => router.push("/perfil/mis-propiedades");
 
-  const mostrarVideoUpload = () => setAgregarVideo(!agregarVideo);
+  // const mostrarVideoUpload = () => setAgregarVideo(!agregarVideo);
 
   return (
     <>
@@ -170,10 +170,10 @@ const AnadirImagenes = () => {
       </Form>
       {opciones ? (
         <div className="d-flex justify-content-around">
-          <Button
+          {/* <Button
             titulo={!agregarVideo ? "Agregar video" : "Continuar"}
             onClick={!agregarVideo ? mostrarVideoUpload : verMisInmuebles}
-          />
+          /> */}
           <Button titulo="Ver mis inmuebles" onClick={verMisInmuebles} />
           <Button titulo="Ver inmueble que agregué" onClick={inmuebleCreado} />
         </div>
