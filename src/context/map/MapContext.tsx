@@ -20,9 +20,14 @@ interface ContextProps {
   setDirMapa: any;
   zoom: number;
   setZoom: any;
-  ubicacionUsuario: Location;
   southEast: Bounds;
   setSouthEast: Dispatch<SetStateAction<Bounds>>;
+  northWest: Bounds;
+  setNorthWest: Dispatch<SetStateAction<Bounds>>;
+  southWest: google.maps.LatLngLiteral | undefined;
+  setSouthWest: Dispatch<SetStateAction<google.maps.LatLngLiteral | undefined>>;
+  northEast: google.maps.LatLngLiteral | undefined;
+  setNorthEast: Dispatch<SetStateAction<google.maps.LatLngLiteral | undefined>>;
 }
 
 interface Bounds {
@@ -34,8 +39,8 @@ export const MapContext = createContext({} as ContextProps);
 
 export const MapProvider: FC = ({ children }) => {
   const [coordenadas, setCoordenadas] = useState<Location>({
-    lat: 19.4326077,
-    lng: -99.133208,
+    lat: 19.4326078,
+    lng: -99.133207,
   });
 
   const [ubicacion, setUbicacion] = useState<Location>({
@@ -43,12 +48,14 @@ export const MapProvider: FC = ({ children }) => {
     lng: -99.133208,
   });
 
-  const [ubicacionUsuario, setUbicacionUsuario] = useState<Location>({
-    lat: 0,
-    lng: 0,
-  });
-
   const [southEast, setSouthEast] = useState<Bounds>({ lat: 0, lng: 0 });
+  const [northWest, setNorthWest] = useState<Bounds>({ lat: 0, lng: 0 });
+  const [southWest, setSouthWest] = useState<
+    google.maps.LatLngLiteral | undefined
+  >({ lat: 0, lng: 0 });
+  const [northEast, setNorthEast] = useState<
+    google.maps.LatLngLiteral | undefined
+  >({ lat: 0, lng: 0 });
 
   const [direccion, setDireccion] = useState();
 
@@ -58,9 +65,15 @@ export const MapProvider: FC = ({ children }) => {
 
   useEffect(() => {
     obtenerUbicacionUsuario().then((lngLat) =>
-      setUbicacionUsuario({ lat: lngLat.lat, lng: lngLat.lng })
+      setCoordenadas({ lat: lngLat.lat, lng: lngLat.lng })
     );
   }, []);
+
+  useEffect(() => {
+    coordenadas.lat !== 19.4326078 && coordenadas.lng !== -99.133207
+      ? setZoom(12)
+      : setZoom(5);
+  }, [coordenadas]);
 
   return (
     <MapContext.Provider
@@ -75,9 +88,14 @@ export const MapProvider: FC = ({ children }) => {
         setDirMapa,
         zoom,
         setZoom,
-        ubicacionUsuario,
         southEast,
         setSouthEast,
+        northWest,
+        setNorthWest,
+        southWest,
+        setSouthWest,
+        northEast,
+        setNorthEast,
       }}
     >
       {children}
