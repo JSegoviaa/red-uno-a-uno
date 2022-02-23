@@ -85,12 +85,16 @@ export const useInmueblesCoordenadas = (
   const [cargando, setCargando] = useState(true);
 
   const obtenerInmueblesPorCoordenadas = async () => {
-    const resp = await fetch(
-      `${production}/inmuebles/inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}`
-    );
-    const data: InmueblesCoordenadas = await resp.json();
-    setInmuebles(data.inmuebles);
-    setCargando(false);
+    try {
+      const resp = await fetch(
+        `${production}/inmuebles/inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}`
+      );
+      const data: InmueblesCoordenadas = await resp.json();
+      setInmuebles(data.inmuebles);
+      setCargando(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -112,13 +116,17 @@ export const useListaInmuebleCoords = (
   const [cargando, setCargando] = useState(true);
 
   const obtenerInmuebles = async () => {
-    const resp = await fetch(
-      `${production}/inmuebles/inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}&limite=${limite}`
-    );
-    const data: ListaInmuebles = await resp.json();
+    try {
+      const resp = await fetch(
+        `${production}/inmuebles/inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}&limite=${limite}`
+      );
+      const data: ListaInmuebles = await resp.json();
 
-    setListaInmuebles(data);
-    setCargando(false);
+      setListaInmuebles(data);
+      setCargando(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
