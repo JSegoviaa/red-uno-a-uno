@@ -11,9 +11,10 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { agregarFav, agregarHist } from "../../../helpers/fetch";
 import { formatPrice } from "../../../helpers/formatPrice";
-import { useListaInmueble } from "../../../hooks/useInmuebles";
+import { useListaInmuebleCoords } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
 import styles from "./ListaProp.module.css";
+import { MapContext } from "context/map/MapContext";
 
 function ContextAwareToggle({ children, eventKey, callback }: any) {
   const { activeEventKey } = useContext(AccordionContext);
@@ -39,10 +40,19 @@ function ContextAwareToggle({ children, eventKey, callback }: any) {
 
 const ListaProp = () => {
   const { auth } = useContext(AuthContext);
+  const { coordenadas, southEast, northWest, southWest, northEast } =
+    useContext(MapContext);
   const router = useRouter();
   const [verLista, setVerLista] = useState(false);
   const [limite, setLimite] = useState(10);
-  const { listaInmuebles, cargando } = useListaInmueble(limite);
+  const { listaInmuebles, cargando } = useListaInmuebleCoords(
+    limite,
+    southEast,
+    northWest,
+    southWest,
+    northEast,
+    coordenadas
+  );
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);
 

@@ -19,7 +19,7 @@ interface ContextProps {
   dirMapa: string | undefined;
   setDirMapa: any;
   zoom: number;
-  setZoom: any;
+  setZoom: Dispatch<SetStateAction<number>>;
   southEast: Bounds;
   setSouthEast: Dispatch<SetStateAction<Bounds>>;
   northWest: Bounds;
@@ -32,7 +32,7 @@ interface ContextProps {
   setUbicacionUsuario: Dispatch<SetStateAction<Location>>;
 }
 
-interface Bounds {
+export interface Bounds {
   lng: number | undefined;
   lat: number | undefined;
 }

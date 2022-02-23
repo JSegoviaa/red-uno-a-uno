@@ -1,7 +1,7 @@
-import { Fragment, memo, useContext, useRef, useState } from "react";
+import { Fragment, memo, useContext, useEffect, useRef, useState } from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { MapContext } from "../../../context/map/MapContext";
-import { useInmuebles } from "../../../hooks/useInmuebles";
+import { useInmueblesCoordenadas } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
 import InfoWindowMap from "./InfoWindowMap";
 import BuscarZona from "./BuscarZona";
@@ -32,9 +32,15 @@ const MapaUbicacion = () => {
     northEast,
     setNorthEast,
   } = useContext(MapContext);
-  const { inmuebles, cargando } = useInmuebles();
   const [seleccionado, setSeleccionado] = useState("");
   const mapRef = useRef<GoogleMap>(null);
+  const { inmuebles, cargando } = useInmueblesCoordenadas(
+    southEast,
+    northWest,
+    southWest,
+    northEast,
+    coordenadas
+  );
 
   const propiedadSeleccionada = (id: string, lat: number, lng: number) => {
     setCoordenadas({ lat, lng });
@@ -64,39 +70,25 @@ const MapaUbicacion = () => {
       lng: mapRef.current?.state.map?.getBounds()?.getNorthEast().lng(),
     };
 
-    const center = mapRef.current?.state.map?.getCenter()?.toJSON();
-    setCoordenadas(center!);
     setSouthEast(southEast);
     setNorthWest(northWest);
     setSouthWest(southWest);
     setNorthEast(northEast);
   };
 
-  console.log(coordenadas, "coordenadas");
-  console.log(southEast, "southEast");
-  console.log(northWest, "nortwest");
-  console.log(southWest, "southWest");
-  console.log(northEast, "northEast");
-  console.log("===================================");
+  const handleClick = () => {
+    onBoundsChange();
+    getCenter();
+  };
 
-  // if (coordenadas.lat > southEast?.lat && coordenadas.lat > southWest?.lat) {
-  //   console.log(true);
-  // }
+  const getCenter = () => {
+    const center = mapRef.current?.state.map?.getCenter()?.toJSON();
+    setCoordenadas(center!);
+  };
 
-  // if (coordenadas.lat < northEast?.lat && coordenadas.lat < northWest.lat) {
-  //   console.log(true);
-  // }
-  // coordenadas.lat > southEast?.lat && southWest?.lat;
-  // coordenadas.lat < northEast?.lat && northWest.lat;
-
-  // if (coordenadas.lng > northWest.lng && coordenadas.lng > southWest?.lng) {
-  //   console.log(true);
-  // }
-  // if (coordenadas.lng < southEast.lng && coordenadas.lng < northEast?.lng) {
-  //   console.log(true);
-  // }
-  // coordenadas.lng > northWest.lng && southWest?.lng;
-  // coordenadas.lng < southEast.lng && northEast?.lng;
+  useEffect(() => {
+    onBoundsChange();
+  }, [coordenadas, cargando]);
 
   return (
     <GoogleMap
@@ -114,7 +106,7 @@ const MapaUbicacion = () => {
         <Loading />
       ) : (
         <>
-          <div className="pointer" onClick={onBoundsChange}>
+          <div className="pointer" onClick={handleClick}>
             <BuscarZona />
           </div>
 

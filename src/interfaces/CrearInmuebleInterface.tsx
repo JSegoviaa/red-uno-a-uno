@@ -123,3 +123,8 @@ interface TipoPropiedad {
   _id: string;
   nombre: string;
 }
+
+export interface InmueblesCoordenadas {
+  ok: boolean;
+  inmuebles: InmueblesUsuario[];
+}
