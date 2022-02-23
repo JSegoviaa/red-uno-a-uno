@@ -21,6 +21,13 @@ const containerStyle = {
   height: "400px",
 };
 
+const options = {
+  disableDefaultUI: true,
+  streetViewControl: true,
+  zoomControl: true,
+  fullscreenControl: true,
+};
+
 const Ubicacion = ({ inmuebles }: Props) => {
   const { auth } = useContext(AuthContext);
   const { ubicacionUsuario } = useContext(MapContext);
@@ -91,13 +98,17 @@ const Ubicacion = ({ inmuebles }: Props) => {
                 lng: inmuebles.inmueble.lng,
               }}
               zoom={comoLLegar ? 10 : 16}
+              options={options}
             >
               <Marker
                 position={{
                   lat: inmuebles.inmueble.lat,
                   lng: inmuebles.inmueble.lng,
                 }}
-                icon={{ url: "/images/icons/marcador.svg" }}
+                icon={{
+                  url: "/images/icons/marcador.svg",
+                  scaledSize: new google.maps.Size(50, 50),
+                }}
               />
 
               {comoLLegar ? (
@@ -106,7 +117,10 @@ const Ubicacion = ({ inmuebles }: Props) => {
                     lat: ubicacionUsuario.lat,
                     lng: ubicacionUsuario.lng,
                   }}
-                  icon={{ url: "/images/icons/marcador.svg" }}
+                  icon={{
+                    url: "/images/icons/marcador.svg",
+                    scaledSize: new google.maps.Size(50, 50),
+                  }}
                 />
               ) : null}
               {comoLLegar ? (
