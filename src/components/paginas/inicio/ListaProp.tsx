@@ -177,7 +177,7 @@ const ListaProp = () => {
                                       <div className={styles.noImage}>
                                         <div className={styles.textNoImage}>
                                           Aún no hay <br /> imagenes <br /> para
-                                          mostrar :(
+                                          mostrar {":("}
                                         </div>
                                       </div>
                                     )}

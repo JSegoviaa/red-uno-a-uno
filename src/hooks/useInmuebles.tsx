@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Bounds, MapContext } from "context/map/MapContext";
-import { production } from "credentials/credentials";
+import { development, production } from "credentials/credentials";
 import {
   InmueblesCoordenadas,
   InmueblesUsuario,
@@ -118,7 +118,7 @@ export const useListaInmuebleCoords = (
   const obtenerInmuebles = async () => {
     try {
       const resp = await fetch(
-        `${production}/inmuebles/inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}&limite=${limite}`
+        `${development}/inmuebles/lista-inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}&limite=${limite}`
       );
       const data: ListaInmuebles = await resp.json();
 
