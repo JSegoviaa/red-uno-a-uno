@@ -28,3 +28,15 @@
   line-height: 30px;
   color: #e65a1f;
 }
+
+.buscarZona {
+  margin-top: 10px;
+  position: absolute;
+  right: 50px;
+  background-color: #f7f7f7;
+  padding: 6.5px 24px;
+  font-size: 18px;
+  border-radius: 2px;
+  -webkit-box-shadow: -5px -8px 27px -6px rgba(0, 0, 0, 0.34);
+  box-shadow: -5px -8px 27px -6px rgba(0, 0, 0, 0.34);
+}

@@ -1,9 +1,7 @@
+import styles from "./Inicio.module.css";
+
 const BuscarZona = () => {
-  return (
-    <div style={{ position: "absolute", right: 100, backgroundColor: "red" }}>
-      BuscarZona
-    </div>
-  );
+  return <div className={`${styles.buscarZona}`}>Buscar en esta zona</div>;
 };
 
 export default BuscarZona;
