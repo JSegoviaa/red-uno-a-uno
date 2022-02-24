@@ -48,8 +48,6 @@ const MiListaFavoritos = () => {
     setMisFavoritos(nuevosFavoritos);
   };
 
-  console.log(dueño);
-
   return (
     <Container>
       <Row>
