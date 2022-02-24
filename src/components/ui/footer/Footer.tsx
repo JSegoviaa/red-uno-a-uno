@@ -98,6 +98,18 @@ const Footer = () => {
                   alt="Comunícate por whatsapp"
                 />
               </a>
+              <br />
+              <br />
+              <Link href="/terminos-y-condiciones" scroll>
+                <p className={`${styles.footerLink} pointer`}>
+                  Términos y condiciones
+                </p>
+              </Link>
+              <Link href="/aviso-de-privacidad" scroll>
+                <p className={`${styles.footerLink} pointer`}>
+                  Aviso de privacidad
+                </p>
+              </Link>
             </div>
           </div>
         </div>
@@ -112,12 +124,12 @@ const Footer = () => {
             className="text-reset fw-bold pointer"
             style={{ textDecoration: "none" }}
           >
-            Red 1 a 1
+            Red 1a1
           </span>
         </Link>
         . Todos los derechos reservados.
       </div>
-      <RegisterModal show={mostrarRegistro} handleClose={cerrarRegistro} />
+      <RegisterModal />
     </footer>
   );
 };
