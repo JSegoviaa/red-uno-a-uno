@@ -35,48 +35,54 @@ const InfoWindowMap = ({ inmueble }: Props) => {
         <div className="row">
           <div className="col text-center">
             <div className={styles.containerimg}>
-              <Swiper
-                effect={"cube"}
-                grabCursor
-                loop
-                autoplay={{
-                  delay: 3200,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true,
-                }}
-                cubeEffect={{
-                  shadow: true,
-                  slideShadows: true,
-                  shadowOffset: 20,
-                  shadowScale: 0.94,
-                }}
-                className="mySwiper"
-              >
-                {inmueble.imgs.map((img) => {
-                  const sepracion = img.split(".");
+              {inmueble.imgs.length === 1 ? (
+                <Swiper>
+                  <img className={styles.imgCard} src={inmueble.imgs[0]} />
+                </Swiper>
+              ) : (
+                <Swiper
+                  effect={"cube"}
+                  grabCursor
+                  loop
+                  autoplay={{
+                    delay: 3200,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                  }}
+                  cubeEffect={{
+                    shadow: true,
+                    slideShadows: true,
+                    shadowOffset: 20,
+                    shadowScale: 0.94,
+                  }}
+                  className="mySwiper"
+                >
+                  {inmueble.imgs.map((img) => {
+                    const sepracion = img.split(".");
 
-                  const extension = sepracion[sepracion.length - 1];
-                  const extensionesValidas = ["mp4"];
-                  return (
-                    <SwiperSlide key={img}>
-                      {extensionesValidas.includes(extension) ? (
-                        <video
-                          src={img}
-                          controls
-                          controlsList="nodownload"
-                          style={{
-                            height: 200,
-                            width: "100%",
-                            overflow: "hidden",
-                          }}
-                        />
-                      ) : (
-                        <img className={styles.imgCard} src={img} />
-                      )}
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
+                    const extension = sepracion[sepracion.length - 1];
+                    const extensionesValidas = ["mp4"];
+                    return (
+                      <SwiperSlide key={img}>
+                        {extensionesValidas.includes(extension) ? (
+                          <video
+                            src={img}
+                            controls
+                            controlsList="nodownload"
+                            style={{
+                              height: 200,
+                              width: "100%",
+                              overflow: "hidden",
+                            }}
+                          />
+                        ) : (
+                          <img className={styles.imgCard} src={img} />
+                        )}
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              )}
             </div>
             <div className={`${styles.title} mb-2`}>{inmueble.titulo}</div>
             <div className="mb-2">
