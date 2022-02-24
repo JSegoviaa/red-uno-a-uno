@@ -7,7 +7,8 @@ interface Props {
   img?: string;
 }
 
-const desc = "Descripción";
+const desc =
+  "Red 1a1 Nace para dar solución a las necesidades del mercado inmobiliario. Asesores y clientes podrán agregar, buscar y compartir propiedades. Red 1a1 Nace para dar solución a las necesidades del mercado actual, la fórmula es simple. Crear un entorno, en el cual, asesores e inmobiliarias puedan llegar a un mutuo acuerdo de intercambio de propiedades y clientes para que todos ganen. Red 1a1 es la solución para asesores independientes e inmobiliarias que permite la comunicación y el intercambio de carteras de clientes / propiedades. A través de esta herramienta versátil podrás agregar, buscar y compartir propiedades, también podrás comunicarte a través de un sistema de chat con otros asesores e inmobiliarias de la comunidad a nivel nacional.";
 const logo = "https://i.imgur.com/45hp3Ed.png";
 
 const SEO = ({ titulo, descripcion = desc, url, img = logo }: Props) => {
