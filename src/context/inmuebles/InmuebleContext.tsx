@@ -128,6 +128,8 @@ interface ContextProps {
   setIdInmueble: Dispatch<SetStateAction<string>>;
   inmuebleState: ActualizarInmueble;
   setInmuebleState: Dispatch<SetStateAction<ActualizarInmueble>>;
+  dueño: string;
+  setDueño: Dispatch<SetStateAction<string>>;
 }
 
 type EditarInmueble = "Información" | "Imágenes";
@@ -184,6 +186,7 @@ export const InmuebleProvider: FC = ({ children }) => {
   const [editar, setEditar] = useState<EditarInmueble>();
   const [idInmueble, setIdInmueble] = useState("");
   const [inmuebleState, setInmuebleState] = useState(InmuebleState);
+  const [dueño, setDueño] = useState("");
 
   const crearInmueble = async (data: InmuebleData) => {
     const resp = await fetchInmueble("inmuebles", data);
@@ -261,6 +264,8 @@ export const InmuebleProvider: FC = ({ children }) => {
         setIdInmueble,
         inmuebleState,
         setInmuebleState,
+        dueño,
+        setDueño,
       }}
     >
       <ToastContainer />

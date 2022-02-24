@@ -1,3 +1,4 @@
+import { InmuebleContext } from "context/inmuebles/InmuebleContext";
 import { useContext } from "react";
 import { Form } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
@@ -8,6 +9,7 @@ import styles from "./FiltrosFavs.module.css";
 
 const FiltroFavs = () => {
   const { auth } = useContext(AuthContext);
+  const { setDueño, dueño } = useContext(InmuebleContext);
   // const { solicitud, setSolicitud } = useContext(InmuebleContext);
   const { favoritos, cargando } = useFavoritos(auth.uid);
   const uniqueValues = new Set();
@@ -25,8 +27,10 @@ const FiltroFavs = () => {
                   <Form.Select
                     aria-label="Default select example"
                     className={`${styles.customSelect} mb-4`}
+                    value={dueño}
+                    onChange={(e) => setDueño(e.target.value)}
                   >
-                    <option>Agentes:</option>
+                    <option value="">Agentes:</option>
 
                     {favoritos
                       .filter((nombre) => {

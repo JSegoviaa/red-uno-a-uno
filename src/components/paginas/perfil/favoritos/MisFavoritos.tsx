@@ -1,3 +1,4 @@
+import { InmuebleContext } from "context/inmuebles/InmuebleContext";
 import { useContext, useState } from "react";
 import { Container, Pagination, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -10,9 +11,11 @@ import styles from "./FiltrosFavs.module.css";
 
 const MiListaFavoritos = () => {
   const { auth } = useContext(AuthContext);
+  const { dueño } = useContext(InmuebleContext);
   const [desde, setDesde] = useState(0);
   const { misFavoritos, cargando, total, setMisFavoritos } = useMisFavoritos(
     auth.uid,
+    dueño,
     desde
   );
 
@@ -44,6 +47,8 @@ const MiListaFavoritos = () => {
 
     setMisFavoritos(nuevosFavoritos);
   };
+
+  console.log(dueño);
 
   return (
     <Container>
