@@ -1,7 +1,6 @@
 import { ChatContext } from "context/chat/ChatContext";
 import { Fragment, useContext } from "react";
 import { Offcanvas } from "react-bootstrap";
-import { AuthContext } from "../../../../context/auth/AuthContext";
 import Loading from "../../../ui/loading/Loading";
 import Chat from "./Chat";
 import styles from "./MisChats.module.css";
@@ -20,8 +19,8 @@ const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
         <Offcanvas.Title>Mis chats</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body className={styles.OFbody}>
-        {conversaciones.map((conversacion) => (
-          <Fragment key={conversacion._id}>
+        {conversaciones.map((conversacion, i) => (
+          <Fragment key={i}>
             {cargando ? (
               <Loading />
             ) : (

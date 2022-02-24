@@ -66,6 +66,7 @@ export const ChatProvider: FC = ({ children }) => {
     console.log(añadirChat);
 
     setConversaciones([...conversaciones, añadirChat.guardarChat]);
+    console.log(añadirChat.guardarChat);
     scrollToBotom.current?.scrollIntoView();
   };
 
