@@ -21,7 +21,7 @@ export const useConversaciones = (uid: string | undefined | null) => {
     obtenerConversaciones();
   }, [uid]);
 
-  return { conversaciones, cargando };
+  return { conversaciones, cargando, setConversaciones };
 };
 
 export const useUltimoMsg = (uid: string, id: string) => {

@@ -1,7 +1,7 @@
+import { ChatContext } from "context/chat/ChatContext";
 import { Fragment, useContext } from "react";
 import { Offcanvas } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
-import { useConversaciones } from "../../../../hooks/useConversaciones";
 import Loading from "../../../ui/loading/Loading";
 import Chat from "./Chat";
 import styles from "./MisChats.module.css";
@@ -12,8 +12,7 @@ interface Props {
 }
 
 const MisChats = ({ showCanvas, handleCloseCanvas }: Props) => {
-  const { auth } = useContext(AuthContext);
-  const { conversaciones, cargando } = useConversaciones(auth.uid);
+  const { cargando, conversaciones } = useContext(ChatContext);
 
   return (
     <Offcanvas show={showCanvas} onHide={handleCloseCanvas} placement="end">

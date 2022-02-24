@@ -1,9 +1,13 @@
+import { AuthContext } from "context/auth/AuthContext";
+import { useConversaciones } from "hooks/useConversaciones";
+import { Conversacion } from "interfaces/ChatInterface";
 import {
   createContext,
   Dispatch,
   FC,
   MutableRefObject,
   SetStateAction,
+  useContext,
   useReducer,
   useRef,
   useState,
@@ -25,6 +29,8 @@ interface ContextProps {
   setMensajePara: any;
   scrollToBotom: MutableRefObject<HTMLDivElement | null>;
   iniciarChat: (data: CrearChat) => Promise<void>;
+  conversaciones: Conversacion[];
+  cargando: boolean;
 }
 
 export const initialState: any = {
@@ -36,6 +42,7 @@ export const initialState: any = {
 export const ChatContext = createContext({} as ContextProps);
 
 export const ChatProvider: FC = ({ children }) => {
+  const { auth } = useContext(AuthContext);
   const [chatState, dispatch] = useReducer(
     chatReducer,
     initialState,
@@ -44,16 +51,21 @@ export const ChatProvider: FC = ({ children }) => {
   const [mensajePara, setMensajePara] = useState("");
   const [minimizarChat, setMinimizarChat] = useState(true);
   const scrollToBotom = useRef<HTMLDivElement | null>(null);
+  const { conversaciones, cargando, setConversaciones } = useConversaciones(
+    auth.uid
+  );
 
   const iniciarChat = async (data: CrearChat) => {
     if (data.destinatario === data.remitente) return;
 
-    await crearChat("chats", data);
+    const añadirChat = await crearChat("chats", data);
     dispatch({ type: "ActivarChat", payload: data.destinatario });
 
     const resp = await obtenerMensajes(`mensajes/${data.destinatario}`);
     dispatch({ type: "CargarMensajes", payload: resp.mensajes });
+    console.log(añadirChat);
 
+    setConversaciones([...conversaciones, añadirChat.guardarChat]);
     scrollToBotom.current?.scrollIntoView();
   };
 
@@ -68,6 +80,8 @@ export const ChatProvider: FC = ({ children }) => {
         setMensajePara,
         scrollToBotom,
         iniciarChat,
+        cargando,
+        conversaciones,
       }}
     >
       {children}
