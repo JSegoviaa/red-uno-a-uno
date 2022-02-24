@@ -15,61 +15,62 @@ const FiltroFavs = () => {
   const uniqueValues = new Set();
 
   return (
-    <div>
-      <section>
-        <div className="container mt-4">
-          <div className="row d-flex justify-content-end">
-            <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-              {cargando ? (
-                <Loading />
-              ) : (
-                <>
-                  <Form.Select
-                    aria-label="Default select example"
-                    className={`${styles.customSelect} mb-4`}
-                    value={dueño}
-                    onChange={(e) => setDueño(e.target.value)}
-                  >
-                    <option value="">Agentes:</option>
+    <>
+      {favoritos.length > 0 ? (
+        <section>
+          <div className="container mt-4">
+            <div className="row d-flex justify-content-end">
+              <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                {cargando ? (
+                  <Loading />
+                ) : (
+                  <>
+                    <Form.Select
+                      aria-label="Default select example"
+                      className={`${styles.customSelect} mb-4`}
+                      value={dueño}
+                      onChange={(e) => setDueño(e.target.value)}
+                    >
+                      <option value="">Agentes:</option>
 
-                    {favoritos
-                      .filter((nombre) => {
-                        const isPresent = uniqueValues.has(
-                          nombre.inmueble.usuario.nombre +
-                            nombre.inmueble.usuario.apellido
-                        );
-                        uniqueValues.add(
-                          nombre.inmueble.usuario.nombre +
-                            nombre.inmueble.usuario.apellido
-                        );
-                        return !isPresent;
-                      })
-                      .map((favorito, i) => (
-                        <option
-                          key={
-                            favorito.inmueble
-                              ? favorito.inmueble.usuario._id + i
-                              : i
-                          }
-                          value={
-                            favorito.inmueble
-                              ? favorito.inmueble.usuario._id
-                              : undefined
-                          }
-                        >
-                          {favorito.inmueble
-                            ? favorito.inmueble.usuario.nombre
-                            : null}{" "}
-                          {favorito.inmueble
-                            ? favorito.inmueble.usuario.apellido
-                            : null}
-                        </option>
-                      ))}
-                  </Form.Select>
-                </>
-              )}
-            </div>
-            {/* <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                      {favoritos
+                        .filter((nombre) => {
+                          const isPresent = uniqueValues.has(
+                            nombre.inmueble.usuario.nombre +
+                              nombre.inmueble.usuario.apellido
+                          );
+                          uniqueValues.add(
+                            nombre.inmueble.usuario.nombre +
+                              nombre.inmueble.usuario.apellido
+                          );
+                          return !isPresent;
+                        })
+                        .map((favorito, i) => (
+                          <option
+                            key={
+                              favorito.inmueble
+                                ? favorito.inmueble.usuario._id + i
+                                : i
+                            }
+                            value={
+                              favorito.inmueble
+                                ? favorito.inmueble.usuario._id
+                                : undefined
+                            }
+                          >
+                            {favorito.inmueble
+                              ? favorito.inmueble.usuario.nombre
+                              : null}{" "}
+                            {favorito.inmueble
+                              ? favorito.inmueble.usuario.apellido
+                              : null}
+                          </option>
+                        ))}
+                    </Form.Select>
+                  </>
+                )}
+              </div>
+              {/* <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">
               <Form.Select
                 aria-label="Default select example"
                 className={`${styles.customSelect} mb-4`}
@@ -83,10 +84,11 @@ const FiltroFavs = () => {
                 <option value="Rechazado">Rechazados</option>
               </Form.Select>
             </div> */}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      ) : null}
+    </>
   );
 };
 
