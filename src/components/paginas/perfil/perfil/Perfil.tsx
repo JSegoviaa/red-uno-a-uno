@@ -76,8 +76,7 @@ const Perfil = () => {
           </Form>
 
           <div className={styles.nombre}>
-            {auth.nombre}
-            {auth.apellido}
+            {auth.nombre} {auth.apellido}
           </div>
 
           {auth.paqueteAdquirido ? (
