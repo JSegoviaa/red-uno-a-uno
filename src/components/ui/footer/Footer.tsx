@@ -79,7 +79,7 @@ const Footer = () => {
 
               <a
                 className="me-2"
-                href="https://www.facebook.com"
+                href="https://es-la.facebook.com/red1a1"
                 target="_blank"
                 rel="noopener noreferrer"
               >
