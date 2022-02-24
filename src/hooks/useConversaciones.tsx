@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "context/auth/AuthContext";
 import { MensajesRespuesta, Mensaje } from "interfaces/MensajesInterface";
 import { production } from "../credentials/credentials";
-import { Conversacion } from "../interfaces/ChatInterface";
+// import { Conversacion } from "../interfaces/ChatInterface";
 
 export const useConversaciones = (uid: string | undefined | null) => {
-  const [conversaciones, setConversaciones] = useState<Conversacion[]>([]);
+  const [conversaciones, setConversaciones] = useState<any[]>([]);
+  // const [conversaciones, setConversaciones] = useState<Conversacion[]>([]);
   const [cargando, setCargando] = useState(false);
 
   const obtenerConversaciones = async () => {
