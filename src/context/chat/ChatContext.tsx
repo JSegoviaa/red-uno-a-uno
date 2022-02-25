@@ -64,7 +64,10 @@ export const ChatProvider: FC = ({ children }) => {
     const resp = await obtenerMensajes(`mensajes/${data.destinatario}`);
     dispatch({ type: "CargarMensajes", payload: resp.mensajes });
 
-    setConversaciones([...conversaciones, añadirChat.guardarChat]);
+    if (añadirChat.ok) {
+      setConversaciones([...conversaciones, añadirChat.guardarChat]);
+    }
+
     scrollToBotom.current?.scrollIntoView();
   };
 
