@@ -93,7 +93,11 @@ const Header = () => {
                 <img
                   src={auth.img}
                   alt="Mi perfil"
-                  style={{ width: "100%", height: "100%", borderRadius: "50%" }}
+                  style={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: "50%",
+                  }}
                 />
               </div>
               <Overlay

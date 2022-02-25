@@ -687,7 +687,7 @@ const Detalles = ({ inmuebles }: Props) => {
                               borderTopLeftRadius: 30,
                               borderTopRightRadius: 30,
                             }}
-                            alt="..."
+                            alt={inmuebles.inmueble.usuario.nombre}
                           />
                         </div>
                         {/* <Modaltitle titulo="Juan Pérez Hernández"/> */}
