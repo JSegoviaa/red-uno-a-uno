@@ -33,6 +33,13 @@ const PurpleHeader = () => {
               </Link>
             </li>
             <li className="nav-item mt-2">
+              <Link href="/perfil/propiedades-compartidas">
+                <div className={`${styles.purpleLinks} mx-3 pointer`}>
+                  Propiedades compartidas
+                </div>
+              </Link>
+            </li>
+            <li className="nav-item mt-2">
               <Link href="/perfil/historial-de-inmueble">
                 <div className={`${styles.purpleLinks} mx-3 pointer`}>
                   Historial de Inmuebles
@@ -42,7 +49,7 @@ const PurpleHeader = () => {
           </>
         ) : null}
         <li className="nav-item">
-          <Buscador/>
+          <Buscador />
           {/* <button className={styles.searchBtn}>
             <i className="bi bi-search" />
           </button> */}
