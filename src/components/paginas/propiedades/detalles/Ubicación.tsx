@@ -59,6 +59,10 @@ const Ubicacion = ({ inmuebles }: Props) => {
     }
   };
 
+  const solicitarCompartir = () => {
+    console.log("Compartir");
+  };
+
   const comoLlegar = () => setComoLLegar(!comoLLegar);
 
   const destination = {
@@ -162,12 +166,23 @@ const Ubicacion = ({ inmuebles }: Props) => {
                 : "Aún no hay descripción para este inmueble"}
             </div>
           </div>
-          <div className="col-12 text-center my-5">
+          <div className="d-flex justify-content-center col-12 text-center my-5">
             {auth.uid ? (
-              <Button
-                titulo="Añadir a favoritos"
-                onClick={() => agregarFavorito(inmuebles.inmueble._id)}
-              />
+              <>
+                <Button
+                  titulo="Solicitar compartir"
+                  onClick={solicitarCompartir}
+                />
+              </>
+            ) : null}
+            <div className="px-2" />
+            {auth.uid ? (
+              <>
+                <Button
+                  titulo="Añadir a favoritos"
+                  onClick={() => agregarFavorito(inmuebles.inmueble._id)}
+                />
+              </>
             ) : null}
           </div>
         </Row>
