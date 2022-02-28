@@ -53,7 +53,7 @@ const RegisterModal = () => {
       }
 
       if (resp.ok) {
-        router.push("/perfil");
+        router.push("/perfil/actualizar-perfil");
         cerrarRegistro();
       }
     }
