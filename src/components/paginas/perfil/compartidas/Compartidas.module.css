@@ -13,3 +13,51 @@
   color: #ccc;
   margin: 150px 0;
 }
+
+.customCard {
+  border-radius: 7px;
+  outline: 1px solid #dddddd;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 7px;
+}
+
+.imgContainer {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  overflow: hidden;
+  height: 180px;
+}
+
+.cardImg {
+  background-size: cover;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+.tituloContainer {
+  height: 68px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.proContent {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+  display: -webkit-box;
+  max-width: calc(100%);
+  max-height: auto;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.titulo {
+  font-size: 70px;
+  color: #ccc;
+  margin: 150px 0;
+}
