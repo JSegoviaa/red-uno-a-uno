@@ -12,7 +12,6 @@ import {
 } from "../../../../helpers/fetch";
 import { toast } from "react-toastify";
 import { MapContext } from "context/map/MapContext";
-import { development } from "credentials/credentials";
 
 interface Props {
   inmuebles: {

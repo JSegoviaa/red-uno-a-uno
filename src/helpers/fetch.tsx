@@ -140,7 +140,7 @@ export const fetchEnviarSolicitud = async (
   endpoint: string,
   data: any
 ): Promise<SolicitudResp> => {
-  const url = `${devURL}/${endpoint}`;
+  const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
   const resp = await fetch(url, {
