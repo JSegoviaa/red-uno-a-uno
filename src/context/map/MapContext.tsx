@@ -30,6 +30,10 @@ interface ContextProps {
   setNorthEast: Dispatch<SetStateAction<google.maps.LatLngLiteral | undefined>>;
   ubicacionUsuario: Location;
   setUbicacionUsuario: Dispatch<SetStateAction<Location>>;
+  categoria: string;
+  tipoPropiedad: string;
+  setCategoria: Dispatch<SetStateAction<string>>;
+  setTipoPropiedad: Dispatch<SetStateAction<string>>;
 }
 
 export interface Bounds {
@@ -69,6 +73,11 @@ export const MapProvider: FC = ({ children }) => {
 
   const [zoom, setZoom] = useState(5);
 
+  const [categoria, setCategoria] = useState("61e99f0e0d3bd9163e4a4b42");
+  const [tipoPropiedad, setTipoPropiedad] = useState(
+    "61e99edd0d3bd9163e4a4b3a"
+  );
+
   useEffect(() => {
     obtenerUbicacionUsuario().then((lngLat) => {
       setUbicacionUsuario({ lat: lngLat.lat, lng: lngLat.lng });
@@ -105,6 +114,10 @@ export const MapProvider: FC = ({ children }) => {
         setNorthEast,
         ubicacionUsuario,
         setUbicacionUsuario,
+        categoria,
+        setCategoria,
+        tipoPropiedad,
+        setTipoPropiedad,
       }}
     >
       {children}

@@ -79,7 +79,9 @@ export const useInmueblesCoordenadas = (
   northWest: Bounds,
   southWest: google.maps.LatLngLiteral | undefined,
   northEast: google.maps.LatLngLiteral | undefined,
-  coordenadas: Location
+  coordenadas: Location,
+  categoria: string,
+  tipoPropiedad: string
 ) => {
   const [inmuebles, setInmuebles] = useState<InmueblesUsuario[]>([]);
   const [cargando, setCargando] = useState(true);
@@ -87,7 +89,7 @@ export const useInmueblesCoordenadas = (
   const obtenerInmueblesPorCoordenadas = async () => {
     try {
       const resp = await fetch(
-        `${production}/inmuebles/inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}`
+        `${production}/inmuebles/inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}&categoria=${categoria}&tipoPropiedad=${tipoPropiedad}`
       );
       const data: InmueblesCoordenadas = await resp.json();
       setInmuebles(data.inmuebles);
@@ -99,7 +101,15 @@ export const useInmueblesCoordenadas = (
 
   useEffect(() => {
     obtenerInmueblesPorCoordenadas();
-  }, [southEast, northWest, southWest, northEast, coordenadas]);
+  }, [
+    southEast,
+    northWest,
+    southWest,
+    northEast,
+    coordenadas,
+    tipoPropiedad,
+    categoria,
+  ]);
 
   return { inmuebles, cargando };
 };
@@ -110,7 +120,9 @@ export const useListaInmuebleCoords = (
   northWest: Bounds,
   southWest: google.maps.LatLngLiteral | undefined,
   northEast: google.maps.LatLngLiteral | undefined,
-  coordenadas: Location
+  coordenadas: Location,
+  categoria: string,
+  tipoPropiedad: string
 ) => {
   const [listaInmuebles, setListaInmuebles] = useState<ListaInmuebles>();
   const [cargando, setCargando] = useState(true);
@@ -118,7 +130,7 @@ export const useListaInmuebleCoords = (
   const obtenerInmuebles = async () => {
     try {
       const resp = await fetch(
-        `${production}/inmuebles/lista-inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}&limite=${limite}`
+        `${production}/inmuebles/lista-inmuebles/coordenadas?lat_south_east=${southEast.lat}&lng_south_east=${southEast.lng}&lat_south_west=${southWest?.lat}&lng_south_west=${southWest?.lng}&lat_north_east=${northEast?.lat}&lng_north_east=${northEast?.lng}&lat_north_west=${northWest.lat}&lng_north_west=${northWest.lng}&limite=${limite}&categoria=${categoria}&tipoPropiedad=${tipoPropiedad}`
       );
       const data: ListaInmuebles = await resp.json();
 
@@ -131,7 +143,15 @@ export const useListaInmuebleCoords = (
 
   useEffect(() => {
     obtenerInmuebles();
-  }, [southEast, northWest, southWest, northEast, coordenadas]);
+  }, [
+    southEast,
+    northWest,
+    southWest,
+    northEast,
+    coordenadas,
+    tipoPropiedad,
+    categoria,
+  ]);
 
   return { listaInmuebles, cargando };
 };

@@ -40,8 +40,15 @@ function ContextAwareToggle({ children, eventKey, callback }: any) {
 
 const ListaProp = () => {
   const { auth } = useContext(AuthContext);
-  const { coordenadas, southEast, northWest, southWest, northEast } =
-    useContext(MapContext);
+  const {
+    coordenadas,
+    southEast,
+    northWest,
+    southWest,
+    northEast,
+    categoria,
+    tipoPropiedad,
+  } = useContext(MapContext);
   const router = useRouter();
   const [verLista, setVerLista] = useState(false);
   const [limite, setLimite] = useState(10);
@@ -51,7 +58,9 @@ const ListaProp = () => {
     northWest,
     southWest,
     northEast,
-    coordenadas
+    coordenadas,
+    categoria,
+    tipoPropiedad
   );
 
   const compartir = () => toast.success(`Se ha copiado al portapapeles`);

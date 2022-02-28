@@ -5,6 +5,8 @@ import { useInmueblesCoordenadas } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
 import InfoWindowMap from "./InfoWindowMap";
 import BuscarZona from "./BuscarZona";
+import { Form } from "react-bootstrap";
+import { useCategories, useTipoPropiedad } from "hooks/useCategories";
 
 const containerStyle = {
   width: "100%",
@@ -31,15 +33,24 @@ const MapaUbicacion = () => {
     setSouthWest,
     northEast,
     setNorthEast,
+    categoria,
+    tipoPropiedad,
+    setCategoria,
+    setTipoPropiedad,
   } = useContext(MapContext);
   const [seleccionado, setSeleccionado] = useState("");
+  const { loading, propertyTypes } = useTipoPropiedad();
+  const { categorias } = useCategories();
+
   const mapRef = useRef<GoogleMap>(null);
   const { inmuebles, cargando } = useInmueblesCoordenadas(
     southEast,
     northWest,
     southWest,
     northEast,
-    coordenadas
+    coordenadas,
+    categoria,
+    tipoPropiedad
   );
 
   const propiedadSeleccionada = (id: string, lat: number, lng: number) => {
@@ -108,6 +119,38 @@ const MapaUbicacion = () => {
         <>
           <div className="pointer" onClick={handleClick}>
             <BuscarZona />
+            <div style={{ position: "absolute", right: 102, top: 55 }}>
+              {loading ? (
+                <Loading />
+              ) : (
+                <Form.Select
+                  value={tipoPropiedad}
+                  onChange={(e) => setTipoPropiedad(e.target.value)}
+                >
+                  {propertyTypes.map((propertyType) => (
+                    <option key={propertyType._id} value={propertyType._id}>
+                      {propertyType.nombre}
+                    </option>
+                  ))}
+                </Form.Select>
+              )}
+            </div>
+            <div style={{ position: "absolute", right: 10, top: 55 }}>
+              {cargando ? (
+                <Loading />
+              ) : (
+                <Form.Select
+                  value={categoria}
+                  onChange={(e) => setCategoria(e.target.value)}
+                >
+                  {categorias.map((categoria) => (
+                    <option key={categoria._id} value={categoria._id}>
+                      {categoria.nombre}
+                    </option>
+                  ))}
+                </Form.Select>
+              )}
+            </div>
           </div>
 
           {inmuebles
