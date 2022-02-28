@@ -48,6 +48,17 @@ const Contact = ({ inmuebles }: Props) => {
                 ? inmuebles.inmueble.usuario.telefonoOficina
                 : "Número oculto"}
             </div>
+            {inmuebles.inmueble.comisiones ? (
+              <div>
+                <i
+                  style={{ color: "#7149BC", fontSize: 35 }}
+                  className="bi bi-currency-dollar"
+                />
+                <span className={styles.telefonoC}>
+                  Comisión {inmuebles.inmueble.comisiones}%
+                </span>
+              </div>
+            ) : null}
           </div>
         </div>
         <div className="col-sm-12 col-md-12 col-lg-7">
