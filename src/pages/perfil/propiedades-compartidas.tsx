@@ -1,7 +1,20 @@
-import { Container } from "react-bootstrap";
+import { useRouter } from "next/router";
+import SEO from "components/seo/SEO";
+import FiltroCompartidas from "components/paginas/perfil/compartidas/FiltroCompartidas";
+import CompartidasCard from "components/paginas/perfil/compartidas/CompartidasCard";
+import Titulo from "components/ui/titulo/Titulo";
 
 const PropiedadesCompartidas = () => {
-  return <Container>Propiedades compartidas</Container>;
+  const router = useRouter();
+
+  return (
+    <>
+      <SEO titulo="Propiedades compartidas" url={router.asPath} />
+      <Titulo titulo="Propiedades compartidas" />
+      <FiltroCompartidas />
+      <CompartidasCard />
+    </>
+  );
 };
 
 export default PropiedadesCompartidas;
