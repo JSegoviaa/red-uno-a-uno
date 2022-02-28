@@ -5,7 +5,11 @@ import { AuthContext } from "../../../../context/auth/AuthContext";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import Button from "../../../ui/button/Button";
 import styles from "./Inmueble.module.css";
-import { agregarFav, fetchSolicitud } from "../../../../helpers/fetch";
+import {
+  agregarFav,
+  fetchEnviarSolicitud,
+  fetchSolicitud,
+} from "../../../../helpers/fetch";
 import { toast } from "react-toastify";
 import { MapContext } from "context/map/MapContext";
 import { development } from "credentials/credentials";
@@ -35,8 +39,6 @@ const Ubicacion = ({ inmuebles }: Props) => {
   const [comoLLegar, setComoLLegar] = useState(false);
   const [direcciones, setDirecciones] = useState<any>();
 
-  const token = localStorage.getItem("token") || "";
-
   const agregarFavorito = async (inmuebleId: string) => {
     const favorito = {
       usuario: auth.uid,
@@ -63,16 +65,34 @@ const Ubicacion = ({ inmuebles }: Props) => {
   };
 
   const solicitarCompartir = async () => {
-    const solicitud = {
+    const solicitudCorreo = {
       nombre: auth.nombre,
       apellido: auth.apellido,
       titulo: inmuebles.inmueble.titulo,
       id: inmuebles.inmueble.usuario._id,
       img: inmuebles.inmueble.imgs[0],
     };
-    const res = await fetchSolicitud("correos/solicitud-compartir", solicitud);
 
-    if (res.ok) toast.success(res.msg);
+    const solicitud = {
+      usuario: auth.uid,
+      propietario: inmuebles.inmueble.usuario,
+      inmueble: inmuebles.inmueble._id,
+      estado: false,
+    };
+
+    const resSolicitud = await fetchEnviarSolicitud("solicitud", solicitud);
+
+    if (resSolicitud.ok) {
+      toast.success(resSolicitud.msg);
+      const resCorreo = await fetchSolicitud(
+        "correos/solicitud-compartir",
+        solicitudCorreo
+      );
+
+      if (resCorreo.ok) toast.success(resCorreo.msg);
+    }
+
+    if (!resSolicitud.ok) toast.error(resSolicitud.msg);
   };
 
   const comoLlegar = () => setComoLLegar(!comoLLegar);
@@ -179,22 +199,23 @@ const Ubicacion = ({ inmuebles }: Props) => {
             </div>
           </div>
           <div className="d-flex justify-content-center col-12 text-center my-5">
-            {auth.uid !== inmuebles.inmueble.usuario._id ? (
-              <>
-                <Button
-                  titulo="Solicitar compartir"
-                  onClick={solicitarCompartir}
-                />
-              </>
-            ) : null}
-            <div className="px-2" />
             {auth.uid ? (
               <>
-                <Button
-                  titulo="Añadir a favoritos"
-                  onClick={() => agregarFavorito(inmuebles.inmueble._id)}
-                />
+                {auth.uid !== inmuebles.inmueble.usuario._id ? (
+                  <Button
+                    titulo="Solicitar compartir"
+                    onClick={solicitarCompartir}
+                  />
+                ) : null}
               </>
+            ) : null}
+
+            <div className="px-2" />
+            {auth.uid ? (
+              <Button
+                titulo="Añadir a favoritos"
+                onClick={() => agregarFavorito(inmuebles.inmueble._id)}
+              />
             ) : null}
           </div>
         </Row>

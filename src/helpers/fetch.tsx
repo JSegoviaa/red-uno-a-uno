@@ -1,3 +1,4 @@
+import { SolicitudResp } from "interfaces/SolicitudInteface";
 import { CrearChat } from "../context/chat/ChatContext";
 import { ActualizarInmueble } from "../context/inmuebles/InmuebleContext";
 import { development, production } from "../credentials/credentials";
@@ -123,6 +124,22 @@ export const fetchSolicitud = async (
   endpoint: string,
   data: any
 ): Promise<ContactResp> => {
+  const url = `${devURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await resp.json();
+};
+
+export const fetchEnviarSolicitud = async (
+  endpoint: string,
+  data: any
+): Promise<SolicitudResp> => {
   const url = `${devURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
