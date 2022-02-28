@@ -5,9 +5,10 @@ import { AuthContext } from "../../../../context/auth/AuthContext";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import Button from "../../../ui/button/Button";
 import styles from "./Inmueble.module.css";
-import { agregarFav } from "../../../../helpers/fetch";
+import { agregarFav, fetchSolicitud } from "../../../../helpers/fetch";
 import { toast } from "react-toastify";
 import { MapContext } from "context/map/MapContext";
+import { development } from "credentials/credentials";
 
 interface Props {
   inmuebles: {
@@ -34,6 +35,8 @@ const Ubicacion = ({ inmuebles }: Props) => {
   const [comoLLegar, setComoLLegar] = useState(false);
   const [direcciones, setDirecciones] = useState<any>();
 
+  const token = localStorage.getItem("token") || "";
+
   const agregarFavorito = async (inmuebleId: string) => {
     const favorito = {
       usuario: auth.uid,
@@ -59,8 +62,17 @@ const Ubicacion = ({ inmuebles }: Props) => {
     }
   };
 
-  const solicitarCompartir = () => {
-    console.log("Compartir");
+  const solicitarCompartir = async () => {
+    const solicitud = {
+      nombre: auth.nombre,
+      apellido: auth.apellido,
+      titulo: inmuebles.inmueble.titulo,
+      id: inmuebles.inmueble.usuario._id,
+      img: inmuebles.inmueble.imgs[0],
+    };
+    const res = await fetchSolicitud("correos/solicitud-compartir", solicitud);
+
+    if (res.ok) toast.success(res.msg);
   };
 
   const comoLlegar = () => setComoLLegar(!comoLLegar);
@@ -167,7 +179,7 @@ const Ubicacion = ({ inmuebles }: Props) => {
             </div>
           </div>
           <div className="d-flex justify-content-center col-12 text-center my-5">
-            {auth.uid ? (
+            {auth.uid !== inmuebles.inmueble.usuario._id ? (
               <>
                 <Button
                   titulo="Solicitar compartir"
