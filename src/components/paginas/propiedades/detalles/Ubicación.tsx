@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { DirectionsRenderer, GoogleMap, Marker } from "@react-google-maps/api";
 import { Container, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { InmueblesUsuario } from "../../../../interfaces/CrearInmuebleInterface";
 import Button from "../../../ui/button/Button";
@@ -10,7 +11,6 @@ import {
   fetchEnviarSolicitud,
   fetchSolicitud,
 } from "../../../../helpers/fetch";
-import { toast } from "react-toastify";
 import { MapContext } from "context/map/MapContext";
 
 interface Props {
