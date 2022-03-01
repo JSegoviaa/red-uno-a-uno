@@ -49,7 +49,7 @@ const Header = () => {
   const handleShowCanvas = () => setShowCanvas(true);
   const mostrarNotificaciones = () => setNotificaciones(!notificaciones);
   const goToProperty = (slug: string) => router.push(`propiedades/${slug}`);
-
+  const goToSolicitudes = () => router.push("/perfil/solicitudes");
   const aprobarSolicitud = () => {
     setAprobadoColor(true);
   };
@@ -257,7 +257,9 @@ const Header = () => {
                             </div>
                           </div>
                         ))}
-                        <span>Ver todas las solicitudes</span>
+                        <span onClick={goToSolicitudes}>
+                          Ver todas las solicitudes
+                        </span>
                       </>
                     )}
                   </div>
