@@ -27,8 +27,8 @@ const Header = () => {
   const target = useRef(null);
   const [notificaciones, setNotificaciones] = useState(false);
   const [showCanvas, setShowCanvas] = useState(false);
+  const [contador, setContador] = useState(0);
   const { solicitudes, cargando, setSolicitudes } = useSolicitudes(auth.uid);
-
   // const [nuevaNotificacion, setNuevaNotificacion] = useState<Notificacion[]>(
   //   []
   // );
@@ -39,9 +39,18 @@ const Header = () => {
 
   useEffect(() => {
     socket?.on("obtener-solicitud", (solicitud) => {
+      setContador((prev) => prev + 1);
       setSolicitudes([...solicitudes, solicitud]);
     });
   }, [socket]);
+
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    const contadorLS = Number(localStorage.getItem("contador"));
+    setContador(contadorLS);
+    console.log(contadorLS, "?");
+  }, []);
 
   // useEffect(() => {
   //   socket?.on("obtener-notificacion", (notificacion) => {
@@ -97,6 +106,8 @@ const Header = () => {
                 target={target}
                 cargando={cargando}
                 solicitudes={solicitudes}
+                contador={contador}
+                setContador={setContador}
               />
             </Nav>
           )}

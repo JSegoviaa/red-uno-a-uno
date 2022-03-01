@@ -79,7 +79,7 @@ const Ubicacion = ({ inmuebles }: Props) => {
       usuario: auth.uid,
       propietario: inmuebles.inmueble.usuario,
       inmueble: inmuebles.inmueble._id,
-      estado: false,
+      estado: "Pendiente",
     };
 
     const resSolicitud = await fetchEnviarSolicitud("solicitud", solicitud);

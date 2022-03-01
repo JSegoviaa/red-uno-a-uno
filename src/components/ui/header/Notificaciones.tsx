@@ -11,15 +11,29 @@ interface Props {
   target: MutableRefObject<null>;
   cargando: boolean;
   solicitudes: Solicitud[];
+  contador: number;
+  setContador: Dispatch<SetStateAction<number>>;
 }
 
 const Notificaciones = (props: Props) => {
-  const { notificaciones, setNotificaciones, target, cargando, solicitudes } =
-    props;
+  const {
+    notificaciones,
+    setNotificaciones,
+    target,
+    cargando,
+    solicitudes,
+    contador,
+    setContador,
+  } = props;
   const [aprobadoColor, setAprobadoColor] = useState(false);
   const router = useRouter();
-  const mostrarNotificaciones = () => setNotificaciones(!notificaciones);
   const goToProperty = (slug: string) => router.push(`propiedades/${slug}`);
+
+  const mostrarNotificaciones = () => {
+    setNotificaciones(!notificaciones);
+    setContador(0);
+    localStorage.removeItem("contador");
+  };
 
   const goToSolicitudes = () => {
     router.push("/perfil/solicitudes");
@@ -38,11 +52,19 @@ const Notificaciones = (props: Props) => {
           style={{ fontSize: 30, color: "#7149BC", marginTop: 5 }}
           className="bi bi-bell pointer px-2"
         />
-        {solicitudes.length > 0 ? (
+        {contador > 0 ? (
           <span
-            style={{ position: "absolute", top: 10, right: -2 }}
-            className="translate-middle p-2 bg-danger border border-light rounded-circle"
-          />
+            style={{
+              position: "absolute",
+              top: 10,
+              right: -8,
+              color: "#fff",
+              fontSize: 8,
+            }}
+            className="px-2 py-1 translate-middle p-2 bg-danger border border-light rounded-circle"
+          >
+            {contador}
+          </span>
         ) : null}
       </div>
       <Overlay target={target.current} show={notificaciones} placement="right">
@@ -67,14 +89,27 @@ const Notificaciones = (props: Props) => {
                   >
                     <div>
                       <b>
-                        {solicitud.usuario.nombre} {solicitud.usuario.apellido}{" "}
+                        {solicitud.nombre
+                          ? solicitud.nombre
+                          : solicitud.usuario.nombre}{" "}
+                        {solicitud.apellido
+                          ? solicitud.apellido
+                          : solicitud.usuario.apellido}{" "}
                       </b>
                       quiere que le compartas este inmueble: <br />
                       <b
                         className="pointer"
-                        onClick={() => goToProperty(solicitud.inmueble.slug)}
+                        onClick={() =>
+                          goToProperty(
+                            solicitud.slug
+                              ? solicitud.slug
+                              : solicitud.inmueble.slug
+                          )
+                        }
                       >
-                        {solicitud.inmueble.titulo}
+                        {solicitud.titulo
+                          ? solicitud.titulo
+                          : solicitud.inmueble.titulo}
                       </b>
                       <br />
                       {!aprobadoColor ? (
@@ -97,9 +132,14 @@ const Notificaciones = (props: Props) => {
                     </div>
                   </div>
                 ))}
-                <span className="pointer" onClick={goToSolicitudes}>
-                  Ver todas las solicitudes
-                </span>
+
+                {solicitudes.length === 0 ? (
+                  "Sin solicitudes"
+                ) : (
+                  <span className="pointer" onClick={goToSolicitudes}>
+                    Ver todas las solicitudes
+                  </span>
+                )}
               </>
             )}
           </div>
