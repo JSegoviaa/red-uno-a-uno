@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import { FC, useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 import { AuthContext } from "../../context/auth/AuthContext";
 import VentanaChat from "../paginas/perfil/chats/VentanaChat";
 import Footer from "../ui/footer/Footer";
@@ -18,11 +18,17 @@ const Layout: FC = ({ children }) => {
 
   return (
     <>
-      <Header />
-      <PurpleHeader />
-      {children}
-      <VentanaChat />
-      <Footer />
+      {admin ? (
+        <>{children}</>
+      ) : (
+        <>
+          <Header />
+          <PurpleHeader />
+          {children}
+          <VentanaChat />
+          <Footer />
+        </>
+      )}
     </>
   );
 };

@@ -136,6 +136,19 @@ const Header = () => {
                       ...props.style,
                     }}
                   >
+                    {auth.role === "Administrador" ? (
+                      <Link href="/dashboard">
+                        <div
+                          className={`${styles.menuItem} pointer mx-3 my-2`}
+                          onClick={() => {
+                            setMostrarMenu(false);
+                          }}
+                        >
+                          Dashboard
+                        </div>
+                      </Link>
+                    ) : null}
+
                     <Link href="/perfil">
                       <div
                         className={`${styles.menuItem} pointer mx-3 my-2`}
@@ -161,6 +174,7 @@ const Header = () => {
                         </div>
                       </Link>
                     )}
+
                     <Link href="/perfil/mis-paquetes">
                       <div
                         className={`${styles.menuItem} pointer mx-3 my-2`}
