@@ -12,6 +12,8 @@ import {
   fetchSolicitud,
 } from "../../../../helpers/fetch";
 import { MapContext } from "context/map/MapContext";
+import { useSolicitudes } from "hooks/useSolicitudes";
+import { SocketContext } from "context/socket/SocketContext";
 
 interface Props {
   inmuebles: {
@@ -37,6 +39,7 @@ const Ubicacion = ({ inmuebles }: Props) => {
   const { ubicacionUsuario } = useContext(MapContext);
   const [comoLLegar, setComoLLegar] = useState(false);
   const [direcciones, setDirecciones] = useState<any>();
+  const { socket } = useContext(SocketContext);
 
   const agregarFavorito = async (inmuebleId: string) => {
     const favorito = {
@@ -80,15 +83,14 @@ const Ubicacion = ({ inmuebles }: Props) => {
     };
 
     const resSolicitud = await fetchEnviarSolicitud("solicitud", solicitud);
-
     if (resSolicitud.ok) {
-      toast.success(resSolicitud.msg);
-      const resCorreo = await fetchSolicitud(
-        "correos/solicitud-compartir",
-        solicitudCorreo
-      );
-
-      if (resCorreo.ok) toast.success(resCorreo.msg);
+      socket?.emit("solicitud", resSolicitud);
+      // toast.success(resSolicitud.msg);
+      // const resCorreo = await fetchSolicitud(
+      //   "correos/solicitud-compartir",
+      //   solicitudCorreo
+      // );
+      // if (resCorreo.ok) toast.success(resCorreo.msg);
     }
 
     if (!resSolicitud.ok) toast.error(resSolicitud.msg);

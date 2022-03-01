@@ -1,4 +1,5 @@
-import React, { FC, useContext, useEffect } from "react";
+import { useRouter } from "next/router";
+import { FC, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/auth/AuthContext";
 import VentanaChat from "../paginas/perfil/chats/VentanaChat";
 import Footer from "../ui/footer/Footer";
@@ -7,6 +8,9 @@ import PurpleHeader from "../ui/purpleheader/PurpleHeader";
 
 const Layout: FC = ({ children }) => {
   const { verificaToken } = useContext(AuthContext);
+  const router = useRouter();
+
+  const admin = router.pathname.includes("dashboard");
 
   useEffect(() => {
     verificaToken();
@@ -17,7 +21,7 @@ const Layout: FC = ({ children }) => {
       <Header />
       <PurpleHeader />
       {children}
-      <VentanaChat/>
+      <VentanaChat />
       <Footer />
     </>
   );

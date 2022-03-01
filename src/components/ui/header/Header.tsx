@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Container, Nav, Navbar, Overlay } from "react-bootstrap";
 import Button from "../button/Button";
 import styles from "./Header.module.css";
@@ -9,14 +10,16 @@ import { AuthContext } from "../../../context/auth/AuthContext";
 import MisChats from "../../paginas/perfil/chats/MisChats";
 import { ChatContext } from "../../../context/chat/ChatContext";
 import { SocketContext } from "context/socket/SocketContext";
+import { useSolicitudes } from "hooks/useSolicitudes";
+import Loading from "../loading/Loading";
 
-interface Notificacion {
-  de: string;
-  para: string;
-  nombre: string;
-  apellido: string;
-  mensaje: string;
-}
+// interface Notificacion {
+//   de: string;
+//   para: string;
+//   nombre: string;
+//   apellido: string;
+//   mensaje: string;
+// }
 
 const Header = () => {
   const { auth, logOut, abrirRegistro, abrirLogin } = useContext(AuthContext);
@@ -25,10 +28,17 @@ const Header = () => {
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const target = useRef(null);
   const [notificaciones, setNotificaciones] = useState(false);
-  const [nuevaNotificacion, setNuevaNotificacion] = useState<Notificacion[]>(
-    []
+  const [aprobadoColor, setAprobadoColor] = useState(false);
+  const [showCanvas, setShowCanvas] = useState(false);
+  const router = useRouter();
+  const { solicitudes, cargando, setSolicitudes, total } = useSolicitudes(
+    auth.uid
   );
-  const uniqueValues = new Set();
+
+  // const [nuevaNotificacion, setNuevaNotificacion] = useState<Notificacion[]>(
+  //   []
+  // );
+  // const uniqueValues = new Set();
 
   const cerrarSesion = () => {
     logOut();
@@ -37,19 +47,32 @@ const Header = () => {
     chatState.chatActivo = null;
   };
 
-  const [showCanvas, setShowCanvas] = useState(false);
   const handleCloseCanvas = () => setShowCanvas(false);
   const handleShowCanvas = () => setShowCanvas(true);
   const mostrarNotificaciones = () => setNotificaciones(!notificaciones);
+  const goToProperty = (slug: string) => router.push(`propiedades/${slug}`);
+
+  const goToSolicitudes = () => {
+    router.push("/perfil/solicitudes");
+    setNotificaciones(false);
+  };
+
+  const aprobarSolicitud = () => {
+    setAprobadoColor(true);
+  };
 
   useEffect(() => {
-    socket?.on("obtener-notificacion", (notificacion) => {
-      console.log(notificacion, "sa");
-      setNuevaNotificacion((noti) => [...noti, notificacion]);
+    socket?.on("obtener-solicitud", (solicitud) => {
+      setSolicitudes([...solicitudes, solicitud]);
     });
-  }, []);
+  }, [socket]);
 
-  const marcarComoLeido = () => setNuevaNotificacion([]);
+  // useEffect(() => {
+  //   socket?.on("obtener-notificacion", (notificacion) => {
+  //     console.log(notificacion, "sa");
+  //     setNuevaNotificacion((noti) => [...noti, notificacion]);
+  //   });
+  // }, []);
 
   return (
     <Navbar className={styles.navStyle} bg="light" expand="lg">
@@ -167,67 +190,88 @@ const Header = () => {
                   </div>
                 )}
               </Overlay>
-
-              {/* <i
-                onClick={mostrarNotificaciones}
-                style={{ fontSize: 30, color: "#7149BC" }}
-                className="bi bi-bell pointer px-2"
-              />
-              {nuevaNotificacion.length > 0 ? (
-                <Overlay
-                  target={target.current}
-                  show={notificaciones}
-                  placement="right"
-                >
-                  {({
-                    placement,
-                    arrowProps,
-                    show: _show,
-                    popper,
-                    ...props
-                  }) => (
-                    <div
-                      className={styles.notificaciones}
-                      {...props}
-                      style={{
-                        ...props.style,
-                      }}
-                    >
-                      <div>
-                        {nuevaNotificacion
-                          // .filter((nombre) => {
-                          //   const isPresent = uniqueValues.has(
-                          //     nombre.nombre + nombre.apellido
-                          //   );
-                          //   uniqueValues.add(nombre.nombre + nombre.apellido);
-                          //   return !isPresent;
-                          // })
-                          .map((notificacion, i) => (
-                            <div key={i}>
-                              {notificacion.de === auth.uid ? null : (
-                                <div
-                                  onClick={async () =>
-                                    await iniciarChat({
-                                      remitente: auth.uid,
-                                      destinatario: notificacion.para,
-                                    })
-                                  }
-                                  className="pointer"
-                                >
-                                  Tienes un nuevo mensaje de{" "}
-                                  {notificacion.nombre}
+              <div style={{ position: "relative" }}>
+                <i
+                  onClick={mostrarNotificaciones}
+                  style={{ fontSize: 30, color: "#7149BC", marginTop: 5 }}
+                  className="bi bi-bell pointer px-2"
+                />
+                {solicitudes.length > 0 ? (
+                  <span
+                    style={{ position: "absolute", top: 10, right: -2 }}
+                    className="translate-middle p-2 bg-danger border border-light rounded-circle"
+                  />
+                ) : null}
+              </div>
+              <Overlay
+                target={target.current}
+                show={notificaciones}
+                placement="right"
+              >
+                {({ placement, arrowProps, show: _show, popper, ...props }) => (
+                  <div
+                    className={styles.notificaciones}
+                    {...props}
+                    style={{
+                      ...props.style,
+                    }}
+                  >
+                    {cargando ? (
+                      <Loading />
+                    ) : (
+                      <>
+                        {solicitudes?.map((solicitud) => (
+                          <div
+                            key={solicitud._id}
+                            style={{
+                              backgroundColor: aprobadoColor
+                                ? "#fff"
+                                : "#EDF3F9",
+                            }}
+                          >
+                            <div>
+                              <b>
+                                {solicitud.usuario.nombre}{" "}
+                                {solicitud.usuario.apellido}{" "}
+                              </b>
+                              quiere que le compartas este inmueble: <br />
+                              <b
+                                className="pointer"
+                                onClick={() =>
+                                  goToProperty(solicitud.inmueble.slug)
+                                }
+                              >
+                                {solicitud.inmueble.titulo}
+                              </b>
+                              <br />
+                              {!aprobadoColor ? (
+                                <div className="d-flex justify-content-center">
+                                  <button
+                                    onClick={aprobarSolicitud}
+                                    className="btn btn-primary mx-2"
+                                  >
+                                    Aprobar
+                                  </button>
+                                  <button
+                                    onClick={aprobarSolicitud}
+                                    className="btn btn-danger mx-2"
+                                  >
+                                    Rechazar
+                                  </button>
                                 </div>
-                              )}
+                              ) : null}
+                              <hr />
                             </div>
-                          ))}
-                        <div className="pointer" onClick={marcarComoLeido}>
-                          Marcar como leído
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </Overlay>
-              ) : null} */}
+                          </div>
+                        ))}
+                        <span className="pointer" onClick={goToSolicitudes}>
+                          Ver todas las solicitudes
+                        </span>
+                      </>
+                    )}
+                  </div>
+                )}
+              </Overlay>
             </Nav>
           )}
         </Navbar.Collapse>
