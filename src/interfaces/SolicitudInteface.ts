@@ -20,6 +20,7 @@ export interface ObtenerSolicitud {
   ok: boolean;
   solicitudes: Solicitud[];
   msg: string;
+  total: number;
 }
 
 export interface Inmueble {

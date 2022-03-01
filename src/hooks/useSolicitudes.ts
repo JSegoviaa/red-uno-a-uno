@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { development } from "credentials/credentials";
+import { production } from "credentials/credentials";
 import { ObtenerSolicitud, Solicitud } from "interfaces/SolicitudInteface";
 
 export const useSolicitudes = (uid: string | undefined | null) => {
   const [solicitudes, setSolicitudes] = useState<Solicitud[]>([]);
+  const [total, setTotal] = useState(0);
   const [cargando, setCargando] = useState(true);
 
   const obtenerSolicitudes = async () => {
@@ -11,9 +12,10 @@ export const useSolicitudes = (uid: string | undefined | null) => {
 
     if (uid) {
       try {
-        const res = await fetch(`${development}/solicitud/${uid}`);
+        const res = await fetch(`${production}/solicitud/${uid}`);
         const data: ObtenerSolicitud = await res.json();
 
+        setTotal(data.total);
         setSolicitudes(data.solicitudes);
         setCargando(false);
       } catch (error) {
@@ -26,5 +28,5 @@ export const useSolicitudes = (uid: string | undefined | null) => {
     obtenerSolicitudes();
   }, [uid]);
 
-  return { solicitudes, cargando, setSolicitudes };
+  return { solicitudes, cargando, setSolicitudes, total };
 };

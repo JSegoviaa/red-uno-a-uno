@@ -30,9 +30,11 @@ const Header = () => {
   const [notificaciones, setNotificaciones] = useState(false);
   const [aprobadoColor, setAprobadoColor] = useState(false);
   const [showCanvas, setShowCanvas] = useState(false);
-  const [contadorNot, setContadorNot] = useState(0);
   const router = useRouter();
-  const { solicitudes, cargando, setSolicitudes } = useSolicitudes(auth.uid);
+  const { solicitudes, cargando, setSolicitudes, total } = useSolicitudes(
+    auth.uid
+  );
+
   // const [nuevaNotificacion, setNuevaNotificacion] = useState<Notificacion[]>(
   //   []
   // );
@@ -49,7 +51,12 @@ const Header = () => {
   const handleShowCanvas = () => setShowCanvas(true);
   const mostrarNotificaciones = () => setNotificaciones(!notificaciones);
   const goToProperty = (slug: string) => router.push(`propiedades/${slug}`);
-  const goToSolicitudes = () => router.push("/perfil/solicitudes");
+
+  const goToSolicitudes = () => {
+    router.push("/perfil/solicitudes");
+    setNotificaciones(false);
+  };
+
   const aprobarSolicitud = () => {
     setAprobadoColor(true);
   };
@@ -257,7 +264,7 @@ const Header = () => {
                             </div>
                           </div>
                         ))}
-                        <span onClick={goToSolicitudes}>
+                        <span className="pointer" onClick={goToSolicitudes}>
                           Ver todas las solicitudes
                         </span>
                       </>
