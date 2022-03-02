@@ -2,7 +2,7 @@ import SEO from "components/seo/SEO";
 import Titulo from "components/ui/titulo/Titulo";
 import { useRouter } from "next/router";
 
-const solicitudes = () => {
+const Solicitudes = () => {
   const router = useRouter();
 
   return (
@@ -13,4 +13,4 @@ const solicitudes = () => {
   );
 };
 
-export default solicitudes;
+export default Solicitudes;

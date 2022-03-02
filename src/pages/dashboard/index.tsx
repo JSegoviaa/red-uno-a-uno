@@ -13,7 +13,7 @@ import SEO from "components/seo/SEO";
 import styles from "./sidebar.module.css";
 import { AdminRoute } from "hooks/useAdminRoute";
 
-const index = () => {
+const Index = () => {
   const router = useRouter();
 
   const goToHome = () => router.push("/");
@@ -89,5 +89,5 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
 // export default AdminRoute(index);
