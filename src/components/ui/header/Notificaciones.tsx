@@ -3,6 +3,7 @@ import {
   MutableRefObject,
   RefObject,
   SetStateAction,
+  useContext,
   useState,
 } from "react";
 import { useRouter } from "next/router";
@@ -12,6 +13,8 @@ import Loading from "../loading/Loading";
 import styles from "./Header.module.css";
 import { Solicitud } from "interfaces/SolicitudInteface";
 import { fetchAceptarRechazarSolicitud } from "helpers/fetch";
+import { AuthContext } from "context/auth/AuthContext";
+import { production } from "credentials/credentials";
 
 interface Props {
   notificaciones: boolean;
@@ -35,6 +38,7 @@ const Notificaciones = (props: Props) => {
     setContador,
     notificacionRef,
   } = props;
+  const { auth } = useContext(AuthContext);
   const [aprobadoColor, setAprobadoColor] = useState(false);
   const router = useRouter();
   const goToProperty = (slug: string) => router.push(`propiedades/${slug}`);
@@ -49,7 +53,12 @@ const Notificaciones = (props: Props) => {
     setNotificaciones(false);
   };
 
-  const aprobarSolicitud = async (id: string) => {
+  const aprobarSolicitud = async (
+    id: string,
+    titulo: string,
+    img: string,
+    correo: string
+  ) => {
     setAprobadoColor(true);
 
     const aprobacion = {
@@ -61,14 +70,44 @@ const Notificaciones = (props: Props) => {
       aprobacion
     );
 
-    if (res.ok) toast.success(res.msg);
+    const body = {
+      nombre: auth.nombre,
+      apellido: auth.apellido,
+      titulo,
+      img,
+      correo,
+    };
+
+    if (res.ok) {
+      // await fetch(`${production}/correos/solicitud-aprobada`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
+      //   body: JSON.stringify(body),
+      // });
+      toast.success(res.msg);
+    }
   };
 
-  const rechazarSolicitud = async (id: string) => {
+  const rechazarSolicitud = async (
+    id: string,
+    titulo: string,
+    img: string,
+    correo: string
+  ) => {
     setAprobadoColor(true);
 
     const rechazo = {
       estado: "Rechazado",
+    };
+
+    const body = {
+      nombre: auth.nombre,
+      apellido: auth.apellido,
+      titulo,
+      img,
+      correo,
     };
 
     const res = await fetchAceptarRechazarSolicitud(
@@ -76,9 +115,19 @@ const Notificaciones = (props: Props) => {
       rechazo
     );
 
-    if (res.ok) toast.success(res.msg);
+    if (res.ok) {
+      // await fetch(`${production}/correos/solicitud-rechazada`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-type": "application/json",
+      //   },
+      //   body: JSON.stringify(body),
+      // });
+      toast.success(res.msg);
+    }
   };
 
+  console.log(solicitudes);
   return (
     <>
       <div ref={notificacionRef} style={{ position: "relative" }}>
@@ -150,13 +199,27 @@ const Notificaciones = (props: Props) => {
                       {!aprobadoColor ? (
                         <div className="d-flex justify-content-center">
                           <button
-                            onClick={() => aprobarSolicitud(solicitud._id)}
+                            onClick={() =>
+                              aprobarSolicitud(
+                                solicitud._id,
+                                solicitud.inmueble.titulo,
+                                solicitud.inmueble.imgs[0],
+                                solicitud.usuario.correo
+                              )
+                            }
                             className="btn btn-primary mx-2"
                           >
                             Aprobar
                           </button>
                           <button
-                            onClick={() => rechazarSolicitud(solicitud._id)}
+                            onClick={() =>
+                              rechazarSolicitud(
+                                solicitud._id,
+                                solicitud.inmueble.titulo,
+                                solicitud.inmueble.imgs[0],
+                                solicitud.usuario.correo
+                              )
+                            }
                             className="btn btn-danger mx-2"
                           >
                             Rechazar
