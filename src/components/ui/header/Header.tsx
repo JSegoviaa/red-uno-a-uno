@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { gsap } from "gsap";
 import Button from "../button/Button";
 import styles from "./Header.module.css";
 import LoginModal from "../authmodal/LoginModal";
@@ -29,6 +30,7 @@ const Header = () => {
   const [showCanvas, setShowCanvas] = useState(false);
   const [contador, setContador] = useState(0);
   const { solicitudes, cargando, setSolicitudes } = useSolicitudes(auth.uid);
+  const notificacionRef = useRef<HTMLDivElement>(null);
   // const [nuevaNotificacion, setNuevaNotificacion] = useState<Notificacion[]>(
   //   []
   // );
@@ -39,17 +41,25 @@ const Header = () => {
 
   useEffect(() => {
     socket?.on("obtener-solicitud", (solicitud) => {
-      setContador((prev) => prev + 1);
       setSolicitudes([...solicitudes, solicitud]);
+      setContador((prev) => prev + 1);
+      const tl = gsap.timeline();
+
+      tl.to(notificacionRef.current, {
+        y: -5,
+        duration: 0.2,
+        ease: "ease.out",
+      }).to(notificacionRef.current, {
+        y: 0,
+        duration: 0.2,
+        ease: "bounce.out",
+      });
     });
   }, [socket]);
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     const contadorLS = Number(localStorage.getItem("contador"));
     setContador(contadorLS);
-    console.log(contadorLS, "?");
   }, []);
 
   // useEffect(() => {
@@ -108,6 +118,7 @@ const Header = () => {
                 solicitudes={solicitudes}
                 contador={contador}
                 setContador={setContador}
+                notificacionRef={notificacionRef}
               />
             </Nav>
           )}

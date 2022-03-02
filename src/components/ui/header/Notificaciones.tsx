@@ -1,4 +1,10 @@
-import { Dispatch, MutableRefObject, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  MutableRefObject,
+  RefObject,
+  SetStateAction,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
 import { Overlay } from "react-bootstrap";
 import Loading from "../loading/Loading";
@@ -13,6 +19,7 @@ interface Props {
   solicitudes: Solicitud[];
   contador: number;
   setContador: Dispatch<SetStateAction<number>>;
+  notificacionRef: RefObject<HTMLDivElement>;
 }
 
 const Notificaciones = (props: Props) => {
@@ -24,6 +31,7 @@ const Notificaciones = (props: Props) => {
     solicitudes,
     contador,
     setContador,
+    notificacionRef,
   } = props;
   const [aprobadoColor, setAprobadoColor] = useState(false);
   const router = useRouter();
@@ -32,7 +40,6 @@ const Notificaciones = (props: Props) => {
   const mostrarNotificaciones = () => {
     setNotificaciones(!notificaciones);
     setContador(0);
-    localStorage.removeItem("contador");
   };
 
   const goToSolicitudes = () => {
@@ -46,7 +53,7 @@ const Notificaciones = (props: Props) => {
 
   return (
     <>
-      <div style={{ position: "relative" }}>
+      <div ref={notificacionRef} style={{ position: "relative" }}>
         <i
           onClick={mostrarNotificaciones}
           style={{ fontSize: 30, color: "#7149BC", marginTop: 5 }}
