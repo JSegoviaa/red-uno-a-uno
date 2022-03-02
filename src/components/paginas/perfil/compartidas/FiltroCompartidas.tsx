@@ -19,6 +19,7 @@ const FiltroCompartidas = () => {
             >
               <option value="Aprobado">Aprobado</option>
               <option value="Pendiente">Pendiente</option>
+              <option value="Rechazado">Rechazado</option>
             </Form.Select>
           </div>
           {/* <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">

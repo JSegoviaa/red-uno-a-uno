@@ -7,9 +7,11 @@ import {
 } from "react";
 import { useRouter } from "next/router";
 import { Overlay } from "react-bootstrap";
+import { toast } from "react-toastify";
 import Loading from "../loading/Loading";
 import styles from "./Header.module.css";
 import { Solicitud } from "interfaces/SolicitudInteface";
+import { fetchAceptarRechazarSolicitud } from "helpers/fetch";
 
 interface Props {
   notificaciones: boolean;
@@ -47,8 +49,34 @@ const Notificaciones = (props: Props) => {
     setNotificaciones(false);
   };
 
-  const aprobarSolicitud = () => {
+  const aprobarSolicitud = async (id: string) => {
     setAprobadoColor(true);
+
+    const aprobacion = {
+      estado: "Aprobado",
+    };
+
+    const res = await fetchAceptarRechazarSolicitud(
+      `solicitud/aceptar/${id}`,
+      aprobacion
+    );
+
+    if (res.ok) toast.success(res.msg);
+  };
+
+  const rechazarSolicitud = async (id: string) => {
+    setAprobadoColor(true);
+
+    const rechazo = {
+      estado: "Rechazado",
+    };
+
+    const res = await fetchAceptarRechazarSolicitud(
+      `solicitud/rechazar/${id}`,
+      rechazo
+    );
+
+    if (res.ok) toast.success(res.msg);
   };
 
   return (
@@ -122,13 +150,13 @@ const Notificaciones = (props: Props) => {
                       {!aprobadoColor ? (
                         <div className="d-flex justify-content-center">
                           <button
-                            onClick={aprobarSolicitud}
+                            onClick={() => aprobarSolicitud(solicitud._id)}
                             className="btn btn-primary mx-2"
                           >
                             Aprobar
                           </button>
                           <button
-                            onClick={aprobarSolicitud}
+                            onClick={() => rechazarSolicitud(solicitud._id)}
                             className="btn btn-danger mx-2"
                           >
                             Rechazar

@@ -1,4 +1,4 @@
-import { SolicitudResp } from "interfaces/SolicitudInteface";
+import { AprobadoRechazado, SolicitudResp } from "interfaces/SolicitudInteface";
 import { CrearChat } from "../context/chat/ChatContext";
 import { ActualizarInmueble } from "../context/inmuebles/InmuebleContext";
 import { development, production } from "../credentials/credentials";
@@ -150,6 +150,22 @@ export const fetchEnviarSolicitud = async (
   });
 
   return await resp.json();
+};
+
+export const fetchAceptarRechazarSolicitud = async (
+  endpoint: string,
+  data: any
+): Promise<AprobadoRechazado> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await res.json();
 };
 
 export const nuevoPedido = async (

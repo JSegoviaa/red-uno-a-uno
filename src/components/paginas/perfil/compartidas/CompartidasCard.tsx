@@ -60,6 +60,13 @@ const CompartidasCard = () => {
                         alt=""
                       />
                     ) : null}
+                    {compartida.estado === "Rechazado" ? (
+                      <img
+                        className={styles.iconoF}
+                        src="/images/icons/properties-icons/rechazado.png"
+                        alt=""
+                      />
+                    ) : null}
 
                     <div>
                       <div className={styles.imgContainer}>

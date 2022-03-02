@@ -72,3 +72,9 @@ export interface Propietario {
   nombre: string;
   apellido: string;
 }
+
+export interface AprobadoRechazado {
+  ok: boolean;
+  solicitudActualizar: Compartida;
+  msg: string;
+}
