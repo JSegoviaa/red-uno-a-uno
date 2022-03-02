@@ -1,88 +1,86 @@
+import { useContext, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { AuthContext } from "context/auth/AuthContext";
+import { useCompartidas } from "hooks/useCompartidas";
 import styles from "./Compartidas.module.css";
-
-const compartidas = [
-  {
-    id: 1,
-    titulo: "Compartida 1",
-    img: "https://res.cloudinary.com/du6f7alxg/image/upload/v1645204979/red1a1/usuarios/61fc60ddc38cff1af6becb4d/inmuebles/620d45f2645c19820f0615f4/fkpucih2fyzorhfpajql.jpg",
-    estado: "compartidas",
-  },
-  {
-    id: 2,
-    titulo: "Compartida 2",
-    img: "https://res.cloudinary.com/du6f7alxg/image/upload/v1645204979/red1a1/usuarios/61fc60ddc38cff1af6becb4d/inmuebles/620d45f2645c19820f0615f4/fkpucih2fyzorhfpajql.jpg",
-    estado: "compartidas",
-  },
-  {
-    id: 3,
-    titulo: "Compartí 1",
-    img: "https://res.cloudinary.com/du6f7alxg/image/upload/v1645204979/red1a1/usuarios/61fc60ddc38cff1af6becb4d/inmuebles/620d45f2645c19820f0615f4/fkpucih2fyzorhfpajql.jpg",
-    estado: "mis-compartidas",
-  },
-  {
-    id: 4,
-    titulo: "Compartí 2",
-    img: "https://res.cloudinary.com/du6f7alxg/image/upload/v1645204979/red1a1/usuarios/61fc60ddc38cff1af6becb4d/inmuebles/620d45f2645c19820f0615f4/fkpucih2fyzorhfpajql.jpg",
-    estado: "mis-compartidas",
-  },
-  {
-    id: 5,
-    titulo: "Compartí 3",
-    img: "https://res.cloudinary.com/du6f7alxg/image/upload/v1645204979/red1a1/usuarios/61fc60ddc38cff1af6becb4d/inmuebles/620d45f2645c19820f0615f4/fkpucih2fyzorhfpajql.jpg",
-    estado: "mis-compartidas",
-  },
-  {
-    id: 6,
-    titulo: "Compartida 3",
-    img: "https://res.cloudinary.com/du6f7alxg/image/upload/v1645204979/red1a1/usuarios/61fc60ddc38cff1af6becb4d/inmuebles/620d45f2645c19820f0615f4/fkpucih2fyzorhfpajql.jpg",
-    estado: "compartidas",
-  },
-  {
-    id: 7,
-    titulo: "Compartida 4",
-    img: "https://res.cloudinary.com/du6f7alxg/image/upload/v1645204979/red1a1/usuarios/61fc60ddc38cff1af6becb4d/inmuebles/620d45f2645c19820f0615f4/fkpucih2fyzorhfpajql.jpg",
-    estado: "compartidas",
-  },
-];
+import { InmuebleContext } from "context/inmuebles/InmuebleContext";
+import Loading from "components/ui/loading/Loading";
 
 const CompartidasCard = () => {
+  const { auth } = useContext(AuthContext);
+  const { estado } = useContext(InmuebleContext);
+  const [totall, setTotall] = useState(20);
+  const router = useRouter();
+  const { total, cargando, compartidas } = useCompartidas(
+    auth.uid,
+    estado,
+    totall
+  );
+
+  const goToProperty = (slug: string) => router.push(`/propiedades/${slug}`);
+
   return (
     <Container>
-      {compartidas.length === 0 ? (
+      {compartidas?.length === 0 ? (
         <div className={`${styles.titulo} text-center`}>
           No tienes propiedades compartidas
         </div>
       ) : (
         <Row>
-          {compartidas.map((compartida) => (
-            <Col
-              key={compartida.id}
-              xs={6}
-              md={4}
-              lg={4}
-              xl={3}
-              className="py-3 text-center"
-            >
-              <div className={`${styles.customCard} card pointer`}>
-                <div>
-                  <div className={styles.imgContainer}>
-                    <div
-                      className={styles.cardImg}
-                      style={{
-                        backgroundImage: `url('${compartida.img}')`,
-                      }}
-                    />
-                  </div>
-                  <div className={styles.tituloContainer}>
-                    <div className={`${styles.proContent} my-2`}>
-                      {compartida.titulo}
+          {cargando ? (
+            <Loading />
+          ) : (
+            <>
+              {compartidas?.map((compartida) => (
+                <Col
+                  key={compartida._id}
+                  xs={6}
+                  md={4}
+                  lg={4}
+                  xl={3}
+                  className="py-3 text-center"
+                >
+                  <div
+                    onClick={() => goToProperty(compartida.inmueble.slug)}
+                    className={`${styles.customCard} card pointer`}
+                  >
+                    {compartida.estado === "Aprobado" ? (
+                      <img
+                        className={styles.iconoF}
+                        src="/images/icons/properties-icons/aprobado.png"
+                        alt=""
+                      />
+                    ) : null}
+
+                    {compartida.estado === "Pendiente" ? (
+                      <img
+                        className={styles.iconoF}
+                        src="/images/icons/properties-icons/pendiente.png"
+                        alt=""
+                      />
+                    ) : null}
+
+                    <div>
+                      <div className={styles.imgContainer}>
+                        <div
+                          className={styles.cardImg}
+                          style={{
+                            backgroundImage: `url('${compartida.inmueble.imgs[0]}')`,
+                          }}
+                        />
+                      </div>
+                      <div className={styles.tituloContainer}>
+                        <div className={`${styles.proContent} my-2`}>
+                          {compartida.inmueble.titulo}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </Col>
-          ))}
+                </Col>
+              ))}
+            </>
+          )}
         </Row>
       )}
     </Container>

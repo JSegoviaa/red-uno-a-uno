@@ -14,6 +14,7 @@ import {
   fetchInmueble,
   subirFotosInmueble,
 } from "helpers/fetch";
+import { Estado } from "interfaces/SolicitudInteface";
 
 export interface InmuebleData {
   titulo: string;
@@ -130,6 +131,8 @@ interface ContextProps {
   setInmuebleState: Dispatch<SetStateAction<ActualizarInmueble>>;
   dueño: string;
   setDueño: Dispatch<SetStateAction<string>>;
+  estado: Estado | string;
+  setEstado: Dispatch<SetStateAction<Estado | string>>;
 }
 
 type EditarInmueble = "Información" | "Imágenes";
@@ -187,6 +190,7 @@ export const InmuebleProvider: FC = ({ children }) => {
   const [idInmueble, setIdInmueble] = useState("");
   const [inmuebleState, setInmuebleState] = useState(InmuebleState);
   const [dueño, setDueño] = useState("");
+  const [estado, setEstado] = useState<Estado | string>("Aprobado");
 
   const crearInmueble = async (data: InmuebleData) => {
     const resp = await fetchInmueble("inmuebles", data);
@@ -266,6 +270,8 @@ export const InmuebleProvider: FC = ({ children }) => {
         setInmuebleState,
         dueño,
         setDueño,
+        estado,
+        setEstado,
       }}
     >
       <ToastContainer />

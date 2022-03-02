@@ -61,3 +61,10 @@
   color: #ccc;
   margin: 150px 0;
 }
+
+.iconoF {
+  position: absolute;
+  right: 0;
+  margin-right: 8px;
+  margin-top: 8px;
+}
