@@ -42,17 +42,17 @@
 }
 
 @media (max-width: 985px) {
-  .searchBtn{
+  .searchBtn {
     margin-top: 4px;
   }
 }
 
 @media (max-width: 443px) {
-    .searchInput{
-        margin-top: 10px;
-        margin-bottom: 8px;
-    }
-    .notificacion{
-       margin-top: 10px; 
-    }
+  .searchInput {
+    margin-top: 10px;
+    margin-bottom: 8px;
+  }
+  .notificacion {
+    margin-top: 10px;
+  }
 }
