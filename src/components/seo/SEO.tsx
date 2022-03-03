@@ -2,8 +2,8 @@ import Head from "next/head";
 
 interface Props {
   titulo: string;
-  descripcion?: string;
   url: string;
+  descripcion?: string;
   img?: string;
 }
 
@@ -22,7 +22,7 @@ const SEO = ({ titulo, descripcion = desc, url, img }: Props) => {
       <meta name="keywords" content="Red uno a uno, Red 1 a 1" />
       <link
         rel="canonical"
-        href={url ? `https://red1a1.com${url}` : "https://red1a1.com"}
+        href={url ? `https://red1a1.com/app${url}` : "https://red1a1.com/app"}
       />
       <link rel="shortcut icon" href="/red.png" type="image/x-icon" />
 
