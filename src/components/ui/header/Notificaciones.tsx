@@ -11,6 +11,7 @@ import { Solicitud } from "interfaces/SolicitudInteface";
 import { fetchAceptarRechazarSolicitud } from "helpers/fetch";
 import { AuthContext } from "context/auth/AuthContext";
 import NotificacionItem from "./NotificacionItem";
+import { InmuebleContext } from "context/inmuebles/InmuebleContext";
 
 interface Props {
   notificaciones: boolean;
@@ -46,7 +47,7 @@ const Notificaciones = (props: Props) => {
   };
 
   const goToSolicitudes = () => {
-    router.push("/perfil/solicitudes");
+    router.push("/perfil/propiedades-compartidas");
     setNotificaciones(false);
   };
 

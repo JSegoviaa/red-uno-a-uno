@@ -192,7 +192,7 @@ export const InmuebleProvider: FC = ({ children }) => {
   const [idInmueble, setIdInmueble] = useState("");
   const [inmuebleState, setInmuebleState] = useState(InmuebleState);
   const [dueño, setDueño] = useState("");
-  const [estado, setEstado] = useState<Estado | string>("Aprobado");
+  const [estado, setEstado] = useState<Estado | string>("Pendiente");
   const [misCompUser, setMisCompUser] = useState("");
 
   const crearInmueble = async (data: InmuebleData) => {
