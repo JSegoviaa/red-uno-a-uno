@@ -82,6 +82,58 @@ const CompartidasCard = () => {
                           {compartida.inmueble.titulo}
                         </div>
                       </div>
+                      <div>
+                        {auth.uid === compartida.propietario._id ? (
+                          <>
+                            {compartida.estado === "Aprobado" ? (
+                              <span>
+                                Has compartido este inmueble con{" "}
+                                {compartida.usuario.nombre}{" "}
+                                {compartida.usuario.apellido}
+                              </span>
+                            ) : compartida.estado === "Rechazado" ? (
+                              <span>
+                                Has rechazado la solicitud de{" "}
+                                {compartida.usuario.nombre}{" "}
+                                {compartida.usuario.apellido}
+                              </span>
+                            ) : compartida.estado === "Pendiente" ? (
+                              <span>
+                                {compartida.usuario.nombre}{" "}
+                                {compartida.usuario.apellido} quiere que le
+                                compartas el inmueble :{" "}
+                                {compartida.inmueble.titulo}
+                              </span>
+                            ) : (
+                              "Error. Nunca debe de llegar aquí"
+                            )}
+                          </>
+                        ) : (
+                          <span>
+                            {compartida.estado === "Aprobado" ? (
+                              <>
+                                {compartida.propietario.nombre}{" "}
+                                {compartida.propietario.apellido} ha compartido
+                                esta propiedad contigo.{" "}
+                              </>
+                            ) : compartida.estado === "Rechazado" ? (
+                              <>
+                                {compartida.propietario.nombre}{" "}
+                                {compartida.propietario.apellido} ha rechazado
+                                tu solicitud.{" "}
+                              </>
+                            ) : compartida.estado === "Pendiente" ? (
+                              <>
+                                {compartida.propietario.nombre}{" "}
+                                {compartida.propietario.apellido} tiene
+                                pendiente tu solicitud{" "}
+                              </>
+                            ) : (
+                              "Error. Nunca debe llegar aquí"
+                            )}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </Col>

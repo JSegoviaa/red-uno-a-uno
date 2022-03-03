@@ -8,7 +8,7 @@ export interface SolicitudResp {
 
 export interface Solicitud {
   usuario: Usuario;
-  propietario: string;
+  propietario: Propietario;
   inmueble: Inmueble;
   estado: Estado;
   _id: string;
@@ -53,7 +53,7 @@ export interface ObtenerInmueblesCompartidosResp {
 
 export interface Compartida {
   _id: string;
-  usuario: string;
+  usuario: Usuario;
   propietario: Propietario;
   inmueble: Inmueble;
   estado: string;
