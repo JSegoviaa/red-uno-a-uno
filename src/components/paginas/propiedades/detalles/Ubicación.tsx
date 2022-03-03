@@ -12,7 +12,6 @@ import {
   fetchSolicitud,
 } from "../../../../helpers/fetch";
 import { MapContext } from "context/map/MapContext";
-import { useSolicitudes } from "hooks/useSolicitudes";
 import { SocketContext } from "context/socket/SocketContext";
 
 interface Props {
@@ -85,12 +84,12 @@ const Ubicacion = ({ inmuebles }: Props) => {
     const resSolicitud = await fetchEnviarSolicitud("solicitud", solicitud);
     if (resSolicitud.ok) {
       socket?.emit("solicitud", resSolicitud);
-      // toast.success(resSolicitud.msg);
-      // const resCorreo = await fetchSolicitud(
-      //   "correos/solicitud-compartir",
-      //   solicitudCorreo
-      // );
-      // if (resCorreo.ok) toast.success(resCorreo.msg);
+      toast.success(resSolicitud.msg);
+      const resCorreo = await fetchSolicitud(
+        "correos/solicitud-compartir",
+        solicitudCorreo
+      );
+      if (resCorreo.ok) toast.success(resCorreo.msg);
     }
 
     if (!resSolicitud.ok) toast.error(resSolicitud.msg);
