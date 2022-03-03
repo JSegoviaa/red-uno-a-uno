@@ -8,6 +8,7 @@ import styles from "./Compartidas.module.css";
 import { InmuebleContext } from "context/inmuebles/InmuebleContext";
 import Loading from "components/ui/loading/Loading";
 import { fetchAceptarRechazarSolicitud } from "helpers/fetch";
+import { production } from "credentials/credentials";
 
 const CompartidasCard = () => {
   const { auth } = useContext(AuthContext);
@@ -45,13 +46,13 @@ const CompartidasCard = () => {
     };
 
     if (res.ok) {
-      // await fetch(`${production}/correos/solicitud-aprobada`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      //   body: JSON.stringify(body),
-      // });
+      await fetch(`${production}/correos/solicitud-aprobada`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
       const solicitudAprobada: any = compartidas?.map((solicitud) => {
         if (solicitud._id === id) {
           return { ...solicitud, estado: "Aprobado" };
@@ -87,13 +88,13 @@ const CompartidasCard = () => {
     );
 
     if (res.ok) {
-      // await fetch(`${production}/correos/solicitud-rechazada`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      //   body: JSON.stringify(body),
-      // });
+      await fetch(`${production}/correos/solicitud-rechazada`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
 
       const solicitudRechazada: any = compartidas?.map((solicitud) => {
         if (solicitud._id === id) {

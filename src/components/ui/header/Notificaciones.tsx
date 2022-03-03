@@ -12,6 +12,7 @@ import { fetchAceptarRechazarSolicitud } from "helpers/fetch";
 import { AuthContext } from "context/auth/AuthContext";
 import NotificacionItem from "./NotificacionItem";
 import { InmuebleContext } from "context/inmuebles/InmuebleContext";
+import { production } from "credentials/credentials";
 
 interface Props {
   notificaciones: boolean;
@@ -75,13 +76,13 @@ const Notificaciones = (props: Props) => {
     };
 
     if (res.ok) {
-      // await fetch(`${production}/correos/solicitud-aprobada`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      //   body: JSON.stringify(body),
-      // });
+      await fetch(`${production}/correos/solicitud-aprobada`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
       const solicitudAprobada: Solicitud[] = solicitudes?.map((solicitud) => {
         if (solicitud._id === id) {
           return { ...solicitud, estado: "Aprobado" };
@@ -117,13 +118,13 @@ const Notificaciones = (props: Props) => {
     );
 
     if (res.ok) {
-      // await fetch(`${production}/correos/solicitud-rechazada`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      //   body: JSON.stringify(body),
-      // });
+      await fetch(`${production}/correos/solicitud-rechazada`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
 
       const solicitudRechazada: Solicitud[] = solicitudes?.map((solicitud) => {
         if (solicitud._id === id) {
