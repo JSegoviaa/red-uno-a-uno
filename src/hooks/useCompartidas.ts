@@ -56,5 +56,5 @@ export const useCompartidas = (
     obtenerCopartidas();
   }, [estado, totall, uid]);
 
-  return { compartidas, cargando, total };
+  return { compartidas, cargando, total, setCompartidas };
 };
