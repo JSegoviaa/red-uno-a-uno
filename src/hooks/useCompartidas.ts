@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { development } from "credentials/credentials";
+import { production } from "credentials/credentials";
 import {
   Compartida,
   ObtenerInmueblesCompartidosResp,
@@ -16,7 +16,7 @@ export const useCompartidas = (
 
   const obtenerCopartidas = async () => {
     const res = await fetch(
-      `${development}/solicitud/usuario/${uid}?estado=${estado}`
+      `${production}/solicitud/usuario/${uid}?estado=${estado}`
     );
     const data: ObtenerInmueblesCompartidosResp = await res.json();
 

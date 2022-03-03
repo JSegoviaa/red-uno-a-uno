@@ -57,11 +57,6 @@ const Header = () => {
     });
   }, [socket]);
 
-  useEffect(() => {
-    const contadorLS = Number(localStorage.getItem("contador"));
-    setContador(contadorLS);
-  }, []);
-
   // useEffect(() => {
   //   socket?.on("obtener-notificacion", (notificacion) => {
   //     console.log(notificacion, "sa");
@@ -116,6 +111,7 @@ const Header = () => {
                 target={target}
                 cargando={cargando}
                 solicitudes={solicitudes}
+                setSolicitudes={setSolicitudes}
                 contador={contador}
                 setContador={setContador}
                 notificacionRef={notificacionRef}

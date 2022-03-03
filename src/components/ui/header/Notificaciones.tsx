@@ -4,17 +4,13 @@ import {
   RefObject,
   SetStateAction,
   useContext,
-  useState,
 } from "react";
 import { useRouter } from "next/router";
-import { Overlay } from "react-bootstrap";
 import { toast } from "react-toastify";
-import Loading from "../loading/Loading";
-import styles from "./Header.module.css";
 import { Solicitud } from "interfaces/SolicitudInteface";
 import { fetchAceptarRechazarSolicitud } from "helpers/fetch";
 import { AuthContext } from "context/auth/AuthContext";
-import { production } from "credentials/credentials";
+import NotificacionItem from "./NotificacionItem";
 
 interface Props {
   notificaciones: boolean;
@@ -25,6 +21,7 @@ interface Props {
   contador: number;
   setContador: Dispatch<SetStateAction<number>>;
   notificacionRef: RefObject<HTMLDivElement>;
+  setSolicitudes: Dispatch<SetStateAction<Solicitud[]>>;
 }
 
 const Notificaciones = (props: Props) => {
@@ -37,9 +34,9 @@ const Notificaciones = (props: Props) => {
     contador,
     setContador,
     notificacionRef,
+    setSolicitudes,
   } = props;
   const { auth } = useContext(AuthContext);
-  const [aprobadoColor, setAprobadoColor] = useState(false);
   const router = useRouter();
   const goToProperty = (slug: string) => router.push(`propiedades/${slug}`);
 
@@ -59,8 +56,6 @@ const Notificaciones = (props: Props) => {
     img: string,
     correo: string
   ) => {
-    setAprobadoColor(true);
-
     const aprobacion = {
       estado: "Aprobado",
     };
@@ -86,6 +81,13 @@ const Notificaciones = (props: Props) => {
       //   },
       //   body: JSON.stringify(body),
       // });
+      const solicitudAprobada: Solicitud[] = solicitudes?.map((solicitud) => {
+        if (solicitud._id === id) {
+          return { ...solicitud, estado: "Aprobado" };
+        }
+        return solicitud;
+      });
+      setSolicitudes(solicitudAprobada);
       toast.success(res.msg);
     }
   };
@@ -96,8 +98,6 @@ const Notificaciones = (props: Props) => {
     img: string,
     correo: string
   ) => {
-    setAprobadoColor(true);
-
     const rechazo = {
       estado: "Rechazado",
     };
@@ -123,11 +123,18 @@ const Notificaciones = (props: Props) => {
       //   },
       //   body: JSON.stringify(body),
       // });
+
+      const solicitudRechazada: Solicitud[] = solicitudes?.map((solicitud) => {
+        if (solicitud._id === id) {
+          return { ...solicitud, estado: "Rechazado" };
+        }
+        return solicitud;
+      });
+      setSolicitudes(solicitudRechazada);
       toast.success(res.msg);
     }
   };
 
-  console.log(solicitudes);
   return (
     <>
       <div ref={notificacionRef} style={{ position: "relative" }}>
@@ -151,98 +158,16 @@ const Notificaciones = (props: Props) => {
           </span>
         ) : null}
       </div>
-      <Overlay target={target.current} show={notificaciones} placement="right">
-        {({ placement, arrowProps, show: _show, popper, ...props }) => (
-          <div
-            className={styles.notificaciones}
-            {...props}
-            style={{
-              ...props.style,
-            }}
-          >
-            {cargando ? (
-              <Loading />
-            ) : (
-              <>
-                {solicitudes?.map((solicitud) => (
-                  <div
-                    key={solicitud._id}
-                    style={{
-                      backgroundColor: aprobadoColor ? "#fff" : "#EDF3F9",
-                    }}
-                  >
-                    <div>
-                      <b>
-                        {solicitud.nombre
-                          ? solicitud.nombre
-                          : solicitud.usuario.nombre}{" "}
-                        {solicitud.apellido
-                          ? solicitud.apellido
-                          : solicitud.usuario.apellido}{" "}
-                      </b>
-                      quiere que le compartas este inmueble: <br />
-                      <b
-                        className="pointer"
-                        onClick={() =>
-                          goToProperty(
-                            solicitud.slug
-                              ? solicitud.slug
-                              : solicitud.inmueble.slug
-                          )
-                        }
-                      >
-                        {solicitud.titulo
-                          ? solicitud.titulo
-                          : solicitud.inmueble.titulo}
-                      </b>
-                      <br />
-                      {!aprobadoColor ? (
-                        <div className="d-flex justify-content-center">
-                          <button
-                            onClick={() =>
-                              aprobarSolicitud(
-                                solicitud._id,
-                                solicitud.inmueble.titulo,
-                                solicitud.inmueble.imgs[0],
-                                solicitud.usuario.correo
-                              )
-                            }
-                            className="btn btn-primary mx-2"
-                          >
-                            Aprobar
-                          </button>
-                          <button
-                            onClick={() =>
-                              rechazarSolicitud(
-                                solicitud._id,
-                                solicitud.inmueble.titulo,
-                                solicitud.inmueble.imgs[0],
-                                solicitud.usuario.correo
-                              )
-                            }
-                            className="btn btn-danger mx-2"
-                          >
-                            Rechazar
-                          </button>
-                        </div>
-                      ) : null}
-                      <hr />
-                    </div>
-                  </div>
-                ))}
-
-                {solicitudes.length === 0 ? (
-                  "Sin solicitudes"
-                ) : (
-                  <span className="pointer" onClick={goToSolicitudes}>
-                    Ver todas las solicitudes
-                  </span>
-                )}
-              </>
-            )}
-          </div>
-        )}
-      </Overlay>
+      <NotificacionItem
+        target={target}
+        cargando={cargando}
+        solicitudes={solicitudes}
+        notificaciones={notificaciones}
+        goToProperty={goToProperty}
+        aprobarSolicitud={aprobarSolicitud}
+        rechazarSolicitud={rechazarSolicitud}
+        goToSolicitudes={goToSolicitudes}
+      />
     </>
   );
 };
