@@ -1,11 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Container, Form } from "react-bootstrap";
+import { AuthContext } from "context/auth/AuthContext";
 import { InmuebleContext } from "context/inmuebles/InmuebleContext";
 import styles from "./Compartidas.module.css";
 
 const FiltroCompartidas = () => {
-  const { estado, setEstado } = useContext(InmuebleContext);
-  const [compartidas, setCompartidas] = useState("compartidas");
+  const { auth } = useContext(AuthContext);
+  const { estado, setEstado, misCompUser, setMisCompUser } =
+    useContext(InmuebleContext);
+
+  const id: any = auth.uid;
 
   return (
     <Container>
@@ -22,18 +26,16 @@ const FiltroCompartidas = () => {
               <option value="Rechazado">Rechazado</option>
             </Form.Select>
           </div>
-          {/* <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+          <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">
             <Form.Select
               className={`${styles.customSelect} mb-4`}
-              value={compartidas}
-              onChange={(e) => setCompartidas(e.target.value)}
+              value={misCompUser}
+              onChange={(e) => setMisCompUser(e.target.value)}
             >
-              <option value="compartidas">Compartidas</option>
-              <option value="mis-compartidas">
-                Mis propiedades compartidas
-              </option>
+              <option value={id}>Compartidas</option>
+              <option value={""}>Mis propiedades compartidas</option>
             </Form.Select>
-          </div> */}
+          </div>
         </div>
       </div>
     </Container>

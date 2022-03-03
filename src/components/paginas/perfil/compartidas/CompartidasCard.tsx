@@ -9,11 +9,11 @@ import Loading from "components/ui/loading/Loading";
 
 const CompartidasCard = () => {
   const { auth } = useContext(AuthContext);
-  const { estado } = useContext(InmuebleContext);
+  const { estado, misCompUser } = useContext(InmuebleContext);
   const [totall, setTotall] = useState(20);
   const router = useRouter();
   const { total, cargando, compartidas } = useCompartidas(
-    auth.uid,
+    misCompUser,
     estado,
     totall
   );

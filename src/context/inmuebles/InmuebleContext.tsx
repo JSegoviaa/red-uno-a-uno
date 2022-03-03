@@ -133,6 +133,8 @@ interface ContextProps {
   setDueño: Dispatch<SetStateAction<string>>;
   estado: Estado | string;
   setEstado: Dispatch<SetStateAction<Estado | string>>;
+  misCompUser: string;
+  setMisCompUser: Dispatch<SetStateAction<string>>;
 }
 
 type EditarInmueble = "Información" | "Imágenes";
@@ -191,6 +193,7 @@ export const InmuebleProvider: FC = ({ children }) => {
   const [inmuebleState, setInmuebleState] = useState(InmuebleState);
   const [dueño, setDueño] = useState("");
   const [estado, setEstado] = useState<Estado | string>("Aprobado");
+  const [misCompUser, setMisCompUser] = useState("");
 
   const crearInmueble = async (data: InmuebleData) => {
     const resp = await fetchInmueble("inmuebles", data);
@@ -272,6 +275,8 @@ export const InmuebleProvider: FC = ({ children }) => {
         setDueño,
         estado,
         setEstado,
+        misCompUser,
+        setMisCompUser,
       }}
     >
       <ToastContainer />
