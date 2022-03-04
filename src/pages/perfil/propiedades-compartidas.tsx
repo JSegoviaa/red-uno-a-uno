@@ -3,6 +3,7 @@ import SEO from "components/seo/SEO";
 import FiltroCompartidas from "components/paginas/perfil/compartidas/FiltroCompartidas";
 import CompartidasCard from "components/paginas/perfil/compartidas/CompartidasCard";
 import Titulo from "components/ui/titulo/Titulo";
+import { PrivateRoute } from "hooks/usePrivateRoute";
 
 const PropiedadesCompartidas = () => {
   const router = useRouter();
@@ -17,4 +18,4 @@ const PropiedadesCompartidas = () => {
   );
 };
 
-export default PropiedadesCompartidas;
+export default PrivateRoute(PropiedadesCompartidas);

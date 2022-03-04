@@ -3,6 +3,7 @@ import { Overlay } from "react-bootstrap";
 import { Solicitud } from "interfaces/SolicitudInteface";
 import Loading from "../loading/Loading";
 import styles from "./Header.module.css";
+import Button from "../button/Button";
 
 interface Props {
   target: MutableRefObject<null>;
@@ -54,12 +55,13 @@ const NotificacionItem: FC<Props> = (props) => {
               {solicitudes?.map((solicitud) => (
                 <div
                   key={solicitud._id}
-                  style={{
-                    backgroundColor:
-                      solicitud.estado === "Pendiente" ? "#EDF3F9" : "#FFF",
-                  }}
+                  className={
+                    solicitud.estado === "Pendiente"
+                      ? styles.pendiente
+                      : styles.noPendiente
+                  }
                 >
-                  <div>
+                  <div className={styles.notificacionContainer}>
                     {solicitud.estado === "Pendiente" ? (
                       <>
                         <b>
@@ -118,7 +120,6 @@ const NotificacionItem: FC<Props> = (props) => {
                         ? solicitud.titulo
                         : solicitud.inmueble.titulo}
                     </b>
-                    <br />
                     {solicitud.estado === "Pendiente" ? (
                       <div className="d-flex justify-content-center">
                         <button
@@ -151,15 +152,17 @@ const NotificacionItem: FC<Props> = (props) => {
                         </button>
                       </div>
                     ) : null}
-                    <hr />
                   </div>
                 </div>
               ))}
 
               {solicitudes.length === 0 ? null : (
-                <span className="pointer" onClick={goToSolicitudes}>
+                <div
+                  className="d-flex justify-content-center py-2 pointer"
+                  onClick={goToSolicitudes}
+                >
                   Ver todas las solicitudes
-                </span>
+                </div>
               )}
             </>
           )}

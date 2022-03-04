@@ -1,5 +1,6 @@
 import SEO from "components/seo/SEO";
 import Titulo from "components/ui/titulo/Titulo";
+import { PrivateRoute } from "hooks/usePrivateRoute";
 import { useRouter } from "next/router";
 
 const Solicitudes = () => {
@@ -13,4 +14,4 @@ const Solicitudes = () => {
   );
 };
 
-export default Solicitudes;
+export default PrivateRoute(Solicitudes);
