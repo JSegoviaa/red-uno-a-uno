@@ -124,7 +124,7 @@ export const fetchSolicitud = async (
   endpoint: string,
   data: any
 ): Promise<ContactResp> => {
-  const url = `${devURL}/${endpoint}`;
+  const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
   const resp = await fetch(url, {
@@ -430,7 +430,7 @@ export const agregarUsuario = async (
   endpoint: string,
   data: UsuariosPagado
 ): Promise<CrearUsuarioResp> => {
-  const url = `${devURL}/${endpoint}`;
+  const url = `${baseURL}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
   const resp = await fetch(url, {

@@ -37,7 +37,7 @@ const NotificacionItem: FC<Props> = (props) => {
     rechazarSolicitud,
     goToSolicitudes,
   } = props;
-
+  console.log(solicitudes);
   return (
     <Overlay target={target.current} show={notificaciones} placement="right">
       {({ placement, arrowProps, show: _show, popper, ...props }) => (
@@ -52,117 +52,120 @@ const NotificacionItem: FC<Props> = (props) => {
             <Loading />
           ) : (
             <>
-              <div className={styles.headerNotif}>
-                Notificaciones
-              </div>
+              <div className={styles.headerNotif}>Notificaciones</div>
               <div className={styles.notContainer}>
-              {solicitudes?.map((solicitud) => (
-                <div
-                  key={solicitud._id}
-                  className={
-                    solicitud.estado === "Pendiente"
-                      ? styles.pendiente
-                      : styles.noPendiente
-                  }
-                >
-                  <div className={styles.notificacionContainer}>
-                    {solicitud.estado === "Pendiente" ? (
-                      <>
-                        <b>
-                          {solicitud.nombre
-                            ? solicitud.nombre
-                            : solicitud.usuario.nombre}{" "}
-                          {solicitud.apellido
-                            ? solicitud.apellido
-                            : solicitud.usuario.apellido}{" "}
-                        </b>
-                        quiere que le compartas este inmueble: {" "}
-                      </>
-                    ) : solicitud.estado === "Aprobado" ? (
-                      <span>
-                        Haz aceptado la solicitud de{" "}
-                        <b>
-                          {solicitud.nombre
-                            ? solicitud.nombre
-                            : solicitud.usuario.nombre}{" "}
-                          {solicitud.apellido
-                            ? solicitud.apellido
-                            : solicitud.usuario.apellido}
-                          {". "}
-                        </b>
-                        Ahora pueda compartir{" "}
-                      </span>
-                    ) : solicitud.estado === "Rechazado" ? (
-                      <span>
-                        Haz rechazado la solicitud de{" "}
-                        <b>
-                          {solicitud.nombre
-                            ? solicitud.nombre
-                            : solicitud.usuario.nombre}{" "}
-                          {solicitud.apellido
-                            ? solicitud.apellido
-                            : solicitud.usuario.apellido}
-                          {". "}
-                        </b>
-                        Inmueble rechazado:{" "}
-                      </span>
-                    ) : (
-                      "Error. Jamás debe de llegar a esta punto"
-                    )}
+                {solicitudes?.map((solicitud) => (
+                  <div
+                    key={solicitud._id}
+                    className={
+                      solicitud.estado === "Pendiente"
+                        ? styles.pendiente
+                        : styles.noPendiente
+                    }
+                  >
+                    <div className={styles.notificacionContainer}>
+                      {solicitud.estado === "Pendiente" ? (
+                        <>
+                          <b>
+                            {solicitud.nombre
+                              ? solicitud.nombre
+                              : solicitud.usuario.nombre}{" "}
+                            {solicitud.apellido
+                              ? solicitud.apellido
+                              : solicitud.usuario.apellido}{" "}
+                          </b>
+                          quiere que le compartas este inmueble:{" "}
+                        </>
+                      ) : solicitud.estado === "Aprobado" ? (
+                        <span>
+                          Haz aceptado la solicitud de{" "}
+                          <b>
+                            {solicitud.nombre
+                              ? solicitud.nombre
+                              : solicitud.usuario.nombre}{" "}
+                            {solicitud.apellido
+                              ? solicitud.apellido
+                              : solicitud.usuario.apellido}
+                            {". "}
+                          </b>
+                          Ahora pueda compartir{" "}
+                        </span>
+                      ) : solicitud.estado === "Rechazado" ? (
+                        <span>
+                          Haz rechazado la solicitud de{" "}
+                          <b>
+                            {solicitud.nombre
+                              ? solicitud.nombre
+                              : solicitud.usuario.nombre}{" "}
+                            {solicitud.apellido
+                              ? solicitud.apellido
+                              : solicitud.usuario.apellido}
+                            {". "}
+                          </b>
+                          Inmueble rechazado:{" "}
+                        </span>
+                      ) : (
+                        "Error. Jamás debe de llegar a esta punto"
+                      )}
 
-                    <span
-                      className={`${styles.propH} pointer`}
-                      onClick={() =>
-                        goToProperty(
-                          solicitud.slug
-                            ? solicitud.slug
-                            : solicitud.inmueble.slug
-                        )
-                      }
-                    >
-                      {solicitud.titulo
-                        ? solicitud.titulo
-                        : solicitud.inmueble.titulo}
-                    </span>
-                    {solicitud.estado === "Pendiente" ? (
-                      <div className="d-flex justify-content-center mt-2">
-                        <button
-                          onClick={() =>
-                            aprobarSolicitud(
-                              solicitud._id,
-                              solicitud.inmueble.titulo,
-                              solicitud.inmueble.imgs[0]
-                                ? solicitud.inmueble.imgs[0]
-                                : "",
-                              solicitud.usuario.correo
-                            )
-                          }
-                          className={`${styles.btnApprove} me-2`}
-                        >
-                          <i className={`${styles.iconNoti} bi bi-hand-thumbs-up`}></i>
-                        </button>
-                        <button
-                          onClick={() =>
-                            rechazarSolicitud(
-                              solicitud._id,
-                              solicitud.inmueble.titulo,
-                              solicitud.inmueble.imgs[0],
-                              solicitud.usuario.correo
-                            )
-                          }
-                          className={`${styles.btnReject} me-2`}
-                        >
-                          <i className={`${styles.iconNoti} bi bi-hand-thumbs-down`}></i>
-                        </button>
-                      </div>
-                    ) : null}
+                      <span
+                        className={`${styles.propH} pointer`}
+                        onClick={() =>
+                          goToProperty(
+                            solicitud.slug
+                              ? solicitud.slug
+                              : solicitud.inmueble.slug
+                          )
+                        }
+                      >
+                        {solicitud.titulo
+                          ? solicitud.titulo
+                          : solicitud.inmueble.titulo}
+                      </span>
+                      {solicitud.estado === "Pendiente" ? (
+                        <div className="d-flex justify-content-center mt-2">
+                          <button
+                            onClick={() =>
+                              aprobarSolicitud(
+                                solicitud._id,
+                                solicitud.inmueble.titulo,
+                                solicitud.inmueble
+                                  ? solicitud.inmueble.imgs[0]
+                                  : "",
+                                solicitud.usuario.correo
+                              )
+                            }
+                            className={`${styles.btnApprove} me-2`}
+                          >
+                            <i
+                              className={`${styles.iconNoti} bi bi-hand-thumbs-up`}
+                            ></i>
+                          </button>
+                          <button
+                            onClick={() =>
+                              rechazarSolicitud(
+                                solicitud._id,
+                                solicitud.inmueble.titulo,
+                                solicitud.inmueble
+                                  ? solicitud.inmueble.imgs[0]
+                                  : "",
+                                solicitud.usuario.correo
+                              )
+                            }
+                            className={`${styles.btnReject} me-2`}
+                          >
+                            <i
+                              className={`${styles.iconNoti} bi bi-hand-thumbs-down`}
+                            ></i>
+                          </button>
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
               </div>
 
               {solicitudes.length === 0 ? null : (
-
                 <div className="d-flex justify-content-center py-2">
                   <div
                     className={`${styles.footVer} pointer`}
