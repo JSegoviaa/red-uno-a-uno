@@ -52,6 +52,9 @@ const NotificacionItem: FC<Props> = (props) => {
             <Loading />
           ) : (
             <>
+              <div className={styles.headerNotif}>
+                Notificaciones
+              </div>
               {solicitudes?.map((solicitud) => (
                 <div
                   key={solicitud._id}
@@ -72,7 +75,7 @@ const NotificacionItem: FC<Props> = (props) => {
                             ? solicitud.apellido
                             : solicitud.usuario.apellido}{" "}
                         </b>
-                        quiere que le compartas este inmueble: <br />
+                        quiere que le compartas este inmueble: {" "}
                       </>
                     ) : solicitud.estado === "Aprobado" ? (
                       <span>
@@ -106,8 +109,8 @@ const NotificacionItem: FC<Props> = (props) => {
                       "Error. Jamás debe de llegar a esta punto"
                     )}
 
-                    <b
-                      className="pointer"
+                    <span
+                      className={`${styles.propH} pointer`}
                       onClick={() =>
                         goToProperty(
                           solicitud.slug
@@ -119,9 +122,9 @@ const NotificacionItem: FC<Props> = (props) => {
                       {solicitud.titulo
                         ? solicitud.titulo
                         : solicitud.inmueble.titulo}
-                    </b>
+                    </span>
                     {solicitud.estado === "Pendiente" ? (
-                      <div className="d-flex justify-content-center">
+                      <div className="d-flex justify-content-center mt-2">
                         <button
                           onClick={() =>
                             aprobarSolicitud(
@@ -133,9 +136,9 @@ const NotificacionItem: FC<Props> = (props) => {
                               solicitud.usuario.correo
                             )
                           }
-                          className="btn btn-primary mx-2"
+                          className={`${styles.btnApprove} me-2`}
                         >
-                          Aprobar
+                          <i className={`${styles.iconNoti} bi bi-hand-thumbs-up`}></i>
                         </button>
                         <button
                           onClick={() =>
@@ -146,9 +149,9 @@ const NotificacionItem: FC<Props> = (props) => {
                               solicitud.usuario.correo
                             )
                           }
-                          className="btn btn-danger mx-2"
+                          className={`${styles.btnReject} me-2`}
                         >
-                          Rechazar
+                          <i className={`${styles.iconNoti} bi bi-hand-thumbs-down`}></i>
                         </button>
                       </div>
                     ) : null}
@@ -157,11 +160,14 @@ const NotificacionItem: FC<Props> = (props) => {
               ))}
 
               {solicitudes.length === 0 ? null : (
-                <div
-                  className="d-flex justify-content-center py-2 pointer"
-                  onClick={goToSolicitudes}
-                >
-                  Ver todas las solicitudes
+
+                <div className="d-flex justify-content-center py-2">
+                  <div
+                    className={`${styles.footVer} pointer`}
+                    onClick={goToSolicitudes}
+                  >
+                    Ver todas las solicitudes
+                  </div>
                 </div>
               )}
             </>
