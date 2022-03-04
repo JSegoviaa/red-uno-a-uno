@@ -72,6 +72,7 @@ const Ubicacion = ({ inmuebles }: Props) => {
       titulo: inmuebles.inmueble.titulo,
       id: inmuebles.inmueble.usuario._id,
       img: inmuebles.inmueble.imgs[0],
+      slug: inmuebles.inmueble.slug,
     };
 
     const solicitud = {
