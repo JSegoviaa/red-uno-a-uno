@@ -57,6 +57,9 @@ const Header = () => {
     });
   }, [socket]);
 
+  useEffect(() => {
+    setContador(solicitudes.length);
+  }, [solicitudes.length]);
   // useEffect(() => {
   //   socket?.on("obtener-notificacion", (notificacion) => {
   //     console.log(notificacion, "sa");

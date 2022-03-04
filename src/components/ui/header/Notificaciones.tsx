@@ -4,6 +4,7 @@ import {
   RefObject,
   SetStateAction,
   useContext,
+  useEffect,
 } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -44,7 +45,6 @@ const Notificaciones = (props: Props) => {
 
   const mostrarNotificaciones = () => {
     setNotificaciones(!notificaciones);
-    setContador(0);
   };
 
   const goToSolicitudes = () => {
@@ -90,6 +90,7 @@ const Notificaciones = (props: Props) => {
         return solicitud;
       });
       setSolicitudes(solicitudAprobada);
+      setContador((prev) => prev - 1);
       toast.success(res.msg);
     }
   };
@@ -132,7 +133,9 @@ const Notificaciones = (props: Props) => {
         }
         return solicitud;
       });
+      setContador((prev) => prev - 1);
       setSolicitudes(solicitudRechazada);
+
       toast.success(res.msg);
     }
   };
