@@ -68,3 +68,48 @@
   margin-right: 8px;
   margin-top: 8px;
 }
+
+.btnApprove {
+  border: 1px solid #7149bc;
+  outline: none;
+  font-family: "Open Sans";
+  font-size: 21px;
+  padding: 5px 25px;
+  background-color: white;
+  border-radius: 20px;
+  color: #7149bc;
+  margin: 5px 0px;
+  transition: 200ms;
+}
+.btnReject {
+  border: 1px solid #e65a1f;
+  outline: none;
+  font-family: "Open Sans";
+  font-size: 21px;
+  padding: 5px 25px;
+  background-color: white;
+  border-radius: 20px;
+  color: #e65a1f;
+  margin: 5px 0px;
+  transition: 200ms;
+}
+.btnApprove:hover {
+  background-color: #7149bc;
+  color: white;
+  transition: 200ms;
+}
+.btnReject:hover {
+  background-color: #e65a1f;
+  color: white;
+  transition: 200ms;
+}
+
+.propH {
+  color: #7149bc;
+  font-weight: 650;
+  transition: 150ms;
+}
+.propH:hover {
+  color: #e65a1f;
+  transition: 150ms;
+}

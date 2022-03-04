@@ -175,24 +175,27 @@ const CompartidasCard = () => {
                             {compartida.estado === "Aprobado" ? (
                               <span>
                                 Has compartido este inmueble con{" "}
-                                {compartida.usuario.nombre}{" "}
-                                {compartida.usuario.apellido}
+                                <b>
+                                  {compartida.usuario.nombre}{" "}
+                                  {compartida.usuario.apellido}
+                                </b>
                               </span>
                             ) : compartida.estado === "Rechazado" ? (
                               <span>
                                 Has rechazado la solicitud de{" "}
-                                {compartida.usuario.nombre}{" "}
-                                {compartida.usuario.apellido}
+                                <b>
+                                  {compartida.usuario.nombre}{" "}
+                                  {compartida.usuario.apellido}
+                                </b>
                               </span>
                             ) : compartida.estado === "Pendiente" ? (
                               <>
-                                <span>
+                                <b>
                                   {compartida.usuario.nombre}{" "}
-                                  {compartida.usuario.apellido} quiere que le
-                                  compartas el inmueble :{" "}
-                                  {compartida.inmueble.titulo}
-                                </span>
-                                <div className="d-flex justify-content-center">
+                                  {compartida.usuario.apellido}{" "}
+                                </b>{" "}
+                                quiere que le compartas este inmueble
+                                <div className="d-flex justify-content-center mt-2">
                                   <button
                                     onClick={() =>
                                       aprobarSolicitud(
@@ -204,22 +207,28 @@ const CompartidasCard = () => {
                                         compartida.usuario.correo
                                       )
                                     }
-                                    className="btn btn-primary mx-2"
+                                    className={`${styles.btnApprove} me-2`}
                                   >
-                                    Aprobar
+                                    <i
+                                      className={`${styles.iconNoti} bi bi-hand-thumbs-up`}
+                                    ></i>
                                   </button>
                                   <button
                                     onClick={() =>
                                       rechazarSolicitud(
                                         compartida._id,
                                         compartida.inmueble.titulo,
-                                        compartida.inmueble.imgs[0],
+                                        compartida.inmueble.imgs[0]
+                                          ? compartida.inmueble.imgs[0]
+                                          : "",
                                         compartida.usuario.correo
                                       )
                                     }
-                                    className="btn btn-danger mx-2"
+                                    className={`${styles.btnReject} me-2`}
                                   >
-                                    Rechazar
+                                    <i
+                                      className={`${styles.iconNoti} bi bi-hand-thumbs-down`}
+                                    ></i>
                                   </button>
                                 </div>
                               </>
@@ -231,21 +240,27 @@ const CompartidasCard = () => {
                           <span>
                             {compartida.estado === "Aprobado" ? (
                               <>
-                                {compartida.propietario.nombre}{" "}
-                                {compartida.propietario.apellido} ha compartido
-                                esta propiedad contigo.{" "}
+                                <b>
+                                  {compartida.propietario.nombre}{" "}
+                                  {compartida.propietario.apellido}
+                                </b>
+                                ha compartido esta propiedad contigo.{" "}
                               </>
                             ) : compartida.estado === "Rechazado" ? (
                               <>
-                                {compartida.propietario.nombre}{" "}
-                                {compartida.propietario.apellido} ha rechazado
-                                tu solicitud.{" "}
+                                <b>
+                                  {compartida.propietario.nombre}{" "}
+                                  {compartida.propietario.apellido}
+                                </b>
+                                ha rechazado tu solicitud.{" "}
                               </>
                             ) : compartida.estado === "Pendiente" ? (
                               <>
-                                {compartida.propietario.nombre}{" "}
-                                {compartida.propietario.apellido} tiene
-                                pendiente tu solicitud{" "}
+                                <b>
+                                  {compartida.propietario.nombre}{" "}
+                                  {compartida.propietario.apellido}
+                                </b>
+                                tiene pendiente tu solicitud{" "}
                               </>
                             ) : (
                               "Error. Nunca debe llegar aquí"
