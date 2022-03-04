@@ -165,3 +165,36 @@
   color: rgb(5, 90, 218);
   font-weight: 700;
 }
+.notContainer{
+  overflow-y: scroll;
+  width: 100%;
+  min-height: 0px;
+  max-height: 550px;
+}
+.notContainer::-webkit-scrollbar {
+  width: 5px;
+}
+.notContainer::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+.notContainer::-webkit-scrollbar-thumb {
+  background: slateblue;
+  border-radius: 5px;
+}
+.notContainer::-webkit-scrollbar-thumb:hover {
+  background: rgb(253, 69, 37);
+}
+
+@media (max-width: 575px) {
+  .notificaciones{
+    margin-top: 260px;
+    margin-left: -60px;
+  }
+}
+@media (max-width: 430px) {
+  .notificaciones{
+    margin-left: -80px;
+    width: 315px;
+  }
+}

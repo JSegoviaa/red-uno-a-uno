@@ -55,6 +55,7 @@ const NotificacionItem: FC<Props> = (props) => {
               <div className={styles.headerNotif}>
                 Notificaciones
               </div>
+              <div className={styles.notContainer}>
               {solicitudes?.map((solicitud) => (
                 <div
                   key={solicitud._id}
@@ -158,6 +159,7 @@ const NotificacionItem: FC<Props> = (props) => {
                   </div>
                 </div>
               ))}
+              </div>
 
               {solicitudes.length === 0 ? null : (
 

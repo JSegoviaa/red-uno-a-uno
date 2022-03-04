@@ -65,7 +65,7 @@ const Header = () => {
   // }, []);
 
   return (
-    <Navbar className={styles.navStyle} bg="light" expand="lg">
+    <Navbar className={styles.navStyle} bg="light" expand="sm">
       <Container>
         <div className="my-2">
           <Link href="/">
@@ -96,7 +96,9 @@ const Header = () => {
                   INICIO
                 </div>
               </Link>
-              <Button titulo="mis chats" onClick={handleShowCanvas} />
+              <div className="my-1">
+                <Button titulo="chats" onClick={handleShowCanvas} />
+              </div>
 
               <MenuUsuario
                 setMostrarMenu={setMostrarMenu}
