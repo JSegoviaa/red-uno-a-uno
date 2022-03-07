@@ -1,0 +1,14 @@
+@media (min-width: 768px) {
+  .burger {
+    display: none;
+  }
+}
+
+.position {
+  position: absolute;
+  bottom: 10px;
+}
+
+.altura {
+  height: 100vh;
+}

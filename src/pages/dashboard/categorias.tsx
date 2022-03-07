@@ -1,0 +1,17 @@
+import { useRouter } from "next/router";
+import DashboardLayout from "components/layout/Dashboard";
+import SEO from "components/seo/SEO";
+import { AdminRoute } from "hooks/useAdminRoute";
+
+const categorias = () => {
+  const router = useRouter();
+
+  return (
+    <>
+      <SEO titulo="Categorías" url={router.asPath} />
+      <DashboardLayout>Categorías</DashboardLayout>
+    </>
+  );
+};
+
+export default AdminRoute(categorias);
