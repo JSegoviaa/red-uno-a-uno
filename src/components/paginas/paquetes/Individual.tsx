@@ -4,6 +4,7 @@ import moment from "moment";
 import { Form, Modal } from "react-bootstrap";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { formatPrice } from "../../../helpers/formatPrice";
 import { usePaqueteInd } from "../../../hooks/usePaquetes";
@@ -18,6 +19,7 @@ import {
 } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 import { NuevoPedido, NuevoPedidoAdmin } from "interfaces/ContactInterface";
+import { development } from "credentials/credentials";
 
 const Individual = () => {
   const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
@@ -29,6 +31,7 @@ const Individual = () => {
   const [loading, setLoading] = useState(false);
   const { paquete, cargando } = usePaqueteInd();
   const [mostrarPago, setMostrarPago] = useState(false);
+  const [mostrarTransferencia, setMostrarTransferencia] = useState(false);
 
   const handleClose = () => {
     setPrecioSeleccionado("");
@@ -38,10 +41,39 @@ const Individual = () => {
   const handleNext = () => setShow(false);
   const handleShow = () => setShow(true);
   const ocultarPago = () => setMostrarPago(false);
+  const ocultarTransferencia = () => setMostrarTransferencia(false);
 
   const pagar = () => {
     handleNext();
     setMostrarPago(true);
+  };
+
+  const pagarTransferencia = () => {
+    handleNext();
+    setMostrarTransferencia(true);
+  };
+
+  const generarReferencia = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    fetch(`${development}/referencias`, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        usuario: auth.uid,
+        paquete: paquete?._id,
+        referencia: Math.floor(
+          1_000_000_000_000 + Math.random() * 9_000_000_000_000
+        ),
+        precio: Number(precioSeleccionado),
+        importe: Number(precioSeleccionado),
+        totalUsuarios: 1,
+      }),
+    });
+
+    toast.success("Se ha generado referencia");
+
+    router.push("/perfil/referencias-de-pago");
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -272,9 +304,18 @@ const Individual = () => {
             </div>
             <div className="text-center mt-5">
               {precioSeleccionado ? (
-                <Button titulo="Siguiente" onClick={pagar} />
+                <>
+                  <Button titulo="Pagar con tarjeta" onClick={pagar} />
+                  <Button
+                    titulo="Transferencia bancaria"
+                    onClick={pagarTransferencia}
+                  />
+                </>
               ) : (
-                <Button titulo="Siguiente" btn="Disabled" />
+                <>
+                  <Button titulo="Pago con tarjeta" btn="Disabled" />
+                  <Button titulo="Transferencia bancaria" btn="Disabled" />
+                </>
               )}
             </div>
           </div>
@@ -330,6 +371,36 @@ const Individual = () => {
               </div>
             )}
           </div>
+        </Form>
+      </Modal>
+
+      <Modal
+        contentClassName={styles.modalS1}
+        show={mostrarTransferencia}
+        onHide={ocultarTransferencia}
+      >
+        <Modal.Header closeButton className={styles.modalS1header} />
+        <Modaltitle titulo="Paquete individual" />
+
+        <div className={`${styles.S1content} text-center`}>
+          Cantidad a pagar:{" "}
+          <span className={`${styles.precio}`}>
+            {formatPrice(Number(precioSeleccionado))} MXN
+          </span>
+        </div>
+
+        <br />
+        <Form onSubmit={generarReferencia}>
+          <div className="text-center">
+            <div className="p-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
+              maiores neque harum distinctio cumque ratione dolorum quam aperiam
+              aut repudiandae in quas architecto molestias quo est obcaecati,
+              similique, voluptatum consectetur!
+            </div>
+            <Button titulo="Generar referencia" />
+          </div>
+          <br />
         </Form>
       </Modal>
     </div>
