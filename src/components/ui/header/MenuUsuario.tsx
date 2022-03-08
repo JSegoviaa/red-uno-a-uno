@@ -109,6 +109,16 @@ const MenuUsuario = (props: Props) => {
                 Mis Pagos
               </div>
             </Link>
+            <Link href="/perfil/referencias-de-pago">
+              <div
+                className={`${styles.menuItem} pointer mx-3 my-2`}
+                onClick={() => {
+                  setMostrarMenu(false);
+                }}
+              >
+                Referencias
+              </div>
+            </Link>
             <div
               className={`${styles.menuCerrar} pointer mx-3 my-2`}
               onClick={cerrarSesion}

@@ -1,11 +1,19 @@
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 const DatosReferencias = () => {
   return (
     <Container>
-      <h2>Número de cuenta</h2>
-      <h2>CLABE</h2>
-      <h2>Beneficiario</h2>
+      <Row>
+        <Col>
+          <span>Número de cuenta: 123456789</span>
+        </Col>
+        <Col>
+          <span>CLABE 123456 123546 123456</span>
+        </Col>
+        <Col>
+          <span>Beneficiario Red1a1</span>
+        </Col>
+      </Row>
     </Container>
   );
 };

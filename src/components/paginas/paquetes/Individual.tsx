@@ -4,7 +4,6 @@ import moment from "moment";
 import { Form, Modal } from "react-bootstrap";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { formatPrice } from "../../../helpers/formatPrice";
 import { usePaqueteInd } from "../../../hooks/usePaquetes";
@@ -19,7 +18,7 @@ import {
 } from "../../../helpers/fetch";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 import { NuevoPedido, NuevoPedidoAdmin } from "interfaces/ContactInterface";
-import { development } from "credentials/credentials";
+import { production } from "credentials/credentials";
 
 const Individual = () => {
   const { auth, abrirLogin, actualizarRol } = useContext(AuthContext);
@@ -53,10 +52,10 @@ const Individual = () => {
     setMostrarTransferencia(true);
   };
 
-  const generarReferencia = (e: FormEvent<HTMLFormElement>) => {
+  const generarReferencia = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    fetch(`${development}/referencias`, {
+    await fetch(`${production}/referencias`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({

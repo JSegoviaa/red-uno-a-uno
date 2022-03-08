@@ -3,7 +3,6 @@ import { Container } from "react-bootstrap";
 import { AuthContext } from "context/auth/AuthContext";
 import { useReferenciasUsuario } from "hooks/useReferencias";
 import Loading from "components/ui/loading/Loading";
-import { horaMes } from "helpers/horaMes";
 import { formatPrice } from "helpers/formatPrice";
 import styles from "./Referencias.module.css";
 
@@ -20,7 +19,7 @@ const ListaReferencias = () => {
         <div className="row">
           {referencias?.length === 0 ? (
             <div className={`${styles.titulo} text-center`}>
-              Aún no has añadido ningún paquete
+              Aún no has creado ninguna referencia
             </div>
           ) : (
             <div className="col-12">
@@ -28,20 +27,23 @@ const ListaReferencias = () => {
                 <table className={`${styles.customTable} table`}>
                   <tbody>
                     <th className="">Referencia o concepto de pago</th>
-                    <th className="">Fecha y hora</th>
+                    <th className="">CLABE</th>
+                    <th className="">Beneficiario</th>
                     <th className="">Paquete</th>
                     <th className="">PPU</th>
                     <th className="text-center">Usuarios</th>
-                    <th className="">Importe</th>
+                    <th className="">Total a depositar</th>
 
                     {referencias?.map((referencia) => (
                       <tr key={referencia._id} className={`${styles.thover} `}>
                         <td className={`${styles.content}`}>
                           {referencia.referencia}
                         </td>
+
                         <td className={`${styles.content}`}>
-                          {/* {horaMes(referencia.fechaPago)} */} Fecha
+                          123456 456789 456123
                         </td>
+                        <td className={`${styles.content}`}>Red 1a1</td>
                         <td className={`${styles.content}`}>
                           {referencia.paquete.nombre}
                         </td>
