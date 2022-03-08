@@ -67,6 +67,7 @@ const Individual = () => {
         precio: Number(precioSeleccionado),
         importe: Number(precioSeleccionado),
         totalUsuarios: 1,
+        estado: false,
       }),
     });
 

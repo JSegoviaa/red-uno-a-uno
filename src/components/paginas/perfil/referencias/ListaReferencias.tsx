@@ -33,6 +33,7 @@ const ListaReferencias = () => {
                     <th className="">PPU</th>
                     <th className="text-center">Usuarios</th>
                     <th className="">Total a depositar</th>
+                    <th className="">Estado</th>
 
                     {referencias?.map((referencia) => (
                       <tr key={referencia._id} className={`${styles.thover} `}>
@@ -57,6 +58,9 @@ const ListaReferencias = () => {
                         </td>
                         <td className={`${styles.content}`}>
                           {formatPrice(referencia.importe)}
+                        </td>
+                        <td className={`${styles.content}`}>
+                          {referencia.estado ? "Aprobado" : "Pendiente"}
                         </td>
                       </tr>
                     ))}

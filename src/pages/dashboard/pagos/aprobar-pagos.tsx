@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
 import DashboardLayout from "components/layout/Dashboard";
 import SEO from "components/seo/SEO";
-import { AdminRoute } from "hooks/useAdminRoute";
 
-const pagos = () => {
+const AprobarPagos = () => {
   const router = useRouter();
+
   return (
     <>
-      <SEO titulo="Pagos" url={router.asPath} />
-      <DashboardLayout>Pagos</DashboardLayout>
+      <SEO titulo="Aprobar pagos" url={router.asPath} />
+      <DashboardLayout>Aprobar pagos</DashboardLayout>
     </>
   );
 };
 
-export default AdminRoute(pagos);
+export default AprobarPagos;

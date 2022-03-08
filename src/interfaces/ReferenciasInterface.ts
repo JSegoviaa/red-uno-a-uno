@@ -6,6 +6,12 @@ export interface ReferenciasUsuarioResp {
   referencias: Referencia[];
 }
 
+export interface ReferenciaNumero {
+  ok: boolean;
+  msg: string;
+  referencia: Referencia;
+}
+
 export interface Referencia {
   _id: string;
   usuario: string;
@@ -16,6 +22,7 @@ export interface Referencia {
   totalUsuarios: number;
   createdAt: string;
   updatedAt: string;
+  estado: boolean;
 }
 
 interface Paquete {

@@ -10,7 +10,7 @@ const ReferenciasPago = () => {
 
   return (
     <>
-      <SEO titulo="Referenias de pago" url={router.asPath} />
+      <SEO titulo="Referencias de pago" url={router.asPath} />
       <Titulo titulo="Referencias de pago" />
       {/* <DatosReferencias /> */}
       <ListaReferencias />
