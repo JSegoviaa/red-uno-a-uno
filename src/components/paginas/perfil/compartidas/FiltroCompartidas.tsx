@@ -32,8 +32,8 @@ const FiltroCompartidas = () => {
               value={misCompUser}
               onChange={(e) => setMisCompUser(e.target.value)}
             >
-              <option value={""}>Mis propiedades compartidas</option>
-              <option value={id}>Compartidas</option>
+              <option value={""}>Propiedades que comparto</option>
+              <option value={id}>Propiedades que me comparten</option>
             </Form.Select>
           </div>
         </div>
