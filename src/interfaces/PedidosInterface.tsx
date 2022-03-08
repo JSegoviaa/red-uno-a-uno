@@ -15,7 +15,7 @@ export interface Pedido {
   fechaVencimiento: string;
   metodoPago: string | undefined;
   vigencia: boolean;
-  idStripe: string | undefined;
+  idPago: string | undefined;
   totalUsuarios?: number;
   _id?: string;
   createdAt?: string;
