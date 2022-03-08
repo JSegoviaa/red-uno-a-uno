@@ -81,7 +81,7 @@ const PaqueteMultiple = (props: Props) => {
         fechaVencimiento,
         metodoPago: pago?.type,
         vigencia: true,
-        idStripe: pago?.id,
+        idPago: pago?.id,
         totalUsuarios: avanzado ? usuarios : usuariosSeleccionados,
       };
 

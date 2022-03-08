@@ -43,7 +43,7 @@ export interface PedidosUsuario {
   totalUsuarios: number;
   metodoPago: string;
   vigencia: boolean;
-  idStripe: string;
+  idPago: string;
   createdAt: string;
   updatedAt: string;
   __v: number;
