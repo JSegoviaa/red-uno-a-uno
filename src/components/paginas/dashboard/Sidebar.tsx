@@ -7,10 +7,12 @@ import {
   MenuItem,
   SidebarHeader,
   SidebarContent,
+  SubMenu,
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import styles from "./Dashboard.module.css";
 import { AuthContext } from "context/auth/AuthContext";
+import { Bank, Wallet, CashCoin, Referencia } from "components/ui/icons";
 
 interface Props {
   handleToggleSidebar: (value: boolean) => void;
@@ -47,10 +49,17 @@ const Sidebar = ({ handleToggleSidebar, toggled, collapsed }: Props) => {
             <i className="bi bi-grid-3x3 me-2" />
             <Link href="/dashboard">Dashboard</Link>
           </MenuItem>
-          <MenuItem>
-            <i className="bi bi-cash me-2" />
-            <Link href="/dashboard/pagos">Pagos</Link>
-          </MenuItem>
+          <SubMenu title="Pagos" icon={<Bank />}>
+            <MenuItem icon={<Wallet />}>
+              <Link href="/dashboard/pagos">Total de pagos</Link>
+            </MenuItem>
+            <MenuItem icon={<CashCoin />}>
+              <Link href="/dashboard/pagos">Aprobar pagos</Link>
+            </MenuItem>
+            <MenuItem icon={<Referencia />}>
+              <Link href="/dashboard/pagos">Referencias</Link>
+            </MenuItem>
+          </SubMenu>
           <MenuItem>
             <i className="bi bi-people-fill me-2"></i> Usuarios
           </MenuItem>
