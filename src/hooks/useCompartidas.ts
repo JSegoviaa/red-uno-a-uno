@@ -11,7 +11,7 @@ import { AuthContext } from "context/auth/AuthContext";
 export const useCompartidas = (
   uid: string | undefined | null,
   estado?: string,
-  totall?: number
+  desde?: number
 ) => {
   const { auth } = useContext(AuthContext);
   const [compartidas, setCompartidas] = useState<Compartida[] | Solicitud[]>(
@@ -24,7 +24,7 @@ export const useCompartidas = (
     if (uid === auth.uid) {
       try {
         const res = await fetch(
-          `${production}/solicitud/usuario/${uid}?estado=${estado}`
+          `${production}/solicitud/usuario/${uid}?estado=${estado}&desde=${desde}&limite=20`
         );
         const data: ObtenerInmueblesCompartidosResp = await res.json();
 
@@ -39,7 +39,7 @@ export const useCompartidas = (
     if (uid === "") {
       try {
         const res = await fetch(
-          `${production}/solicitud/${auth.uid}?estado=${estado}`
+          `${production}/solicitud/${auth.uid}?estado=${estado}&desde=${desde}&limite=20`
         );
         const data: ObtenerSolicitud = await res.json();
 
@@ -54,7 +54,7 @@ export const useCompartidas = (
 
   useEffect(() => {
     obtenerCopartidas();
-  }, [estado, totall, uid]);
+  }, [estado, desde, uid]);
 
   return { compartidas, cargando, total, setCompartidas };
 };

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Pagination, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { AuthContext } from "context/auth/AuthContext";
 import { useCompartidas } from "hooks/useCompartidas";
@@ -13,7 +13,7 @@ import { production } from "credentials/credentials";
 const CompartidasCard = () => {
   const { auth } = useContext(AuthContext);
   const { estado, misCompUser } = useContext(InmuebleContext);
-  const [totall, setTotall] = useState(20);
+  const [totall, setTotall] = useState(0);
   const router = useRouter();
   const { total, cargando, compartidas, setCompartidas } = useCompartidas(
     misCompUser,
@@ -104,6 +104,21 @@ const CompartidasCard = () => {
       });
       setCompartidas(solicitudRechazada);
       toast.success(res.msg);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (totall === 0) {
+      return;
+    } else {
+      setTotall(totall - 15);
+    }
+  };
+  const handleNextPage = () => {
+    if (totall < total - 15) {
+      setTotall(totall + 15);
+    } else {
+      return;
     }
   };
 
@@ -274,6 +289,14 @@ const CompartidasCard = () => {
               ))}
             </>
           )}
+          {total > 20 ? (
+            <div className="d-flex justify-content-center">
+              <Pagination>
+                <Pagination.Prev onClick={handlePrevPage} />
+                <Pagination.Next onClick={handleNextPage} />
+              </Pagination>
+            </div>
+          ) : null}
         </Row>
       )}
     </Container>
