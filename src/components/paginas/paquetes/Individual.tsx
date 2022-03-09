@@ -52,6 +52,7 @@ const Individual = () => {
     setMostrarTransferencia(true);
   };
 
+  const token = localStorage.getItem("token") || "";
   const generarReferencia = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

@@ -19,6 +19,7 @@ import {
 } from "../../../helpers/fetch";
 import Loading from "../../ui/loading/Loading";
 import { NuevoPedido, NuevoPedidoAdmin } from "interfaces/ContactInterface";
+import { production } from "credentials/credentials";
 
 interface Props {
   id: string;
@@ -39,6 +40,7 @@ const PaqueteMultiple = (props: Props) => {
   const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
+  const [mostrarTransferencia, setMostrarTransferencia] = useState(false);
   const [usuariosSeleccionados, setUsuariosSeleccionados] =
     useState<any>(usuario);
   const { formulario, handleChange } = useForm({ usuarios: 11 });
@@ -53,6 +55,43 @@ const PaqueteMultiple = (props: Props) => {
     handleNext();
     setMostrarPago(true);
     !avanzado ? setUsuariosSeleccionados(usuariosSeleccionados.value) : null;
+  };
+
+  const ocultarTransferencia = () => setMostrarTransferencia(false);
+
+  const pagarTransferencia = () => {
+    handleNext();
+    setMostrarTransferencia(true);
+  };
+
+  const token = localStorage.getItem("token") || "";
+  const generarReferencia = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const body = {
+      usuario: auth.uid,
+      paquete: id,
+      referencia: Math.floor(
+        1_000_000_000_000 + Math.random() * 9_000_000_000_000
+      ),
+      precio: Number(precio),
+      importe: avanzado
+        ? Number(precio) * Number(usuariosSeleccionados)
+        : Number(precio) * Number(usuariosSeleccionados.value),
+      totalUsuarios: avanzado ? Number(usuarios) : usuariosSeleccionados.value,
+      estado: false,
+    };
+
+    console.log(body);
+    await fetch(`${production}/referencias`, {
+      method: "POST",
+      headers: { "Content-type": "application/json", "x-token": token },
+      body: JSON.stringify(body),
+    });
+
+    toast.success("Se ha generado referencia");
+
+    router.push("/perfil/referencias-de-pago");
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -230,8 +269,12 @@ const PaqueteMultiple = (props: Props) => {
                           >
                             {formatPrice(precio * usuarios)}
                           </div>
-                          <div className="col-12 text-center">
-                            <Button titulo="Siguiente" onClick={pagar} />
+                          <div className="col-12 d-flex justify-content-center">
+                            <Button titulo="Pago con tarjeta" onClick={pagar} />
+                            <Button
+                              titulo="Transferencia bancaria"
+                              onClick={pagarTransferencia}
+                            />
                           </div>
                         </>
                       )}
@@ -273,9 +316,27 @@ const PaqueteMultiple = (props: Props) => {
                       <div className="col-12">
                         <div className="text-center mt-5">
                           {!usuariosSeleccionados.value ? (
-                            <Button titulo="Siguiente" btn="Disabled" />
+                            <div className="d-flex justify-content-center">
+                              <Button
+                                titulo="Pago con tarjeta"
+                                btn="Disabled"
+                              />
+                              <Button
+                                titulo="Transferencia bancaria"
+                                btn="Disabled"
+                              />
+                            </div>
                           ) : (
-                            <Button titulo="Siguiente" onClick={pagar} />
+                            <div className="d-flex justify-content-center">
+                              <Button
+                                titulo="Pago con tarjeta"
+                                onClick={pagar}
+                              />
+                              <Button
+                                titulo="Transferencia bancaria"
+                                onClick={pagarTransferencia}
+                              />
+                            </div>
                           )}
                         </div>
                       </div>
@@ -336,6 +397,39 @@ const PaqueteMultiple = (props: Props) => {
               </div>
             )}
           </div>
+        </Form>
+      </Modal>
+
+      <Modal
+        contentClassName={styles.modalS1}
+        show={mostrarTransferencia}
+        onHide={ocultarTransferencia}
+      >
+        <Modal.Header closeButton className={styles.modalS1header} />
+        <Modaltitle titulo={titulo} />
+
+        <div className={`${styles.S1content} text-center`}>
+          Cantidad a pagar:{" "}
+          <span className={`${styles.precio}`}>
+            {avanzado
+              ? formatPrice(Number(precio) * Number(usuarios))
+              : formatPrice(Number(precio) * usuariosSeleccionados.value)}
+            MXN
+          </span>
+        </div>
+
+        <br />
+        <Form onSubmit={generarReferencia}>
+          <div className="text-center">
+            <div className="p-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
+              maiores neque harum distinctio cumque ratione dolorum quam aperiam
+              aut repudiandae in quas architecto molestias quo est obcaecati,
+              similique, voluptatum consectetur!
+            </div>
+            <Button titulo="Generar referencia" />
+          </div>
+          <br />
         </Form>
       </Modal>
     </div>
