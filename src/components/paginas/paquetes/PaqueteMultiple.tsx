@@ -76,13 +76,12 @@ const PaqueteMultiple = (props: Props) => {
       ),
       precio: Number(precio),
       importe: avanzado
-        ? Number(precio) * Number(usuariosSeleccionados)
+        ? Number(precio) * Number(usuarios)
         : Number(precio) * Number(usuariosSeleccionados.value),
       totalUsuarios: avanzado ? Number(usuarios) : usuariosSeleccionados.value,
       estado: false,
     };
 
-    console.log(body);
     await fetch(`${production}/referencias`, {
       method: "POST",
       headers: { "Content-type": "application/json", "x-token": token },
@@ -115,7 +114,9 @@ const PaqueteMultiple = (props: Props) => {
         usuario: auth.uid,
         paquete: id,
         precio: Number(precio),
-        importe: Number(precio) * usuariosSeleccionados,
+        importe: avanzado
+          ? Number(precio) * Number(usuarios)
+          : Number(precio) * Number(usuariosSeleccionados),
         fechaPago,
         fechaVencimiento,
         metodoPago: pago?.type,
@@ -131,7 +132,9 @@ const PaqueteMultiple = (props: Props) => {
         idCompra: pago?.id,
         nombrePaquete: titulo,
         precio: Number(precio),
-        importe: Number(precio) * usuariosSeleccionados,
+        importe: avanzado
+          ? Number(precio) * Number(usuarios)
+          : Number(precio) * Number(usuariosSeleccionados),
       };
 
       const correoPedidoAdmin: NuevoPedidoAdmin = {
@@ -140,7 +143,9 @@ const PaqueteMultiple = (props: Props) => {
         idCompra: pago?.id,
         nombrePaquete: titulo,
         precio: Number(precio),
-        importe: Number(precio) * usuariosSeleccionados,
+        importe: avanzado
+          ? Number(precio) * Number(usuarios)
+          : Number(precio) * Number(usuariosSeleccionados),
       };
 
       try {

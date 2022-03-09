@@ -58,7 +58,7 @@ const Individual = () => {
 
     await fetch(`${production}/referencias`, {
       method: "POST",
-      headers: { "Content-type": "application/json" },
+      headers: { "Content-type": "application/json", "x-token": token },
       body: JSON.stringify({
         usuario: auth.uid,
         paquete: paquete?._id,
