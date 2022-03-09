@@ -6,7 +6,7 @@ export const publicadoHace = (fecha: number | string) => {
   return hoyMes.fromNow();
 };
 
-export const horaMes = (fecha: number | string) => {
+export const horaMes = (fecha: number | string | undefined) => {
   const hoyMes = moment(fecha);
 
   return hoyMes.format("HH:mm a - D/MM/YY");
