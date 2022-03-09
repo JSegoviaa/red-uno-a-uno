@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { Form, Pagination } from "react-bootstrap";
 import DashboardLayout from "components/layout/Dashboard";
@@ -20,7 +20,7 @@ const Referencias = () => {
     numero: "",
   });
   const { numero } = formulario;
-  const { cargando, referencia } = useReferenciaNumero(seleccionado);
+  const { referencia } = useReferenciaNumero(seleccionado);
   const { referencias, total, cargando: loading } = useReferencias(desde);
 
   const seleccionarReferencia = (ref: string) => {
@@ -30,6 +30,11 @@ const Referencias = () => {
   useEffect(() => {
     refTop.current?.scrollIntoView({ behavior: "smooth" });
   }, [seleccionado, refTop]);
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setSeleccionado(numero);
+  };
 
   const cerrarReferencia = () => setSeleccionado("");
 
@@ -58,7 +63,7 @@ const Referencias = () => {
             <div className="container">
               <div className="row">
                 <div className="col-12">
-                  {seleccionado !== "" ? (
+                  {seleccionado === referencia?.referencia ? (
                     <div className="row d-flex justify-content-center my-4">
                       <div className="col-sm-12 col-md-12 col-lg-10 col-xl-9 col-xxl-8">
                         <div className={styleRef.refCard}>
@@ -198,10 +203,15 @@ const Referencias = () => {
                   ) : null}
                   <div className="row d-flex justify-content-between mb-3">
                     <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-3 mb-md-0 mb-lg-0 mb-3">
-                      <Form.Control
-                        type="text"
-                        placeholder="Buscar por referencia"
-                      />
+                      <Form onSubmit={onSubmit}>
+                        <Form.Control
+                          type="text"
+                          placeholder="Buscar por referencia"
+                          value={numero}
+                          name="numero"
+                          onChange={handleChange}
+                        />
+                      </Form>
                     </div>
                     <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-3 mb-md-0 mb-lg-0 mb-3">
                       <Form.Select aria-label="Default select example">
@@ -271,16 +281,12 @@ const Referencias = () => {
                               </td>
                               <td className={styleRef.contentT}>
                                 <button
+                                  onClick={() =>
+                                    seleccionarReferencia(referencia.referencia)
+                                  }
                                   className={`${styleRef.btnT1} px-2 mx-1`}
                                 >
-                                  <i
-                                    className="bi bi-eye"
-                                    onClick={() =>
-                                      seleccionarReferencia(
-                                        referencia.referencia
-                                      )
-                                    }
-                                  />
+                                  <i className="bi bi-eye" />
                                 </button>
                                 <button
                                   className={`${styleRef.btnT2} px-2 mx-1`}
