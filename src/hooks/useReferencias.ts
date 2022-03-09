@@ -31,7 +31,7 @@ export const useReferenciaNumero = (numero: string) => {
 
   const obtenerReferenciaPorNumero = async () => {
     const res = await fetch(
-      `${development}/referencias/ref/numero?numero=${numero}`
+      `${production}/referencias/ref/numero?numero=${numero}`
     );
     const data: ReferenciaNumero = await res.json();
 

@@ -1,9 +1,3 @@
-@media (min-width: 768px) {
-  .burger {
-    display: none;
-  }
-}
-
 .position {
   position: absolute;
   bottom: 10px;
@@ -11,4 +5,55 @@
 
 .altura {
   height: 100vh;
+}
+
+.navbarCustom {
+  background-color: white;
+  padding: 25px 45px;
+  background-color: #1d1d1d;
+  box-shadow: 0px -6px 30px 3px rgba(0, 0, 0, 0.61);
+  -webkit-box-shadow: 0px -6px 30px 3px rgba(0, 0, 0, 0.61);
+  -moz-box-shadow: 0px -6px 30px 3px rgba(0, 0, 0, 0.61);
+}
+
+.hoja{
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: 600;
+  color: #7149bc;
+  position: relative;
+  float: left;
+  letter-spacing: 3px;
+}
+.navLinks {
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  transition: 200ms;
+}
+
+.navLinks:hover {
+  color: #7149bc;
+  transition: 200ms;
+}
+
+.profileImg {
+  background-color: gray;
+  color: gray;
+  padding: 8px 15px;
+  border-radius: 50%;
+  transition: 200ms;
+}
+
+.profileImg:hover {
+  background-color: #7149bc;
+  color: #7149bc;
+  transition: 200ms;
+}
+
+@media (min-width: 768px) {
+  .burger {
+    display: none;
+  }
 }

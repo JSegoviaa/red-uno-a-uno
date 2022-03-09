@@ -8,7 +8,7 @@ interface Props {
 
 const Main: FC<Props> = ({ children, handleToggleSidebar }) => {
   return (
-    <div style={{ width: "100%", overflowX: "hidden" }}>
+    <div style={{ width: "100%", overflowX: "hidden", background: "#F4F3FF"}}>
       <i
         onClick={() => handleToggleSidebar(true)}
         className={`bi bi-list ${styles.burger}`}
