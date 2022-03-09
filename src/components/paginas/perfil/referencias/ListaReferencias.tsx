@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { Container } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Container, Pagination } from "react-bootstrap";
 import { AuthContext } from "context/auth/AuthContext";
 import { useReferenciasUsuario } from "hooks/useReferencias";
 import Loading from "components/ui/loading/Loading";
@@ -8,7 +8,28 @@ import styles from "./Referencias.module.css";
 
 const ListaReferencias = () => {
   const { auth } = useContext(AuthContext);
-  const { cargando, referencias } = useReferenciasUsuario(auth.uid);
+  const [desde, setDesde] = useState(0);
+  const { cargando, referencias, total } = useReferenciasUsuario(
+    auth.uid,
+    desde
+  );
+
+  const handlePrevPage = () => {
+    if (desde === 0) {
+      return;
+    } else {
+      setDesde(desde - 15);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (desde < total - 15) {
+      setDesde(desde + 15);
+    } else {
+      return;
+    }
+  };
+  console.log(total);
 
   return (
     <Container>
@@ -69,14 +90,14 @@ const ListaReferencias = () => {
               </div>
             </div>
           )}
-          {/* {total > 15 ? (
-    <div className="d-flex justify-content-center">
-      <Pagination>
-        <Pagination.Prev onClick={handlePrevPage} />
-        <Pagination.Next onClick={handleNextPage} />
-      </Pagination>
-    </div>
-  ) : null} */}
+          {total > 15 ? (
+            <div className="d-flex justify-content-center">
+              <Pagination>
+                <Pagination.Prev onClick={handlePrevPage} />
+                <Pagination.Next onClick={handleNextPage} />
+              </Pagination>
+            </div>
+          ) : null}
         </div>
       )}
     </Container>

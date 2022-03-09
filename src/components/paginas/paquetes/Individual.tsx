@@ -52,12 +52,13 @@ const Individual = () => {
     setMostrarTransferencia(true);
   };
 
+  const token = localStorage.getItem("token") || "";
   const generarReferencia = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     await fetch(`${production}/referencias`, {
       method: "POST",
-      headers: { "Content-type": "application/json" },
+      headers: { "Content-type": "application/json", "x-token": token },
       body: JSON.stringify({
         usuario: auth.uid,
         paquete: paquete?._id,
@@ -126,10 +127,12 @@ const Individual = () => {
 
       try {
         const resp = await anadirPaqueteInv("pedidos", body);
-        await actualizarRol({
-          role: paquete?.nombre,
-          paqueteAdquirido: paquete?._id,
-        });
+        auth.role !== "Administrador"
+          ? await actualizarRol({
+              role: paquete?.nombre,
+              paqueteAdquirido: paquete?._id,
+            })
+          : null;
 
         await nuevoPedido("correos/nuevo-pedido", correoPedido);
         await nuevoPedidoAdmin("correos/nuevo-pedido-admin", correoPedidoAdmin);

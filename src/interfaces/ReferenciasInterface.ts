@@ -4,6 +4,7 @@ export interface ReferenciasUsuarioResp {
   ok: boolean;
   msg: string;
   referencias: Referencia[];
+  total: number;
 }
 
 export interface ReferenciaNumero {
