@@ -50,6 +50,19 @@
   transition: 200ms;
 }
 
+.bgContainer{
+  padding: 25px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  border: 1px solid rgba(201, 201, 201, 0.315);
+}
+.dashContain{
+  overflow-y: scroll;
+  height: 95vh;
+}
+
+
+
 @media (min-width: 768px) {
   .burger {
     display: none;

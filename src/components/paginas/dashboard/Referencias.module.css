@@ -2,6 +2,9 @@
   background-color: white;
   border-radius: 10px;
   border: 1px solid rgba(201, 201, 201, 0.308);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
 }
 .paqueteBG {
   background: rgb(255, 147, 0);
@@ -14,23 +17,116 @@
   height: 100%;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
-  
 }
-.paqueteNombre{
-    font-family: "Open Sans";
-    font-weight: 700;
-    font-size: 25px;
-    color: white;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+.paqueteNombre {
+  font-family: "Open Sans";
+  font-weight: 700;
+  font-size: 25px;
+  color: white;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.refCardContenido{
-    padding: 20px;
+.refCardContenido {
+  padding: 20px;
 }
-.TituloCard{
-    font-family: "Open Sans";
-    font-weight: 700;
-    font-size: 22px;
+.TituloCard {
+  font-family: "Open Sans";
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+.labelsCard {
+  font-family: "Open Sans";
+  font-weight: 500;
+  font-size: 16px;
+  color: rgb(95, 95, 95);
+  line-height: 22px;
+}
+.contentCard {
+  font-family: "Open Sans";
+  font-weight: 600;
+  font-size: 18px;
+  color: rgb(54, 54, 54);
+}
+.btnClose {
+  border: none;
+  background: none;
+}
+.btnClose:hover {
+  color: rgb(182, 0, 0);
+}
+.btnAp {
+  border: 2px solid #7149bc;
+  background-color: white;
+  border-radius: 40px;
+  padding: 5px 45px;
+  font-size: 18px;
+  font-family: "Open Sans";
+  font-weight: 600;
+  color: #7149bc;
+  transition: 250ms;
+}
+.btnAp:hover {
+  background-color: #7149bc;
+  color: white;
+  font-weight: 600;
+  transition: 250ms;
+}
+
+.tablaRef {
+  border-radius: 15px;
+  background-color: white;
+  border: 0.5px solid rgba(218, 218, 218, 0.349);
+  border: 1px solid rgba(201, 201, 201, 0.308);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+}
+.headerRef {
+  padding: 10px 1.5rem;
+  font-family: "Open Sans";
+  font-size: 17px;
+  font-weight: 600;
+  border-bottom: 0.5px solid rgba(218, 218, 218, 0.349);
+}
+.rowT {
+  border-bottom: 0.5px solid rgba(218, 218, 218, 0.349);
+}
+.rowT:hover {
+  background-color: #d6d6d621;
+}
+.headersT {
+  padding: 15px 1.5rem;
+  background-color: #d6d6d621;
+  font-family: "Open Sans";
+  font-weight: bold;
+  color: #7149bc;
+}
+.contentT {
+  padding: 15px 1.5rem;
+  font-family: "Open Sans";
+  font-size: 15px;
+  color: grey;
+}
+.btnT1,
+.btnT2 {
+  border: 1px solid rgba(201, 201, 201, 0.308);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+  background-color: white;
+  transition: 250ms;
+}
+.btnT1:hover {
+  background-color: #7149bc;
+  color: white;
+  transition: 250ms;
+}
+.btnT2:hover {
+  background-color: tomato;
+  color: white;
+  transition: 250ms;
 }

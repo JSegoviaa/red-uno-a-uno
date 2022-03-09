@@ -30,6 +30,7 @@ const DashboardLayout: FC<Props> = ({ children, titulo }) => {
         children={children}
         handleToggleSidebar={handleToggleSidebar}
         titulo={titulo}
+        
       />
     </div>
   );
