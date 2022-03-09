@@ -44,9 +44,18 @@ const MisUsuarios = () => {
         propietario
       );
 
-      if (resp.ok) toast.success(resp.msg);
-
-      setMisUsuarios([...misUsuarios, resp.usuario]);
+      if (resp.ok) {
+        setMisUsuarios([...misUsuarios, resp.usuario]);
+        setFormulario({
+          nombre: "",
+          apellido: "",
+          correo: "",
+          password: "",
+          password2: "",
+          role: "UsuarioPagado",
+        });
+        toast.success(resp.msg);
+      }
 
       if (resp.errors) {
         resp.errors.map((e) => {
@@ -54,15 +63,6 @@ const MisUsuarios = () => {
         });
       }
     }
-
-    setFormulario({
-      nombre: "",
-      apellido: "",
-      correo: "",
-      password: "",
-      password2: "",
-      role: "UsuarioPagado",
-    });
   };
 
   const mostrarContraseña = () => setShowPassword(!showPassword);
@@ -75,7 +75,8 @@ const MisUsuarios = () => {
 
   return (
     <>
-      {auth.usuarios && auth.usuarios > misUsuarios.length ? (
+      {(auth.usuarios && auth.usuarios > misUsuarios.length) ||
+      auth.role === "Administrador" ? (
         <Form onSubmit={handleSubmit}>
           <Container>
             <Row>

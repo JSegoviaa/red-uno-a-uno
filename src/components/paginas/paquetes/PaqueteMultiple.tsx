@@ -150,12 +150,13 @@ const PaqueteMultiple = (props: Props) => {
 
       try {
         const resp = await anadirPaqueteInv("pedidos", body);
-
-        await actualizarRol({
-          role: titulo,
-          paqueteAdquirido: id,
-          usuarios: avanzado ? usuarios : usuariosSeleccionados,
-        });
+        auth.role !== "Administrador"
+          ? await actualizarRol({
+              role: titulo,
+              paqueteAdquirido: id,
+              usuarios: avanzado ? usuarios : usuariosSeleccionados,
+            })
+          : null;
 
         await nuevoPedido("correos/nuevo-pedido", correoPedido);
         await nuevoPedidoAdmin("correos/nuevo-pedido-admin", correoPedidoAdmin);
