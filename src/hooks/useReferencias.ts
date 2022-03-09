@@ -51,3 +51,25 @@ export const useReferenciaNumero = (numero: string) => {
 
   return { referencia, cargando };
 };
+
+export const useReferencias = (desde: number) => {
+  const [referencias, setReferencias] = useState<Referencia[]>([]);
+  const [cargando, setCargando] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  const obtenerReferencias = async () => {
+    const res = await fetch(`${production}/referencias?desde=${desde}`);
+    const data: ReferenciasUsuarioResp = await res.json();
+
+    console.log(data);
+    setReferencias(data.referencias);
+    setTotal(data.total);
+    setCargando(false);
+  };
+
+  useEffect(() => {
+    obtenerReferencias();
+  }, [desde]);
+
+  return { referencias, cargando, total };
+};
