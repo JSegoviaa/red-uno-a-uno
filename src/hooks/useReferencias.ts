@@ -4,25 +4,30 @@ import {
   ReferenciaNumero,
   ReferenciasUsuarioResp,
 } from "interfaces/ReferenciasInterface";
-import { development, production } from "credentials/credentials";
+import { production } from "credentials/credentials";
 
-export const useReferenciasUsuario = (uid: string | null | undefined) => {
+export const useReferenciasUsuario = (
+  uid: string | null | undefined,
+  desde: number
+) => {
   const [referencias, setReferencias] = useState<Referencia[]>([]);
   const [cargando, setCargando] = useState(true);
+  const [total, setTotal] = useState(0);
 
   const obtenerReferencias = async () => {
-    const res = await fetch(`${production}/referencias/${uid}`);
+    const res = await fetch(`${production}/referencias/${uid}?desde=${desde}`);
     const data: ReferenciasUsuarioResp = await res.json();
 
     setReferencias(data.referencias);
+    setTotal(data.total);
     setCargando(false);
   };
 
   useEffect(() => {
     obtenerReferencias();
-  }, []);
+  }, [desde]);
 
-  return { referencias, cargando };
+  return { referencias, cargando, total };
 };
 
 export const useReferenciaNumero = (numero: string) => {
