@@ -45,22 +45,20 @@ const Sidebar = ({ handleToggleSidebar, toggled, collapsed }: Props) => {
           <br />
         </SidebarHeader>
         <SidebarContent className="py-4">
-          <MenuItem>
+          {/* <MenuItem>
             <i className="bi bi-grid-3x3 me-2" />
             <Link href="/dashboard">Dashboard</Link>
-          </MenuItem>
+          </MenuItem> */}
           <SubMenu title="Pagos" icon={<Bank />}>
-            <MenuItem icon={<Wallet />}>
+            {/* <MenuItem icon={<Wallet />}>
               <Link href="/dashboard/pagos">Total de pagos</Link>
-            </MenuItem>
-            <MenuItem icon={<CashCoin />}>
-              <Link href="/dashboard/pagos/aprobar-pagos">Aprobar pagos</Link>
-            </MenuItem>
+            </MenuItem> */}
+
             <MenuItem icon={<Referencia />}>
               <Link href="/dashboard/pagos/referencias">Referencias</Link>
             </MenuItem>
           </SubMenu>
-          <MenuItem>
+          {/* <MenuItem>
             <i className="bi bi-people-fill me-2"></i> Usuarios
           </MenuItem>
           <MenuItem>
@@ -72,7 +70,7 @@ const Sidebar = ({ handleToggleSidebar, toggled, collapsed }: Props) => {
           </MenuItem>
           <MenuItem>
             <i className="bi bi-building me-2"></i> Tipo de propiedad
-          </MenuItem>
+          </MenuItem> */}
         </SidebarContent>
 
         <div className={styles.position}>
