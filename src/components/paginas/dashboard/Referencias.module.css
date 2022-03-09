@@ -1,3 +1,36 @@
+.PaqIndivi {
+  background: rgb(0, 65, 196);
+  background: linear-gradient(
+    45deg,
+    rgba(0, 65, 196, 1) 5%,
+    rgba(56, 179, 255, 1) 100%
+  );
+}
+.PaqBasic {
+  background: rgb(24, 107, 16);
+  background: linear-gradient(
+    45deg,
+    rgba(24, 107, 16, 1) 0%,
+    rgba(24, 149, 0, 1) 100%
+  );
+}
+.PaqInter {
+  background: rgb(255, 147, 0);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 147, 0, 1) 0%,
+    rgba(255, 207, 19, 1) 100%
+  );
+}
+.PaqAvanza {
+  background: rgb(86, 0, 149);
+  background: linear-gradient(
+    45deg,
+    rgba(86, 0, 149, 1) 0%,
+    rgba(181, 0, 228, 1) 100%
+  );
+}
+
 .refCard {
   background-color: white;
   border-radius: 10px;
@@ -7,12 +40,6 @@
   -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
 }
 .paqueteBG {
-  background: rgb(255, 147, 0);
-  background: linear-gradient(
-    45deg,
-    rgba(255, 147, 0, 1) 0%,
-    rgba(255, 207, 19, 1) 100%
-  );
   width: 100%;
   height: 100%;
   border-bottom-left-radius: 10px;
@@ -131,25 +158,24 @@
   transition: 250ms;
 }
 
-
 @media (max-width: 1075px) {
-  .paqueteNombre{
+  .paqueteNombre {
     transform: rotate(-90deg);
   }
 }
 @media (max-width: 767px) {
-  .paqueteNombre{
+  .paqueteNombre {
     transform: rotate(0deg);
     position: relative;
     transform: none;
     top: auto;
     padding: 50px 0;
   }
-  .paqueteBG{
-    border-top-right-radius: 10px ;
+  .paqueteBG {
+    border-top-right-radius: 10px;
     border-bottom-left-radius: 0;
   }
-  .refCardContenido{
+  .refCardContenido {
     padding-left: 8vw;
   }
 }

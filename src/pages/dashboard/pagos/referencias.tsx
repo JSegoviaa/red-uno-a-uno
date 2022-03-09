@@ -47,7 +47,7 @@ const Referencias = () => {
                       <div className={styleRef.refCard}>
                         <div className="row">
                           <div className="col-sm-12 col-md-3 col-lg-3 text-center">
-                            <div className={styleRef.paqueteBG}>
+                            <div className={`${styleRef.paqueteBG} ${styleRef.PaqInter}`}>
                               <div className={styleRef.paqueteNombre}>
                                 Intermedio
                               </div>
