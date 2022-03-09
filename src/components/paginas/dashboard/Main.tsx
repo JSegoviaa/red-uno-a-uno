@@ -25,7 +25,7 @@ const Main: FC<Props> = ({ children, handleToggleSidebar, titulo }) => {
               <img
                 className={`pointer ${styles.profileImg}`}
                 src={auth.img}
-                alt={auth.img}
+                alt="Imagen de usuario no encontrada"
               />
             </Link>
           </div>
