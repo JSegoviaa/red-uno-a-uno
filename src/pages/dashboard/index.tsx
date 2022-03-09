@@ -9,7 +9,7 @@ const Index = () => {
   return (
     <>
       <SEO titulo="Panel de administración" url={router.asPath} />
-      <DashboardLayout>Inicio</DashboardLayout>
+      <DashboardLayout titulo="Inicio">Inicio</DashboardLayout>
     </>
   );
 };

@@ -9,7 +9,7 @@ const categorias = () => {
   return (
     <>
       <SEO titulo="Categorías" url={router.asPath} />
-      <DashboardLayout>Categorías</DashboardLayout>
+      <DashboardLayout titulo="Categorías">Categorías</DashboardLayout>
     </>
   );
 };

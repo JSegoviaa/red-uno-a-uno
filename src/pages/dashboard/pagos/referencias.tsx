@@ -5,9 +5,8 @@ import { Col, Form, Row } from "react-bootstrap";
 import { useForm } from "hooks/useForm";
 import { useReferenciaNumero } from "hooks/useReferencias";
 import Loading from "components/ui/loading/Loading";
-import styles from 'components/paginas/dashboard/Dashboard.module.css'
-import styleRef from 'components/paginas/dashboard/Referencias.module.css'
-import Link from "next/link";
+import styles from "components/paginas/dashboard/Dashboard.module.css";
+import styleRef from "components/paginas/dashboard/Referencias.module.css";
 
 const Referencias = () => {
   const router = useRouter();
@@ -22,26 +21,17 @@ const Referencias = () => {
   return (
     <>
       <SEO titulo="Referencias" url={router.asPath} />
-      <DashboardLayout>
-        <section>
-          <div className="row ">
-            <div className="col text-end">
-              <div className={styles.navbarCustom}>
-                <span className={`${styles.hoja}`}>REFERENCIAS</span>
-                <Link href={'/'}><span className={`${styles.navLinks} mx-3 pointer`}>Inicio</span></Link>
-                <Link href={'/'}><span className={`${styles.profileImg} mx-3 pointer`}>x</span></Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
+      <DashboardLayout titulo="Referencias">
         <section className="my-5">
           <div className="container">
             <div className="row">
               <div className="col-12">
                 <div className="row d-flex justify-content-between mb-3">
                   <div className="col-4">
-                    <Form.Control type="text" placeholder="Buscar por referencia" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Buscar por referencia"
+                    />
                   </div>
                   <div className="col-4">
                     <Form.Select aria-label="Default select example">
@@ -74,8 +64,8 @@ const Referencias = () => {
                               <b>Creada e:</b> 22/05/2022 - 14:81:96
                             </div>
                             <div className="mb-2">
-                            <b>ID: </b> a6+sd5sa+6d54asd+4asd 
-                            <b> Usuario: </b> Juanito Espinito
+                              <b>ID: </b> a6+sd5sa+6d54asd+4asd
+                              <b> Usuario: </b> Juanito Espinito
                             </div>
                             <div className="mb-2">
                               <b>Importe Unitario: </b> $5000

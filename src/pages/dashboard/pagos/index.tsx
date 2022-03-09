@@ -8,7 +8,7 @@ const index = () => {
   return (
     <>
       <SEO titulo="Pagos" url={router.asPath} />
-      <DashboardLayout>Pagos</DashboardLayout>
+      <DashboardLayout titulo="Pagos">Pagos</DashboardLayout>
     </>
   );
 };
