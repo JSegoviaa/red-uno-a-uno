@@ -27,11 +27,11 @@ const DashboardLayout: FC<Props> = ({ children, titulo }) => {
       />
       <Main
         handleCollapsedChange={handleCollapsedChange}
-        children={children}
         handleToggleSidebar={handleToggleSidebar}
         titulo={titulo}
-        
-      />
+      >
+        {children}
+      </Main>
     </div>
   );
 };

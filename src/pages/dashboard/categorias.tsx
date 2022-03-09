@@ -3,7 +3,7 @@ import DashboardLayout from "components/layout/Dashboard";
 import SEO from "components/seo/SEO";
 import { AdminRoute } from "hooks/useAdminRoute";
 
-const categorias = () => {
+const Categorias = () => {
   const router = useRouter();
 
   return (
@@ -14,4 +14,4 @@ const categorias = () => {
   );
 };
 
-export default AdminRoute(categorias);
+export default AdminRoute(Categorias);
