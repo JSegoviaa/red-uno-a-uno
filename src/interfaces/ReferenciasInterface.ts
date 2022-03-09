@@ -14,7 +14,7 @@ export interface ReferenciaNumero {
 
 export interface Referencia {
   _id: string;
-  usuario: string;
+  usuario: Usuario;
   paquete: Paquete;
   referencia: string;
   precio: number;
@@ -28,4 +28,11 @@ export interface Referencia {
 interface Paquete {
   _id: string;
   nombre: string;
+}
+
+interface Usuario {
+  nombre: string;
+  apellido: string;
+  correo: string;
+  img: string;
 }
