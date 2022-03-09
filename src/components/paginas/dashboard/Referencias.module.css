@@ -130,3 +130,26 @@
   color: white;
   transition: 250ms;
 }
+
+
+@media (max-width: 1075px) {
+  .paqueteNombre{
+    transform: rotate(-90deg);
+  }
+}
+@media (max-width: 767px) {
+  .paqueteNombre{
+    transform: rotate(0deg);
+    position: relative;
+    transform: none;
+    top: auto;
+    padding: 50px 0;
+  }
+  .paqueteBG{
+    border-top-right-radius: 10px ;
+    border-bottom-left-radius: 0;
+  }
+  .refCardContenido{
+    padding-left: 8vw;
+  }
+}

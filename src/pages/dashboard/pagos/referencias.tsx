@@ -23,18 +23,18 @@ const Referencias = () => {
       <SEO titulo="Referencias" url={router.asPath} />
       <DashboardLayout titulo="REFERENCIAS">
         <section className={styles.dashContain}>
-          <section className="my-5">
+          <section className="mt-5">
             <div className="container">
               <div className="row">
                 <div className="col-12">
                   <div className="row d-flex justify-content-between mb-3">
-                    <div className="col-4">
+                    <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-3 mb-md-0 mb-lg-0 mb-3">
                       <Form.Control
                         type="text"
                         placeholder="Buscar por referencia"
                       />
                     </div>
-                    <div className="col-4">
+                    <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-3 mb-md-0 mb-lg-0 mb-3">
                       <Form.Select aria-label="Default select example">
                         <option>Ordenar por:</option>
                         <option value="1">Fecha</option>
@@ -43,17 +43,17 @@ const Referencias = () => {
                     </div>
                   </div>
                   <div className="row d-flex justify-content-center my-4">
-                    <div className="col-8">
+                    <div className="col-sm-12 col-md-12 col-lg-10 col-xl-9 col-xxl-8">
                       <div className={styleRef.refCard}>
                         <div className="row">
-                          <div className="col-3 text-center">
+                          <div className="col-sm-12 col-md-3 col-lg-3 text-center">
                             <div className={styleRef.paqueteBG}>
                               <div className={styleRef.paqueteNombre}>
                                 Intermedio
                               </div>
                             </div>
                           </div>
-                          <div className="col-9 p-0">
+                          <div className="col-sm-12 col-md-9 col-lg-9 p-0">
                             <div className={styleRef.refCardContenido}>
                               <div className="row">
                                 <div className="col-10 mb-3">
@@ -72,7 +72,7 @@ const Referencias = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="col-4 mb-3">
+                                <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
                                   <div className={`${styleRef.labelsCard}`}>
                                     Generada
                                     <div className={`${styleRef.contentCard}`}>
@@ -90,7 +90,7 @@ const Referencias = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="col-4 mb-3">
+                                <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
                                   <div className={`${styleRef.labelsCard}`}>
                                     Precio de Paquete
                                     <div className={`${styleRef.contentCard}`}>
@@ -100,7 +100,7 @@ const Referencias = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="col-4 mb-3">
+                                <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
                                   <div className={`${styleRef.labelsCard}`}>
                                     Usuarios adquiridos
                                     <div className={`${styleRef.contentCard}`}>
@@ -110,7 +110,7 @@ const Referencias = () => {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="col-4 mb-3">
+                                <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
                                   <div className={`${styleRef.labelsCard}`}>
                                     Importe
                                     <div className={`${styleRef.contentCard}`}>
@@ -138,8 +138,8 @@ const Referencias = () => {
           <section>
             <div className="container">
               <div className="row">
-                <div className="col-12 p-0">
-                  <div className={styleRef.tablaRef}>
+                <div className="col-12 p-2">
+                  <div className={`${styleRef.tablaRef} table-responsive`}>
                     <div className={styleRef.headerRef}>
                       Ultimas referencias generadas
                     </div>
@@ -419,8 +419,8 @@ const Referencias = () => {
               </div>
             </div>
           </section>
+          <br /><br />
         </section>
-
       </DashboardLayout>
     </>
   );
