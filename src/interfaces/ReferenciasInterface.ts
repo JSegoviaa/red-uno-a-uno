@@ -43,4 +43,5 @@ interface Usuario {
   apellido: string;
   correo: string;
   img: string;
+  role: string;
 }

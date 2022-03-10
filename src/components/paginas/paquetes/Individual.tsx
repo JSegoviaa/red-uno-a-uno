@@ -90,6 +90,8 @@ const Individual = () => {
 
     const fechaPago = moment().format();
     const fechaVencimiento = moment(fechaPago).add(1, "y").format();
+    const fechaVencimientoSem = moment(fechaPago).add(6, "M").format();
+    const fechaVencimientoTri = moment(fechaPago).add(3, "M").format();
 
     if (!error) {
       const pago = paymentMethod;
@@ -99,7 +101,12 @@ const Individual = () => {
         precio: Number(precioSeleccionado),
         importe: Number(precioSeleccionado),
         fechaPago,
-        fechaVencimiento,
+        fechaVencimiento:
+          Number(precioSeleccionado) === 1250
+            ? fechaVencimientoTri
+            : Number(precioSeleccionado) === 2799
+            ? fechaVencimientoSem
+            : fechaVencimiento,
         metodoPago: pago?.type,
         vigencia: true,
         idPago: pago?.id,

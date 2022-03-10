@@ -2,6 +2,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { Form, Pagination } from "react-bootstrap";
 import { toast } from "react-toastify";
+import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 import DashboardLayout from "components/layout/Dashboard";
 import SEO from "components/seo/SEO";
@@ -20,6 +21,7 @@ import {
 import { Pedido } from "interfaces/PedidosInterface";
 import { AuthContext } from "context/auth/AuthContext";
 import { NuevoPedido } from "interfaces/ContactInterface";
+import { AdminRoute } from "hooks/useAdminRoute";
 
 const Referencias = () => {
   const router = useRouter();
@@ -79,9 +81,15 @@ const Referencias = () => {
     pid: string,
     precio: number,
     paquete: string,
-    usuarios: number
+    usuarios: number,
+    role: string
   ) => {
     const pagoId = uuidv4();
+
+    const fechaPago = moment().format();
+    const fechaVencimiento = moment(fechaPago).add(1, "y").format();
+    const fechaVencimientoSem = moment(fechaPago).add(6, "M").format();
+    const fechaVencimientoTri = moment(fechaPago).add(3, "M").format();
 
     const correoPedido: NuevoPedido = {
       apellido: apellido,
@@ -101,8 +109,13 @@ const Referencias = () => {
         paquete === "Individual"
           ? Number(precio)
           : Number(precio) * Number(usuarios),
-      fechaPago: "asda",
-      fechaVencimiento: "asds",
+      fechaPago,
+      fechaVencimiento:
+        Number(precio) === 1250
+          ? fechaVencimientoTri
+          : Number(precio) === 1999
+          ? fechaVencimientoSem
+          : fechaVencimiento,
       metodoPago: "Transferencia",
       vigencia: true,
       idPago: pagoId,
@@ -110,7 +123,6 @@ const Referencias = () => {
     };
 
     const resIndi = await anadirPaqueteInv("pedidos/ref", body);
-
     if (resIndi.ok) {
       const res = await aprobarRef(`referencias/${refId}`);
       if (res.ok) {
@@ -127,18 +139,21 @@ const Referencias = () => {
       }
       toast.success(resIndi.msg);
 
-      await actualizarRol(
-        {
-          role: paquete,
-          paqueteAdquirido: pid,
-          usuarios: usuarios,
-        },
-        uid
-      );
+      role !== "Administrador"
+        ? await actualizarRol(
+            {
+              role: paquete,
+              paqueteAdquirido: pid,
+              usuarios: usuarios,
+            },
+            uid
+          )
+        : null;
 
       await nuevoPedido("correos/nuevo-pedido", correoPedido);
     }
   };
+
   return (
     <>
       <SEO titulo="Referencias" url={router.asPath} />
@@ -293,7 +308,8 @@ const Referencias = () => {
                                             referencia.paquete._id,
                                             referencia.precio,
                                             referencia.paquete.nombre,
-                                            referencia.totalUsuarios
+                                            referencia.totalUsuarios,
+                                            referencia.usuario.role
                                           )
                                         }
                                         className={`${styleRef.btnAp}`}
@@ -436,4 +452,4 @@ const Referencias = () => {
   );
 };
 
-export default Referencias;
+export default AdminRoute(Referencias);
