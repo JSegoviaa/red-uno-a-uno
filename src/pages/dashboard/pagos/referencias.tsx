@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { Form, Pagination } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -12,11 +12,18 @@ import styles from "components/paginas/dashboard/Dashboard.module.css";
 import styleRef from "components/paginas/dashboard/Referencias.module.css";
 import { formatPrice } from "helpers/formatPrice";
 import { horaMes } from "helpers/horaMes";
-import { aprobarRef, anadirPaqueteInv } from "../../../helpers/fetch";
+import {
+  aprobarRef,
+  anadirPaqueteInv,
+  nuevoPedido,
+} from "../../../helpers/fetch";
 import { Pedido } from "interfaces/PedidosInterface";
+import { AuthContext } from "context/auth/AuthContext";
+import { NuevoPedido } from "interfaces/ContactInterface";
 
 const Referencias = () => {
   const router = useRouter();
+  const { actualizarRol } = useContext(AuthContext);
   const refTop = useRef<HTMLElement>(null);
   const [seleccionado, setSeleccionado] = useState("");
   const [desde, setDesde] = useState(0);
@@ -66,11 +73,26 @@ const Referencias = () => {
   const confirmarRef = async (
     refId: string,
     uid: string,
+    nombre: string,
+    apellido: string,
+    correo: string,
     pid: string,
     precio: number,
     paquete: string,
     usuarios: number
   ) => {
+    const pagoId = uuidv4();
+
+    const correoPedido: NuevoPedido = {
+      apellido: apellido,
+      nombre: nombre,
+      correo: correo,
+      idCompra: pagoId,
+      nombrePaquete: paquete,
+      precio: Number(precio),
+      importe: Number(precio) * Number(usuarios),
+    };
+
     const body: Pedido = {
       usuario: uid,
       paquete: pid,
@@ -83,7 +105,7 @@ const Referencias = () => {
       fechaVencimiento: "asds",
       metodoPago: "Transferencia",
       vigencia: true,
-      idPago: uuidv4(),
+      idPago: pagoId,
       totalUsuarios: paquete === "Individual" ? 1 : usuarios,
     };
 
@@ -105,14 +127,18 @@ const Referencias = () => {
       }
       toast.success(resIndi.msg);
 
-      // await actualizarRol({
-      //   role: paquete,
-      //   paqueteAdquirido: pid,
-      //   usuarios: usuarios,
-      // });
+      await actualizarRol(
+        {
+          role: paquete,
+          paqueteAdquirido: pid,
+          usuarios: usuarios,
+        },
+        uid
+      );
+
+      await nuevoPedido("correos/nuevo-pedido", correoPedido);
     }
   };
-
   return (
     <>
       <SEO titulo="Referencias" url={router.asPath} />
@@ -261,6 +287,9 @@ const Referencias = () => {
                                           confirmarRef(
                                             referencia._id,
                                             referencia.usuario._id,
+                                            referencia.usuario.nombre,
+                                            referencia.usuario.apellido,
+                                            referencia.usuario.correo,
                                             referencia.paquete._id,
                                             referencia.precio,
                                             referencia.paquete.nombre,

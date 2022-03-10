@@ -128,10 +128,13 @@ const Individual = () => {
       try {
         const resp = await anadirPaqueteInv("pedidos", body);
         auth.role !== "Administrador"
-          ? await actualizarRol({
-              role: paquete?.nombre,
-              paqueteAdquirido: paquete?._id,
-            })
+          ? await actualizarRol(
+              {
+                role: paquete?.nombre,
+                paqueteAdquirido: paquete?._id,
+              },
+              auth.uid
+            )
           : null;
 
         await nuevoPedido("correos/nuevo-pedido", correoPedido);

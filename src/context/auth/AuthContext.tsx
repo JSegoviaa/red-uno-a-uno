@@ -52,7 +52,10 @@ interface ContextProps {
   cerrarLogin: () => void;
   abrirRegistro: () => void;
   cerrarRegistro: () => void;
-  actualizarRol: (data: any) => Promise<RespActualizar>;
+  actualizarRol: (
+    data: any,
+    uid: string | undefined | null
+  ) => Promise<RespActualizar>;
 }
 
 export const AuthContext = createContext({} as ContextProps);
@@ -396,8 +399,8 @@ export const AuthProvider: FC = ({ children }) => {
     return resp;
   };
 
-  const actualizarRol = async (data: any) => {
-    const resp = await actualizarRolUsuario(`usuarios/rol/${auth.uid}`, data);
+  const actualizarRol = async (data: any, uid: string | undefined | null) => {
+    const resp = await actualizarRolUsuario(`usuarios/rol/${uid}`, data);
     const { usuario } = resp;
     if (resp.ok) {
       setAuth({
