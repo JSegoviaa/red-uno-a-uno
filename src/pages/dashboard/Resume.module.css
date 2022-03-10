@@ -1,0 +1,35 @@
+.Rcard {
+  background-color: white;
+  border-radius: 15px;
+  padding: 15px;
+  border-left: 20px solid orange;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+}
+
+.labelC {
+  font-family: "Open Sans";
+  font-size: 15px;
+  color: grey;
+  font-weight: 500;
+}
+
+.ingreso {
+  font-family: "Open Sans";
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 35px;
+  color: rgb(37, 155, 1);
+}
+.ingreso2 {
+  font-family: "Open Sans";
+  font-size: 23px;
+  line-height: 28px;
+  color: rgb(71, 71, 71);
+}
+.ingreso3 {
+  font-family: "Open Sans";
+  font-size: 18px;
+  color: rgb(71, 71, 71);
+}

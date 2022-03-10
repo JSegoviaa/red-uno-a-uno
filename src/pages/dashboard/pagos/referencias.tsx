@@ -114,8 +114,8 @@ const Referencias = () => {
         Number(precio) === 1250
           ? fechaVencimientoTri
           : Number(precio) === 1999
-          ? fechaVencimientoSem
-          : fechaVencimiento,
+            ? fechaVencimientoSem
+            : fechaVencimiento,
       metodoPago: "Transferencia",
       vigencia: true,
       idPago: pagoId,
@@ -141,13 +141,13 @@ const Referencias = () => {
 
       role !== "Administrador"
         ? await actualizarRol(
-            {
-              role: paquete,
-              paqueteAdquirido: pid,
-              usuarios: usuarios,
-            },
-            uid
-          )
+          {
+            role: paquete,
+            paqueteAdquirido: pid,
+            usuarios: usuarios,
+          },
+          uid
+        )
         : null;
 
       await nuevoPedido("correos/nuevo-pedido", correoPedido);
@@ -170,18 +170,17 @@ const Referencias = () => {
                           <div className="row">
                             <div className="col-sm-12 col-md-3 col-lg-3 text-center">
                               <div
-                                className={`${styleRef.paqueteBG} ${
-                                  referencia?.paquete.nombre === "Individual"
+                                className={`${styleRef.paqueteBG} ${referencia?.paquete.nombre === "Individual"
                                     ? styleRef.PaqIndivi
                                     : referencia?.paquete.nombre === "Básico"
-                                    ? styleRef.PaqBasic
-                                    : referencia?.paquete.nombre ===
-                                      "Intermedio"
-                                    ? styleRef.PaqInter
-                                    : referencia?.paquete.nombre === "Avanzado"
-                                    ? styleRef.PaqAvanza
-                                    : ""
-                                }`}
+                                      ? styleRef.PaqBasic
+                                      : referencia?.paquete.nombre ===
+                                        "Intermedio"
+                                        ? styleRef.PaqInter
+                                        : referencia?.paquete.nombre === "Avanzado"
+                                          ? styleRef.PaqAvanza
+                                          : ""
+                                  }`}
                               >
                                 <div className={styleRef.paqueteNombre}>
                                   {referencia?.paquete.nombre}
@@ -270,7 +269,7 @@ const Referencias = () => {
                                           }}
                                         ></i>{" "}
                                         {referencia &&
-                                        referencia?.totalUsuarios >= 3
+                                          referencia?.totalUsuarios >= 3
                                           ? referencia?.totalUsuarios
                                           : "N/A"}
                                       </div>
