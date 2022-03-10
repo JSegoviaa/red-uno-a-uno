@@ -14,6 +14,7 @@ import styles from "./paquetes.module.css";
 import { Pedido } from "../../../interfaces/PedidosInterface";
 import {
   anadirPaqueteInv,
+  generarRefMul,
   nuevoPedido,
   nuevoPedidoAdmin,
 } from "../../../helpers/fetch";
@@ -64,7 +65,6 @@ const PaqueteMultiple = (props: Props) => {
     setMostrarTransferencia(true);
   };
 
-  const token = localStorage.getItem("token") || "";
   const generarReferencia = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -82,15 +82,14 @@ const PaqueteMultiple = (props: Props) => {
       estado: false,
     };
 
-    await fetch(`${production}/referencias`, {
-      method: "POST",
-      headers: { "Content-type": "application/json", "x-token": token },
-      body: JSON.stringify(body),
-    });
+    const res = await generarRefMul("referencias", body);
 
-    toast.success("Se ha generado referencia");
-
-    router.push("/perfil/referencias-de-pago");
+    if (res.ok) {
+      toast.success(res.msg);
+      router.push("/perfil/referencias-de-pago");
+    } else {
+      toast.success("Error al generear la referencia. Inténtelo de nuevo");
+    }
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {

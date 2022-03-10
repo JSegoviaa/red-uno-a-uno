@@ -13,6 +13,7 @@ import Modaltitle from "../../ui/modaltitle/Modaltitle";
 import styles from "./paquetes.module.css";
 import {
   anadirPaqueteInv,
+  generarRefInd,
   nuevoPedido,
   nuevoPedidoAdmin,
 } from "../../../helpers/fetch";
@@ -52,29 +53,28 @@ const Individual = () => {
     setMostrarTransferencia(true);
   };
 
-  const token = localStorage.getItem("token") || "";
   const generarReferencia = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await fetch(`${production}/referencias`, {
-      method: "POST",
-      headers: { "Content-type": "application/json", "x-token": token },
-      body: JSON.stringify({
-        usuario: auth.uid,
-        paquete: paquete?._id,
-        referencia: Math.floor(
-          1_000_000_000_000 + Math.random() * 9_000_000_000_000
-        ),
-        precio: Number(precioSeleccionado),
-        importe: Number(precioSeleccionado),
-        totalUsuarios: 1,
-        estado: false,
-      }),
-    });
+    const body = {
+      usuario: auth.uid,
+      paquete: paquete?._id,
+      referencia: Math.floor(
+        1_000_000_000_000 + Math.random() * 9_000_000_000_000
+      ),
+      precio: Number(precioSeleccionado),
+      importe: Number(precioSeleccionado),
+      totalUsuarios: 1,
+      estado: false,
+    };
 
-    toast.success("Se ha generado referencia");
-
-    router.push("/perfil/referencias-de-pago");
+    const res = await generarRefInd("referencias", body);
+    if (res.ok) {
+      toast.success(res.msg);
+      router.push("/perfil/referencias-de-pago");
+    } else {
+      toast.success("Error al generear la referencia. Inténtelo de nuevo");
+    }
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {

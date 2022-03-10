@@ -26,6 +26,7 @@ import {
 } from "../interfaces/MisUsuariosInterface";
 import { Pedido, PedidoIndividualResp } from "../interfaces/PedidosInterface";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
+import { NuevaReferencia } from "../interfaces/ReferenciasInterface";
 
 const baseURL = production;
 const devURL = development;
@@ -440,4 +441,36 @@ export const agregarUsuario = async (
   });
 
   return await resp.json();
+};
+
+export const generarRefInd = async (
+  endpoint: string,
+  data: any
+): Promise<NuevaReferencia> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await res.json();
+};
+
+export const generarRefMul = async (
+  endpoint: string,
+  data: any
+): Promise<NuevaReferencia> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify(data),
+  });
+
+  return await res.json();
 };

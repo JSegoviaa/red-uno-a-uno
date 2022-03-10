@@ -13,6 +13,12 @@ export interface ReferenciaNumero {
   referencia: Referencia;
 }
 
+export interface NuevaReferencia {
+  ok: boolean;
+  msg: string;
+  nuevaRef: Referencia;
+}
+
 export interface Referencia {
   _id: string;
   usuario: Usuario;
