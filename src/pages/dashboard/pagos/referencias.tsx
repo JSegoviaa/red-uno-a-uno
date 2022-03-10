@@ -1,6 +1,8 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { Form, Pagination } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 import DashboardLayout from "components/layout/Dashboard";
 import SEO from "components/seo/SEO";
 import { useForm } from "hooks/useForm";
@@ -10,6 +12,8 @@ import styles from "components/paginas/dashboard/Dashboard.module.css";
 import styleRef from "components/paginas/dashboard/Referencias.module.css";
 import { formatPrice } from "helpers/formatPrice";
 import { horaMes } from "helpers/horaMes";
+import { aprobarRef, anadirPaqueteInv } from "../../../helpers/fetch";
+import { Pedido } from "interfaces/PedidosInterface";
 
 const Referencias = () => {
   const router = useRouter();
@@ -20,8 +24,13 @@ const Referencias = () => {
     numero: "",
   });
   const { numero } = formulario;
-  const { referencia } = useReferenciaNumero(seleccionado);
-  const { referencias, total, cargando: loading } = useReferencias(desde);
+  const { referencia, setReferencia } = useReferenciaNumero(seleccionado);
+  const {
+    referencias,
+    total,
+    cargando: loading,
+    setReferencias,
+  } = useReferencias(desde);
 
   const seleccionarReferencia = (ref: string) => {
     setSeleccionado(ref);
@@ -51,6 +60,56 @@ const Referencias = () => {
       setDesde(desde + 15);
     } else {
       return;
+    }
+  };
+
+  const confirmarRef = async (
+    refId: string,
+    uid: string,
+    pid: string,
+    precio: number,
+    paquete: string,
+    usuarios: number
+  ) => {
+    const body: Pedido = {
+      usuario: uid,
+      paquete: pid,
+      precio: Number(precio),
+      importe:
+        paquete === "Individual"
+          ? Number(precio)
+          : Number(precio) * Number(usuarios),
+      fechaPago: "asda",
+      fechaVencimiento: "asds",
+      metodoPago: "Transferencia",
+      vigencia: true,
+      idPago: uuidv4(),
+      totalUsuarios: paquete === "Individual" ? 1 : usuarios,
+    };
+
+    const resIndi = await anadirPaqueteInv("pedidos/ref", body);
+
+    if (resIndi.ok) {
+      const res = await aprobarRef(`referencias/${refId}`);
+      if (res.ok) {
+        toast.success(res.msg);
+        const refAprobada = referencias?.map((ref) => {
+          if (ref._id === refId) {
+            return { ...ref, estado: true };
+          }
+
+          return ref;
+        });
+        setReferencia({ ...referencia, estado: true });
+        setReferencias(refAprobada);
+      }
+      toast.success(resIndi.msg);
+
+      // await actualizarRol({
+      //   role: paquete,
+      //   paqueteAdquirido: pid,
+      //   usuarios: usuarios,
+      // });
     }
   };
 
@@ -189,9 +248,30 @@ const Referencias = () => {
                                     </div>
                                   </div>
                                   <div className="col-12 mt-3 text-end pe-4">
-                                    <button className={`${styleRef.btnAp}`}>
-                                      Confirmar
-                                    </button>
+                                    {referencia.estado ? (
+                                      <button
+                                        disabled
+                                        className={`${styleRef.btnAp}`}
+                                      >
+                                        Aprobado
+                                      </button>
+                                    ) : (
+                                      <button
+                                        onClick={() =>
+                                          confirmarRef(
+                                            referencia._id,
+                                            referencia.usuario._id,
+                                            referencia.paquete._id,
+                                            referencia.precio,
+                                            referencia.paquete.nombre,
+                                            referencia.totalUsuarios
+                                          )
+                                        }
+                                        className={`${styleRef.btnAp}`}
+                                      >
+                                        Confirmar
+                                      </button>
+                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -200,7 +280,9 @@ const Referencias = () => {
                         </div>
                       </div>
                     </div>
-                  ) : null}
+                  ) : seleccionado === "" ? null : (
+                    <Loading />
+                  )}
                   <div className="row d-flex justify-content-between mb-3">
                     <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-3 mb-md-0 mb-lg-0 mb-3">
                       <Form onSubmit={onSubmit}>
@@ -210,16 +292,17 @@ const Referencias = () => {
                           value={numero}
                           name="numero"
                           onChange={handleChange}
+                          autoComplete="off"
                         />
                       </Form>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-3 mb-md-0 mb-lg-0 mb-3">
+                    {/* <div className="col-sm-12 col-md-6 col-lg-4 mb-sm-3 mb-md-0 mb-lg-0 mb-3">
                       <Form.Select aria-label="Default select example">
                         <option>Ordenar por:</option>
                         <option value="1">Fecha</option>
                         <option value="2">Paquetes</option>
                       </Form.Select>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

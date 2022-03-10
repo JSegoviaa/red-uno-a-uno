@@ -26,7 +26,10 @@ import {
 } from "../interfaces/MisUsuariosInterface";
 import { Pedido, PedidoIndividualResp } from "../interfaces/PedidosInterface";
 import { ActualizarUsuario, RespActualizar } from "../interfaces/UserInterface";
-import { NuevaReferencia } from "../interfaces/ReferenciasInterface";
+import {
+  NuevaReferencia,
+  ReferenciaNumero,
+} from "../interfaces/ReferenciasInterface";
 
 const baseURL = production;
 const devURL = development;
@@ -470,6 +473,21 @@ export const generarRefMul = async (
     method: "POST",
     headers: { "Content-type": "application/json", "x-token": token },
     body: JSON.stringify(data),
+  });
+
+  return await res.json();
+};
+
+export const aprobarRef = async (
+  endpoint: string
+): Promise<ReferenciaNumero> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: { "Content-type": "application/json", "x-token": token },
+    body: JSON.stringify({ estado: true }),
   });
 
   return await res.json();

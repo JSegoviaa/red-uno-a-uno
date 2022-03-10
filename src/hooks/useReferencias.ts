@@ -31,7 +31,18 @@ export const useReferenciasUsuario = (
 };
 
 export const useReferenciaNumero = (numero: string) => {
-  const [referencia, setReferencia] = useState<Referencia>();
+  const [referencia, setReferencia] = useState<Referencia>({
+    importe: 0,
+    _id: "",
+    createdAt: "",
+    estado: false,
+    paquete: { _id: "", nombre: "" },
+    precio: 0,
+    referencia: "",
+    totalUsuarios: 0,
+    updatedAt: "",
+    usuario: { _id: "", apellido: "", correo: "", img: "", nombre: "" },
+  });
   const [cargando, setCargando] = useState(true);
 
   const obtenerReferenciaPorNumero = async () => {
@@ -40,7 +51,6 @@ export const useReferenciaNumero = (numero: string) => {
     );
     const data: ReferenciaNumero = await res.json();
 
-    console.log(data);
     setReferencia(data.referencia);
     setCargando(false);
   };
@@ -49,7 +59,7 @@ export const useReferenciaNumero = (numero: string) => {
     obtenerReferenciaPorNumero();
   }, [numero]);
 
-  return { referencia, cargando };
+  return { referencia, cargando, setReferencia };
 };
 
 export const useReferencias = (desde: number) => {
@@ -61,7 +71,6 @@ export const useReferencias = (desde: number) => {
     const res = await fetch(`${production}/referencias?desde=${desde}`);
     const data: ReferenciasUsuarioResp = await res.json();
 
-    console.log(data);
     setReferencias(data.referencias);
     setTotal(data.total);
     setCargando(false);
@@ -71,5 +80,5 @@ export const useReferencias = (desde: number) => {
     obtenerReferencias();
   }, [desde]);
 
-  return { referencias, cargando, total };
+  return { referencias, cargando, total, setReferencias };
 };
