@@ -411,6 +411,11 @@ const Referencias = () => {
                         </>
                       )}
                     </table>
+                    {referencias.length === 0 ? (
+                      <h2 className="text-center py-5">
+                        Aún no hay referencias
+                      </h2>
+                    ) : null}
                   </div>
                 </div>
               </div>
