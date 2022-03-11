@@ -203,7 +203,7 @@ const Referencias = () => {
                                       />
                                     </button>
                                   </div>
-                                  <div className="col-sm-6 col-md-4 col-lg-6 mb-3">
+                                  <div className="col-sm-6 col-md-6 col-lg-8 mb-3">
                                     <div className={`${styleRef.labelsCard}`}>
                                       Referencia
                                       <div
@@ -213,7 +213,7 @@ const Referencias = () => {
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="col-sm-6 col-md-4 col-lg-6 mb-3">
+                                  <div className="col-sm-6 col-md-6 col-lg-4 mb-3">
                                     <div className={`${styleRef.labelsCard}`}>
                                       Generada
                                       <div
@@ -254,8 +254,7 @@ const Referencias = () => {
                                             fontSize: "20px",
                                           }}
                                         ></i>{" "}
-                                        {/* {referencia?.usuario.nombre} */}
-                                        9984784555
+                                        {referencia?.usuario.telefonoOficina}
                                       </div>
                                     </div>
                                   </div>
@@ -288,8 +287,7 @@ const Referencias = () => {
                                             fontSize: "20px",
                                           }}
                                         ></i>{" "}
-                                        {/* {referencia?.usuario.nombre} */}
-                                        9984784555
+                                        {referencia?.usuario.telefonoPersonal}
                                       </div>
                                     </div>
                                   </div>
