@@ -115,8 +115,8 @@ const Referencias = () => {
         Number(precio) === 1250
           ? fechaVencimientoTri
           : Number(precio) === 1999
-          ? fechaVencimientoSem
-          : fechaVencimiento,
+            ? fechaVencimientoSem
+            : fechaVencimiento,
       metodoPago: "Transferencia",
       vigencia: true,
       idPago: pagoId,
@@ -142,10 +142,10 @@ const Referencias = () => {
 
       role !== "Administrador"
         ? await actualizarRolUsuario(`usuarios/rol/${uid}`, {
-            role: paquete,
-            paqueteAdquirido: pid,
-            usuarios: usuarios,
-          })
+          role: paquete,
+          paqueteAdquirido: pid,
+          usuarios: usuarios,
+        })
         : null;
 
       await nuevoPedido("correos/nuevo-pedido", correoPedido);
@@ -168,18 +168,17 @@ const Referencias = () => {
                           <div className="row">
                             <div className="col-sm-12 col-md-3 col-lg-3 text-center">
                               <div
-                                className={`${styleRef.paqueteBG} ${
-                                  referencia?.paquete.nombre === "Individual"
-                                    ? styleRef.PaqIndivi
-                                    : referencia?.paquete.nombre === "Básico"
+                                className={`${styleRef.paqueteBG} ${referencia?.paquete.nombre === "Individual"
+                                  ? styleRef.PaqIndivi
+                                  : referencia?.paquete.nombre === "Básico"
                                     ? styleRef.PaqBasic
                                     : referencia?.paquete.nombre ===
                                       "Intermedio"
-                                    ? styleRef.PaqInter
-                                    : referencia?.paquete.nombre === "Avanzado"
-                                    ? styleRef.PaqAvanza
-                                    : ""
-                                }`}
+                                      ? styleRef.PaqInter
+                                      : referencia?.paquete.nombre === "Avanzado"
+                                        ? styleRef.PaqAvanza
+                                        : ""
+                                  }`}
                               >
                                 <div className={styleRef.paqueteNombre}>
                                   {referencia?.paquete.nombre}
@@ -204,7 +203,7 @@ const Referencias = () => {
                                       />
                                     </button>
                                   </div>
-                                  <div className="col-8 mb-3">
+                                  <div className="col-sm-6 col-md-4 col-lg-6 mb-3">
                                     <div className={`${styleRef.labelsCard}`}>
                                       Referencia
                                       <div
@@ -214,7 +213,7 @@ const Referencias = () => {
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="col-sm-6 col-md-4 col-lg-4 mb-3">
+                                  <div className="col-sm-6 col-md-4 col-lg-6 mb-3">
                                     <div className={`${styleRef.labelsCard}`}>
                                       Generada
                                       <div
@@ -224,7 +223,7 @@ const Referencias = () => {
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="col-12 mb-3">
+                                  <div className="col-8 mb-3">
                                     <div className={`${styleRef.labelsCard}`}>
                                       Usuario
                                       <div
@@ -239,6 +238,58 @@ const Referencias = () => {
                                         ></i>{" "}
                                         {referencia?.usuario.nombre}{" "}
                                         {referencia?.usuario.apellido}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-sm-12 col-md-6 col-lg-4 mb-3">
+                                    <div className={`${styleRef.labelsCard}`}>
+                                      Oficina
+                                      <div
+                                        className={`${styleRef.contentCard}`}
+                                      >
+                                        <i
+                                          className="bi bi-telephone"
+                                          style={{
+                                            color: "#7149bc",
+                                            fontSize: "20px",
+                                          }}
+                                        ></i>{" "}
+                                        {/* {referencia?.usuario.nombre} */}
+                                        9984784555
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-sm-12 col-md-6 col-lg-8 mb-3">
+                                    <div className={`${styleRef.labelsCard}`}>
+                                      E-mail
+                                      <div
+                                        className={`${styleRef.contentCard}`}
+                                      >
+                                        <i className="bi bi-envelope"
+                                          style={{
+                                            color: "#7149bc",
+                                            fontSize: "20px",
+                                          }}
+                                        ></i>{" "}
+                                        {referencia?.usuario.correo}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="col-sm-12 col-md-6 col-lg-4 mb-3">
+                                    <div className={`${styleRef.labelsCard}`}>
+                                      Teléfono
+                                      <div
+                                        className={`${styleRef.contentCard}`}
+                                      >
+                                        <i
+                                          className="bi bi-phone"
+                                          style={{
+                                            color: "#7149bc",
+                                            fontSize: "20px",
+                                          }}
+                                        ></i>{" "}
+                                        {/* {referencia?.usuario.nombre} */}
+                                        9984784555
                                       </div>
                                     </div>
                                   </div>
@@ -268,7 +319,7 @@ const Referencias = () => {
                                           }}
                                         ></i>{" "}
                                         {referencia &&
-                                        referencia?.totalUsuarios >= 3
+                                          referencia?.totalUsuarios >= 3
                                           ? referencia?.totalUsuarios
                                           : "N/A"}
                                       </div>
@@ -286,7 +337,10 @@ const Referencias = () => {
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="col-12 mt-3 text-end pe-4">
+                                  <div className="col-2 mt-3 text-start">
+                                    <button className={styleRef.btnTicket}><i className="bi bi-card-image"></i></button>
+                                  </div>
+                                  <div className="col-10 mt-3 text-end pe-4">
                                     {referencia.estado ? (
                                       <button
                                         disabled

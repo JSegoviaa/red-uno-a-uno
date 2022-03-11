@@ -102,6 +102,24 @@
   transition: 250ms;
 }
 
+.btnTicket{
+  border: 2px solid #7149bc;
+  background-color: white;
+  border-radius: 40px;
+  padding: 5px 25px;
+  font-size: 18px;
+  font-family: "Open Sans";
+  font-weight: 600;
+  color: #7149bc;
+  transition: 250ms;
+}
+.btnTicket:hover {
+  background-color: #7149bc;
+  color: white;
+  font-weight: 600;
+  transition: 250ms;
+}
+
 .tablaRef {
   border-radius: 15px;
   background-color: white;

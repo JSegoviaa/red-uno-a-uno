@@ -19,7 +19,7 @@
 }
 .Rcard:hover .cardName {
   transform: translate(335px, -28px);
-  transform: translate(-98px, 70px);
+  transform: translate(-98px, 60px);
   transition: 200ms;
 }
 .Rcard:hover .backText {
@@ -41,6 +41,13 @@
   line-height: 35px;
   color: rgb(37, 155, 1);
 }
+.ingresoNegativo {
+  font-family: "Open Sans";
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 35px;
+  color: rgb(255, 0, 0);
+}
 .ingreso2 {
   font-family: "Open Sans";
   font-size: 23px;
@@ -49,8 +56,9 @@
 }
 .ingreso3 {
   font-family: "Open Sans";
-  font-size: 18px;
-  color: rgb(71, 71, 71);
+  font-size: 17px;
+  color: rgb(8, 108, 189);
+  font-weight: 500;
 }
 
 .backText {
@@ -63,6 +71,6 @@
 }
 .cardName {
   position: absolute;
-  transform: translate(-70px, 70px);
+  transform: translate(-70px, 60px);
   transition: 200ms;
 }
