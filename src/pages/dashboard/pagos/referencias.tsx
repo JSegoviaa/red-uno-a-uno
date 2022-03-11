@@ -22,6 +22,7 @@ import { Pedido } from "interfaces/PedidosInterface";
 import { AuthContext } from "context/auth/AuthContext";
 import { NuevoPedido } from "interfaces/ContactInterface";
 import { AdminRoute } from "hooks/useAdminRoute";
+import { actualizarRolUsuario } from "../../../helpers/fetch";
 
 const Referencias = () => {
   const router = useRouter();
@@ -140,14 +141,11 @@ const Referencias = () => {
       toast.success(resIndi.msg);
 
       role !== "Administrador"
-        ? await actualizarRol(
-            {
-              role: paquete,
-              paqueteAdquirido: pid,
-              usuarios: usuarios,
-            },
-            uid
-          )
+        ? await actualizarRolUsuario(`usuarios/rol/${uid}`, {
+            role: paquete,
+            paqueteAdquirido: pid,
+            usuarios: usuarios,
+          })
         : null;
 
       await nuevoPedido("correos/nuevo-pedido", correoPedido);
