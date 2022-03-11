@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Container, Pagination } from "react-bootstrap";
 import { AuthContext } from "context/auth/AuthContext";
 import { useReferenciasUsuario } from "hooks/useReferencias";
@@ -8,6 +8,7 @@ import styles from "./Referencias.module.css";
 
 const ListaReferencias = () => {
   const { auth } = useContext(AuthContext);
+  const refAdjuntar = useRef<HTMLInputElement>(null);
   const [desde, setDesde] = useState(0);
   const { cargando, referencias, total } = useReferenciasUsuario(
     auth.uid,
@@ -29,7 +30,8 @@ const ListaReferencias = () => {
       return;
     }
   };
-  console.log(total);
+
+  const handleAdjuntar = () => refAdjuntar.current?.click();
 
   return (
     <Container>
@@ -54,6 +56,7 @@ const ListaReferencias = () => {
                     <th className="">PPU</th>
                     <th className="text-center">Usuarios</th>
                     <th className="">Total a depositar</th>
+                    <th className="">Comprobante</th>
                     <th className="">Estado</th>
 
                     {referencias?.map((referencia) => (
@@ -80,6 +83,12 @@ const ListaReferencias = () => {
                         <td className={`${styles.content}`}>
                           {formatPrice(referencia.importe)}
                         </td>
+                        <td
+                          onClick={handleAdjuntar}
+                          className={`${styles.content} pointer`}
+                        >
+                          Adjuntar
+                        </td>
                         <td className={`${styles.content}`}>
                           {referencia.estado ? "Aprobado" : "Pendiente"}
                         </td>
@@ -88,6 +97,9 @@ const ListaReferencias = () => {
                   </tbody>
                 </table>
               </div>
+              <form style={{ display: "none" }}>
+                <input ref={refAdjuntar} type="file" />
+              </form>
             </div>
           )}
           {total > 15 ? (
