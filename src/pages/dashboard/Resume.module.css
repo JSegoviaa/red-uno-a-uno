@@ -2,10 +2,29 @@
   background-color: white;
   border-radius: 15px;
   padding: 15px;
-  border-left: 20px solid orange;
+  border-left: 15px solid #7149bc;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
   -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
   -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  transition: 200ms;
+}
+.RcardTitle{
+  font-family: "Open Sans";
+  font-weight: 500;
+  color: grey;
+}
+.Rcard:hover {
+  border-left: 45px solid #7149bc;
+  transition: 200ms;
+}
+.Rcard:hover .cardName {
+  transform: translate(335px, -28px);
+  transform: translate(-98px, 70px);
+  transition: 200ms;
+}
+.Rcard:hover .backText {
+  color: white;
+  transition: 200ms;
 }
 
 .labelC {
@@ -32,4 +51,18 @@
   font-family: "Open Sans";
   font-size: 18px;
   color: rgb(71, 71, 71);
+}
+
+.backText {
+  font-family: "Open Sans";
+  font-size: 28px;
+  transform: rotate(270deg);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0);
+  transition: 200ms;
+}
+.cardName {
+  position: absolute;
+  transform: translate(-70px, 70px);
+  transition: 200ms;
 }
