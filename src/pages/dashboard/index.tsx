@@ -139,72 +139,106 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-              {/* users */}
+              {/* Propiedades */}
               <div className="col-sm-12 col-md-12 col-lg-6 col-xl-8 mb-3">
                 <div className={`${styles.Rcard} pointer`}>
                   <div className={`${styles.RcardTitle} text-end`}>
-                    <i className="bi bi-wallet2"></i> Usuarios
+                    <i className="bi bi-house"></i> Propiedades
                   </div>
                   <div className={styles.cardName}>
                     <div className={styles.backText}>
-                      <i className="bi bi-wallet2"></i> Wallet
+                      <i className="bi bi-house"></i> Propie
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-12 mb-3">
+                    <div className="col-sm-6 col-md-6 col-lg-4 mb-3">
                       <div className={styles.labelC}>
-                        Ingresos de hoy
+                        Nuevos inmuebles
                       </div>
-                      <div className={styles.ingreso}>
-                        $3,899.00
+                      <div className={styles.ingresoIndividual}>
+                        28
                       </div>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-6 mb-3">
                       <div className={styles.labelC}>
-                        Ingresos de la ultima semana
+                        Nuevos inmuebles en la ultima semana
                       </div>
                       <div className={styles.ingreso2}>
-                        $125,065.00
+                        46
                       </div>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-6 mb-3">
                       <div className={styles.labelC}>
-                        Ingresos de la ultima semana
+                        Nuevos inmuebles en los ultimos 30 dias
                       </div>
                       <div className={styles.ingreso2}>
-                        $125,065.00
+                        121
                       </div>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    
+                    <div className="col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 col-6 mb-3">
                       <div className={styles.labelC}>
-                        Ingresos de la ultima semana
+                        Casas
                       </div>
                       <div className={styles.ingreso2}>
-                        $125,065.00
+                        671
                       </div>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <div className="col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 col-6 mb-3">
                       <div className={styles.labelC}>
-                        Ingresos de la ultima semana
+                        Departamentos
                       </div>
                       <div className={styles.ingreso2}>
-                        $125,065.00
+                        354
                       </div>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <div className="col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 col-6 mb-3">
                       <div className={styles.labelC}>
-                        Ingresos de la ultima semana
+                        Desarrollos
                       </div>
                       <div className={styles.ingreso2}>
-                        $125,065.00
+                        12
                       </div>
                     </div>
-                    <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <div className="col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 col-6 mb-3">
                       <div className={styles.labelC}>
-                        Ingresos del ultimo mes
+                        Locales
                       </div>
                       <div className={styles.ingreso2}>
-                        $5,125,065.00
+                        41
+                      </div>
+                    </div>
+                    <div className="col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 col-6 mb-3">
+                      <div className={styles.labelC}>
+                        Oficinas
+                      </div>
+                      <div className={styles.ingreso2}>
+                        105
+                      </div>
+                    </div>
+                    <div className="col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 col-6 mb-3">
+                      <div className={styles.labelC}>
+                        Bodegas
+                      </div>
+                      <div className={styles.ingreso2}>
+                        10
+                      </div>
+                    </div>
+                    
+                    <div className="col-sm-6 col-md-6 col-lg-4 col-xl-3 col-6 mb-3">
+                      <div className={styles.labelC}>
+                        Total de inmuebles <br /> en renta
+                      </div>
+                      <div className={styles.ingreso2}>
+                        758
+                      </div>
+                    </div>
+                    <div className="col-sm-6 col-md-6 col-lg-4 col-xl-3 col-6 mb-3">
+                      <div className={styles.labelC}>
+                        Total de inmuebles <br /> en venta
+                      </div>
+                      <div className={styles.ingreso2}>
+                        455
                       </div>
                     </div>
                     <hr className="p-0" />
@@ -212,12 +246,12 @@ const Index = () => {
                       <div className="row">
                         <div className="col-sm-12 col-md-6 col-lg-6">
                           <div className={styles.labelC}>
-                            Ingreso estimado del año
+                            Total del propiedades publicadas
                           </div>
                         </div>
-                        <div className="col-sm-12 col-md-6 col-lg-6">
+                        <div className="col-sm-12 col-md-6 col-lg-6 text-end">
                           <div className={styles.ingreso3}>
-                            $15,125,065.00
+                            1,758
                           </div>
                         </div>
                       </div>

@@ -335,10 +335,10 @@ const Referencias = () => {
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="col-2 mt-3 text-start">
-                                    <button className={styleRef.btnTicket}><i className="bi bi-card-image"></i></button>
+                                  <div className="col-sm-12 col-md-12 col-lg-6 mt-3 text-center ">
+                                    <button className={styleRef.btnTicket}><i className="bi bi-card-image"></i> Comprobante</button>
                                   </div>
-                                  <div className="col-10 mt-3 text-end pe-4">
+                                  <div className="col-sm-12 col-md-12 col-lg-6 mt-3 text-center">
                                     {referencia.estado ? (
                                       <button
                                         disabled

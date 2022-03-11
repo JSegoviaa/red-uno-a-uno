@@ -41,12 +41,20 @@
   line-height: 35px;
   color: rgb(37, 155, 1);
 }
+.ingresoIndividual {
+  font-family: "Open Sans";
+  font-size: 58px;
+  font-weight: 600;
+  line-height: 65px;
+  color: rgb(37, 155, 1);
+}
 .ingresoNegativo {
   font-family: "Open Sans";
   font-size: 38px;
   font-weight: 600;
   line-height: 35px;
-  color: rgb(255, 0, 0);
+  /* color: rgb(255, 0, 0); */
+  color: tomato;
 }
 .ingreso2 {
   font-family: "Open Sans";
