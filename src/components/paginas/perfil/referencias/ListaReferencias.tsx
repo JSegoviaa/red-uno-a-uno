@@ -5,15 +5,18 @@ import { useReferenciasUsuario } from "hooks/useReferencias";
 import Loading from "components/ui/loading/Loading";
 import { formatPrice } from "helpers/formatPrice";
 import styles from "./Referencias.module.css";
+import { subirComprobanteFetch } from "../../../../helpers/fetch";
+import { toast } from "react-toastify";
 
 const ListaReferencias = () => {
   const { auth } = useContext(AuthContext);
   const refAdjuntar = useRef<HTMLInputElement>(null);
   const [desde, setDesde] = useState(0);
-  const { cargando, referencias, total } = useReferenciasUsuario(
-    auth.uid,
-    desde
-  );
+  const [subiendo, setSubiendo] = useState(false);
+  const [comprobante, setcomprobante] = useState("");
+  const [seleccionado, setSeleccionado] = useState("");
+  const { cargando, referencias, total, setReferencias } =
+    useReferenciasUsuario(auth.uid, desde);
 
   const handlePrevPage = () => {
     if (desde === 0) {
@@ -31,7 +34,36 @@ const ListaReferencias = () => {
     }
   };
 
-  const handleAdjuntar = () => refAdjuntar.current?.click();
+  const handleAdjuntar = (id: string) => {
+    refAdjuntar.current?.click();
+    setSeleccionado(id);
+  };
+
+  const subirComprobante = async (uid: string, rid: string) => {
+    setSubiendo(true);
+
+    const formData = new FormData();
+    formData.append("comprobante", comprobante);
+
+    const res = await subirComprobanteFetch(
+      `subidas/comprobante/${uid}/${rid}`,
+      formData
+    );
+
+    if (res.ok) {
+      toast.success(res.msg);
+      const refAprobada = referencias?.map((ref) => {
+        if (ref._id === rid) {
+          return { ...ref, comprobante: res.referencia.comprobante };
+        }
+
+        return ref;
+      });
+      setReferencias(refAprobada);
+    }
+
+    setSubiendo(false);
+  };
 
   return (
     <Container>
@@ -83,11 +115,57 @@ const ListaReferencias = () => {
                         <td className={`${styles.content}`}>
                           {formatPrice(referencia.importe)}
                         </td>
-                        <td
-                          onClick={handleAdjuntar}
-                          className={`${styles.content} pointer`}
-                        >
-                          Adjuntar
+                        <td className={`${styles.content} pointer`}>
+                          {referencia.comprobante ? (
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={referencia.comprobante}
+                            >
+                              Comprobante
+                            </a>
+                          ) : (
+                            <>
+                              {seleccionado === referencia._id &&
+                              comprobante !== "" ? (
+                                <button
+                                  onClick={() =>
+                                    subirComprobante(
+                                      referencia.usuario._id,
+                                      referencia._id
+                                    )
+                                  }
+                                >
+                                  Subir
+                                </button>
+                              ) : (
+                                <>
+                                  {" "}
+                                  {referencia.estado ? (
+                                    ""
+                                  ) : (
+                                    <span
+                                      onClick={() =>
+                                        handleAdjuntar(referencia._id)
+                                      }
+                                    >
+                                      Adjuntar
+                                    </span>
+                                  )}
+                                </>
+                              )}
+
+                              <input
+                                style={{ display: "none" }}
+                                ref={refAdjuntar}
+                                type="file"
+                                accept="image/*"
+                                onChange={(e: any) =>
+                                  setcomprobante(e.target.files[0])
+                                }
+                              />
+                            </>
+                          )}
                         </td>
                         <td className={`${styles.content}`}>
                           {referencia.estado ? "Aprobado" : "Pendiente"}
@@ -96,10 +174,13 @@ const ListaReferencias = () => {
                     ))}
                   </tbody>
                 </table>
+
+                {subiendo ? (
+                  <div className="d-flex justify-content-center">
+                    <Loading />
+                  </div>
+                ) : null}
               </div>
-              <form style={{ display: "none" }}>
-                <input ref={refAdjuntar} type="file" />
-              </form>
             </div>
           )}
           {total > 15 ? (

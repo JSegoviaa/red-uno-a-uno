@@ -355,6 +355,22 @@ export const subirFotoPerfil = async (
   return await resp.json();
 };
 
+export const subirComprobanteFetch = async (
+  endpoint: string,
+  data: any
+): Promise<ReferenciaNumero> => {
+  const url = `${baseURL}/${endpoint}`;
+  const token = localStorage.getItem("token") || "";
+
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: { "x-token": token },
+    body: data,
+  });
+
+  return await resp.json();
+};
+
 export const subirFotosInmueble = async (
   endpoint: string,
   data: any

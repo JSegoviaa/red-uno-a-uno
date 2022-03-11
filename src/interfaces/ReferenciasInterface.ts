@@ -30,6 +30,7 @@ export interface Referencia {
   createdAt: string;
   updatedAt: string;
   estado: boolean;
+  comprobante: string;
 }
 
 interface Paquete {

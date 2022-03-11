@@ -27,7 +27,7 @@ export const useReferenciasUsuario = (
     obtenerReferencias();
   }, [desde]);
 
-  return { referencias, cargando, total };
+  return { referencias, cargando, total, setReferencias };
 };
 
 export const useReferenciaNumero = (numero: string) => {
@@ -41,7 +41,17 @@ export const useReferenciaNumero = (numero: string) => {
     referencia: "",
     totalUsuarios: 0,
     updatedAt: "",
-    usuario: { _id: "", apellido: "", correo: "", img: "", nombre: "" },
+    usuario: {
+      _id: "",
+      apellido: "",
+      correo: "",
+      img: "",
+      nombre: "",
+      role: "",
+      telefonoOficina: "",
+      telefonoPersonal: "",
+    },
+    comprobante: "",
   });
   const [cargando, setCargando] = useState(true);
 
