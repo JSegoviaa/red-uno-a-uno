@@ -115,8 +115,8 @@ const Referencias = () => {
         Number(precio) === 1250
           ? fechaVencimientoTri
           : Number(precio) === 1999
-            ? fechaVencimientoSem
-            : fechaVencimiento,
+          ? fechaVencimientoSem
+          : fechaVencimiento,
       metodoPago: "Transferencia",
       vigencia: true,
       idPago: pagoId,
@@ -142,10 +142,10 @@ const Referencias = () => {
 
       role !== "Administrador"
         ? await actualizarRolUsuario(`usuarios/rol/${uid}`, {
-          role: paquete,
-          paqueteAdquirido: pid,
-          usuarios: usuarios,
-        })
+            role: paquete,
+            paqueteAdquirido: pid,
+            usuarios: usuarios,
+          })
         : null;
 
       await nuevoPedido("correos/nuevo-pedido", correoPedido);
@@ -168,17 +168,18 @@ const Referencias = () => {
                           <div className="row">
                             <div className="col-sm-12 col-md-3 col-lg-3 text-center">
                               <div
-                                className={`${styleRef.paqueteBG} ${referencia?.paquete.nombre === "Individual"
-                                  ? styleRef.PaqIndivi
-                                  : referencia?.paquete.nombre === "Básico"
+                                className={`${styleRef.paqueteBG} ${
+                                  referencia?.paquete.nombre === "Individual"
+                                    ? styleRef.PaqIndivi
+                                    : referencia?.paquete.nombre === "Básico"
                                     ? styleRef.PaqBasic
                                     : referencia?.paquete.nombre ===
                                       "Intermedio"
-                                      ? styleRef.PaqInter
-                                      : referencia?.paquete.nombre === "Avanzado"
-                                        ? styleRef.PaqAvanza
-                                        : ""
-                                  }`}
+                                    ? styleRef.PaqInter
+                                    : referencia?.paquete.nombre === "Avanzado"
+                                    ? styleRef.PaqAvanza
+                                    : ""
+                                }`}
                               >
                                 <div className={styleRef.paqueteNombre}>
                                   {referencia?.paquete.nombre}
@@ -264,7 +265,8 @@ const Referencias = () => {
                                       <div
                                         className={`${styleRef.contentCard}`}
                                       >
-                                        <i className="bi bi-envelope"
+                                        <i
+                                          className="bi bi-envelope"
                                           style={{
                                             color: "#7149bc",
                                             fontSize: "20px",
@@ -317,7 +319,7 @@ const Referencias = () => {
                                           }}
                                         ></i>{" "}
                                         {referencia &&
-                                          referencia?.totalUsuarios >= 3
+                                        referencia?.totalUsuarios >= 3
                                           ? referencia?.totalUsuarios
                                           : "N/A"}
                                       </div>
@@ -336,7 +338,30 @@ const Referencias = () => {
                                     </div>
                                   </div>
                                   <div className="col-sm-12 col-md-12 col-lg-6 mt-3 text-center ">
-                                    <button className={styleRef.btnTicket}><i className="bi bi-card-image"></i> Comprobante</button>
+                                    {referencia.comprobante ? (
+                                      <button className={styleRef.btnTicket}>
+                                        <a
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          href={referencia.comprobante}
+                                        >
+                                          Comprobante
+                                        </a>
+                                      </button>
+                                    ) : (
+                                      <button
+                                        disabled
+                                        className={styleRef.btnTicket}
+                                      >
+                                        <a
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          href={referencia.comprobante}
+                                        >
+                                          Sin comprobante
+                                        </a>
+                                      </button>
+                                    )}
                                   </div>
                                   <div className="col-sm-12 col-md-12 col-lg-6 mt-3 text-center">
                                     {referencia.estado ? (
@@ -347,25 +372,37 @@ const Referencias = () => {
                                         Aprobado
                                       </button>
                                     ) : (
-                                      <button
-                                        onClick={() =>
-                                          confirmarRef(
-                                            referencia._id,
-                                            referencia.usuario._id,
-                                            referencia.usuario.nombre,
-                                            referencia.usuario.apellido,
-                                            referencia.usuario.correo,
-                                            referencia.paquete._id,
-                                            referencia.precio,
-                                            referencia.paquete.nombre,
-                                            referencia.totalUsuarios,
-                                            referencia.usuario.role
-                                          )
-                                        }
-                                        className={`${styleRef.btnAp}`}
-                                      >
-                                        Confirmar
-                                      </button>
+                                      <>
+                                        {referencia.comprobante ? (
+                                          <button
+                                            onClick={() =>
+                                              confirmarRef(
+                                                referencia._id,
+                                                referencia.usuario._id,
+                                                referencia.usuario.nombre,
+                                                referencia.usuario.apellido,
+                                                referencia.usuario.correo,
+                                                referencia.paquete._id,
+                                                referencia.precio,
+                                                referencia.paquete.nombre,
+                                                referencia.totalUsuarios,
+                                                referencia.usuario.role
+                                              )
+                                            }
+                                            className={`${styleRef.btnAp}`}
+                                          >
+                                            Confirmar
+                                          </button>
+                                        ) : (
+                                          <button
+                                            disabled
+                                            className={`${styleRef.btnAp}`}
+                                          >
+                                            <i className="bi bi-lock-fill" />{" "}
+                                            Confirmar
+                                          </button>
+                                        )}
+                                      </>
                                     )}
                                   </div>
                                 </div>
