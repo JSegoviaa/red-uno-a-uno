@@ -18,11 +18,11 @@ const Index = () => {
               <div className="col-sm-12 col-md-12 col-lg-6 col-xl-5 mb-3">
                 <div className={`${styles.Rcard} pointer`}>
                   <div className={`${styles.RcardTitle} text-end`}>
-                    <i className="bi bi-person-plus"></i> Wallet
+                    <i className="bi bi-wallet2"></i> Wallet
                   </div>
-                  <div className={styles.cardName}>
+                  <div className={styles.cardName1}>
                     <div className={styles.backText}>
-                      <i className="bi bi-person-plus"></i> Wallet
+                      <i className="bi bi-wallet2"></i> Wallet
                     </div>
                   </div>
                   <div className="row">
@@ -74,9 +74,9 @@ const Index = () => {
                   <div className={`${styles.RcardTitle} text-end`}>
                     <i className="bi bi-shuffle"></i> Referencias
                   </div>
-                  <div className={styles.cardName}>
+                  <div className={styles.cardName2}>
                     <div className={styles.backText}>
-                      <i className="bi bi-shuffle"></i> Refere
+                      <i className="bi bi-shuffle"></i> Referencias
                     </div>
                   </div>
                   <div className="row">
@@ -145,9 +145,9 @@ const Index = () => {
                   <div className={`${styles.RcardTitle} text-end`}>
                     <i className="bi bi-house"></i> Propiedades
                   </div>
-                  <div className={styles.cardName}>
+                  <div className={styles.cardName3}>
                     <div className={styles.backText}>
-                      <i className="bi bi-house"></i> Propie
+                      <i className="bi bi-house"></i> Propiedades
                     </div>
                   </div>
                   <div className="row">
@@ -265,9 +265,9 @@ const Index = () => {
                   <div className={`${styles.RcardTitle} text-end`}>
                     <i className="bi bi-person-plus"></i> Usuarios
                   </div>
-                  <div className={styles.cardName}>
+                  <div className={styles.cardName4}>
                     <div className={styles.backText}>
-                      <i className="bi bi-person-plus"></i> Usuari
+                      <i className="bi bi-person-plus"></i> Usuarios
                     </div>
                   </div>
                   <div className="row">

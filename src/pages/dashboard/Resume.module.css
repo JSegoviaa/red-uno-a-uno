@@ -8,7 +8,7 @@
   -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
   transition: 200ms;
 }
-.RcardTitle{
+.RcardTitle {
   font-family: "Open Sans";
   font-weight: 500;
   color: grey;
@@ -17,13 +17,26 @@
   border-left: 45px solid #7149bc;
   transition: 200ms;
 }
-.Rcard:hover .cardName {
-  transform: translate(335px, -28px);
-  transform: translate(-98px, 60px);
+.Rcard:hover .cardName1 {
+  transform: translate(-100px, 60px);
+  display: flex;
   transition: 200ms;
 }
-.Rcard:hover .backText {
-  color: white;
+.Rcard:hover .cardName2 {
+  transform: translate(-135px, 60px);
+  display: flex;
+  transition: 200ms;
+}
+
+.Rcard:hover .cardName3 {
+  transform: translate(-140px, 120px);
+  display: flex;
+  transition: 200ms;
+}
+
+.Rcard:hover .cardName4 {
+  transform: translate(-118px, 110px);
+  display: flex;
   transition: 200ms;
 }
 
@@ -72,13 +85,32 @@
 .backText {
   font-family: "Open Sans";
   font-size: 28px;
-  transform: rotate(270deg);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0);
+  color: white;
   transition: 200ms;
+  transform: rotate(270deg);
 }
-.cardName {
+.cardName1 {
   position: absolute;
-  transform: translate(-70px, 60px);
   transition: 200ms;
+  transform: translate(-100px, 60px);
+  display: none;
+}
+.cardName2 {
+  position: absolute;
+  transition: 200ms;
+  transform: translate(-135px, 60px);
+  display: none;
+}
+.cardName3 {
+  position: absolute;
+  transition: 200ms;
+  transform: translate(-100px, 60px);
+  display: none;
+}
+.cardName4 {
+  position: absolute;
+  transition: 200ms;
+  transform: translate(-100px, 60px);
+  display: none;
 }
