@@ -42,7 +42,6 @@ const Header = () => {
   useEffect(() => {
     socket?.on("obtener-solicitud", (solicitud) => {
       setSolicitudes([...solicitudes, solicitud]);
-      console.log(solicitud);
       setContador(solicitudes.length + 1);
       const tl = gsap.timeline();
 

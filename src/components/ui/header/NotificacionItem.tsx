@@ -37,7 +37,6 @@ const NotificacionItem: FC<Props> = (props) => {
     rechazarSolicitud,
     goToSolicitudes,
   } = props;
-  console.log(solicitudes);
   return (
     <Overlay target={target.current} show={notificaciones} placement="right">
       {({ placement, arrowProps, show: _show, popper, ...props }) => (

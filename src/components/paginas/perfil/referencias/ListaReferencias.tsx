@@ -37,8 +37,6 @@ const ListaReferencias = () => {
   const handleAdjuntar = (id: string) => {
     refAdjuntar.current?.click();
     setSeleccionado(id);
-    console.log(id);
-    console.log(refAdjuntar.current);
   };
 
   const subirComprobante = async (uid: string, rid: string) => {
