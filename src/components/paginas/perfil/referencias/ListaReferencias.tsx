@@ -115,15 +115,27 @@ const ListaReferencias = () => {
                         <td className={`${styles.content}`}>
                           {formatPrice(referencia.importe)}
                         </td>
-                        <td className={`${styles.content} pointer`}>
+                        <td className={`${styles.content}`}>
                           {referencia.comprobante ? (
-                            <a
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href={referencia.comprobante}
-                            >
-                              Comprobante
-                            </a>
+                            <div className="d-flex justify-content-center">
+                              <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={referencia.comprobante}
+                              >
+                                <i className="bi bi-image-fill px-2" />
+                              </a>
+                              {referencia.estado ? null : (
+                                <i
+                                  onClick={() => handleAdjuntar(referencia._id)}
+                                  className="bi bi-cloud-plus-fill pointer px-2"
+                                  style={{
+                                    fontSize: 22,
+                                    color: "#7149bc",
+                                  }}
+                                />
+                              )}
+                            </div>
                           ) : (
                             <>
                               {seleccionado === referencia._id &&
@@ -140,17 +152,21 @@ const ListaReferencias = () => {
                                 </button>
                               ) : (
                                 <>
-                                  {" "}
                                   {referencia.estado ? (
                                     ""
                                   ) : (
-                                    <span
-                                      onClick={() =>
-                                        handleAdjuntar(referencia._id)
-                                      }
-                                    >
-                                      Adjuntar
-                                    </span>
+                                    <div className="d-flex justify-content-center">
+                                      <i
+                                        onClick={() =>
+                                          handleAdjuntar(referencia._id)
+                                        }
+                                        className="bi bi-cloud-plus-fill pointer"
+                                        style={{
+                                          fontSize: 22,
+                                          color: "#7149bc",
+                                        }}
+                                      />
+                                    </div>
                                   )}
                                 </>
                               )}
