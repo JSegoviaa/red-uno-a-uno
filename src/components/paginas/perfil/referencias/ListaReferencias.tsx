@@ -37,6 +37,8 @@ const ListaReferencias = () => {
   const handleAdjuntar = (id: string) => {
     refAdjuntar.current?.click();
     setSeleccionado(id);
+    console.log(id);
+    console.log(refAdjuntar.current);
   };
 
   const subirComprobante = async (uid: string, rid: string) => {
@@ -63,6 +65,7 @@ const ListaReferencias = () => {
     }
 
     setSubiendo(false);
+    setSeleccionado("");
   };
 
   return (
@@ -126,14 +129,32 @@ const ListaReferencias = () => {
                                 <i className="bi bi-image-fill px-2" />
                               </a>
                               {referencia.estado ? null : (
-                                <i
-                                  onClick={() => handleAdjuntar(referencia._id)}
-                                  className="bi bi-cloud-plus-fill pointer px-2"
-                                  style={{
-                                    fontSize: 22,
-                                    color: "#7149bc",
-                                  }}
-                                />
+                                <>
+                                  <i
+                                    onClick={() =>
+                                      handleAdjuntar(referencia._id)
+                                    }
+                                    className="bi bi-cloud-plus-fill pointer px-2"
+                                    style={{
+                                      fontSize: 22,
+                                      color: "#7149bc",
+                                    }}
+                                  />
+                                  {seleccionado === referencia._id &&
+                                  comprobante !== "" ? (
+                                    <button
+                                      className="btn"
+                                      onClick={() =>
+                                        subirComprobante(
+                                          referencia.usuario._id,
+                                          referencia._id
+                                        )
+                                      }
+                                    >
+                                      Subir
+                                    </button>
+                                  ) : null}
+                                </>
                               )}
                             </div>
                           ) : (
@@ -141,6 +162,7 @@ const ListaReferencias = () => {
                               {seleccionado === referencia._id &&
                               comprobante !== "" ? (
                                 <button
+                                  className="btn"
                                   onClick={() =>
                                     subirComprobante(
                                       referencia.usuario._id,
@@ -152,9 +174,7 @@ const ListaReferencias = () => {
                                 </button>
                               ) : (
                                 <>
-                                  {referencia.estado ? (
-                                    ""
-                                  ) : (
+                                  {referencia.estado ? null : (
                                     <div className="d-flex justify-content-center">
                                       <i
                                         onClick={() =>
@@ -170,16 +190,6 @@ const ListaReferencias = () => {
                                   )}
                                 </>
                               )}
-
-                              <input
-                                style={{ display: "none" }}
-                                ref={refAdjuntar}
-                                type="file"
-                                accept="image/*"
-                                onChange={(e: any) =>
-                                  setcomprobante(e.target.files[0])
-                                }
-                              />
                             </>
                           )}
                         </td>
@@ -191,6 +201,13 @@ const ListaReferencias = () => {
                   </tbody>
                 </table>
 
+                <input
+                  style={{ display: "none" }}
+                  ref={refAdjuntar}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e: any) => setcomprobante(e.target.files[0])}
+                />
                 {subiendo ? (
                   <div className="d-flex justify-content-center">
                     <Loading />
