@@ -117,6 +117,7 @@ interface Usuario {
   instagram: string;
   twitter: string;
   img: string;
+  direccionFisica: string;
 }
 
 interface TipoPropiedad {

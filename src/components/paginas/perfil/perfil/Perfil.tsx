@@ -86,6 +86,7 @@ const Perfil = () => {
           <div className={styles.empresa}>{auth.nombreInmobiliaria}</div>
           <div className={styles.correo}>{auth.correo} </div>
           <div className={styles.telefono}>{auth.telefonoPersonal}</div>
+          <div className={styles.telefono}>{auth.direccionFisica}</div>
         </div>
       </div>
 

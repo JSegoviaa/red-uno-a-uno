@@ -1,14 +1,17 @@
-import { FormEvent, useContext } from "react";
+import { FormEvent, useContext, useRef, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import Geosuggest, { Suggest } from "react-geosuggest";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useForm } from "../../../../hooks/useForm";
 import Button from "../../../ui/button/Button";
 import Modaltitle from "../../../ui/modaltitle/Modaltitle";
 import Titulo from "../../../ui/titulo/Titulo";
+import styles from "./Perfil.module.css";
 
 const ActualizarPerfilForm = () => {
   const { auth, actualizarPerfil } = useContext(AuthContext);
-
+  const geosuggestEl = useRef<Geosuggest>(null);
+  const [ubicacion, setUbicacion] = useState("");
   const { formulario, handleChange } = useForm({
     nombre: auth.nombre,
     apellido: auth.apellido,
@@ -39,10 +42,14 @@ const ActualizarPerfilForm = () => {
     linkedin,
   } = formulario;
 
+  const onSuggestSelect = (suggest: Suggest) => {
+    !suggest ? setUbicacion("") : setUbicacion(suggest.label);
+  };
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    actualizarPerfil(formulario);
+    actualizarPerfil({ ...formulario, direccionFisica: ubicacion });
   };
 
   return (
@@ -127,12 +134,27 @@ const ActualizarPerfilForm = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
+        <Form.Group>
+          <Form.Label>Escriba su ubicación</Form.Label>
+          <Geosuggest
+            ref={geosuggestEl}
+            queryDelay={530}
+            country="mx"
+            placeholder="Busca aquí..."
+            onSuggestSelect={onSuggestSelect}
+            autoComplete="off"
+            inputClassName={styles.buscador}
+            suggestsClassName={styles.respuesta}
+            suggestItemClassName={styles.item}
+          />
+        </Form.Group>
+        <br />
         <Form.Group className="mb-3">
-          <Form.Label>Dirección física</Form.Label>
+          <Form.Label>Ubicación</Form.Label>
           <Form.Control
+            readOnly
             type="text"
-            value={direccionFisica}
+            value={ubicacion ? ubicacion : direccionFisica}
             name="direccionFisica"
             onChange={handleChange}
           />

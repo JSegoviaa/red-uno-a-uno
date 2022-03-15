@@ -696,9 +696,9 @@ const Detalles = ({ inmuebles }: Props) => {
                           {inmuebles.inmueble.usuario.apellido}
                         </div>
                         <div className={styles.perfilCardLine}></div>
-                        {/* <div className={styles.perfilCardCiudad}>
-                          Cancún, Quintana Roo.
-                        </div> */}
+                        <div className={styles.perfilCardCiudad}>
+                          {inmuebles.inmueble.usuario.direccionFisica}
+                        </div>
                       </div>
                     </td>
                   </tr>
