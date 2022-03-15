@@ -253,7 +253,7 @@ export const actualizarPerfilFetch = async (
   endpoint: string,
   data: ActualizarUsuario
 ): Promise<RespActualizar> => {
-  const url = `${baseURL}/${endpoint}`;
+  const url = `${development}/${endpoint}`;
   const token = localStorage.getItem("token") || "";
 
   const resp = await fetch(url, {

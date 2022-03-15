@@ -1,6 +1,7 @@
-import { FormEvent, useContext, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useRef, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Geosuggest, { Suggest } from "react-geosuggest";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useForm } from "../../../../hooks/useForm";
 import Button from "../../../ui/button/Button";
@@ -11,7 +12,8 @@ import styles from "./Perfil.module.css";
 const ActualizarPerfilForm = () => {
   const { auth, actualizarPerfil } = useContext(AuthContext);
   const geosuggestEl = useRef<Geosuggest>(null);
-  const [ubicacion, setUbicacion] = useState("");
+  const [ubicacion, setUbicacion] = useState(auth.direccionFisica);
+  const [recibirCorreos, setRecibirCorreos] = useState(auth.recibirCorreo);
   const { formulario, handleChange } = useForm({
     nombre: auth.nombre,
     apellido: auth.apellido,
@@ -49,7 +51,16 @@ const ActualizarPerfilForm = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    actualizarPerfil({ ...formulario, direccionFisica: ubicacion });
+    if (ubicacion === "") {
+      toast.error("La ubicación es obligatoria");
+      return;
+    }
+
+    await actualizarPerfil({
+      ...formulario,
+      direccionFisica: ubicacion,
+      recibirCorreo: recibirCorreos,
+    });
   };
 
   return (
@@ -138,9 +149,12 @@ const ActualizarPerfilForm = () => {
           <Form.Label>Escriba su ubicación</Form.Label>
           <Geosuggest
             ref={geosuggestEl}
+            initialValue={direccionFisica}
+            value={direccionFisica}
+            defaultValue={direccionFisica}
             queryDelay={530}
             country="mx"
-            placeholder="Busca aquí..."
+            placeholder="Escoge tu ubicaicón"
             onSuggestSelect={onSuggestSelect}
             autoComplete="off"
             inputClassName={styles.buscador}
@@ -160,6 +174,20 @@ const ActualizarPerfilForm = () => {
           />
         </Form.Group>
 
+        <Form.Group>
+          <Form.Check
+            checked={recibirCorreos}
+            onChange={() => {
+              setRecibirCorreos(!recibirCorreos);
+            }}
+            type="checkbox"
+            label=" Quiero recibir correos electrónicos cuando haya inmuebles nuevos
+            cerca de mi ubicación"
+          />
+        </Form.Group>
+
+        <br />
+        <br />
         <div>Redes sociales</div>
         <br />
         <Form.Group className="mb-3">

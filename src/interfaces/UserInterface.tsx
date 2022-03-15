@@ -48,6 +48,7 @@ export interface ActualizarUsuario {
   twitter: string | number | string[] | undefined;
   youtube: string | number | string[] | undefined;
   linkedin: string | number | string[] | undefined;
+  recibirCorreo: boolean;
 }
 
 export interface RespActualizar {
@@ -84,6 +85,7 @@ export interface Usuario {
   paqueteAdquirido: string;
   usuarios: number | undefined;
   propietario: string | undefined;
+  recibirCorreo: boolean;
 }
 
 export interface UsuariosDir {
