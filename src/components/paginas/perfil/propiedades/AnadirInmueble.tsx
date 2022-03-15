@@ -14,8 +14,6 @@ import {
   InmuebleContext,
   InmuebleData,
 } from "../../../../context/inmuebles/InmuebleContext";
-import { useUsuariosPorDir } from "hooks/useUserInfo";
-import { production } from "credentials/credentials";
 
 const FormStepOne: any = dynamic(() => import("./FormStepOne"), { ssr: false });
 
@@ -52,7 +50,6 @@ const AnadirInmueble = () => {
   const [horno, setHorno] = useState<any>(false);
   const [lavadora, setLavadora] = useState<any>(false);
   const [secadora, setSecadora] = useState<any>(false);
-  const [direccionInm, setDireccionInm] = useState("");
 
   const { formulario, handleChange } = useForm({
     titulo: "",
@@ -69,8 +66,6 @@ const AnadirInmueble = () => {
     descripcion: "",
     otros: "",
   });
-
-  const { usuariosPorDir } = useUsuariosPorDir(direccionInm);
 
   const {
     titulo,
@@ -145,25 +140,8 @@ const AnadirInmueble = () => {
     setCargando(true);
     e.preventDefault();
 
-    const res = await crearInmueble(dataInmueble);
-    if (res.ok) {
-      setDireccionInm(res.inmueble.direccion);
-      usuariosPorDir.forEach(async (usuario) => {
-        const body = {
-          nombre: usuario.nombre,
-          apellido: usuario.apellido,
-          correo: usuario.correo,
-          tituloInmueble: titulo,
-          slug: res.inmueble.slug,
-        };
+    await crearInmueble(dataInmueble);
 
-        await fetch(`${production}/correos/inmueble-zona`, {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(body),
-        });
-      });
-    }
     setCargando(false);
     handleNextStep();
   };

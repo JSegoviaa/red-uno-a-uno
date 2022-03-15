@@ -120,7 +120,7 @@ export const useMisUsuarios = (uid: string | undefined | null) => {
   return { misUsuarios, cargando, setMisUsuarios };
 };
 
-export const useUsuariosPorDir = (direccion: string) => {
+export const useUsuariosPorDir = (direccion: string | undefined) => {
   const [usuariosPorDir, setUsuariosDir] = useState<Usuario[]>([]);
   const [cargando, setCargando] = useState(true);
 
