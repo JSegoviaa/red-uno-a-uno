@@ -85,3 +85,9 @@ export interface Usuario {
   usuarios: number | undefined;
   propietario: string | undefined;
 }
+
+export interface UsuariosDir {
+  ok: boolean;
+  msg: string;
+  usuarios: Usuario[];
+}
