@@ -12,23 +12,29 @@ interface Props {
 
 const BarraCategorias = (props: Props) => {
   const { setTipoPropiedad, propertyTypes, categorias, setCategoria } = props;
-  const [selected, setSelected] = useState(false);
+  const [selectedPro, setSelected] = useState("");
+  const [selectedCat, setselectedCat] = useState("");
 
   const seleccionarCategoria = (id: string) => {
     setCategoria(id);
+    setselectedCat(id);
   };
 
   const seleccionarTipoPropiedad = (id: string) => {
     setTipoPropiedad(id);
-    setSelected(true);
+    setSelected(id);
   };
 
   return (
     <>
-      <div className="text-center">
+      <div className={`text-center  d-flex justify-content-center `}>
         {propertyTypes.map((propertyType) => (
           <span
-            className={styles.barraItem}
+            className={`${
+              selectedPro === propertyType._id
+                ? styles.barraItemPropertyTypeSelected
+                : styles.barraItemPropertyType
+            } mx-2 pointer`}
             onClick={() => seleccionarTipoPropiedad(propertyType._id)}
             key={propertyType._id}
           >
@@ -37,7 +43,11 @@ const BarraCategorias = (props: Props) => {
         ))}
         {categorias?.map((categoria) => (
           <span
-            className={styles.barraItem}
+            className={`${
+              selectedCat === categoria._id
+                ? styles.barraItemCategorySelected
+                : styles.barraItemCategory
+            } mx-2 pointer`}
             onClick={() => {
               seleccionarCategoria(categoria._id);
             }}
@@ -48,16 +58,6 @@ const BarraCategorias = (props: Props) => {
         ))}
       </div>
     </>
-    // <Form.Select
-    //   value={tipoPropiedad}
-    //   onChange={(e) => setTipoPropiedad(e.target.value)}
-    // >
-    //   {propertyTypes.map((propertyType) => (
-    //     <option key={propertyType._id} value={propertyType._id}>
-    //       {propertyType.nombre}
-    //     </option>
-    //   ))}
-    // </Form.Select>
   );
 };
 
