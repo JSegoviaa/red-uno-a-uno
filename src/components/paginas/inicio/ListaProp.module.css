@@ -12,6 +12,7 @@
   border: none;
   padding: 0;
   background-color: #ffffff;
+  border-radius: 10px;
 }
 .btnList {
   background: #ffffff;
@@ -28,7 +29,7 @@
 }
 
 .bodyList {
-  max-height: 80vh;
+  max-height: 74.5vh;
   overflow-y: scroll;
   background-color: white;
 }
