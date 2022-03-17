@@ -31,7 +31,11 @@ function ContextAwareToggle({ children, eventKey, callback }: any) {
       type="button"
       className={styles.btnList}
       onClick={decoratedOnClick}
-      style={{ backgroundColor: isCurrentEventKey ? "#c5c5c5" : "#f7f7f7" }}
+      style={{
+        backgroundColor: isCurrentEventKey ? "white" : "white",
+        boxShadow: isCurrentEventKey ? "none" : "0px 0px 14px 7px rgba(0, 0, 0, 0.16)",
+        float: isCurrentEventKey ? "right" : "left",
+      }}
     >
       {children}
     </button>
@@ -114,7 +118,7 @@ const ListaProp = () => {
             {listaInmuebles?.inmuebles?.length === 0 ? null : (
               <ContextAwareToggle eventKey="1">
                 <div onClick={handleVerLista}>
-                  {verLista ? "Ocultar lista" : "Vista de lista"}
+                  {verLista ? '< Ocultar lista' : "Vista de lista"}
                 </div>
               </ContextAwareToggle>
             )}
@@ -140,7 +144,7 @@ const ListaProp = () => {
                             <div
                               className={`${styles.cardPropBody} card mb-3 pointer`}
                             >
-                              <div className={styles.topIcons}>
+                              <div className={styles.topIcons1}>
                                 <CopyToClipboard
                                   onCopy={compartir}
                                   text={`red1a1.com/app/propiedades/${inmueble.slug}`}
@@ -150,6 +154,8 @@ const ListaProp = () => {
                                     className={`${styles.iconShare} btn me-1`}
                                   />
                                 </CopyToClipboard>
+                              </div>
+                              <div className={styles.topIcons2}>
                                 {auth.uid ? (
                                   <button
                                     onClick={() =>
@@ -197,21 +203,35 @@ const ListaProp = () => {
                                     <div className={styles.cardTitle}>
                                       {inmueble.titulo}
                                     </div>
-
-                                    <div className={styles.cardPrecio}>
-                                      {formatPrice(inmueble.precio)}
-                                    </div>
                                     <div className={styles.cardDescription}>
                                       {inmueble.descripcion
                                         ? inmueble.descripcion
                                         : "Sin descripción"}
+                                    </div>
+                                    <div className="row">
+                                      <div className="col-4 text-center p-0">
+                                        <span className={styles.tagTipoProp}>
+                                          Departamento
+                                        </span>
+                                      </div>
+                                      <div className="col-2 text-center p-0">
+                                        <span className={styles.tagTipo}>
+                                          Venta
+                                        </span>
+                                      </div>
+                                      <div className="col-6 text-end">
+                                        <div className={styles.cardPrecio}>
+                                          {formatPrice(inmueble.precio)}
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        ))}
+                        ))
+                        }
                       {limite > listaInmuebles!.total ? null : (
                         <>
                           {cargando ? (
