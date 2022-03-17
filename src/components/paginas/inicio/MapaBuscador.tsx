@@ -5,8 +5,9 @@ import { useInmueblesCoordenadas } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
 import InfoWindowMap from "./InfoWindowMap";
 import BuscarZona from "./BuscarZona";
-import { Form } from "react-bootstrap";
 import { useCategories, useTipoPropiedad } from "hooks/useCategories";
+import BarraCategorias from "./BarraCategorias";
+import styles from "./BarraCategoria.module.css";
 
 const containerStyle = {
   width: "100%",
@@ -17,7 +18,7 @@ const options = {
   disableDefaultUI: true,
   streetViewControl: true,
   zoomControl: true,
-  fullscreenControl: true,
+  fullscreenControl: false,
 };
 
 const MapaUbicacion = () => {
@@ -52,6 +53,8 @@ const MapaUbicacion = () => {
     categoria,
     tipoPropiedad
   );
+  console.log(categoria);
+  console.log(tipoPropiedad);
 
   const propiedadSeleccionada = (id: string, lat: number, lng: number) => {
     setCoordenadas({ lat, lng });
@@ -102,87 +105,69 @@ const MapaUbicacion = () => {
   }, [coordenadas, cargando]);
 
   return (
-    <GoogleMap
-      ref={mapRef}
-      mapContainerStyle={containerStyle}
-      center={{
-        lat: coordenadas.lat,
-        lng: coordenadas.lng,
-      }}
-      onClick={closeInfoWindow}
-      zoom={zoom}
-      options={options}
-    >
-      {cargando ? (
-        <Loading />
-      ) : (
-        <>
-          <div className="pointer" onClick={handleClick}>
-            <BuscarZona />
-            <div style={{ position: "absolute", right: 102, top: 55 }}>
-              {loading ? (
-                <Loading />
-              ) : (
-                <Form.Select
-                  value={tipoPropiedad}
-                  onChange={(e) => setTipoPropiedad(e.target.value)}
-                >
-                  {propertyTypes.map((propertyType) => (
-                    <option key={propertyType._id} value={propertyType._id}>
-                      {propertyType.nombre}
-                    </option>
-                  ))}
-                </Form.Select>
-              )}
+    <>
+      <GoogleMap
+        ref={mapRef}
+        mapContainerStyle={containerStyle}
+        center={{
+          lat: coordenadas.lat,
+          lng: coordenadas.lng,
+        }}
+        onClick={closeInfoWindow}
+        zoom={zoom}
+        options={options}
+      >
+        {cargando ? (
+          <Loading />
+        ) : (
+          <>
+            <div onClick={handleClick}>
+              <BuscarZona />
+              <div className={styles.barraCategorias}>
+                {loading ? (
+                  <Loading />
+                ) : (
+                  <BarraCategorias
+                    setTipoPropiedad={setTipoPropiedad}
+                    propertyTypes={propertyTypes}
+                    setCategoria={setCategoria}
+                    categorias={categorias}
+                  />
+                )}
+              </div>
             </div>
-            <div style={{ position: "absolute", right: 10, top: 55 }}>
-              {cargando ? (
-                <Loading />
-              ) : (
-                <Form.Select
-                  value={categoria}
-                  onChange={(e) => setCategoria(e.target.value)}
-                >
-                  {categorias.map((categoria) => (
-                    <option key={categoria._id} value={categoria._id}>
-                      {categoria.nombre}
-                    </option>
-                  ))}
-                </Form.Select>
-              )}
-            </div>
-          </div>
 
-          {inmuebles
-            ?.filter((inmueble) => {
-              return inmueble.publicado === true;
-            })
-            .map((inmueble) => (
-              <Fragment key={inmueble._id}>
-                <Marker
-                  animation={2}
-                  position={{ lat: inmueble.lat, lng: inmueble.lng }}
-                  icon={{
-                    url: "/images/icons/marcador.svg",
-                    scaledSize: new google.maps.Size(50, 50),
-                  }}
-                  onClick={() =>
-                    propiedadSeleccionada(
-                      inmueble._id,
-                      inmueble.lat,
-                      inmueble.lng
-                    )
-                  }
-                >
-                  {seleccionado === inmueble._id ? (
-                    <InfoWindowMap inmueble={inmueble} />
-                  ) : null}
-                </Marker>
-              </Fragment>
-            ))}
-        </>
-      )}
-    </GoogleMap>
+            {inmuebles
+              ?.filter((inmueble) => {
+                return inmueble.publicado === true;
+              })
+              .map((inmueble) => (
+                <Fragment key={inmueble._id}>
+                  <Marker
+                    animation={2}
+                    position={{ lat: inmueble.lat, lng: inmueble.lng }}
+                    icon={{
+                      url: "/images/icons/marcador.svg",
+                      scaledSize: new google.maps.Size(50, 50),
+                    }}
+                    onClick={() =>
+                      propiedadSeleccionada(
+                        inmueble._id,
+                        inmueble.lat,
+                        inmueble.lng
+                      )
+                    }
+                  >
+                    {seleccionado === inmueble._id ? (
+                      <InfoWindowMap inmueble={inmueble} />
+                    ) : null}
+                  </Marker>
+                </Fragment>
+              ))}
+          </>
+        )}
+      </GoogleMap>
+    </>
   );
 };
 

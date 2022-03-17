@@ -84,6 +84,7 @@ const initialState: Auth = {
   usuarios: undefined,
   propietario: undefined,
   google: undefined,
+  recibirCorreo: false,
 };
 
 export const AuthProvider: FC = ({ children }) => {
@@ -129,6 +130,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
         google: undefined,
+        recibirCorreo: usuario.recibirCorreo,
       });
     }
     return resp;
@@ -173,6 +175,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
         google: undefined,
+        recibirCorreo: usuario.recibirCorreo,
       });
     }
 
@@ -222,6 +225,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
         google: undefined,
+        recibirCorreo: usuario.recibirCorreo,
       });
     }
 
@@ -256,6 +260,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: undefined,
         propietario: undefined,
         google: undefined,
+        recibirCorreo: false,
       });
 
       return false;
@@ -290,6 +295,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
         google: true,
+        recibirCorreo: usuario.recibirCorreo,
       });
       return true;
     } else {
@@ -317,6 +323,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: undefined,
         propietario: undefined,
         google: undefined,
+        recibirCorreo: false,
       });
 
       return false;
@@ -349,6 +356,7 @@ export const AuthProvider: FC = ({ children }) => {
       usuarios: undefined,
       propietario: undefined,
       google: undefined,
+      recibirCorreo: false,
     });
   };
 
@@ -384,6 +392,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
         google: undefined,
+        recibirCorreo: usuario.recibirCorreo,
       });
 
       toast.success(resp.msg);
@@ -427,6 +436,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
         google: undefined,
+        recibirCorreo: usuario.recibirCorreo,
       });
     }
 
@@ -466,6 +476,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
         google: undefined,
+        recibirCorreo: usuario.recibirCorreo,
       });
 
       toast.success(resp.msg);
@@ -508,6 +519,7 @@ export const AuthProvider: FC = ({ children }) => {
         usuarios: usuario.usuarios,
         propietario: usuario.propietario,
         google: true,
+        recibirCorreo: usuario.recibirCorreo,
       });
     }
     setMostrarLogin(false);

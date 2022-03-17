@@ -10,10 +10,14 @@ import { Form } from "react-bootstrap";
 import { useDropzone } from "react-dropzone";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { InmuebleContext } from "../../../../context/inmuebles/InmuebleContext";
-import { useUserInmuebles } from "../../../../hooks/useUserInfo";
+import {
+  useUserInmuebles,
+  useUsuariosPorDir,
+} from "../../../../hooks/useUserInfo";
 import Button from "../../../ui/button/Button";
 import styles from "./AgregaImg.module.css";
 import Loading from "../../../ui/loading/Loading";
+import { production } from "credentials/credentials";
 
 const thumb: CSSProperties = {
   display: "inline-flex",
@@ -48,6 +52,9 @@ const AnadirImagenes = () => {
   const { inmuebles } = useUserInmuebles(auth.uid);
   const [opciones, setOpciones] = useState(false);
   const [agregarVideo, setAgregarVideo] = useState(false);
+  const [direccionInm, setDireccionInm] = useState<string | undefined>("");
+
+  const { usuariosPorDir } = useUsuariosPorDir(direccionInm);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -98,7 +105,32 @@ const AnadirImagenes = () => {
       formData.append("pictures", pictures[i]);
     }
 
-    await subirImagenesInmueble(formData, auth.uid, ultimoInmueble?._id, "");
+    const res = await subirImagenesInmueble(
+      formData,
+      auth.uid,
+      ultimoInmueble?._id,
+      ""
+    );
+
+    if (res.ok) {
+      setDireccionInm(ultimoInmueble?.direccion);
+      usuariosPorDir.forEach(async (usuario) => {
+        const body = {
+          nombre: usuario.nombre,
+          apellido: usuario.apellido,
+          correo: usuario.correo,
+          tituloInmueble: ultimoInmueble?.titulo,
+          slug: ultimoInmueble?.slug,
+          imgInmueble: res.imgs[0],
+        };
+
+        await fetch(`${production}/correos/inmueble-zona`, {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(body),
+        });
+      });
+    }
 
     setCargando(false);
     setOpciones(true);

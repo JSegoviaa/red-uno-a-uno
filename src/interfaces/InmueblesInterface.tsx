@@ -76,5 +76,6 @@ export interface CategoriesResponse {
 export interface SubirImagenesInmueble {
   ok: boolean;
   msg: string;
+  imgs: string[];
   files: string[];
 }

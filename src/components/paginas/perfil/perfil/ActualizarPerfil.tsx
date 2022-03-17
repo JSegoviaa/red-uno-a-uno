@@ -1,14 +1,19 @@
-import { FormEvent, useContext } from "react";
+import { ChangeEvent, FormEvent, useContext, useRef, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import Geosuggest, { Suggest } from "react-geosuggest";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import { useForm } from "../../../../hooks/useForm";
 import Button from "../../../ui/button/Button";
 import Modaltitle from "../../../ui/modaltitle/Modaltitle";
 import Titulo from "../../../ui/titulo/Titulo";
+import styles from "./Perfil.module.css";
 
 const ActualizarPerfilForm = () => {
   const { auth, actualizarPerfil } = useContext(AuthContext);
-
+  const geosuggestEl = useRef<Geosuggest>(null);
+  const [ubicacion, setUbicacion] = useState(auth.direccionFisica);
+  const [recibirCorreos, setRecibirCorreos] = useState(auth.recibirCorreo);
   const { formulario, handleChange } = useForm({
     nombre: auth.nombre,
     apellido: auth.apellido,
@@ -39,10 +44,23 @@ const ActualizarPerfilForm = () => {
     linkedin,
   } = formulario;
 
+  const onSuggestSelect = (suggest: Suggest) => {
+    !suggest ? setUbicacion("") : setUbicacion(suggest.label);
+  };
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    actualizarPerfil(formulario);
+    if (ubicacion === "") {
+      toast.error("La ubicación es obligatoria");
+      return;
+    }
+
+    await actualizarPerfil({
+      ...formulario,
+      direccionFisica: ubicacion,
+      recibirCorreo: recibirCorreos,
+    });
   };
 
   return (
@@ -127,17 +145,49 @@ const ActualizarPerfilForm = () => {
             onChange={handleChange}
           />
         </Form.Group>
-
-        <Form.Group className="mb-3">
-          <Form.Label>Dirección física</Form.Label>
-          <Form.Control
-            type="text"
+        <Form.Group>
+          <Form.Label>Escriba su ubicación</Form.Label>
+          <Geosuggest
+            ref={geosuggestEl}
+            initialValue={direccionFisica}
             value={direccionFisica}
+            defaultValue={direccionFisica}
+            queryDelay={530}
+            country="mx"
+            placeholder="Escoge tu ubicaicón"
+            onSuggestSelect={onSuggestSelect}
+            autoComplete="off"
+            inputClassName={styles.buscador}
+            suggestsClassName={styles.respuesta}
+            suggestItemClassName={styles.item}
+          />
+        </Form.Group>
+        <br />
+        <Form.Group className="mb-3">
+          <Form.Label>Ubicación</Form.Label>
+          <Form.Control
+            readOnly
+            type="text"
+            value={ubicacion ? ubicacion : direccionFisica}
             name="direccionFisica"
             onChange={handleChange}
           />
         </Form.Group>
 
+        <Form.Group>
+          <Form.Check
+            checked={recibirCorreos}
+            onChange={() => {
+              setRecibirCorreos(!recibirCorreos);
+            }}
+            type="checkbox"
+            label=" Quiero recibir correos electrónicos cuando haya inmuebles nuevos
+            cerca de mi ubicación"
+          />
+        </Form.Group>
+
+        <br />
+        <br />
         <div>Redes sociales</div>
         <br />
         <Form.Group className="mb-3">

@@ -8,7 +8,7 @@ export interface Auth {
   telefonoOficina: string | number | string[] | undefined;
   telefonoPersonal: string | number | string[] | undefined;
   nombreInmobiliaria: string | number | string[] | undefined;
-  direccionFisica: string | number | string[] | undefined;
+  direccionFisica: string | undefined;
   facebookpage: string | number | string[] | undefined;
   instagram: string | number | string[] | undefined;
   twitter: string | number | string[] | undefined;
@@ -22,6 +22,7 @@ export interface Auth {
   usuarios: number | undefined;
   propietario: string | undefined;
   google: true | undefined;
+  recibirCorreo: boolean;
 }
 
 export interface Resp {

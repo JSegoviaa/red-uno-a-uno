@@ -3,7 +3,7 @@ import { InmuebleContext } from "../context/inmuebles/InmuebleContext";
 import { production } from "../credentials/credentials";
 import { InmueblesUsuario } from "../interfaces/CrearInmuebleInterface";
 import { HistorialUsuario, PedidosUsuario } from "../interfaces/Historial";
-import { Usuario } from "../interfaces/UserInterface";
+import { Usuario, UsuariosDir } from "../interfaces/UserInterface";
 
 const devURL = "http://localhost:8080/api";
 const baseURL = "https://prueba-red1a1.herokuapp.com/api";
@@ -118,4 +118,26 @@ export const useMisUsuarios = (uid: string | undefined | null) => {
   }, [uid]);
 
   return { misUsuarios, cargando, setMisUsuarios };
+};
+
+export const useUsuariosPorDir = (direccion: string | undefined) => {
+  const [usuariosPorDir, setUsuariosDir] = useState<Usuario[]>([]);
+  const [cargando, setCargando] = useState(true);
+
+  const obtenerUsuariosPorDir = async () => {
+    const res = await fetch(
+      `${production}/usuarios/usuario/ubicacion?direccion=${direccion}`
+    );
+
+    const data: UsuariosDir = await res.json();
+
+    setUsuariosDir(data.usuarios);
+    setCargando(false);
+  };
+
+  useEffect(() => {
+    obtenerUsuariosPorDir();
+  }, [direccion]);
+
+  return { usuariosPorDir, cargando };
 };

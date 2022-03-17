@@ -18,7 +18,6 @@ const Chat = ({ handleCloseCanvas, conversacion }: Props) => {
   const { dispatch, scrollToBotom } = useContext(ChatContext);
   const { auth } = useContext(AuthContext);
   const [contacto, setContacto] = useState<Usuario>();
-  console.log(conversacion, "?");
   const { ultimoMsg } = useUltimoMsg(conversacion.remitente, conversacion.para);
   const ultimo = ultimoMsg && ultimoMsg.length - 1;
 
