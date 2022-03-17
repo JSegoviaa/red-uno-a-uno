@@ -33,7 +33,9 @@ function ContextAwareToggle({ children, eventKey, callback }: any) {
       onClick={decoratedOnClick}
       style={{
         backgroundColor: isCurrentEventKey ? "white" : "white",
-        boxShadow: isCurrentEventKey ? "none" : "0px 0px 14px 7px rgba(0, 0, 0, 0.16)",
+        boxShadow: isCurrentEventKey
+          ? "none"
+          : "0px 0px 14px 7px rgba(0, 0, 0, 0.16)",
         float: isCurrentEventKey ? "right" : "left",
       }}
     >
@@ -118,7 +120,7 @@ const ListaProp = () => {
             {listaInmuebles?.inmuebles?.length === 0 ? null : (
               <ContextAwareToggle eventKey="1">
                 <div onClick={handleVerLista}>
-                  {verLista ? '< Ocultar lista' : "Vista de lista"}
+                  {verLista ? "< Ocultar lista" : "Vista de lista"}
                 </div>
               </ContextAwareToggle>
             )}
@@ -211,12 +213,12 @@ const ListaProp = () => {
                                     <div className="row">
                                       <div className="col-4 text-center p-0">
                                         <span className={styles.tagTipoProp}>
-                                          Departamento
+                                          {inmueble.tipoPropiedad.nombre}
                                         </span>
                                       </div>
                                       <div className="col-2 text-center p-0">
                                         <span className={styles.tagTipo}>
-                                          Venta
+                                          {inmueble.categoria.nombre}
                                         </span>
                                       </div>
                                       <div className="col-6 text-end">
@@ -230,8 +232,7 @@ const ListaProp = () => {
                               </div>
                             </div>
                           </div>
-                        ))
-                        }
+                        ))}
                       {limite > listaInmuebles!.total ? null : (
                         <>
                           {cargando ? (
