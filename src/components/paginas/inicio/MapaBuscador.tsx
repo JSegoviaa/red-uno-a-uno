@@ -5,8 +5,9 @@ import { useInmueblesCoordenadas } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
 import InfoWindowMap from "./InfoWindowMap";
 import BuscarZona from "./BuscarZona";
-import { Form } from "react-bootstrap";
 import { useCategories, useTipoPropiedad } from "hooks/useCategories";
+import BarraCategorias from "./BarraCategorias";
+import styles from "./BarraCategoria.module.css";
 
 const containerStyle = {
   width: "100%",
@@ -17,7 +18,7 @@ const options = {
   disableDefaultUI: true,
   streetViewControl: true,
   zoomControl: true,
-  fullscreenControl: true,
+  fullscreenControl: false,
 };
 
 const MapaUbicacion = () => {
@@ -52,6 +53,8 @@ const MapaUbicacion = () => {
     categoria,
     tipoPropiedad
   );
+  console.log(categoria);
+  console.log(tipoPropiedad);
 
   const propiedadSeleccionada = (id: string, lat: number, lng: number) => {
     setCoordenadas({ lat, lng });
@@ -119,36 +122,16 @@ const MapaUbicacion = () => {
         <>
           <div className="pointer" onClick={handleClick}>
             <BuscarZona />
-            <div style={{ position: "absolute", right: 102, top: 55 }}>
+            <div className={styles.barraCategorias}>
               {loading ? (
                 <Loading />
               ) : (
-                <Form.Select
-                  value={tipoPropiedad}
-                  onChange={(e) => setTipoPropiedad(e.target.value)}
-                >
-                  {propertyTypes.map((propertyType) => (
-                    <option key={propertyType._id} value={propertyType._id}>
-                      {propertyType.nombre}
-                    </option>
-                  ))}
-                </Form.Select>
-              )}
-            </div>
-            <div style={{ position: "absolute", right: 10, top: 55 }}>
-              {cargando ? (
-                <Loading />
-              ) : (
-                <Form.Select
-                  value={categoria}
-                  onChange={(e) => setCategoria(e.target.value)}
-                >
-                  {categorias.map((categoria) => (
-                    <option key={categoria._id} value={categoria._id}>
-                      {categoria.nombre}
-                    </option>
-                  ))}
-                </Form.Select>
+                <BarraCategorias
+                  setTipoPropiedad={setTipoPropiedad}
+                  propertyTypes={propertyTypes}
+                  setCategoria={setCategoria}
+                  categorias={categorias}
+                />
               )}
             </div>
           </div>
