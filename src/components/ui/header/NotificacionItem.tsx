@@ -54,14 +54,8 @@ const NotificacionItem: FC<Props> = (props) => {
               <div className={styles.headerNotif}>Notificaciones</div>
               <div className={styles.notContainer}>
                 {solicitudes?.map((solicitud) => (
-                  <div
-                    key={solicitud._id}
-                    className={
-                      solicitud.estado === "Pendiente"
-                        ? styles.pendiente
-                        : styles.noPendiente
-                    }
-                  >
+                  <div className={solicitud.estado === "Pendiente" ? styles.pendiente : styles.noPendiente
+                  } key={solicitud._id}>
                     <div className={styles.notificacionContainer}>
                       {solicitud.estado === "Pendiente" ? (
                         <>

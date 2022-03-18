@@ -11,8 +11,8 @@
 .cardheader {
   border: none;
   padding: 0;
-  background-color: #ffffff;
-  border-radius: 10px;
+  background-color: white;
+  border-radius: 10px !important;
 }
 .btnList {
   background: #ffffff;
@@ -86,7 +86,6 @@
   font-size: 22px;
   line-height: 40px;
   color: #13a407;
-  
 }
 .cardDescription {
   font-family: "Open Sans";
