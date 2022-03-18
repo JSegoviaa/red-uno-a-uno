@@ -71,9 +71,16 @@
   color: crimson;
   font-weight: bold;
 }
+.notifImg{
+  border-radius: 50%;
+  background-color: #7149bc;
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
 
 .notificacionContainer {
-  padding: 15px 30px 5px 30px;
+  padding: 10px;
   border-bottom: 1px solid lightblue;
   font-family: "Open Sans";
   font-weight: 400;
@@ -136,25 +143,25 @@
   transition: 200ms;
 }
 .btnReject {
-  border: 1px solid #e65a1f;
+  border: 1px solid #7149bc;
   outline: none;
   font-family: "Open Sans";
   font-size: 21px;
   padding: 5px 25px;
   background-color: white;
   border-radius: 20px;
-  color: #e65a1f;
+  color: #7149bc;
   margin: 5px 0px;
   transition: 200ms;
 }
 .btnApprove:hover {
   background-color: #7149bc;
-  color: white;
+  color: #2fce07;
   transition: 200ms;
 }
 .btnReject:hover {
-  background-color: #e65a1f;
-  color: white;
+  background-color: #7149bc;
+  color: red;
   transition: 200ms;
 }
 .footVer {
