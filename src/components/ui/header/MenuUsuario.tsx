@@ -50,19 +50,6 @@ const MenuUsuario = (props: Props) => {
               ...props.style,
             }}
           >
-            {auth.role === "Administrador" ? (
-              <Link href="/dashboard/pagos/referencias">
-                <div
-                  className={`${styles.menuItem} pointer mx-3 my-2`}
-                  onClick={() => {
-                    setMostrarMenu(false);
-                  }}
-                >
-                  Dashboard
-                </div>
-              </Link>
-            ) : null}
-
             <Link href="/perfil">
               <div
                 className={`${styles.menuItem} pointer mx-3 my-2`}
@@ -75,8 +62,8 @@ const MenuUsuario = (props: Props) => {
             </Link>
 
             {auth.role === "Individual" ||
-            auth.role === "Usuario" ||
-            auth.role === "UsuarioPagado" ? null : (
+              auth.role === "Usuario" ||
+              auth.role === "UsuarioPagado" ? null : (
               <Link href="/perfil/mis-usuarios">
                 <div
                   className={`${styles.menuItem} pointer mx-3 my-2`}
@@ -119,11 +106,25 @@ const MenuUsuario = (props: Props) => {
                 Referencias
               </div>
             </Link>
+            {auth.role === "Administrador" ? (
+              <Link href="/dashboard/pagos/referencias">
+                <div
+                  className={`${styles.menuItem} pointer mx-3 my-2`}
+                  onClick={() => {
+                    setMostrarMenu(false);
+                  }}
+                >
+                  Dashboard
+                </div>
+              </Link>
+            ) : null}
+
+            <hr />
             <div
               className={`${styles.menuCerrar} pointer mx-3 my-2`}
               onClick={cerrarSesion}
             >
-              Cerrar sesion
+              <i className="bi bi-box-arrow-right"></i> Cerrar sesión
             </div>
           </div>
         )}

@@ -14,6 +14,7 @@ import { AuthContext } from "context/auth/AuthContext";
 import NotificacionItem from "./NotificacionItem";
 import { InmuebleContext } from "context/inmuebles/InmuebleContext";
 import { production } from "credentials/credentials";
+import { relative } from "path";
 
 interface Props {
   notificaciones: boolean;
@@ -142,18 +143,27 @@ const Notificaciones = (props: Props) => {
 
   return (
     <>
-      <div ref={notificacionRef} style={{ position: "relative" }}>
-        <i
-          onClick={mostrarNotificaciones}
-          style={{ fontSize: 30, color: "#7149BC", marginTop: 5 }}
-          className="bi bi-bell pointer px-2"
-        />
+      <div className="text-center" ref={notificacionRef}>
+        <div className="ms-3" onClick={mostrarNotificaciones}
+          style={{
+            border: '2.5px solid #7149bc',
+            borderRadius: '50%',
+            padding: '0px 6px',
+            boxSizing: "border-box",
+            marginTop: '12px'
+          }}>
+          <i
+
+            style={{ fontSize: '20px', color: "#7149BC" }}
+            className="bi bi-bell-fill pointer"
+          />
+        </div>
         {contador > 0 ? (
           <span
             style={{
               position: "absolute",
-              top: 10,
-              right: -8,
+              top: 15,
+              right: -18,
               color: "#fff",
               fontSize: 8,
             }}
