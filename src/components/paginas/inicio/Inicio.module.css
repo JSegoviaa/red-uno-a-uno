@@ -30,13 +30,16 @@
 }
 
 .buscarZona {
-  margin-top: 10px;
+  margin-top: 71px;
   position: absolute;
   right: 50px;
-  background-color: #f7f7f7;
-  padding: 6.5px 24px;
-  font-size: 18px;
-  border-radius: 2px;
-  -webkit-box-shadow: -5px -8px 27px -6px rgba(0, 0, 0, 0.34);
-  box-shadow: -5px -8px 27px -6px rgba(0, 0, 0, 0.34);
+  background: #ffffff;
+  box-shadow: 0px 0px 14px 7px rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 21px;
+  color: #7149bc;
+  box-shadow: 0px 0px 14px 7px rgba(0, 0, 0, 0.16);
+  padding: 15px 22px;
 }

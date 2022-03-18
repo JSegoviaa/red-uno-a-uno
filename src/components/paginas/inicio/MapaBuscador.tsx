@@ -53,8 +53,6 @@ const MapaUbicacion = () => {
     categoria,
     tipoPropiedad
   );
-  console.log(categoria);
-  console.log(tipoPropiedad);
 
   const propiedadSeleccionada = (id: string, lat: number, lng: number) => {
     setCoordenadas({ lat, lng });
