@@ -17,9 +17,9 @@ const Home: NextPage = () => {
   return (
     <>
       <SEO titulo="Inicio" url={asPath} />
-      <MediaQuery minWidth={992}>
-        <ListaProp />
-      </MediaQuery>
+      <ListaProp />
+      {/* <MediaQuery minWidth={992}>
+      </MediaQuery> */}
       <MapaBuscador />
       <Info />
     </>

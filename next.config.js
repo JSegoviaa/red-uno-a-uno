@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  // basePath: "/app",
+  basePath: "/app",
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
