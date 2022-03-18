@@ -150,7 +150,8 @@ const Notificaciones = (props: Props) => {
             borderRadius: '50%',
             padding: '0px 6px',
             boxSizing: "border-box",
-            marginTop: '12px'
+            marginTop: '12px',
+            width: '38px'
           }}>
           <i
 
@@ -162,8 +163,8 @@ const Notificaciones = (props: Props) => {
           <span
             style={{
               position: "absolute",
-              top: 15,
-              right: -18,
+              top: 30,
+              marginLeft: 22,
               color: "#fff",
               fontSize: 8,
             }}
