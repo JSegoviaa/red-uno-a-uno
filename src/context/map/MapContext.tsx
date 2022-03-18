@@ -34,6 +34,8 @@ interface ContextProps {
   tipoPropiedad: string;
   setCategoria: Dispatch<SetStateAction<string>>;
   setTipoPropiedad: Dispatch<SetStateAction<string>>;
+  filtros: boolean;
+  setFiltros: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface Bounds {
@@ -78,6 +80,8 @@ export const MapProvider: FC = ({ children }) => {
     "61e99edd0d3bd9163e4a4b3a"
   );
 
+  const [filtros, setFiltros] = useState(false);
+
   useEffect(() => {
     obtenerUbicacionUsuario().then((lngLat) => {
       setUbicacionUsuario({ lat: lngLat.lat, lng: lngLat.lng });
@@ -118,6 +122,8 @@ export const MapProvider: FC = ({ children }) => {
         setCategoria,
         tipoPropiedad,
         setTipoPropiedad,
+        filtros,
+        setFiltros,
       }}
     >
       {children}

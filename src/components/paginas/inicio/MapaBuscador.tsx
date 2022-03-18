@@ -38,6 +38,7 @@ const MapaUbicacion = () => {
     tipoPropiedad,
     setCategoria,
     setTipoPropiedad,
+    filtros,
   } = useContext(MapContext);
   const [seleccionado, setSeleccionado] = useState("");
   const { loading, propertyTypes } = useTipoPropiedad();
@@ -121,7 +122,14 @@ const MapaUbicacion = () => {
           <>
             <div onClick={handleClick}>
               <BuscarZona />
-              <div className={styles.barraCategorias}>
+
+              <div
+                className={
+                  filtros
+                    ? styles.barraCategorias
+                    : styles.barraCategoriasInactive
+                }
+              >
                 {loading ? (
                   <Loading />
                 ) : (

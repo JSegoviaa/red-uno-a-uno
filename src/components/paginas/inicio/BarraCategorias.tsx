@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { Categoria } from "interfaces/InmueblesInterface";
 import { TipoPropiedad } from "interfaces/PropertyType";
 import styles from "./BarraCategoria.module.css";
+import { MapContext } from "context/map/MapContext";
 
 interface Props {
   setTipoPropiedad: Dispatch<SetStateAction<string>>;
@@ -12,8 +13,9 @@ interface Props {
 
 const BarraCategorias = (props: Props) => {
   const { setTipoPropiedad, propertyTypes, categorias, setCategoria } = props;
-  const [selectedPro, setSelected] = useState("");
-  const [selectedCat, setselectedCat] = useState("");
+  const { categoria, tipoPropiedad } = useContext(MapContext);
+  const [selectedPro, setSelected] = useState(tipoPropiedad);
+  const [selectedCat, setselectedCat] = useState(categoria);
 
   const seleccionarCategoria = (id: string) => {
     setCategoria(id);

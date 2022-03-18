@@ -1,11 +1,16 @@
-import Link from "next/link";
 import { useContext } from "react";
+import Link from "next/link";
+import { MapContext } from "context/map/MapContext";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import Buscador from "../buscador/Buscador";
 import styles from "./PurpleHeader.module.css";
 
 const PurpleHeader = () => {
   const { auth } = useContext(AuthContext);
+  const { setFiltros, filtros } = useContext(MapContext);
+
+  const mostrarFiltros = () => setFiltros(!filtros);
+
   return (
     <div className={styles.purpleNav2}>
       <ul className="nav d-flex justify-content-center">
@@ -49,25 +54,21 @@ const PurpleHeader = () => {
           </>
         ) : null}
         <li className="nav-item">
-          <Buscador />
-          {/* <button className={styles.searchBtn}>
-            <i className="bi bi-search" />
-          </button> */}
+          <div className={styles.filterIconContainer}>
+            <Buscador />
+            <i
+              onClick={mostrarFiltros}
+              className={`${
+                filtros ? styles.filterIconActive : styles.filterIcon
+              } bi bi-sliders pointer`}
+            />
+          </div>
         </li>
         <li>
           <button className={styles.searchBtn}>
             <i className="bi bi-search" />
           </button>
         </li>
-        {/* {auth.uid ? (
-          <li className="nav-item">
-            <img
-              className={`${styles.notificacion} mx-3 pointer`}
-              src="/images/icons/Notificaciones.png"
-              alt="..."
-            />
-          </li>
-        ) : null} */}
       </ul>
     </div>
   );
