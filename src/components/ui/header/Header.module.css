@@ -100,8 +100,8 @@
 .noPendiente :hover {
   background-color: #dbe7f8;
 }
-.iconNoti:hover{
-  background:none;
+.iconNoti:hover {
+  background: none;
 }
 
 .headerNotif {
@@ -161,11 +161,11 @@
   color: rgb(15, 99, 224);
   font-weight: 500;
 }
-.footVer:hover{
+.footVer:hover {
   color: rgb(5, 90, 218);
   font-weight: 700;
 }
-.notContainer{
+.notContainer {
   overflow-y: scroll;
   width: 100%;
   min-height: 0px;
@@ -186,14 +186,22 @@
   background: rgb(253, 69, 37);
 }
 
+.listIcon {
+  position: absolute;
+  left: 20px;
+  font-size: 35px;
+  transition: 300ms;
+  color: #7a7a7a;
+}
+
 @media (max-width: 575px) {
-  .notificaciones{
+  .notificaciones {
     margin-top: 260px;
     margin-left: -60px;
   }
 }
 @media (max-width: 430px) {
-  .notificaciones{
+  .notificaciones {
     margin-left: -80px;
     width: 315px;
   }

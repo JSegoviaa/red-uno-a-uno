@@ -7,6 +7,7 @@ import Footer from "../ui/footer/Footer";
 import Header from "../ui/header/Header";
 import PurpleHeader from "../ui/purpleheader/PurpleHeader";
 import BuscadorRes from "components/ui/buscador/BuscadorRes";
+import ResponsiveHeader from "components/ui/header/ResponsiveHeader";
 
 const Layout: FC = ({ children }) => {
   const { verificaToken } = useContext(AuthContext);
@@ -28,9 +29,12 @@ const Layout: FC = ({ children }) => {
             <Header />
             <PurpleHeader />
           </MediaQuery>
+
           <MediaQuery maxWidth={991}>
+            <ResponsiveHeader />
             <BuscadorRes />
           </MediaQuery>
+
           {children}
           <VentanaChat />
           <Footer />
