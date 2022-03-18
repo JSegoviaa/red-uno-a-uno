@@ -68,7 +68,7 @@ const Header = () => {
   // }, []);
 
   return (
-    <Navbar className={styles.navStyle} bg="light" expand="sm">
+    <Navbar className={styles.navStyle} bg="light" expand="lg">
       <Container>
         <div className="my-2">
           <Link href="/">
@@ -94,11 +94,6 @@ const Header = () => {
             </Nav>
           ) : (
             <Nav className="ms-auto my-2" navbarScroll>
-              <Link href="/">
-                <div className="pointer mx-4 d-flex align-items-center">
-                  INICIO
-                </div>
-              </Link>
               <div className="my-1">
                 <Button titulo="chats" onClick={handleShowCanvas} />
               </div>
