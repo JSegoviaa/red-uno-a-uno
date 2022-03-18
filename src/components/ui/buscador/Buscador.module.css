@@ -33,15 +33,12 @@
   cursor: pointer;
 }
 
-
 @media (max-width: 985px) {
-  .buscador{
+  .buscador {
     margin-top: 5px;
     width: 60vw;
   }
 }
-
-
 
 .buscador2 {
   background: #ffffff;
@@ -55,7 +52,7 @@
   font-size: 19px;
   outline: none;
 }
-.buscador2:focus{
+.buscador2:focus {
   border: 1px solid #7149bc;
 }
 .respuesta2 {
@@ -77,4 +74,64 @@
 .item2:hover {
   background-color: #c5c5c5;
   cursor: pointer;
+}
+
+.filterIcon {
+  position: absolute;
+  font-size: 25px;
+  right: 7px;
+  top: 8px;
+  bottom: 96.04%;
+  color: #7a7a7a;
+  transition: 300ms;
+  background-color: #f1f1f1;
+  width: 70px;
+  height: 40px;
+  text-align: center;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+.filterIconActive {
+  position: absolute;
+  font-size: 25px;
+  right: 7px;
+  top: 8px;
+  bottom: 96.04%;
+  color: #7149bc;
+  transition: 300ms;
+  background-color: #f1f1f1;
+  width: 70px;
+  height: 40px;
+  text-align: center;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+@media (max-width: 991px) {
+  .buscador {
+    background: #f1f1f1;
+    border: none;
+    width: 100%;
+    border-radius: 20px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 19px;
+    outline: none;
+    padding: 8px 0;
+  }
+
+  .respuesta {
+    position: absolute;
+    z-index: 2;
+    background-color: #ffffff;
+    border-radius: 0;
+    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.25);
+    margin-top: 8px;
+    left: 0;
+    width: 100%;
+  }
+  .item {
+    color: #7a7a7a;
+  }
 }

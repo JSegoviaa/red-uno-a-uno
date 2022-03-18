@@ -68,4 +68,7 @@
   .barraCategorias {
     overflow-x: scroll;
   }
+  .barraCategoriasContainer {
+    overflow-x: scroll;
+  }
 }
