@@ -41,9 +41,40 @@
   color: #ec7e0a;
 }
 
+.filterIconContainer {
+  position: relative;
+}
+
+.filterIcon {
+  position: absolute;
+  font-size: 20px;
+  right: 12px;
+  top: 2px;
+  bottom: 96.04%;
+  color: #7a7a7a;
+  transition: 300ms;
+}
+.filterIconActive {
+  position: absolute;
+  font-size: 20px;
+  right: 12px;
+  top: 2px;
+  bottom: 96.04%;
+  color: #7149bc;
+  transition: 300ms;
+}
+
 @media (max-width: 985px) {
   .searchBtn {
     margin-top: 4px;
+  }
+  .filterIcon {
+    right: 12px;
+    top: 7px;
+  }
+  .filterIconActive {
+    right: 12px;
+    top: 7px;
   }
 }
 
