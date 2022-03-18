@@ -4,6 +4,7 @@ import { Solicitud } from "interfaces/SolicitudInteface";
 import Loading from "../loading/Loading";
 import styles from "./Header.module.css";
 import Button from "../button/Button";
+import { Console } from "console";
 
 interface Props {
   target: MutableRefObject<null>;
@@ -37,6 +38,7 @@ const NotificacionItem: FC<Props> = (props) => {
     rechazarSolicitud,
     goToSolicitudes,
   } = props;
+  console.log(solicitudes)
   return (
     <Overlay target={target.current} show={notificaciones} placement="right">
       {({ placement, arrowProps, show: _show, popper, ...props }) => (
@@ -57,64 +59,77 @@ const NotificacionItem: FC<Props> = (props) => {
                   <div className={solicitud.estado === "Pendiente" ? styles.pendiente : styles.noPendiente
                   } key={solicitud._id}>
                     <div className={styles.notificacionContainer}>
-                      {solicitud.estado === "Pendiente" ? (
-                        <>
-                          <b>
-                            {solicitud.nombre
-                              ? solicitud.nombre
-                              : solicitud.usuario.nombre}{" "}
-                            {solicitud.apellido
-                              ? solicitud.apellido
-                              : solicitud.usuario.apellido}{" "}
-                          </b>
-                          quiere que le compartas este inmueble:{" "}
-                        </>
-                      ) : solicitud.estado === "Aprobado" ? (
-                        <span>
-                          Haz aceptado la solicitud de{" "}
-                          <b>
-                            {solicitud.nombre
-                              ? solicitud.nombre
-                              : solicitud.usuario.nombre}{" "}
-                            {solicitud.apellido
-                              ? solicitud.apellido
-                              : solicitud.usuario.apellido}
-                            {". "}
-                          </b>
-                          Ahora pueda compartir{" "}
-                        </span>
-                      ) : solicitud.estado === "Rechazado" ? (
-                        <span>
-                          Haz rechazado la solicitud de{" "}
-                          <b>
-                            {solicitud.nombre
-                              ? solicitud.nombre
-                              : solicitud.usuario.nombre}{" "}
-                            {solicitud.apellido
-                              ? solicitud.apellido
-                              : solicitud.usuario.apellido}
-                            {". "}
-                          </b>
-                          Inmueble rechazado:{" "}
-                        </span>
-                      ) : (
-                        "Error. Jamás debe de llegar a esta punto"
-                      )}
+                      <table>
+                        <tr>
+                          <td valign="middle">
+                            <div className={`${styles.notifImg}`}>
+                              <img src="https://res.cloudinary.com/du6f7alxg/image/upload/v1647448058/red1a1/usuarios/620fd8479d32c9541a3bb214/foto-de-perfil.png" alt="..." width={'100%'} />
+                            </div>
+                          </td>
+                          <td>
+                            {solicitud.estado === "Pendiente" ? (
+                              <>
+                                <b>
+                                  {solicitud.nombre
+                                    ? solicitud.nombre
+                                    : solicitud.usuario.nombre}{" "}
+                                  {solicitud.apellido
+                                    ? solicitud.apellido
+                                    : solicitud.usuario.apellido}{" "}
+                                </b>
+                                quiere que le compartas este inmueble:{" "}
+                              </>
+                            ) : solicitud.estado === "Aprobado" ? (
+                              <span>
+                                Haz aceptado la solicitud de{" "}
+                                <b>
+                                  {solicitud.nombre
+                                    ? solicitud.nombre
+                                    : solicitud.usuario.nombre}{" "}
+                                  {solicitud.apellido
+                                    ? solicitud.apellido
+                                    : solicitud.usuario.apellido}
+                                  {". "}
+                                </b>
+                                Ahora pueda compartir{" "}
+                              </span>
+                            ) : solicitud.estado === "Rechazado" ? (
+                              <span>
+                                Haz rechazado la solicitud de{" "}
+                                <b>
+                                  {solicitud.nombre
+                                    ? solicitud.nombre
+                                    : solicitud.usuario.nombre}{" "}
+                                  {solicitud.apellido
+                                    ? solicitud.apellido
+                                    : solicitud.usuario.apellido}
+                                  {". "}
+                                </b>
+                                Inmueble rechazado:{" "}
+                              </span>
+                            ) : (
+                              "Error. Jamás debe de llegar a esta punto"
+                            )}
+                            <span
+                              className={`${styles.propH} pointer`}
+                              onClick={() =>
+                                goToProperty(
+                                  solicitud.slug
+                                    ? solicitud.slug
+                                    : solicitud.inmueble.slug
+                                )
+                              }
+                            >
+                              {solicitud.titulo
+                                ? solicitud.titulo
+                                : solicitud.inmueble.titulo}
+                            </span>
+                          </td>
+                        </tr>
+                      </table>
 
-                      <span
-                        className={`${styles.propH} pointer`}
-                        onClick={() =>
-                          goToProperty(
-                            solicitud.slug
-                              ? solicitud.slug
-                              : solicitud.inmueble.slug
-                          )
-                        }
-                      >
-                        {solicitud.titulo
-                          ? solicitud.titulo
-                          : solicitud.inmueble.titulo}
-                      </span>
+
+
                       {solicitud.estado === "Pendiente" ? (
                         <div className="d-flex justify-content-center mt-2">
                           <button
@@ -131,7 +146,7 @@ const NotificacionItem: FC<Props> = (props) => {
                             className={`${styles.btnApprove} me-2`}
                           >
                             <i
-                              className={`${styles.iconNoti} bi bi-hand-thumbs-up`}
+                              className={`${styles.iconNoti} bi bi-check-circle`}
                             ></i>
                           </button>
                           <button
@@ -148,7 +163,7 @@ const NotificacionItem: FC<Props> = (props) => {
                             className={`${styles.btnReject} me-2`}
                           >
                             <i
-                              className={`${styles.iconNoti} bi bi-hand-thumbs-down`}
+                              className={`${styles.iconNoti} bi bi-x-circle`}
                             ></i>
                           </button>
                         </div>
