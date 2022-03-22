@@ -38,6 +38,7 @@ export interface Usuario {
   nombre: string;
   apellido: string;
   correo: string;
+  img: string;
 }
 
 export type Estado = "Aprobado" | "Rechazado" | "Pendiente";

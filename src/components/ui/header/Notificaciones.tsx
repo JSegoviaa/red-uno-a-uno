@@ -4,7 +4,6 @@ import {
   RefObject,
   SetStateAction,
   useContext,
-  useEffect,
 } from "react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -12,9 +11,7 @@ import { Solicitud } from "interfaces/SolicitudInteface";
 import { fetchAceptarRechazarSolicitud } from "helpers/fetch";
 import { AuthContext } from "context/auth/AuthContext";
 import NotificacionItem from "./NotificacionItem";
-import { InmuebleContext } from "context/inmuebles/InmuebleContext";
 import { production } from "credentials/credentials";
-import { relative } from "path";
 
 interface Props {
   notificaciones: boolean;
@@ -144,18 +141,20 @@ const Notificaciones = (props: Props) => {
   return (
     <>
       <div className="text-center" ref={notificacionRef}>
-        <div className="ms-3" onClick={mostrarNotificaciones}
+        <div
+          className="ms-3"
+          onClick={mostrarNotificaciones}
           style={{
-            border: '2.5px solid #7149bc',
-            borderRadius: '50%',
-            padding: '0px 6px',
+            border: "2.5px solid #7149bc",
+            borderRadius: "50%",
+            padding: "0px 6px",
             boxSizing: "border-box",
-            marginTop: '12px',
-            width: '38px'
-          }}>
+            marginTop: "12px",
+            width: "38px",
+          }}
+        >
           <i
-
-            style={{ fontSize: '20px', color: "#7149BC" }}
+            style={{ fontSize: "20px", color: "#7149BC" }}
             className="bi bi-bell-fill pointer"
           />
         </div>

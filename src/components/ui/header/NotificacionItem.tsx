@@ -3,8 +3,6 @@ import { Overlay } from "react-bootstrap";
 import { Solicitud } from "interfaces/SolicitudInteface";
 import Loading from "../loading/Loading";
 import styles from "./Header.module.css";
-import Button from "../button/Button";
-import { Console } from "console";
 
 interface Props {
   target: MutableRefObject<null>;
@@ -38,7 +36,6 @@ const NotificacionItem: FC<Props> = (props) => {
     rechazarSolicitud,
     goToSolicitudes,
   } = props;
-  console.log(solicitudes)
   return (
     <Overlay target={target.current} show={notificaciones} placement="right">
       {({ placement, arrowProps, show: _show, popper, ...props }) => (
@@ -53,24 +50,43 @@ const NotificacionItem: FC<Props> = (props) => {
             <Loading />
           ) : (
             <>
-              
-              {solicitudes.length === 0 ?
-                <div className="text-center py-5" style={{color: '#7A7A7A', fontWeight: '500'}}>
+              {solicitudes.length === 0 ? (
+                <div
+                  className="text-center py-5"
+                  style={{ color: "#7A7A7A", fontWeight: "500" }}
+                >
                   Aún no tiene notificaciones
                 </div>
-                : (
-                  <>
+              ) : (
+                <>
                   <div className={styles.headerNotif}>Notificaciones</div>
                   <div className={styles.notContainer}>
                     {solicitudes?.map((solicitud) => (
-                      <div className={solicitud.estado === "Pendiente" ? styles.pendiente : styles.noPendiente
-                      } key={solicitud._id}>
+                      <div
+                        className={
+                          solicitud.estado === "Pendiente"
+                            ? styles.pendiente
+                            : styles.noPendiente
+                        }
+                        key={solicitud._id}
+                      >
                         <div className={styles.notificacionContainer}>
                           <table>
                             <tr>
                               <td valign="middle">
                                 <div className={`${styles.notifImg}`}>
-                                  <img src="https://res.cloudinary.com/du6f7alxg/image/upload/v1647448058/red1a1/usuarios/620fd8479d32c9541a3bb214/foto-de-perfil.png" alt="..." width={'100%'} />
+                                  <img
+                                    src={
+                                      solicitud.usuario.img
+                                        ? solicitud.usuario.img
+                                        : ""
+                                    }
+                                    alt={solicitud.usuario.nombre}
+                                    style={{
+                                      borderRadius: "50%",
+                                      width: "100%",
+                                    }}
+                                  />
                                 </div>
                               </td>
                               <td>
@@ -135,8 +151,6 @@ const NotificacionItem: FC<Props> = (props) => {
                             </tr>
                           </table>
 
-
-
                           {solicitud.estado === "Pendiente" ? (
                             <div className="d-flex justify-content-center mt-2">
                               <button
@@ -179,8 +193,8 @@ const NotificacionItem: FC<Props> = (props) => {
                       </div>
                     ))}
                   </div>
-                  </>
-                )}
+                </>
+              )}
               {solicitudes.length === 0 ? null : (
                 <div className="d-flex justify-content-center py-2">
                   <div
