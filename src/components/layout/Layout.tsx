@@ -8,9 +8,10 @@ import PurpleHeader from "../ui/purpleheader/PurpleHeader";
 import BuscadorRes from "components/ui/buscador/BuscadorRes";
 import ResponsiveHeader from "components/ui/header/ResponsiveHeader";
 import styles from "../../styles/Responsive.module.css";
+import BottomNavBar from "components/ui/responsive/BottomNavBar";
 
 const Layout: FC = ({ children }) => {
-  const { verificaToken } = useContext(AuthContext);
+  const { verificaToken, auth } = useContext(AuthContext);
   const router = useRouter();
 
   const admin = router.pathname.includes("dashboard");
@@ -33,6 +34,7 @@ const Layout: FC = ({ children }) => {
           <div className={styles.mostrarHeaderResponsive}>
             <ResponsiveHeader />
             <BuscadorRes />
+            {auth.logged ? <BottomNavBar /> : null}
           </div>
 
           {children}

@@ -12,6 +12,7 @@ import { SocketContext } from "context/socket/SocketContext";
 import { useSolicitudes } from "hooks/useSolicitudes";
 import MenuUsuario from "./MenuUsuario";
 import Notificaciones from "./Notificaciones";
+import { ChatContext } from "context/chat/ChatContext";
 
 // interface Notificacion {
 //   de: string;
@@ -23,11 +24,12 @@ import Notificaciones from "./Notificaciones";
 
 const Header = () => {
   const { auth, abrirRegistro, abrirLogin } = useContext(AuthContext);
+  const { showCanvas, handleCloseCanvas, handleShowCanvas } =
+    useContext(ChatContext);
   const { socket } = useContext(SocketContext);
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const target = useRef(null);
   const [notificaciones, setNotificaciones] = useState(false);
-  const [showCanvas, setShowCanvas] = useState(false);
   const [contador, setContador] = useState(0);
   const { solicitudes, cargando, setSolicitudes } = useSolicitudes(auth.uid);
   const notificacionRef = useRef<HTMLDivElement>(null);
@@ -35,9 +37,6 @@ const Header = () => {
   //   []
   // );
   // const uniqueValues = new Set();
-
-  const handleCloseCanvas = () => setShowCanvas(false);
-  const handleShowCanvas = () => setShowCanvas(true);
 
   useEffect(() => {
     socket?.on("obtener-solicitud", (solicitud) => {

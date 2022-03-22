@@ -24,7 +24,6 @@ const Home: NextPage = () => {
       </div>
       <MapaBuscador />
       <Info />
-      <BottomNavBar />
     </>
   );
 };

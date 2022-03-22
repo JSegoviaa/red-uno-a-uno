@@ -1,6 +1,3 @@
-import { AuthContext } from "context/auth/AuthContext";
-import { useConversaciones } from "hooks/useConversaciones";
-import { Conversacion } from "interfaces/ChatInterface";
 import {
   createContext,
   Dispatch,
@@ -12,6 +9,9 @@ import {
   useRef,
   useState,
 } from "react";
+import { AuthContext } from "context/auth/AuthContext";
+import { useConversaciones } from "hooks/useConversaciones";
+import { Conversacion } from "interfaces/ChatInterface";
 import { crearChat, obtenerMensajes } from "../../helpers/fetch";
 import { ActionType, chatReducer } from "./chatReducer";
 
@@ -31,6 +31,10 @@ interface ContextProps {
   iniciarChat: (data: CrearChat) => Promise<void>;
   conversaciones: Conversacion[];
   cargando: boolean;
+  showCanvas: boolean;
+  setShowCanvas: Dispatch<SetStateAction<boolean>>;
+  handleCloseCanvas: () => void;
+  handleShowCanvas: () => void;
 }
 
 export const initialState: any = {
@@ -51,6 +55,7 @@ export const ChatProvider: FC = ({ children }) => {
   const [mensajePara, setMensajePara] = useState("");
   const [minimizarChat, setMinimizarChat] = useState(true);
   const scrollToBotom = useRef<HTMLDivElement | null>(null);
+  const [showCanvas, setShowCanvas] = useState(false);
   const { conversaciones, cargando, setConversaciones } = useConversaciones(
     auth.uid
   );
@@ -71,6 +76,9 @@ export const ChatProvider: FC = ({ children }) => {
     scrollToBotom.current?.scrollIntoView();
   };
 
+  const handleCloseCanvas = () => setShowCanvas(false);
+  const handleShowCanvas = () => setShowCanvas(true);
+
   return (
     <ChatContext.Provider
       value={{
@@ -84,6 +92,10 @@ export const ChatProvider: FC = ({ children }) => {
         iniciarChat,
         cargando,
         conversaciones,
+        showCanvas,
+        setShowCanvas,
+        handleCloseCanvas,
+        handleShowCanvas,
       }}
     >
       {children}
