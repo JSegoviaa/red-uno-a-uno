@@ -90,6 +90,23 @@ const ResponsiveHeader = () => {
                 </span>
               </Link>
             </div>
+
+            {auth.role === "Individual" ||
+            auth.role === "Usuario" ||
+            auth.role === "UsuarioPagado" ? null : (
+              <div onClick={cerrarMenu}>
+                <Link href="/perfil/mis-usuarios">
+                  <span className={styles.headerLinkItem}>Mis Usuarios</span>
+                </Link>
+              </div>
+            )}
+            {auth.role === "Administrador" ? (
+              <div onClick={cerrarMenu}>
+                <Link href="/dashboard">
+                  <span className={styles.headerLinkItem}>Dashboard</span>
+                </Link>
+              </div>
+            ) : null}
           </div>
         )}
       </div>
