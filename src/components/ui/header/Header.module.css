@@ -226,3 +226,35 @@
     width: 315px;
   }
 }
+
+/*Responsive header*/
+
+.resHeader {
+  background-color: #fff;
+  height: 100vh;
+  overflow: auto;
+  position: absolute;
+  transform: translateX(-100%);
+  transition: 300ms;
+  width: 100%;
+  z-index: 9;
+}
+
+.resHeaderAtive {
+  background-color: #fff;
+  height: 100vh;
+  overflow: auto;
+  position: absolute;
+  transition: 300ms;
+  width: 100%;
+  z-index: 9;
+}
+
+.headerLinkItem {
+  color: #0e0e0e;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 59px;
+  margin-left: 25px;
+}
