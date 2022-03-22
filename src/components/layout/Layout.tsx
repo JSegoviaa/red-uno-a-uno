@@ -1,6 +1,5 @@
 import { FC, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import MediaQuery from "react-responsive";
 import { AuthContext } from "../../context/auth/AuthContext";
 import VentanaChat from "../paginas/perfil/chats/VentanaChat";
 import Footer from "../ui/footer/Footer";
@@ -8,6 +7,7 @@ import Header from "../ui/header/Header";
 import PurpleHeader from "../ui/purpleheader/PurpleHeader";
 import BuscadorRes from "components/ui/buscador/BuscadorRes";
 import ResponsiveHeader from "components/ui/header/ResponsiveHeader";
+import styles from "../../styles/Responsive.module.css";
 
 const Layout: FC = ({ children }) => {
   const { verificaToken } = useContext(AuthContext);
@@ -25,15 +25,15 @@ const Layout: FC = ({ children }) => {
         <>{children}</>
       ) : (
         <>
-          <MediaQuery minWidth={992}>
+          <div className={styles.ocultarHeaderResponsive}>
             <Header />
             <PurpleHeader />
-          </MediaQuery>
+          </div>
 
-          <MediaQuery maxWidth={991}>
+          <div className={styles.mostrarHeaderResponsive}>
             <ResponsiveHeader />
             <BuscadorRes />
-          </MediaQuery>
+          </div>
 
           {children}
           <VentanaChat />

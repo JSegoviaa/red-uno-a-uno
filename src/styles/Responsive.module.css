@@ -1,0 +1,11 @@
+@media (max-width: 993px) {
+  .ocultarHeaderResponsive {
+    display: none;
+  }
+}
+
+@media (min-width: 993px) {
+  .mostrarHeaderResponsive {
+    display: none;
+  }
+}
