@@ -112,13 +112,12 @@
     background: #f1f1f1;
     border: none;
     width: 100%;
-    border-radius: 20px;
     font-family: "Open Sans";
     font-style: normal;
     font-weight: normal;
     font-size: 19px;
     outline: none;
-    padding: 8px 0;
+    margin-top: 3px;
   }
 
   .respuesta {
@@ -133,5 +132,11 @@
   }
   .item {
     color: #7a7a7a;
+  }
+}
+
+@media (max-width: 985px) {
+  .buscador {
+    margin-top: 8px;
   }
 }
