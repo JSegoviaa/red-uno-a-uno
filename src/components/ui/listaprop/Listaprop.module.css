@@ -1,0 +1,231 @@
+.containerList {
+  max-width: 650px;
+  position: absolute;
+  z-index: 1;
+  transform: translate(0px, 70.5px);
+}
+.lista {
+  background: none;
+  border: none;
+}
+.cardheader {
+  border: none;
+  padding: 0;
+  background-color: white;
+  border-radius: 10px !important;
+}
+.btnList {
+  background: #ffffff;
+  box-shadow: 0px 0px 14px 7px rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+  border: none;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 21px;
+  color: #7149bc;
+  padding: 15px 22px;
+}
+
+.bodyList {
+  max-height: 74.5vh;
+  overflow-y: scroll;
+  background-color: white;
+}
+.bodyList::-webkit-scrollbar {
+  width: 5px;
+}
+.bodyList::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+.bodyList::-webkit-scrollbar-thumb {
+  background: slateblue;
+  border-radius: 5px;
+}
+.bodyList::-webkit-scrollbar-thumb:hover {
+  background: rgb(253, 69, 37);
+}
+
+.cardPropBody {
+  height: 185px;
+  overflow: hidden;
+  transition: 150ms;
+  background: #ffffff;
+  box-shadow: 0px 0px 13px 5px rgba(0, 0, 0, 0.07);
+  border-radius: 15px;
+  border: none;
+}
+
+.cardImg {
+  width: 100%;
+  min-height: 200px;
+}
+.cardContenido {
+  padding: 10px;
+}
+.cardTitle {
+  font-family: "Open Sans";
+  font-size: 22px;
+  font-weight: 700;
+  color: black;
+  line-height: 54px;
+  white-space: pre-line;
+  display: -webkit-box;
+  max-width: calc(90%);
+  max-height: auto;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.cardPrecio {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 40px;
+  color: #13a407;
+}
+.cardDescription {
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #5e5e5e;
+  white-space: pre-line;
+  display: -webkit-box;
+  max-width: calc(100%);
+  max-height: auto;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 70px;
+}
+
+.tagTipoProp {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 42px;
+  color: #e65a1f;
+  padding: 4px 13px;
+  border: 0.777778px solid #e65a1f;
+  box-sizing: border-box;
+  border-radius: 31.1111px;
+  text-align: center;
+}
+.tagTipo {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 42px;
+  color: #e65a1f;
+  padding: 4px 13px;
+  border: 0.777778px solid #e65a1f;
+  box-sizing: border-box;
+  border-radius: 31.1111px;
+  text-align: center;
+}
+
+.imgcontainer {
+  overflow: hidden;
+}
+
+.topIcons1 {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.topIcons2 {
+  position: absolute;
+  left: 162px;
+  top: 5px;
+}
+
+.iconShare {
+  padding-top: 25px;
+  padding-left: 18px;
+  /* border: 1px solid #dddddd;
+    background-color: white; */
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-image: url("/images/icons/properties-icons/2-gray.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 100ms;
+}
+
+.iconShare:hover {
+  /* background-color: #7149bc;
+    border: 1px solid #7149bc; */
+  background-image: url("/images/icons/properties-icons/2-gray.png");
+  transition: 100ms;
+}
+.iconFav {
+  padding-top: 25px;
+  padding-left: 18px;
+  /* border: 1px solid #dddddd; */
+  border: none;
+  /* background-color: white; */
+
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-image: url("/images/icons/properties-icons/6-white.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: 100ms;
+}
+
+.iconFav:hover {
+  /* background-color: #7149bc; */
+  /* border: 1px solid #7149bc; */
+  background-image: url("/images/icons/properties-icons/6-white.png");
+  transition: 100ms;
+}
+
+.noImage {
+  width: 100%;
+  height: 200px;
+  background-color: #c5c5c5;
+}
+.textNoImage {
+  color: white;
+  font-size: 1vw;
+  font-family: "Open Sans";
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  padding-top: 45px;
+}
+
+@media (max-width: 767px) {
+  .containerList {
+    max-width: calc(100%);
+  }
+  .containerList {
+    position: relative;
+    z-index: 1;
+    transform: translate(0px, -2px);
+  }
+  .btnList {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-left: 0;
+  }
+  .btnList {
+    margin-bottom: 10px;
+  }
+  .cardPropBody {
+    height: auto;
+  }
+  .cardImg {
+    width: 100%;
+    max-height: 200px;
+  }
+  /* .cardTitle {
+    } */
+}

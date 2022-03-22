@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import {
   Accordion,
@@ -6,15 +6,14 @@ import {
   Card,
   useAccordionButton,
 } from "react-bootstrap";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import { agregarFav, agregarHist } from "../../../helpers/fetch";
-import { formatPrice } from "../../../helpers/formatPrice";
 import { useListaInmuebleCoords } from "../../../hooks/useInmuebles";
 import Loading from "../../ui/loading/Loading";
 import styles from "./ListaProp.module.css";
 import { MapContext } from "context/map/MapContext";
+import ListaPropCard from "components/ui/listaprop/ListaPropCard";
 
 function ContextAwareToggle({ children, eventKey, callback }: any) {
   const { activeEventKey } = useContext(AccordionContext);
@@ -139,99 +138,14 @@ const ListaProp = () => {
                           return inmueble.publicado === true;
                         })
                         .map((inmueble) => (
-                          <div
-                            key={inmueble._id}
-                            className="col-sm-6 col-md-12 col-lg-12"
-                          >
-                            <div
-                              className={`${styles.cardPropBody} card mb-3 pointer`}
-                            >
-                              <div className={styles.topIcons1}>
-                                <CopyToClipboard
-                                  onCopy={compartir}
-                                  text={`red1a1.com/app/propiedades/${inmueble.slug}`}
-                                >
-                                  <button
-                                    type="button"
-                                    className={`${styles.iconShare} btn me-1`}
-                                  />
-                                </CopyToClipboard>
-                              </div>
-                              <div className={styles.topIcons2}>
-                                {auth.uid ? (
-                                  <button
-                                    onClick={() =>
-                                      agregarFavorito(
-                                        inmueble._id,
-                                        inmueble.usuario
-                                      )
-                                    }
-                                    type="button"
-                                    className={`${styles.iconFav} btn me-0`}
-                                  />
-                                ) : null}
-                              </div>
-
-                              <div
-                                className="row"
-                                onClick={() =>
-                                  handleProperty(inmueble._id, inmueble.slug)
-                                }
-                              >
-                                <div className="col-sm-12 col-md-4 col-lg-4 col-xl-4 col-12 p-0">
-                                  <div className={styles.imgcontainer}>
-                                    {inmueble.imgs.length > 0 ? (
-                                      <img
-                                        className={styles.cardImg}
-                                        src={
-                                          inmueble.imgs.length > 0
-                                            ? inmueble.imgs[0]
-                                            : ""
-                                        }
-                                        alt={inmueble.titulo}
-                                      />
-                                    ) : (
-                                      <div className={styles.noImage}>
-                                        <div className={styles.textNoImage}>
-                                          Aún no hay <br /> imagenes <br /> para
-                                          mostrar {":("}
-                                        </div>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="col-sm-12 col-md-8 col-lg-8 col-xl-8 col-12">
-                                  <div className={styles.cardContenido}>
-                                    <div className={styles.cardTitle}>
-                                      {inmueble.titulo}
-                                    </div>
-                                    <div className={styles.cardDescription}>
-                                      {inmueble.descripcion
-                                        ? inmueble.descripcion
-                                        : "Sin descripción"}
-                                    </div>
-                                    <div className="row">
-                                      <div className="col-4 text-center p-0">
-                                        <span className={styles.tagTipoProp}>
-                                          {inmueble.tipoPropiedad.nombre}
-                                        </span>
-                                      </div>
-                                      <div className="col-2 text-center p-0">
-                                        <span className={styles.tagTipo}>
-                                          {inmueble.categoria.nombre}
-                                        </span>
-                                      </div>
-                                      <div className="col-6 text-end">
-                                        <div className={styles.cardPrecio}>
-                                          {formatPrice(inmueble.precio)}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <Fragment key={inmueble._id}>
+                            <ListaPropCard
+                              inmueble={inmueble}
+                              compartir={compartir}
+                              agregarFavorito={agregarFavorito}
+                              handleProperty={handleProperty}
+                            />
+                          </Fragment>
                         ))}
                       {limite > listaInmuebles!.total ? null : (
                         <>
