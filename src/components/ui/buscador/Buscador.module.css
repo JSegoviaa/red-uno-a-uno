@@ -110,16 +110,24 @@
 @media (max-width: 991px) {
   .buscador {
     background: #f1f1f1;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
     border: none;
-    width: 100%;
     font-family: "Open Sans";
+    font-size: 19px;
     font-style: normal;
     font-weight: normal;
-    font-size: 19px;
-    outline: none;
-    margin-top: 3px;
-    padding: 8px;
     margin-bottom: 5px;
+    margin-top: 3px;
+    outline: none;
+    padding: 8px 30px;
+    width: 100%;
+  }
+
+  .leftArrow {
+    position: absolute;
+    margin-top: 16px;
+    font-size: 20px;
   }
 
   .respuesta {

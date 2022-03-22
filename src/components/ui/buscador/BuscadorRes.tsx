@@ -10,6 +10,7 @@ const BuscadorRes = () => {
 
   return (
     <div className="px-2">
+      <i className={`bi bi-chevron-left ${styles.leftArrow}`} />
       <Buscador />
       <i
         onClick={mostrarFiltros}
