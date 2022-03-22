@@ -25,15 +25,15 @@ const Layout: FC = ({ children }) => {
         <>{children}</>
       ) : (
         <>
-          {/* <MediaQuery minWidth={992}>
-          </MediaQuery> */}
-          <Header />
-          <PurpleHeader />
-          {/* 
+          <MediaQuery minWidth={992}>
+            <Header />
+            <PurpleHeader />
+          </MediaQuery>
+
           <MediaQuery maxWidth={991}>
             <ResponsiveHeader />
             <BuscadorRes />
-          </MediaQuery> */}
+          </MediaQuery>
 
           {children}
           <VentanaChat />
