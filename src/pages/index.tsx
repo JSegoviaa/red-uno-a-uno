@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Info from "../components/paginas/inicio/Info";
 import ListaProp from "../components/paginas/inicio/ListaProp";
+import BottomNavBar from "../components/ui/responsive/BottomNavBar";
 import SEO from "../components/seo/SEO";
 import Loading from "../components/ui/loading/Loading";
 import styles from "../styles/Responsive.module.css";
@@ -23,6 +24,7 @@ const Home: NextPage = () => {
       </div>
       <MapaBuscador />
       <Info />
+      <BottomNavBar />
     </>
   );
 };

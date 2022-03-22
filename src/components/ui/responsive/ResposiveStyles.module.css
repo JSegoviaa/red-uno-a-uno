@@ -1,0 +1,26 @@
+.whiteBBar {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  box-shadow: 
+  0px 2px 31px 2px 
+  rgba(119, 119, 119, 0.21);
+  z-index: 99;
+  bottom: 0;
+}
+.btnContainer {
+  border-right: 1px solid #C7C7C7;
+}
+
+.whiteBBarImg{
+    width: 25px;
+}
+
+
+
+@media (min-width: 992px) {
+    .whiteBBar{
+        display: none;
+    }
+}
