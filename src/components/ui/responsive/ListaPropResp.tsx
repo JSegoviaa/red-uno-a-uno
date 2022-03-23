@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "context/auth/AuthContext";
 import styles from "./ResposiveStyles.module.css";
 
 const ListaPropResp = () => {
-  const [mostrarLista, setMostrarLista] = useState(true);
+  const { auth } = useContext(AuthContext);
+  const [mostrarLista, setMostrarLista] = useState(false);
 
   const mostrarListaF = () => setMostrarLista(!mostrarLista);
 
   return (
     <div
-      className={
-        mostrarLista ? styles.listaRespActive : styles.listaRespInactive 
-      }
+      className={`
+      ${mostrarLista ? styles.listaRespActive : styles.listaRespInactive}
+      ${auth.logged ? styles.heightLogin : styles.heightLogOut}
+      `}
     >
       <div
         onClick={mostrarListaF}
