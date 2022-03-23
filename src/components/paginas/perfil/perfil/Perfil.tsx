@@ -1,25 +1,25 @@
 import { useContext, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import { AuthContext } from "../../../../context/auth/AuthContext";
 import Button from "../../../ui/button/Button";
 import styles from "./Perfil.module.css";
 import Loading from "../../../ui/loading/Loading";
-import historialDePagos from "pages/perfil/historial-de-pagos";
-import referencias from "pages/dashboard/pagos/referencias";
 
 const Perfil = () => {
   const router = useRouter();
-  const { auth, fotoPerfil } = useContext(AuthContext);
+  const { auth, fotoPerfil, logOut } = useContext(AuthContext);
   const [picture, setPicture] = useState("");
   const [hover, setHover] = useState(false);
   const [cargando, setCargando] = useState(false);
-  const inputFile = useRef<any>(null);
+  const inputFile = useRef<HTMLInputElement>(null);
   const misPaquetes = () => router.push("/perfil/mis-paquetes");
   const misPropiedades = () => router.push("/perfil/mis-propiedades");
   const actualizarPerfil = () => router.push("/perfil/actualizar-perfil");
+  const referencias = () => router.push("/perfil/referencias-de-pago");
+  const historialPagos = () => router.push("/perfil/historial-de-pagos");
 
-  const abrirInputfile = () => inputFile.current.click();
+  const abrirInputfile = () => inputFile.current?.click();
 
   const handlePicture = async (e: any) => {
     e.preventDefault();
@@ -78,16 +78,21 @@ const Perfil = () => {
           </Form>
 
           <div className={styles.nombre}>
-            {auth.nombre} {auth.apellido} <i onClick={actualizarPerfil}
-            className={`${styles.edicionIcon} bi bi-pencil-square pointer`}></i>
+            {auth.nombre} {auth.apellido}{" "}
+            <i
+              onClick={actualizarPerfil}
+              className={`${styles.edicionIcon} bi bi-pencil-square pointer`}
+            ></i>
           </div>
 
           {auth.paqueteAdquirido ? (
-            <div className={styles.paquete}>Paquete {auth.role}</div>
+            <div className={styles.paquete}>
+              {auth.role === "Administrador" ? null : "Paquete"} {auth.role}
+            </div>
           ) : null}
 
           <div className={styles.empresa}>{auth.nombreInmobiliaria}</div>
-          <div className={styles.correo}>{auth.correo} </div>
+          <div className={styles.correo}>{auth.correo}</div>
           <div className={styles.telefono}>{auth.telefonoPersonal}</div>
           <div className={styles.telefono}>{auth.direccionFisica}</div>
         </div>
@@ -97,11 +102,7 @@ const Perfil = () => {
 
       <div className="row d-flex justify-content-center">
         <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
-          <Button
-            titulo="Mis paquetes"
-            btn="Secondary"
-            onClick={misPaquetes}
-          />
+          <Button titulo="Mis paquetes" btn="Secondary" onClick={misPaquetes} />
         </div>
         <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
           <Button
@@ -110,20 +111,9 @@ const Perfil = () => {
             onClick={misPropiedades}
           />
         </div>
-        {/* <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
-          <Button
-            titulo="Actualizar perfil"
-            btn="Secondary"
-            onClick={actualizarPerfil}
-          />
-        </div> */}
 
         <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
-          <Button
-            titulo="Mis pagos"
-            btn="Secondary"
-            onClick={historialDePagos}
-          />
+          <Button titulo="Mis pagos" btn="Secondary" onClick={historialPagos} />
         </div>
 
         <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
@@ -134,10 +124,11 @@ const Perfil = () => {
           />
         </div>
         <div className="col-12 text-center my-4">
-          <span className={styles.btnSession}> <i className="bi bi-box-arrow-right"></i>  Cerrar sesión</span>
+          <span className={styles.btnSession} onClick={logOut}>
+            <i className="bi bi-box-arrow-right" /> Cerrar sesión
+          </span>
         </div>
       </div>
-      
     </Container>
   );
 };
