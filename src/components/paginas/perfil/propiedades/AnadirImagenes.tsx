@@ -114,7 +114,7 @@ const AnadirImagenes = () => {
 
     if (res.ok) {
       setDireccionInm(ultimoInmueble?.direccion);
-      usuariosPorDir.forEach(async (usuario) => {
+      usuariosPorDir?.forEach(async (usuario) => {
         const body = {
           nombre: usuario.nombre,
           apellido: usuario.apellido,
