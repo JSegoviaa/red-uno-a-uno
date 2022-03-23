@@ -50,6 +50,12 @@ de atras y viceversa*/
   font-size: 15px;
   color: #7149bc;
 }
+.notifiTextAprobado {
+  color: #7a7a7a;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+}
 .aceptar {
   font-style: normal;
   font-weight: 400;
