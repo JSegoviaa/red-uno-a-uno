@@ -1,7 +1,8 @@
+import { useRouter } from "next/router";
 import SEO from "components/seo/SEO";
+import NotificacionResp from "components/ui/responsive/NotificacionResp";
 import Titulo from "components/ui/titulo/Titulo";
 import { PrivateRoute } from "hooks/usePrivateRoute";
-import { useRouter } from "next/router";
 
 const Solicitudes = () => {
   const router = useRouter();
@@ -10,6 +11,7 @@ const Solicitudes = () => {
     <>
       <SEO titulo="Mis solicitudes" url={router.asPath} />
       <Titulo titulo="Solicitudes" />
+      <NotificacionResp />
     </>
   );
 };

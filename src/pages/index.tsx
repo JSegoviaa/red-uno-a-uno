@@ -25,9 +25,6 @@ const Home: NextPage = () => {
       </div>
       <MapaBuscador />
       <Info />
-
-      <NotificacionResp/>
-
     </>
   );
 };

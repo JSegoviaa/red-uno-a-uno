@@ -1,7 +1,6 @@
-import MisChats from "components/paginas/perfil/chats/MisChats";
-import { ChatContext } from "context/chat/ChatContext";
-import { useRouter } from "next/router";
 import { useContext } from "react";
+import { useRouter } from "next/router";
+import { ChatContext } from "context/chat/ChatContext";
 import styles from "./ResposiveStyles.module.css";
 
 const BottomNavBar = () => {
@@ -10,6 +9,7 @@ const BottomNavBar = () => {
     useContext(ChatContext);
   const goToHome = () => push("/");
   const goToProfile = () => push("/perfil");
+  const goToNot = () => push("/perfil/solicitudes");
 
   return (
     <div className={`${styles.whiteBBar}`}>
@@ -48,16 +48,20 @@ const BottomNavBar = () => {
         </div>
         <div className="col text-center py-3">
           <div className={`${styles.btnContainer} py-2`}>
-            <img
-              className={`${styles.whiteBBarImg} pointer`}
-              src="/images/icons/whitebar-icon-purple-3.png"
-              alt="..."
-            />
-
-
-            
-            {/* on click -->
-                        <img className={`${styles.whiteBBarImg} pointer`} src="/images/icons/whitebar-icon-orange-3.png" alt="..." /> */}
+            {pathname === "/perfil/solicitudes" ? (
+              <img
+                className={`${styles.whiteBBarImg} pointer`}
+                src="/images/icons/whitebar-icon-orange-3.png"
+                alt="..."
+              />
+            ) : (
+              <img
+                onClick={goToNot}
+                className={`${styles.whiteBBarImg} pointer`}
+                src="/images/icons/whitebar-icon-purple-3.png"
+                alt="..."
+              />
+            )}
           </div>
         </div>
         <div className="col text-center py-2">
