@@ -3,7 +3,6 @@
   border: 3px solid #7149bc;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  /* border-radius: 15px; */
   width: 25vw;
   padding-left: 15px;
   font-family: "Open Sans";
@@ -80,7 +79,7 @@
   position: absolute;
   font-size: 25px;
   right: 7px;
-  top: 70px;
+  top: 79px;
   bottom: 96.04%;
   color: #7a7a7a;
   transition: 300ms;
@@ -126,8 +125,9 @@
 
   .leftArrow {
     position: absolute;
-    margin-top: 16px;
-    font-size: 20px;
+    font-size: 30px;
+    margin-top: 7px;
+    left: 10px;
   }
 
   .respuesta {
