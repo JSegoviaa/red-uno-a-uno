@@ -9,7 +9,7 @@ const ListaPropResp = () => {
   return (
     <div
       className={
-        mostrarLista ? styles.listaRespActive : styles.listaRespInactive
+        mostrarLista ? styles.listaRespActive : styles.listaRespInactive 
       }
     >
       <div

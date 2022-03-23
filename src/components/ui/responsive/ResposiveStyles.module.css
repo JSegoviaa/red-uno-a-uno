@@ -92,13 +92,18 @@
   color: #7a7a7a;
 }
 
+.heightLogin {
+  height: 135px;
+}
+.heightLogOut {
+  height: 60px;
+}
+
 .listaRespInactive {
   background: #ffffff;
   box-shadow: 0px 0px 17px 8px rgba(0, 0, 0, 0.05);
   border-radius: 36px 36px 0px 0px;
   width: 100%;
-  height: 135px;
-  /* height: 60px; */
   position: fixed;
   z-index: 98;
   bottom: 0;
@@ -109,7 +114,7 @@
   box-shadow: 0px 0px 17px 8px rgba(0, 0, 0, 0.05);
   border-radius: none;
   width: 100%;
-  height: calc(83%);
+  height: 83vh;
   position: fixed;
   z-index: 98;
   bottom: 0;
@@ -151,12 +156,16 @@
 }
 .cardLista {
   background: #ffffff;
-  box-shadow: 0px 2px 9px 1px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 2px 9px 1px rgba(0, 0, 0, 0.1);
   border-radius: 22.7246px;
 }
 
 @media (min-width: 992px) {
   .whiteBBar {
+    display: none;
+  }
+  .listaRespInactive,
+  .listaRespActive {
     display: none;
   }
 }
