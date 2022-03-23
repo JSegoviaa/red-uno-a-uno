@@ -30,7 +30,7 @@ const ListaPropResp = () => {
       {/* empieza lista */}
       <div className={styles.ListContainer}>
         <div className="row">
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -43,7 +43,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -56,7 +56,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -69,7 +69,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -82,7 +82,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -95,7 +95,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -108,7 +108,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -121,7 +121,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -134,7 +134,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -147,7 +147,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
@@ -160,7 +160,7 @@ const ListaPropResp = () => {
               <br />
             </div>
           </div>
-          <div className="col-12 mb-4">
+          <div className="col-12 mb-3">
             <div className={`${styles.cardLista} p-4`}>
               <br />
               <br />
