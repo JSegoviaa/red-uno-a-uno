@@ -5,6 +5,8 @@ import { AuthContext } from "../../../../context/auth/AuthContext";
 import Button from "../../../ui/button/Button";
 import styles from "./Perfil.module.css";
 import Loading from "../../../ui/loading/Loading";
+import historialDePagos from "pages/perfil/historial-de-pagos";
+import referencias from "pages/dashboard/pagos/referencias";
 
 const Perfil = () => {
   const router = useRouter();
@@ -76,7 +78,8 @@ const Perfil = () => {
           </Form>
 
           <div className={styles.nombre}>
-            {auth.nombre} {auth.apellido}
+            {auth.nombre} {auth.apellido} <i onClick={actualizarPerfil}
+            className={`${styles.edicionIcon} bi bi-pencil-square pointer`}></i>
           </div>
 
           {auth.paqueteAdquirido ? (
@@ -92,31 +95,49 @@ const Perfil = () => {
 
       <hr />
 
-      <div className="py-5">
-        <Row className="d-flex justify-content-center text-center">
-          <Col className="py-3">
-            <Button
-              titulo="Mis paquetes"
-              btn="Secondary"
-              onClick={misPaquetes}
-            />
-          </Col>
-          <Col className="py-3">
-            <Button
-              titulo="Mis propiedades"
-              btn="Secondary"
-              onClick={misPropiedades}
-            />
-          </Col>
-          <Col className="py-3">
-            <Button
-              titulo="Actualizar perfil"
-              btn="Secondary"
-              onClick={actualizarPerfil}
-            />
-          </Col>
-        </Row>
+      <div className="row d-flex justify-content-center">
+        <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+          <Button
+            titulo="Mis paquetes"
+            btn="Secondary"
+            onClick={misPaquetes}
+          />
+        </div>
+        <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+          <Button
+            titulo="Mis propiedades"
+            btn="Secondary"
+            onClick={misPropiedades}
+          />
+        </div>
+        {/* <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+          <Button
+            titulo="Actualizar perfil"
+            btn="Secondary"
+            onClick={actualizarPerfil}
+          />
+        </div> */}
+
+        <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+          <Button
+            titulo="Mis pagos"
+            btn="Secondary"
+            onClick={historialDePagos}
+          />
+        </div>
+
+        <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+          <Button
+            titulo="Mis Referencias"
+            btn="Secondary"
+            onClick={referencias}
+          />
+        </div>
+        <div className="col-12 text-center my-4">
+          <span className={styles.btnSession}> <i className="bi bi-box-arrow-right"></i>  Cerrar sesión</span>
+        </div>
       </div>
+      
     </Container>
   );
 };

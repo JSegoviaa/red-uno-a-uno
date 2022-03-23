@@ -86,3 +86,33 @@
   margin-right: 30px;
   list-style: none;
 }
+
+.edicionIcon {
+  position: absolute;
+  transform: translate(10px, -15px);
+  transition: 150ms;
+}
+.edicionIcon:hover {
+  color: tomato;
+  transition: 150ms;
+}
+
+.btnSession {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 58px;
+  color: #ffffff;
+  background: #ff3030;
+  border: 2.49905px solid #ff3030;
+  box-sizing: border-box;
+  border-radius: 99.9622px;
+  padding: 8px 45px;
+}
+
+
+@media (min-width: 992px) {
+  .btnSession{
+    display: none;
+  }
+}
