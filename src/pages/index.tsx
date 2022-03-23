@@ -7,6 +7,7 @@ import BottomNavBar from "../components/ui/responsive/BottomNavBar";
 import SEO from "../components/seo/SEO";
 import Loading from "../components/ui/loading/Loading";
 import styles from "../styles/Responsive.module.css";
+import NotificacionResp from "../components/ui/responsive/NotificacionResp";
 
 const MapaBuscador = dynamic(
   () => import("../components/paginas/inicio/MapaBuscador"),
@@ -24,6 +25,9 @@ const Home: NextPage = () => {
       </div>
       <MapaBuscador />
       <Info />
+
+      <NotificacionResp/>
+
     </>
   );
 };

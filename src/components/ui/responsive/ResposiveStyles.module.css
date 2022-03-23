@@ -3,24 +3,98 @@
   width: 100%;
   height: auto;
   background-color: white;
-  box-shadow: 
-  0px 2px 31px 2px 
-  rgba(119, 119, 119, 0.21);
+  box-shadow: 0px 2px 31px 2px rgba(119, 119, 119, 0.21);
   z-index: 99;
   bottom: 0;
 }
 .btnContainer {
-  border-right: 1px solid #C7C7C7;
+  border-right: 1px solid #c7c7c7;
 }
 
-.whiteBBarImg{
-    width: 25px;
+.whiteBBarImg {
+  width: 25px;
 }
 
+/*al hacer hover en notifi
+se debe desactivar el scroll 
+de atras y viceversa*/
 
+
+.notifi {
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  height: 95%;
+  z-index: 2;
+  top: 0;
+  overflow-y: scroll;
+}
+
+.notifiContainer {
+  padding-top: 75px;
+  padding-bottom: 35px;
+}
+
+.notifiContent {
+  background-color: white;
+  padding: 15px 20px;
+  border-bottom: 1px solid #b4b4b44b;
+}
+.imgContainer {
+  background-color: blueviolet;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+.notifiText {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  color: #7149bc;
+}
+.aceptar {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: #13a407;
+  padding: 5px 15px;
+  border: 1px solid #13a407;
+  box-sizing: border-box;
+  border-radius: 49px;
+  margin-right: 5px;
+}
+.rechazar {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: #ff0000;
+  padding: 5px 15px;
+  border: 1px solid #ff0000;
+  box-sizing: border-box;
+  border-radius: 49px;
+  margin-right: 5px;
+}
+
+.aceptar:hover {
+  background: rgba(19, 164, 7, 0.22);
+}
+.rechazar:hover {
+  background: rgba(255, 0, 0, 0.22);
+}
+
+.hra {
+  position: absolute;
+  right: 20px;
+  transform: translateY(-12px);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  color: #7a7a7a;
+}
 
 @media (min-width: 992px) {
-    .whiteBBar{
-        display: none;
-    }
+  .whiteBBar {
+    display: none;
+  }
 }

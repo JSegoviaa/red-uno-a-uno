@@ -214,6 +214,14 @@
   color: #7a7a7a;
 }
 
+.respNavbar {
+  position: relative;
+  z-index: 105;
+  background-color: white;
+  border: 1px solid white;
+  box-shadow: 0px 2px 8px -3px rgba(0, 0, 0, 0.83);
+}
+
 @media (max-width: 575px) {
   .notificaciones {
     margin-top: 260px;

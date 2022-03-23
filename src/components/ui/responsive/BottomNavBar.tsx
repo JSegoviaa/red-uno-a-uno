@@ -53,6 +53,9 @@ const BottomNavBar = () => {
               src="/images/icons/whitebar-icon-purple-3.png"
               alt="..."
             />
+
+
+            
             {/* on click -->
                         <img className={`${styles.whiteBBarImg} pointer`} src="/images/icons/whitebar-icon-orange-3.png" alt="..." /> */}
           </div>

@@ -21,7 +21,7 @@ const ResponsiveHeader = () => {
   };
 
   return (
-    <div>
+    <div className={styles.respNavbar}>
       <div>
         <i
           onClick={() => setMostrar(!mostrar)}
