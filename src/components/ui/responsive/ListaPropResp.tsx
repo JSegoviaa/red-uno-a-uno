@@ -18,12 +18,13 @@ const ListaPropResp = () => {
       ></div>
       <div className="row g-0">
         <div className="col-12">
-          {/* <div className={`${styles.LRtitle1} mb-3`}>
-                        Lista de Inmuebles
-                    </div> */}
-          <div className={`${styles.LRtitle2}`}>
-            Se encontraron 37 resultados
-          </div>
+          {!mostrarLista ? (
+            <div className={`${styles.LRtitle1} mb-3`}>Lista de Inmuebles</div>
+          ) : (
+            <div className={`${styles.LRtitle2}`}>
+              Se encontraron 37 resultados
+            </div>
+          )}
         </div>
       </div>
       {/* empieza lista */}
