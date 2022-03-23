@@ -1,13 +1,13 @@
 import { useContext } from "react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import { AuthContext } from "context/auth/AuthContext";
 import { useSolicitudes } from "hooks/useSolicitudes";
 import styles from "./ResposiveStyles.module.css";
 import { useWindowWide } from "hooks/useWindowWide";
-import { useRouter } from "next/router";
 import { fetchAceptarRechazarSolicitud, hora } from "helpers";
 import { production } from "credentials/credentials";
 import { Solicitud } from "interfaces/SolicitudInteface";
-import { toast } from "react-toastify";
 import Loading from "../loading/Loading";
 
 const NotificacionResp = () => {
@@ -106,34 +106,32 @@ const NotificacionResp = () => {
     }
   };
 
-  console.log(solicitudes);
-
   return (
     <div className={`${styles.notifi}`}>
       <div className={`${styles.notifiContainer}`}>
         <div className="row g-0">
-          <div className="col-12">
-            <div className={styles.notifiContent}>
-              <table>
-                {cargando ? (
-                  <Loading />
-                ) : (
-                  <>
-                    {solicitudes.length === 0 ? (
-                      <div
-                        className="text-center py-5"
-                        style={{
-                          color: "#7A7A7A",
-                          fontWeight: "500",
-                          fontSize: 30,
-                        }}
-                      >
-                        Aún no tiene notificaciones
-                      </div>
-                    ) : (
-                      <>
-                        {solicitudes.map((solicitud) => (
-                          <tr key={solicitud._id}>
+          {cargando ? (
+            <Loading />
+          ) : (
+            <>
+              {solicitudes.length === 0 ? (
+                <div
+                  className="text-center py-5"
+                  style={{
+                    color: "#7A7A7A",
+                    fontWeight: "500",
+                    fontSize: 30,
+                  }}
+                >
+                  Aún no tiene notificaciones
+                </div>
+              ) : (
+                <>
+                  {solicitudes.map((solicitud) => (
+                    <div key={solicitud._id} className="col-12">
+                      <div className={styles.notifiContent}>
+                        <table>
+                          <tr>
                             {solicitud.estado === "Pendiente" ? (
                               <>
                                 <td valign="top">
@@ -272,14 +270,14 @@ const NotificacionResp = () => {
                               "Error. No debe llegar a esta parte"
                             )}
                           </tr>
-                        ))}
-                      </>
-                    )}
-                  </>
-                )}
-              </table>
-            </div>
-          </div>
+                        </table>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
