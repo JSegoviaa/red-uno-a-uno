@@ -86,7 +86,7 @@ const ListaPropResp = () => {
               ) : (
                 <>
                   {listaInmuebles?.inmuebles.map((inmueble) => (
-                    <div className="col-sm-6 col-md-12 col-lg-12 px-4 py-2">
+                    <div className="col-sm-12 col-md-12 col-lg-12 px-4 py-2">
                       <div className={`${styles.cardPropBody} card mb-3 pointer`}>
                         <div className={styles.topIcons1}>
                           <CopyToClipboard
@@ -133,17 +133,17 @@ const ListaPropResp = () => {
                                   : "Sin descripción"}
                               </div>
                               <div className="row">
-                                <div className="col-4 text-center p-0">
+                                <div className="col-sm-4 col-md-5 col-4 text-center p-0">
                                   <span className={styles.tagTipoProp}>
                                     {inmueble.tipoPropiedad.nombre}
                                   </span>
                                 </div>
-                                <div className="col-2 text-center p-0">
+                                <div className="col-sm-3 col-md-2 col-lg-2 col-3 text-center p-0">
                                   <span className={styles.tagTipo}>
                                     {inmueble.categoria.nombre}
                                   </span>
                                 </div>
-                                <div className="col-6 text-end">
+                                <div className="col-sm-5 col-md-5 col-5 text-end ps-0">
                                   <div className={styles.cardPrecio}>
                                     {formatPrice(inmueble.precio)}
                                   </div>
