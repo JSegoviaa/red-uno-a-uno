@@ -9,6 +9,7 @@ import styles from "./AuthModal.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import GoogleLogin from "react-google-login";
+import { production } from "credentials/credentials";
 
 const RegisterModal = () => {
   const router = useRouter();
@@ -53,6 +54,17 @@ const RegisterModal = () => {
       }
 
       if (resp.ok) {
+        const bienvida = {
+          nombre: resp.usuario.nombre,
+          apellido: resp.usuario.apellido,
+          correo: resp.usuario.correo,
+        };
+
+        await fetch(`${production}/correos/bienvenida`, {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(bienvida),
+        });
         router.push("/perfil/actualizar-perfil");
         cerrarRegistro();
       }
