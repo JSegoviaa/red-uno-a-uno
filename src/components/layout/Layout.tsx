@@ -9,11 +9,12 @@ import BuscadorRes from "components/ui/buscador/BuscadorRes";
 import ResponsiveHeader from "components/ui/header/ResponsiveHeader";
 import styles from "../../styles/Responsive.module.css";
 import BottomNavBar from "components/ui/responsive/BottomNavBar";
+import { MapContext } from "context/map/MapContext";
 
 const Layout: FC = ({ children }) => {
   const { verificaToken, auth } = useContext(AuthContext);
   const router = useRouter();
-
+  const { ocultarBottomNav } = useContext(MapContext);
   const admin = router.pathname.includes("dashboard");
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const Layout: FC = ({ children }) => {
           <div className={styles.mostrarHeaderResponsive}>
             <ResponsiveHeader />
             <BuscadorRes />
-            {auth.logged ? <BottomNavBar /> : null}
+            {auth.logged && ocultarBottomNav ? <BottomNavBar /> : null}
           </div>
 
           {children}

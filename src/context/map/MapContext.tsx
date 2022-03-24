@@ -36,6 +36,8 @@ interface ContextProps {
   setTipoPropiedad: Dispatch<SetStateAction<string>>;
   filtros: boolean;
   setFiltros: Dispatch<SetStateAction<boolean>>;
+  ocultarBottomNav: boolean;
+  setOcultarBottomNav: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface Bounds {
@@ -81,6 +83,7 @@ export const MapProvider: FC = ({ children }) => {
   );
 
   const [filtros, setFiltros] = useState(false);
+  const [ocultarBottomNav, setOcultarBottomNav] = useState(true);
 
   useEffect(() => {
     obtenerUbicacionUsuario().then((lngLat) => {
@@ -124,6 +127,8 @@ export const MapProvider: FC = ({ children }) => {
         setTipoPropiedad,
         filtros,
         setFiltros,
+        ocultarBottomNav,
+        setOcultarBottomNav,
       }}
     >
       {children}
