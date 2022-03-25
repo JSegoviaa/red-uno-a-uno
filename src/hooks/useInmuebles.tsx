@@ -1,6 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { Bounds, MapContext } from "context/map/MapContext";
-import { development, production } from "credentials/credentials";
+import {
+  bodegasCat,
+  casasC,
+  departamentosCat,
+  desarrollosCat,
+  oficinasCat,
+  production,
+  rentas,
+  ventas,
+} from "credentials";
 import {
   InmueblesCoordenadas,
   InmueblesUsuario,
@@ -188,7 +197,7 @@ export const useTipoInmueble = () => {
 
   const obtenerTotalCasas = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=61e99edd0d3bd9163e4a4b3a`
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=${casasC}`
     );
     const data = await res.json();
 
@@ -197,7 +206,7 @@ export const useTipoInmueble = () => {
 
   const obtenerTotalDepartamentos = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=61e99ee80d3bd9163e4a4b3e`
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=${departamentosCat}`
     );
     const data = await res.json();
 
@@ -206,7 +215,7 @@ export const useTipoInmueble = () => {
 
   const obtenerTotalBodegas = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=6213cb480d7c145fa7ae62b8`
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=${bodegasCat}`
     );
     const data = await res.json();
 
@@ -215,7 +224,7 @@ export const useTipoInmueble = () => {
 
   const obtenerTotalDesarrollos = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=6213cb350d7c145fa7ae62ac`
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=${desarrollosCat}`
     );
     const data = await res.json();
 
@@ -224,7 +233,7 @@ export const useTipoInmueble = () => {
 
   const obtenerTotalLocales = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=6213cb3c0d7c145fa7ae62b0`
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=${localStorage}`
     );
     const data = await res.json();
 
@@ -233,7 +242,7 @@ export const useTipoInmueble = () => {
 
   const obtenerTotalOficinas = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=6213cb430d7c145fa7ae62b4`
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=${oficinasCat}`
     );
     const data = await res.json();
 
@@ -258,7 +267,7 @@ export const useCategoriaInmueble = () => {
 
   const obtenerTotalRenta = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/categoria?categoria=61e99f0e0d3bd9163e4a4b42`
+      `${production}/inmuebles/inmuebles/categoria?categoria=${rentas}`
     );
     const data = await res.json();
 
@@ -267,7 +276,7 @@ export const useCategoriaInmueble = () => {
 
   const obtenerTotalVenta = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/categoria?categoria=61e99f120d3bd9163e4a4b46`
+      `${production}/inmuebles/inmuebles/categoria?categoria=${ventas}`
     );
     const data = await res.json();
 

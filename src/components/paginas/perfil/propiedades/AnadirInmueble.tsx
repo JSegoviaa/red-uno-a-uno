@@ -14,6 +14,7 @@ import {
   InmuebleContext,
   InmuebleData,
 } from "../../../../context/inmuebles/InmuebleContext";
+import { casasC, rentas } from "credentials";
 
 const FormStepOne: any = dynamic(() => import("./FormStepOne"), { ssr: false });
 
@@ -23,10 +24,8 @@ const AnadirInmueble = () => {
   const { crearInmueble } = useContext(InmuebleContext);
   const [cargando, setCargando] = useState(false);
   const [steps, setSteps] = useState(1);
-  const [tipoPropiedad, setTipoPropiedad] = useState(
-    "61e99edd0d3bd9163e4a4b3a"
-  );
-  const [categoria, setCategoria] = useState("61e99f0e0d3bd9163e4a4b42");
+  const [tipoPropiedad, setTipoPropiedad] = useState(casasC);
+  const [categoria, setCategoria] = useState(rentas);
   const [amueblado, setAmueblado] = useState(false);
   const [agua, setAgua] = useState<any>(false);
   const [luz, setLuz] = useState<any>(false);

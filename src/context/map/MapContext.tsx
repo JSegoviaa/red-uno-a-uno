@@ -8,6 +8,7 @@ import {
 } from "react";
 import { obtenerUbicacionUsuario } from "helpers/obtenerUbicación";
 import { Location } from "../../interfaces/MapInterfaces";
+import { casasC, rentas } from "credentials";
 
 interface ContextProps {
   coordenadas: Location;
@@ -77,10 +78,8 @@ export const MapProvider: FC = ({ children }) => {
 
   const [zoom, setZoom] = useState(5);
 
-  const [categoria, setCategoria] = useState("61e99f0e0d3bd9163e4a4b42");
-  const [tipoPropiedad, setTipoPropiedad] = useState(
-    "61e99edd0d3bd9163e4a4b3a"
-  );
+  const [categoria, setCategoria] = useState(rentas);
+  const [tipoPropiedad, setTipoPropiedad] = useState(casasC);
 
   const [filtros, setFiltros] = useState(false);
   const [ocultarBottomNav, setOcultarBottomNav] = useState(true);
