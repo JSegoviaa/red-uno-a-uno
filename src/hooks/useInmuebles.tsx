@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
+import moment from "moment";
 import { Bounds, MapContext } from "context/map/MapContext";
 import {
   bodegasCat,
   casasC,
   departamentosCat,
   desarrollosCat,
+  localesCat,
   oficinasCat,
   production,
   rentas,
@@ -233,7 +235,7 @@ export const useTipoInmueble = () => {
 
   const obtenerTotalLocales = async () => {
     const res = await fetch(
-      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=${localStorage}`
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=${localesCat}`
     );
     const data = await res.json();
 
@@ -289,4 +291,49 @@ export const useCategoriaInmueble = () => {
   }, []);
 
   return { renta, venta };
+};
+
+export const useFechaInmueble = () => {
+  const [hoy, setHoy] = useState(0);
+  const [semana, setSemana] = useState(0);
+  const [mes, setMes] = useState(0);
+
+  const obtenerInmueblesHoy = async () => {
+    const today = moment().startOf("day");
+
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/fecha?createdAt=${Number(today)}`
+    );
+    const data = await res.json();
+
+    setHoy(data.total);
+  };
+
+  const obtenerInmueblesSemana = async () => {
+    const week = moment().startOf("week");
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/fecha?createdAt=${Number(week)}`
+    );
+    const data = await res.json();
+
+    setSemana(data.total);
+  };
+
+  const obtenerInmueblesMes = async () => {
+    const month = moment().startOf("month");
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/fecha?createdAt=${Number(month)}`
+    );
+    const data = await res.json();
+
+    setMes(data.total);
+  };
+
+  useEffect(() => {
+    obtenerInmueblesHoy();
+    obtenerInmueblesSemana();
+    obtenerInmueblesMes();
+  }, []);
+
+  return { hoy, semana, mes };
 };

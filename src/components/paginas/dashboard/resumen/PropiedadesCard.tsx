@@ -2,6 +2,7 @@ import styles from "./Resume.module.css";
 import {
   useAllInmuebles,
   useCategoriaInmueble,
+  useFechaInmueble,
   useTipoInmueble,
 } from "../../../../hooks";
 import Loading from "components/ui/loading/Loading";
@@ -12,6 +13,9 @@ const PropiedadesCard = () => {
     useTipoInmueble();
 
   const { venta, renta } = useCategoriaInmueble();
+
+  const { hoy, mes, semana } = useFechaInmueble();
+
   return (
     <>
       {cargando ? (
@@ -31,19 +35,19 @@ const PropiedadesCard = () => {
             <div className="row">
               <div className="col-sm-6 col-md-6 col-lg-4 mb-3">
                 <div className={styles.labelC}>Nuevos inmuebles</div>
-                <div className={styles.ingresoIndividual}>28</div>
+                <div className={styles.ingresoIndividual}>{hoy}</div>
               </div>
               <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-6 mb-3">
                 <div className={styles.labelC}>
                   Nuevos inmuebles en la ultima semana
                 </div>
-                <div className={styles.ingreso2}>46</div>
+                <div className={styles.ingreso2}>{semana}</div>
               </div>
               <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4 col-6 mb-3">
                 <div className={styles.labelC}>
                   Nuevos inmuebles en los ultimos 30 dias
                 </div>
-                <div className={styles.ingreso2}>121</div>
+                <div className={styles.ingreso2}>{mes}</div>
               </div>
 
               <div className="col-sm-5 col-md-4 col-lg-4 col-xl-3 col-xxl-2 col-6 mb-3">
