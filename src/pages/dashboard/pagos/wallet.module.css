@@ -1,0 +1,93 @@
+.cardGeneralInfo {
+  border-radius: 15px;
+  background-color: white;
+  border: 0.5px solid rgba(218, 218, 218, 0.349);
+  border: 1px solid rgba(201, 201, 201, 0.308);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.GeneralInfoHeader{
+    padding: 10px 1.5rem;
+    font-family: "Open Sans";
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 0.5px solid rgba(218, 218, 218, 0.349);  
+    background-color: #7149bc;
+    color: white;
+}
+.labelFijo{
+    padding: 5px 1.5rem;
+    font-family: "Open Sans";
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(97, 97, 97);
+}
+.monto{
+    padding: 5px 1.5rem;
+    font-family: "Open Sans";
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(32, 158, 0);
+}
+
+
+
+
+
+.tablaRef {
+  border-radius: 15px;
+  background-color: white;
+  border: 0.5px solid rgba(218, 218, 218, 0.349);
+  border: 1px solid rgba(201, 201, 201, 0.308);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+}
+.headerRef {
+  padding: 10px 1.5rem;
+  font-family: "Open Sans";
+  font-size: 17px;
+  font-weight: 600;
+  border-bottom: 0.5px solid rgba(218, 218, 218, 0.349);
+}
+.rowT {
+  border-bottom: 0.5px solid rgba(218, 218, 218, 0.349);
+}
+.rowT:hover {
+  background-color: #d6d6d621;
+}
+.headersT {
+  padding: 15px 1.5rem;
+  background-color: #d6d6d621;
+  font-family: "Open Sans";
+  font-weight: bold;
+  color: #7149bc;
+}
+.contentT {
+  padding: 15px 1.5rem;
+  font-family: "Open Sans";
+  font-size: 15px;
+  color: grey;
+}
+.btnT1,
+.btnT2 {
+  border: 1px solid rgba(201, 201, 201, 0.308);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+  background-color: white;
+  transition: 250ms;
+}
+.btnT1:hover {
+  background-color: #7149bc;
+  color: white;
+  transition: 250ms;
+}
+.btnT2:hover {
+  background-color: tomato;
+  color: white;
+  transition: 250ms;
+}
