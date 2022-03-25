@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Bounds, MapContext } from "context/map/MapContext";
-import { production } from "credentials/credentials";
+import { development, production } from "credentials/credentials";
 import {
   InmueblesCoordenadas,
   InmueblesUsuario,
@@ -176,4 +176,108 @@ export const useAllInmuebles = () => {
   }, []);
 
   return { inmuebles, cargando, total };
+};
+
+export const useTipoInmueble = () => {
+  const [casas, setCasas] = useState(0);
+  const [departamentos, setDepartamentos] = useState(0);
+  const [bodegas, setBodegas] = useState(0);
+  const [desarrollos, setDesarrollos] = useState(0);
+  const [locales, setLocales] = useState(0);
+  const [oficinas, setOficinas] = useState(0);
+
+  const obtenerTotalCasas = async () => {
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=61e99edd0d3bd9163e4a4b3a`
+    );
+    const data = await res.json();
+
+    setCasas(data.total);
+  };
+
+  const obtenerTotalDepartamentos = async () => {
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=61e99ee80d3bd9163e4a4b3e`
+    );
+    const data = await res.json();
+
+    setDepartamentos(data.total);
+  };
+
+  const obtenerTotalBodegas = async () => {
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=6213cb480d7c145fa7ae62b8`
+    );
+    const data = await res.json();
+
+    setBodegas(data.total);
+  };
+
+  const obtenerTotalDesarrollos = async () => {
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=6213cb350d7c145fa7ae62ac`
+    );
+    const data = await res.json();
+
+    setDesarrollos(data.total);
+  };
+
+  const obtenerTotalLocales = async () => {
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=6213cb3c0d7c145fa7ae62b0`
+    );
+    const data = await res.json();
+
+    setLocales(data.total);
+  };
+
+  const obtenerTotalOficinas = async () => {
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/tipo-propiedad?tipoPropiedad=6213cb430d7c145fa7ae62b4`
+    );
+    const data = await res.json();
+
+    setOficinas(data.total);
+  };
+
+  useEffect(() => {
+    obtenerTotalCasas();
+    obtenerTotalDepartamentos();
+    obtenerTotalBodegas();
+    obtenerTotalDesarrollos();
+    obtenerTotalLocales();
+    obtenerTotalOficinas();
+  }, []);
+
+  return { casas, departamentos, bodegas, desarrollos, locales, oficinas };
+};
+
+export const useCategoriaInmueble = () => {
+  const [renta, setRenta] = useState(0);
+  const [venta, setVenta] = useState(0);
+
+  const obtenerTotalRenta = async () => {
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/categoria?categoria=61e99f0e0d3bd9163e4a4b42`
+    );
+    const data = await res.json();
+
+    setRenta(data.total);
+  };
+
+  const obtenerTotalVenta = async () => {
+    const res = await fetch(
+      `${production}/inmuebles/inmuebles/categoria?categoria=61e99f120d3bd9163e4a4b46`
+    );
+    const data = await res.json();
+
+    setVenta(data.total);
+  };
+
+  useEffect(() => {
+    obtenerTotalRenta();
+    obtenerTotalVenta();
+  }, []);
+
+  return { renta, venta };
 };
