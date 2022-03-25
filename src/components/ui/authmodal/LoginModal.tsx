@@ -9,6 +9,7 @@ import Button from "../button/Button";
 import Modaltitle from "../modaltitle/Modaltitle";
 import styles from "./AuthModal.module.css";
 import "react-toastify/dist/ReactToastify.css";
+import { googleClientId } from "credentials";
 
 const LoginModal = () => {
   const router = useRouter();
@@ -123,7 +124,7 @@ const LoginModal = () => {
             </div>
 
             <GoogleLogin
-              clientId="89650619107-jecf46e28s507h50vrtpfadtf44u2hmc.apps.googleusercontent.com"
+              clientId={googleClientId}
               buttonText="Inicia sesión con google"
               onSuccess={signInWithGoogle}
               onFailure={signInWithGoogle}

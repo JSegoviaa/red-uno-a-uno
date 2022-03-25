@@ -1,5 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { stripePublicId } from "credentials";
 import { usePaquetes } from "../../../hooks/usePaquetes";
 import Individual from "./Individual";
 import PaqueteMultiple from "./PaqueteMultiple";
@@ -19,9 +20,7 @@ const intermedio = [
   { value: 10, label: "10" },
 ];
 
-const stripePromise = loadStripe(
-  "pk_test_51JaTznCGqe3RvXVDQxhEnjQ1bLyso24Cy7whGP7B39Y2a8qCZEsEHEtCi1zxSfx0XbWiAUfqW10HbeCiyg4phaTy00Qu5iDasP"
-);
+const stripePromise = loadStripe(stripePublicId);
 
 const PaquetesCards = () => {
   const { paquetes } = usePaquetes();

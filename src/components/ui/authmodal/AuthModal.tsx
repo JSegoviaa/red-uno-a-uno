@@ -9,7 +9,7 @@ import styles from "./AuthModal.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../context/auth/AuthContext";
 import GoogleLogin from "react-google-login";
-import { production } from "credentials/credentials";
+import { production, googleClientId } from "credentials/credentials";
 
 const RegisterModal = () => {
   const router = useRouter();
@@ -199,7 +199,7 @@ const RegisterModal = () => {
                 <hr />
               </div>
               <GoogleLogin
-                clientId="89650619107-jecf46e28s507h50vrtpfadtf44u2hmc.apps.googleusercontent.com"
+                clientId={googleClientId}
                 buttonText="Inicia sesión con google"
                 onSuccess={signInWithGoogle}
                 onFailure={signInWithGoogle}
