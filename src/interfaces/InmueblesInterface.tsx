@@ -6,6 +6,12 @@ export interface InmueblesResponse {
   inmueble: Inmueble;
 }
 
+export interface AllInmuebles {
+  ok: boolean;
+  total: number;
+  inmuebles: Inmueble[];
+}
+
 export interface Inmueble {
   _id: string;
   titulo: string;
