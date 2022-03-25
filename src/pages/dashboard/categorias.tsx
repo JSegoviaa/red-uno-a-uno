@@ -10,6 +10,7 @@ const Categorias = () => {
     <>
       <SEO titulo="Categorías" url={router.asPath} />
       <DashboardLayout titulo="Categorías">Categorías</DashboardLayout>
+      {/* alta y baja de categorias de propiedades */}
     </>
   );
 };

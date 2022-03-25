@@ -50,9 +50,9 @@ const Sidebar = ({ handleToggleSidebar, toggled, collapsed }: Props) => {
             <Link href="/dashboard">Dashboard</Link>
           </MenuItem>
           <SubMenu title="Pagos" icon={<Bank />}>
-            {/* <MenuItem icon={<Wallet />}>
-              <Link href="/dashboard/pagos">Total de pagos</Link>
-            </MenuItem> */}
+            <MenuItem icon={<Wallet />}>
+              <Link href="/dashboard/pagos/wallet">Wallet</Link>
+            </MenuItem>
 
             <MenuItem icon={<Referencia />}>
               <Link href="/dashboard/pagos/referencias">Referencias</Link>
