@@ -310,7 +310,8 @@ export const useFechaInmueble = () => {
   };
 
   const obtenerInmueblesSemana = async () => {
-    const week = moment().startOf("week");
+    const today = moment().startOf("day");
+    const week = today.subtract(7, "day");
     const res = await fetch(
       `${production}/inmuebles/inmuebles/fecha?createdAt=${Number(week)}`
     );
@@ -320,7 +321,8 @@ export const useFechaInmueble = () => {
   };
 
   const obtenerInmueblesMes = async () => {
-    const month = moment().startOf("month");
+    const today = moment().startOf("day");
+    const month = today.subtract(30, "days");
     const res = await fetch(
       `${production}/inmuebles/inmuebles/fecha?createdAt=${Number(month)}`
     );
