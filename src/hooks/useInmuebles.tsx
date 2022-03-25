@@ -8,6 +8,7 @@ import {
   ListaInmuebles,
 } from "interfaces/CrearInmuebleInterface";
 import { Location } from "interfaces/MapInterfaces";
+import { AllInmuebles, Inmueble } from "interfaces";
 
 export const useInmuebles = () => {
   const { dirMapa } = useContext(MapContext);
@@ -154,4 +155,25 @@ export const useListaInmuebleCoords = (
   ]);
 
   return { listaInmuebles, cargando };
+};
+
+export const useAllInmuebles = () => {
+  const [inmuebles, setInmuebles] = useState<Inmueble[]>([]);
+  const [cargando, setCargando] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  const obtenerInmuebles = async () => {
+    const res = await fetch(`${production}/inmuebles`);
+    const data: AllInmuebles = await res.json();
+
+    setTotal(data.total);
+    setInmuebles(data.inmuebles);
+    setCargando(false);
+  };
+
+  useEffect(() => {
+    obtenerInmuebles();
+  }, []);
+
+  return { inmuebles, cargando, total };
 };
